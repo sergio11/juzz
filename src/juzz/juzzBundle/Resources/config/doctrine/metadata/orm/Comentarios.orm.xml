@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Comentarios" table="comentarios">
+    <indexes>
+      <index name="COM_PAR_FK" columns="parent_id"/>
+      <index name="COM_PRO_FK" columns="propietario_id"/>
+    </indexes>
+    <id name="id" type="bigint" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fecha" type="date" column="fecha" nullable="false"/>
+    <field name="valido" type="boolean" column="valido" nullable="false">
+      <options>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <field name="contenido" type="text" column="contenido" length="16777215" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="target" type="bigint" column="target" nullable="false">
+      <options>
+        <option name="unsigned">1</option>
+      </options>
+    </field>
+    <many-to-one field="propietario" target-entity="Usuarios" fetch="LAZY">
+      <join-columns>
+        <join-column name="propietario_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="parent" target-entity="Comentarios" fetch="LAZY">
+      <join-columns>
+        <join-column name="parent_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>
