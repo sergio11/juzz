@@ -1,0 +1,18 @@
+programas:
+    path:     /
+    defaults: { _controller: juzzProgramasBundle:Programs:index }
+programa:
+    path:     /{program}
+    defaults: { _controller: juzzProgramasBundle:Programs:show }
+nuevo_programa:
+    path:     /new
+    defaults: { _controller: juzzProgramasBundle:Programs:create }
+actualizar_programa:
+    path:     /{program}/update
+    defaults: { _controller: juzzProgramasBundle:Programs:update }
+borrar_programa:
+    path:     /{program}/delete
+    defaults: { _controller: juzzProgramasBundle:Programs:delete }
+subcripciones_programa:
+    path:     /{program}/subscriptores
+    defaults: { _controller: juzzProgramasBundle:Programs:subscriptores }

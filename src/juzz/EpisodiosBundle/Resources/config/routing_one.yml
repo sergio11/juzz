@@ -1,0 +1,8 @@
+episodios_programa:
+    path:     /
+    defaults: { _controller: juzzEpisodiosBundle:Episodios:index }
+episodios_comentarios:
+    path:    /{episode}/comentarios
+    defaults: { _controller: juzzEpisodiosBundle:Episodios:comentarios }
+    requirements:
+        episode: .+

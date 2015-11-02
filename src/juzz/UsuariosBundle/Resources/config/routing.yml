@@ -1,0 +1,6 @@
+perfil:
+    path:     /perfil
+    defaults: { _controller: juzzUsuariosBundle:Users:index }
+login:
+    path:     /login
+    defaults: { _controller: juzzUsuariosBundle:Users:login }

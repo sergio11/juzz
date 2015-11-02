@@ -1,0 +1,15 @@
+canales:
+    path:     /
+    defaults: { _controller: juzzCanalesBundle:Channel:index }
+mostrar_canal:
+    path:     /{canal}
+    defaults: { _controller: juzzCanalesBundle:Channel:show }
+crear_canal:
+    path:     /new
+    defaults: { _controller: juzzCanalesBundle:Channel:create }
+actualizar_canal:
+    path:     /{canal}/update
+    defaults: { _controller: juzzCanalesBundle:Channel:update }
+borrar_canal:
+    path:     /{canal}/delete
+    defaults: { _controller: juzzCanalesBundle:Channel:delete }

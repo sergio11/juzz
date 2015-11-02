@@ -1,7 +1,26 @@
-juzzjuzz:
-    resource: "@juzzjuzzBundle/Resources/config/routing.yml"
-    prefix:   /
+# Rutas importadas del bundle UsuariosBundle
+juzz_usuarios:
+    resource: "@juzzUsuariosBundle/Resources/config/routing.yml"
+    prefix:   /usuario
 
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
+# Rutas importadas del bundle CanalesBundle
+juzz_canales:
+    resource: "@juzzCanalesBundle/Resources/config/routing.yml"
+    prefix:   /canales
+# Rutas importadas del bundle ProgramasBundle
+juzz_programas:
+    resource: "@juzzProgramasBundle/Resources/config/routing.yml"
+    prefix:   /{channel}/programas
+    requirements:
+        channel: .+
+# Primer listado de rutas importadas del bundle EpisodiosBundle
+juzz_canales_episodios:
+    resource: "@juzzEpisodiosBundle/Resources/config/routing_one.yml"
+    prefix:   /{channel}/{program}/episodios
+    requirements:
+        channel: \w+
+        program: \w+
+# Segundo listado de rutas importadas del bundle EpisodiosBundle
+juzz_episodios:
+    resource: "@juzzEpisodiosBundle/Resources/config/routing_two.yml"
+    prefix:   /episodios
