@@ -3,31 +3,96 @@
     <head>
         <meta charset='utf-8' />
         <title>{% block title %}{% endblock %} | juzz</title>
-    {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+          <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}" charset="utf-8">
+          <link rel="stylesheet" href="{{ asset('css/style.css') }}" charset="utf-8">
+        {% endblock %}
     <link rel="shortcut icon" href="{{ asset('favicon.png') }}" />
 
 </head>
-
-<body id="{% block id '' %}">
-{% block body %}{% endblock %}
-
-<footer>
-    &copy; {{ 'now'|date('Y') }} - Cupon
-    <a href="{{ path('ayuda') }}">{{ "Ayuda" | trans }}</a>
-    <a href="{{ path('contacto') }}">{{ "Contacto" | trans }}</a>
-    <a href="{{ path('privacidad') }}">{{ "Privacidad" | trans }}</a>
-    <a href="{{ path('sobre_nosotros') }}">{{ "Sobre nosotros" | trans }}</a>
-
-    {% set locale = app.request.locale %}
-    <section id="idioma">
-        {% if locale == 'es' %}
-            <span>Español</span> - <a href="{{ path('portada', { '_locale': 'en' }) }}">English</a>
-        {% elseif locale == 'en' %}
-            <a href="{{ path('portada', { '_locale': 'es' }) }}">Español</a> - <span>English</span>
-        {% endif %}
-    </section>
-</footer>
-
-{% block javascripts %}{% endblock %}
+<body>
+  <header>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div>
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle pull-left collapsed" data-toggle="collapse" data-target="#main-navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+          <button type="button" class="navbar-toggle  pull-right active collapsed" data-toggle="collapse" data-target="#searchbar">
+              <span class="sr-only">Toggle player</span>
+              <span class="glyphicon glyphicon-search"></span>
+          </button>
+          <a class="navbar-brand" href="">Juzz</a>
+        </div>
+        <div class="navbar-collapse collapse in" id="main-navbar">
+          <ul class="nav navbar-nav navbar-left">
+            <li class="active">
+              <a href="#">Inicio</a>
+            </li>
+            <li>
+              <a href="#">Explorar</a>
+            </li>
+            <li class="hidden-xs">
+                <a data-toggle="collapse" data-target="#searchbar">
+                    <span class="glyphicon glyphicon-search"></span>&nbsp;
+                    <span class="hidden-sm">Buscar</span>
+                </a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="#">
+                  <span class="glyphicon glyphicon-open"></span>&nbsp;
+                  <span class="hidden-sm">Subir</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">Entra</a>
+            </li>
+            <li>
+              <a href="#">Registrate</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div id="searchbar" class="container collapse" data-target="#words" data-baseurl="http://www.ivoox.com/">
+            <form id="buscador" method="get" action="">
+              <div class="col-md-8">
+              	<p class="visible-lg visible-md">
+              		Busca podcasts, programas, episodios, canales, radios online, usuarios...
+              	</p>
+              </div>
+              <div class="col-md-4">
+                <div id="searchBarSuggest">
+        		        <div class="input-group">
+            		        <input class="form-control btn-block" autocomplete="off" type="text" id="words" value="">
+                    		<div class="input-group-btn">
+                    			<input class="btn btn-default" id="searchb" data-main-item="AUDIO" type="button" value="Buscar">
+                    		</div>
+            	      </div>
+                    <div class="suggestionsBox" id="suggestions">
+                	     <div class="suggestionList" id="suggestionsList"> &nbsp; </div>
+				            </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+        </div>
+    </nav>
+  </header>
+  <main>
+    {% block main %}
+    {% endblock %}
+  </main>
+  <footer></footer>
+  {% block javascripts %}
+    <script src="{{ asset('bower_components/prefixfree/prefixfree.min.js') }}" charset="utf-8"></script>
+    <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+  {% endblock %}
 </body>
 </html>

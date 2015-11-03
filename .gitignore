@@ -10,3 +10,4 @@
 /vendor/
 /web/bundles/
 /nbproject/*
+/web/bower_components/*

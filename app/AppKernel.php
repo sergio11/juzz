@@ -17,7 +17,6 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
-            new juzz\juzzBundle\juzzjuzzBundle(),
             new juzz\CanalesBundle\juzzCanalesBundle(),
             new juzz\ProgramasBundle\juzzProgramasBundle(),
             new juzz\EpisodiosBundle\juzzEpisodiosBundle(),

@@ -1,1 +1,12 @@
-Hello {{ name }}!
+{% extends 'base.html.twig' %}
+
+{% block main %}
+  <video autoplay="" loop="" class="video-bg">
+    <source src="http://static-1.ivoox.com/img/videos/video_home_0510.mp4" type="video/mp4">
+    <source src="http://static-1.ivoox.com/img/videos/video_home_0510.ogv" type="video/ogg">
+    <source src="http://static-1.ivoox.com/img/videos/video_home_0510.webm" type="video/webm">
+      Your browser does not support the video tag. I suggest you upgrade your browser.
+  </video>
+  <div class="overlay"></div>
+  <p>Hello Word !!!</p>
+{% endblock %}

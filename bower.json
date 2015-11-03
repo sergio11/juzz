@@ -1,0 +1,10 @@
+{
+  "name": "Juzz",
+  "version": "0.0.1",
+  "author": "Sergio Sánchez Sánchez",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "prefixfree": "*"
+  }
+}

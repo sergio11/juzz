@@ -1,3 +1,7 @@
+juzz_usuarios:
+    resource: "@juzzUsuariosBundle/Resources/config/routing.yml"
+    prefix:   /
+
 # Rutas importadas del bundle UsuariosBundle
 juzz_usuarios:
     resource: "@juzzUsuariosBundle/Resources/config/routing.yml"
@@ -24,3 +28,7 @@ juzz_canales_episodios:
 juzz_episodios:
     resource: "@juzzEpisodiosBundle/Resources/config/routing_two.yml"
     prefix:   /episodios
+
+portada:
+  path:  /
+  defaults: { _controller: juzzUsuariosBundle:Default:index }
