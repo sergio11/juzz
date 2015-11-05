@@ -1,7 +1,7 @@
 episodios_categorias:
     path:     /categorias/{category}
     defaults: { _controller: juzzEpisodiosBundle:Episodios:categorias }
-episodios_categorias:
+episodios_etiquetas:
     path:     /tags/{tag}
     defaults: { _controller: juzzEpisodiosBundle:Episodios:tags }
 episodios_generos:

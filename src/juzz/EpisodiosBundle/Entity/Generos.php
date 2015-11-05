@@ -1,16 +1,16 @@
 <?php
 
-namespace juzz\juzzBundle\Entity;
+namespace juzz\EpisodiosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Terminos
+ * Generos
  *
- * @ORM\Table(name="terminos", uniqueConstraints={@ORM\UniqueConstraint(name="TER_UK", columns={"nombre"}), @ORM\UniqueConstraint(name="SLU_UK", columns={"nombre"})})
+ * @ORM\Table(name="generos", uniqueConstraints={@ORM\UniqueConstraint(name="GEN_NOM_UK", columns={"nombre"})})
  * @ORM\Entity
  */
-class Terminos
+class Generos
 {
     /**
      * @var integer
@@ -27,13 +27,6 @@ class Terminos
      * @ORM\Column(name="nombre", type="string", length=30, nullable=false)
      */
     private $nombre;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="slug", type="string", length=30, nullable=false)
-     */
-    private $slug;
 
     /**
      * @var string
@@ -59,7 +52,7 @@ class Terminos
      *
      * @param string $nombre
      *
-     * @return Terminos
+     * @return Generos
      */
     public function setNombre($nombre)
     {
@@ -79,35 +72,11 @@ class Terminos
     }
 
     /**
-     * Set slug
-     *
-     * @param string $slug
-     *
-     * @return Terminos
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
      * Set descripcion
      *
      * @param string $descripcion
      *
-     * @return Terminos
+     * @return Generos
      */
     public function setDescripcion($descripcion)
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace juzz\juzzBundle\Entity;
+namespace juzz\EpisodiosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -79,7 +79,7 @@ class Episodios
     /**
      * @var \Programas
      *
-     * @ORM\ManyToOne(targetEntity="Programas")
+     * @ORM\ManyToOne(targetEntity="\juzz\ProgramasBundle\Entity\Programas")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="programa_id", referencedColumnName="id")
      * })

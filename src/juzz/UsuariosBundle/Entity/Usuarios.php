@@ -1,6 +1,6 @@
 <?php
 
-namespace juzz\juzzBundle\Entity;
+namespace juzz\UsuariosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -73,7 +73,7 @@ class Usuarios
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Categorias", inversedBy="usuario")
+     * @ORM\ManyToMany(targetEntity="\juzz\EpisodiosBundle\Entity\Categorias", inversedBy="usuario")
      * @ORM\JoinTable(name="categorias_usuarios",
      *   joinColumns={
      *     @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
@@ -88,7 +88,7 @@ class Usuarios
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Programas", inversedBy="subscriptor")
+     * @ORM\ManyToMany(targetEntity="juzz\ProgramasBundle\Entity\Programas", inversedBy="subscriptor")
      * @ORM\JoinTable(name="likes_programas",
      *   joinColumns={
      *     @ORM\JoinColumn(name="subscriptor_id", referencedColumnName="id")
@@ -103,14 +103,14 @@ class Usuarios
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Usuarios", mappedBy="seguidor")
+     * @ORM\ManyToMany(targetEntity="juzz\UsuariosBundle\Entity\Usuarios", mappedBy="seguidor")
      */
     private $seguido;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Programas", inversedBy="usuario")
+     * @ORM\ManyToMany(targetEntity="juzz\ProgramasBundle\Entity\Programas", inversedBy="usuario")
      * @ORM\JoinTable(name="subscripciones_programas",
      *   joinColumns={
      *     @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
@@ -315,11 +315,11 @@ class Usuarios
     /**
      * Add categorium
      *
-     * @param \juzz\juzzBundle\Entity\Categorias $categorium
+     * @param \juzz\EpisodiosBundle\Entity\Categorias $categorium
      *
      * @return Usuarios
      */
-    public function addCategorium(\juzz\juzzBundle\Entity\Categorias $categorium)
+    public function addCategorium(\juzz\EpisodiosBundle\Entity\Categorias $categorium)
     {
         $this->categoria[] = $categorium;
 
@@ -329,9 +329,9 @@ class Usuarios
     /**
      * Remove categorium
      *
-     * @param \juzz\juzzBundle\Entity\Categorias $categorium
+     * @param \juzz\EpisodiosBundle\Entity\Categorias $categorium
      */
-    public function removeCategorium(\juzz\juzzBundle\Entity\Categorias $categorium)
+    public function removeCategorium(\juzz\EpisodiosBundle\Entity\Categorias $categorium)
     {
         $this->categoria->removeElement($categorium);
     }
@@ -349,11 +349,11 @@ class Usuarios
     /**
      * Add subscripcion
      *
-     * @param \juzz\juzzBundle\Entity\Programas $subscripcion
+     * @param \juzz\ProgramasBundle\Entity\Programas $subscripcion
      *
      * @return Usuarios
      */
-    public function addSubscripcion(\juzz\juzzBundle\Entity\Programas $subscripcion)
+    public function addSubscripcion(\juzz\ProgramasBundle\Entity\Programas $subscripcion)
     {
         $this->subscripcion[] = $subscripcion;
 
@@ -363,9 +363,9 @@ class Usuarios
     /**
      * Remove subscripcion
      *
-     * @param \juzz\juzzBundle\Entity\Programas $subscripcion
+     * @param \juzz\ProgramasBundle\Entity\Programas $subscripcion
      */
-    public function removeSubscripcion(\juzz\juzzBundle\Entity\Programas $subscripcion)
+    public function removeSubscripcion(\juzz\ProgramasBundle\Entity\Programas $subscripcion)
     {
         $this->subscripcion->removeElement($subscripcion);
     }
@@ -383,11 +383,11 @@ class Usuarios
     /**
      * Add seguido
      *
-     * @param \juzz\juzzBundle\Entity\Usuarios $seguido
+     * @param \juzz\UsuariosBundle\Entity\Usuarios $seguido
      *
      * @return Usuarios
      */
-    public function addSeguido(\juzz\juzzBundle\Entity\Usuarios $seguido)
+    public function addSeguido(\juzz\UsuariosBundle\Entity\Usuarios $seguido)
     {
         $this->seguido[] = $seguido;
 
@@ -397,9 +397,9 @@ class Usuarios
     /**
      * Remove seguido
      *
-     * @param \juzz\juzzBundle\Entity\Usuarios $seguido
+     * @param \juzz\UsuariosBundle\Entity\Usuarios $seguido
      */
-    public function removeSeguido(\juzz\juzzBundle\Entity\Usuarios $seguido)
+    public function removeSeguido(\juzz\UsuariosBundle\Entity\Usuarios $seguido)
     {
         $this->seguido->removeElement($seguido);
     }
@@ -417,11 +417,11 @@ class Usuarios
     /**
      * Add programa
      *
-     * @param \juzz\juzzBundle\Entity\Programas $programa
+     * @param \juzz\ProgramasBundle\Entity\Programas $programa
      *
      * @return Usuarios
      */
-    public function addPrograma(\juzz\juzzBundle\Entity\Programas $programa)
+    public function addPrograma(\juzz\ProgramasBundle\Entity\Programas $programa)
     {
         $this->programa[] = $programa;
 
@@ -431,9 +431,9 @@ class Usuarios
     /**
      * Remove programa
      *
-     * @param \juzz\juzzBundle\Entity\Programas $programa
+     * @param \juzz\ProgramasBundle\Entity\Programas $programa
      */
-    public function removePrograma(\juzz\juzzBundle\Entity\Programas $programa)
+    public function removePrograma(\juzz\ProgramasBundle\Entity\Programas $programa)
     {
         $this->programa->removeElement($programa);
     }

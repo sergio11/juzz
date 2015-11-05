@@ -1,6 +1,6 @@
 <?php
 
-namespace juzz\juzzBundle\Entity;
+namespace juzz\EpisodiosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

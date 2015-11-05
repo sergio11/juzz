@@ -1,6 +1,6 @@
 <?php
 
-namespace juzz\juzzBundle\Entity;
+namespace juzz\EpisodiosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -62,7 +62,7 @@ class Comentarios
     /**
      * @var \Usuarios
      *
-     * @ORM\ManyToOne(targetEntity="Usuarios")
+     * @ORM\ManyToOne(targetEntity="\juzz\UsuariosBundle\Entity\Usuarios")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="propietario_id", referencedColumnName="id")
      * })

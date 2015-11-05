@@ -1,6 +1,6 @@
 <?php
 
-namespace juzz\juzzBundle\Entity;
+namespace juzz\ProgramasBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -45,7 +45,7 @@ class Programas
     /**
      * @var \Canales
      *
-     * @ORM\ManyToOne(targetEntity="Canales")
+     * @ORM\ManyToOne(targetEntity="\juzz\CanalesBundle\Entity\Canales")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="canal_id", referencedColumnName="id")
      * })
@@ -55,14 +55,14 @@ class Programas
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Usuarios", mappedBy="subscripcion")
+     * @ORM\ManyToMany(targetEntity="juzz\UsuariosBundle\Entity\Usuarios", mappedBy="subscripcion")
      */
     private $subscriptor;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Usuarios", mappedBy="programa")
+     * @ORM\ManyToMany(targetEntity="juzz\UsuariosBundle\Entity\Usuarios", mappedBy="programa")
      */
     private $usuario;
 

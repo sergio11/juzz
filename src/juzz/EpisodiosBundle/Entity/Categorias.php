@@ -1,6 +1,6 @@
 <?php
 
-namespace juzz\juzzBundle\Entity;
+namespace juzz\EpisodiosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -37,7 +37,7 @@ class Categorias
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Usuarios", mappedBy="categoria")
+     * @ORM\ManyToMany(targetEntity="\juzz\UsuariosBundle\Entity\Usuarios", mappedBy="categoria")
      */
     private $usuario;
 
@@ -53,11 +53,11 @@ class Categorias
     /**
      * Set parent
      *
-     * @param \juzz\juzzBundle\Entity\Categorias $parent
+     * @param \juzz\EpisodiosBundle\Entity\Categorias $parent
      *
      * @return Categorias
      */
-    public function setParent(\juzz\juzzBundle\Entity\Categorias $parent = null)
+    public function setParent(\juzz\EpisodiosBundle\Entity\Categorias $parent = null)
     {
         $this->parent = $parent;
 
@@ -67,7 +67,7 @@ class Categorias
     /**
      * Get parent
      *
-     * @return \juzz\juzzBundle\Entity\Categorias
+     * @return \juzz\EpisodiosBundle\Entity\Categorias
      */
     public function getParent()
     {
@@ -77,11 +77,11 @@ class Categorias
     /**
      * Set termino
      *
-     * @param \juzz\juzzBundle\Entity\Terminos $termino
+     * @param \juzz\EpisodiosBundle\Entity\Terminos $termino
      *
      * @return Categorias
      */
-    public function setTermino(\juzz\juzzBundle\Entity\Terminos $termino)
+    public function setTermino(\juzz\EpisodiosBundle\Entity\Terminos $termino)
     {
         $this->termino = $termino;
 
@@ -91,7 +91,7 @@ class Categorias
     /**
      * Get termino
      *
-     * @return \juzz\juzzBundle\Entity\Terminos
+     * @return \juzz\EpisodiosBundle\Entity\Terminos
      */
     public function getTermino()
     {
@@ -101,11 +101,11 @@ class Categorias
     /**
      * Add usuario
      *
-     * @param \juzz\juzzBundle\Entity\Usuarios $usuario
+     * @param \juzz\UsuariosBundle\Entity\Usuarios $usuario
      *
      * @return Categorias
      */
-    public function addUsuario(\juzz\juzzBundle\Entity\Usuarios $usuario)
+    public function addUsuario(\juzz\UsuariosBundle\Entity\Usuarios $usuario)
     {
         $this->usuario[] = $usuario;
 
@@ -115,9 +115,9 @@ class Categorias
     /**
      * Remove usuario
      *
-     * @param \juzz\juzzBundle\Entity\Usuarios $usuario
+     * @param \juzz\UsuariosBundle\Entity\Usuarios $usuario
      */
-    public function removeUsuario(\juzz\juzzBundle\Entity\Usuarios $usuario)
+    public function removeUsuario(\juzz\UsuariosBundle\Entity\Usuarios $usuario)
     {
         $this->usuario->removeElement($usuario);
     }
