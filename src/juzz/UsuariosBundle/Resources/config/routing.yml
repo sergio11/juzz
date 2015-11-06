@@ -4,3 +4,10 @@ perfil:
 login:
     path:     /login
     defaults: { _controller: juzzUsuariosBundle:Usuarios:login }
+# Ruta para la acción que comprueba el login del frontend
+login_check:
+    pattern:   /login_check
+
+# Ruta para la acción de logout de los usuarios del frontend extranet
+logout:
+    pattern:   /logout

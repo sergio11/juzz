@@ -226,6 +226,7 @@ header .navbar .navbar-right li:nth-child(odd) a{
   text-align: center;
   color: #fff;
   padding: 50px 0 ;
+  height: 70vh;
 }
 
 .section.section-fill{

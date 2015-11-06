@@ -1,24 +1,29 @@
-# To get started with security, check out the documentation:
-# http://symfony.com/doc/current/book/security.html
 security:
 
-    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
-    providers:
-        in_memory:
-            memory: ~
-
     firewalls:
-        # disables authentication for assets and the profiler, adapt it according to your needs
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
+        frontend:
+            pattern:        ^/*
+            provider:       users
+            anonymous:      ~
+            form_login:
+                login_path: login
+                check_path: login_check
+            logout:
+                path:    logout
+                target:  /
+            remember_me:
+                key:        juzz_cookie
+                lifetime:   604800  # 604.800 = 3.600 * 24 * 7 = 1 semana
 
-        main:
-            anonymous: ~
-            # activate different ways to authenticate
+    access_control:
+        - { path: ^/usuario/(login|registro), roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/usuario/*, roles: ROLE_USER }
 
-            # http_basic: ~
-            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
+    encoders:
+        juzz\UsuariosBundle\Entity\Usuarios:        { algorithm: sha512, iterations: 10 }
 
-            # form_login: ~
-            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+    providers:
+        # Usuarios del frontend
+        users:
+            entity: { class: juzz\UsuariosBundle\Entity\Usuarios, property: email }
+

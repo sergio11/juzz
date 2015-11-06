@@ -1,11 +1,8 @@
-juzz_usuarios:
-    resource: "@juzzUsuariosBundle/Resources/config/routing.yml"
-    prefix:   /
 
 # Rutas importadas del bundle UsuariosBundle
 juzz_usuarios:
     resource: "@juzzUsuariosBundle/Resources/config/routing.yml"
-    prefix:   /usuario
+    prefix:   /usuarios
 
 # Rutas importadas del bundle CanalesBundle
 juzz_canales:
@@ -31,7 +28,7 @@ juzz_episodios:
 
 portada:
   path:  /
-  defaults: { _controller: juzzUsuariosBundle:Default:index }
+  defaults: { _controller: juzzUsuariosBundle:Usuarios:index }
 
 dcs_opauth_connect:
     resource: "@DCSOpauthBundle/Resources/config/routing/connect.xml"
