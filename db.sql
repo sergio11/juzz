@@ -230,4 +230,5 @@ php app/console generate:bundle --namespace=juzz/juzzBundle --format=yml
 php app/console doctrine:mapping:convert xml ./src/juzz/juzzBundle/Resources/config/doctrine/metadata/orm --from-database --force
 php app/console doctrine:mapping:import AppBundlejuzzBundle annotation
 php app/console doctrine:generate:entities AppBundlejuzzBundle --no-backup
-juzzjuzzBundle
+-- Para Cargar Fixtures
+php app/console doctrine:fixtures:load
