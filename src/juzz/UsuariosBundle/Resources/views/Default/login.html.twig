@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-social/bootstrap-social.css') }}" charset="utf-8">
+{% endblock %}
+{% block main %}
+  {{form()}}
+{% endblock %}
