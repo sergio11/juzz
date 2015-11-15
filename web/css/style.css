@@ -531,6 +531,7 @@ header .navbar .navbar-right li:nth-child(odd) a{
 
 .episode-card .episode-card-content .episode-card-actions .episode-card-play{
   width: 80%;
+  border-right: 1px solid #fff;
 }
 
 .episode-card .episode-card-content .episode-card-actions .episode-card-plus{

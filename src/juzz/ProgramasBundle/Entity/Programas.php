@@ -161,11 +161,11 @@ class Programas
     /**
      * Set canal
      *
-     * @param \juzz\juzzBundle\Entity\Canales $canal
+     * @param \juzz\CanalesBundle\Entity\Canales $canal
      *
      * @return Programas
      */
-    public function setCanal(\juzz\juzzBundle\Entity\Canales $canal = null)
+    public function setCanal(\juzz\CanalesBundle\Entity\Canales $canal = null)
     {
         $this->canal = $canal;
 
@@ -175,7 +175,7 @@ class Programas
     /**
      * Get canal
      *
-     * @return \juzz\juzzBundle\Entity\Canales
+     * @return \juzz\CanalesBundle\Entity\Canales
      */
     public function getCanal()
     {
@@ -185,11 +185,11 @@ class Programas
     /**
      * Add subscriptor
      *
-     * @param \juzz\juzzBundle\Entity\Usuarios $subscriptor
+     * @param \juzz\UsuariosBundle\Entity\Usuarios $subscriptor
      *
      * @return Programas
      */
-    public function addSubscriptor(\juzz\juzzBundle\Entity\Usuarios $subscriptor)
+    public function addSubscriptor(\juzz\UsuariosBundle\Entity\Usuarios $subscriptor)
     {
         $this->subscriptor[] = $subscriptor;
 
@@ -199,9 +199,9 @@ class Programas
     /**
      * Remove subscriptor
      *
-     * @param \juzz\juzzBundle\Entity\Usuarios $subscriptor
+     * @param \juzz\UsuariosBundle\Entity\Usuarios $subscriptor
      */
-    public function removeSubscriptor(\juzz\juzzBundle\Entity\Usuarios $subscriptor)
+    public function removeSubscriptor(\juzz\UsuariosBundle\Entity\Usuarios $subscriptor)
     {
         $this->subscriptor->removeElement($subscriptor);
     }
@@ -219,11 +219,11 @@ class Programas
     /**
      * Add usuario
      *
-     * @param \juzz\juzzBundle\Entity\Usuarios $usuario
+     * @param \juzz\UsuariosBundle\Entity\Usuarios $usuario
      *
      * @return Programas
      */
-    public function addUsuario(\juzz\juzzBundle\Entity\Usuarios $usuario)
+    public function addUsuario(\juzz\UsuariosBundle\Entity\Usuarios $usuario)
     {
         $this->usuario[] = $usuario;
 
@@ -233,9 +233,9 @@ class Programas
     /**
      * Remove usuario
      *
-     * @param \juzz\juzzBundle\Entity\Usuarios $usuario
+     * @param \juzz\UsuariosBundle\Entity\Usuarios $usuario
      */
-    public function removeUsuario(\juzz\juzzBundle\Entity\Usuarios $usuario)
+    public function removeUsuario(\juzz\UsuariosBundle\Entity\Usuarios $usuario)
     {
         $this->usuario->removeElement($usuario);
     }

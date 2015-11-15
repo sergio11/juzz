@@ -232,3 +232,8 @@ php app/console doctrine:mapping:import AppBundlejuzzBundle annotation
 php app/console doctrine:generate:entities AppBundlejuzzBundle --no-backup
 -- Para Cargar Fixtures
 php app/console doctrine:fixtures:load
+-- Cargar Fixtures de un bundle
+php app/console doctrine:fixtures:load --fixtures src/juzz/UsuariosBundle/DataFixtures/ORM/ --append
+php app/console doctrine:fixtures:load --fixtures src/juzz/CanalesBundle/DataFixtures/ORM/ --append
+php app/console doctrine:fixtures:load --fixtures src/juzz/ProgramasBundle/DataFixtures/ORM/ --append
+php app/console doctrine:fixtures:load --fixtures src/juzz/EpisodiosBundle/DataFixtures/ORM/ --append

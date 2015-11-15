@@ -139,11 +139,11 @@ class Canales
     /**
      * Set usuario
      *
-     * @param \juzz\juzzBundle\Entity\Usuarios $usuario
+     * @param \juzz\UsuariosBundle\Entity\Usuarios $usuario
      *
      * @return Canales
      */
-    public function setUsuario(\juzz\juzzBundle\Entity\Usuarios $usuario = null)
+    public function setUsuario(\juzz\UsuariosBundle\Entity\Usuarios $usuario = null)
     {
         $this->usuario = $usuario;
 
@@ -153,7 +153,7 @@ class Canales
     /**
      * Get usuario
      *
-     * @return \juzz\juzzBundle\Entity\Usuarios
+     * @return \juzz\UsuariosBundle\Entity\Usuarios
      */
     public function getUsuario()
     {
