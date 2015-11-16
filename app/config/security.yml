@@ -16,14 +16,15 @@ security:
                 lifetime:   604800  # 604.800 = 3.600 * 24 * 7 = 1 semana
 
     access_control:
-        - { path: ^/usuario/(login|registro), roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/usuario/*, roles: ROLE_USER }
+        - { path: ^/usuarios/(login|registro), roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/usuarios/*, roles: ROLE_USER }
 
     encoders:
-        juzz\UsuariosBundle\Entity\Usuarios:        { algorithm: sha512, iterations: 10 }
+        juzz\UsuariosBundle\Entity\Usuarios:
+            algorithm: bcrypt
+            cost:      12 
 
     providers:
-        # Usuarios del frontend
         users:
             entity: { class: juzz\UsuariosBundle\Entity\Usuarios, property: email }
 

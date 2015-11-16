@@ -1,0 +1,6 @@
+{% block form_widget %}
+    {% if type is not defined or 'file' != type %}
+        {%- set attr = attr|merge({class: (attr.class|default('') ~ ' form-control')|trim}) -%}
+    {% endif %}
+    {{ parent() }}
+{% endblock form_widget %}

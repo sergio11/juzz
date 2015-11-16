@@ -1,0 +1,11 @@
+{% block form_row %}
+{% spaceless %}
+	<div class="form-group">
+
+        {{ form_label(edit_form.categoryName, 'CategoryName', {'label_attr': {'class': 'control-label col-xs-2'}}) }}
+        <div class="col-xs-6">
+            {{ form_widget() }}
+        </div>
+     </div>
+{% endspaceless %}
+{% endblock form_row %}

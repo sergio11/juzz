@@ -9,6 +9,7 @@ h1,h2,h3,h4{
 }
 
 
+
 /*
   Flex Block Layout
   =======================
@@ -536,4 +537,53 @@ header .navbar .navbar-right li:nth-child(odd) a{
 
 .episode-card .episode-card-content .episode-card-actions .episode-card-plus{
   width: 20%;
+}
+
+
+/*
+  
+  Estilo Tabs
+  ==================
+  
+*/
+
+.big-tabs-container{
+  background: #FFF;
+  border-bottom: 2px solid #CCCCCC;
+  padding: 10px 10px 0 10px;
+  margin: 8rem auto 1rem;
+  max-width: 780px;
+}
+
+.big-tabs-container .nav-tabs {
+  margin: -10px -10px 55px -10px;
+}
+
+.big-tabs-container .nav-tabs {
+  border-bottom: 2px solid #EEEEEE;
+}
+
+.big-tabs-container li.active > a, 
+.big-tabs-container li.active > a:hover, 
+.big-tabs-container li.active > a:focus,
+.big-tabs-container li > a:hover {
+  background: none;
+  color: #297a4d;
+  border: none;
+  border-bottom: 2px solid #297a4d;
+}
+
+.big-tabs-container li > a {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333333;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 19px 10px;
+  line-height: 16px;
+  text-align: center;
+}
+
+.big-tabs-container .container{
+  width: 100%;
 }

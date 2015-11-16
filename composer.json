@@ -21,7 +21,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "damianociarla/opauth-bundle": "^1.0",
         "opauth/facebook": "^0.2.1",
-        "opauth/twitter": "^0.3.1"
+        "opauth/twitter": "^0.3.1",
+        "ras/flash-alert-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
