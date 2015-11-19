@@ -5,5 +5,9 @@
   <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-social/bootstrap-social.css') }}" charset="utf-8">
 {% endblock %}
 {% block main %}
-  	{{ render_flash_alerts() }}
+	<section id='section-bg-2' class="section section-main section-bg">
+		<div class="container container-md">
+  			{{ render_flash_alerts() }}
+  		</div>
+  	</section>
 {% endblock %}

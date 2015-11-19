@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-social/bootstrap-social.css') }}" charset="utf-8">
+{% endblock %}
+{% block main %}
+<section id='section-bg-2' class="section section-main section-bg">
+	<div class="container container-md">
+		<h2 class="text-center">Debes estar logado para poder publicar</h2>
+		<div class="big-tabs-container">
+			<ul class="nav nav-tabs" role='tablist'>
+				<li class="{{ tab is null or tab == 'login' ? 'active' }}">
+		            <a data-toggle="tab" role="tab" href="#tab-login">Con mi cuenta</a>
+		        </li>
+		        <li class="{{ tab is defined and tab == 'register' ? 'active' }}">
+		            <a data-toggle="tab" role="tab" href="#tab-new-account">Crear cuenta</a>
+		        </li>
+			</ul>
+			<div class="tab-content">
+				<!-- Login Tab -->
+				<div id="tab-login" class="container tab-pane {{ tab is null or tab == 'login' ? 'active' }}">
+					{% include "juzzUsuariosBundle:Usuarios:login.html.twig" with {'data':login_data} %}	
+				</div>
+				<!-- Register Tab -->
+				<div id="tab-new-account" class="container tab-pane {{ tab is defined and tab == 'register' ? 'active' }}">
+					{% include "juzzUsuariosBundle:Usuarios:register.html.twig" with {'data':register_data} %}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}

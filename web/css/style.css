@@ -99,15 +99,17 @@ h1,h2,h3,h4{
 body {
     padding-top: 52px;
 }
+
+
 body {
-    background: rgba(60, 179, 113, 0.49);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-smoothing: antialiased;
-    font-size: 14px;
-    font-family: 'Open Sans';
-    position: relative;
-    overflow-x: hidden;
+  background-color: rgba(60, 179, 113, 0.49);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: antialiased;
+  font-size: 14px;
+  font-family: 'Open Sans';
+  position: relative;
+  overflow-x: hidden;
 }
 
 
@@ -232,6 +234,20 @@ header .navbar .navbar-right li:nth-child(odd) a{
 
 .section.section-fill{
   background-color: #297a4d;
+}
+
+.section.section-bg{
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#section-bg-1{
+  background-image: url("../img/parallax.jpg");
+}
+
+#section-bg-2{
+  background-image: url("../img/parallax-3.jpg");
 }
 
 .section.section-fill-background{
@@ -586,4 +602,9 @@ header .navbar .navbar-right li:nth-child(odd) a{
 
 .big-tabs-container .container{
   width: 100%;
+}
+
+form .form-group{
+  text-align: left;
+  color: #297a4d;
 }

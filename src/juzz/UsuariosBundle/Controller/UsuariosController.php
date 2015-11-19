@@ -19,9 +19,32 @@ class UsuariosController extends Controller
     	$categories = $repository->findBy(
 		    array('parent'  => null)
 		  );
-        $response =  $this->render(':default:index.html.twig',array('categories' => $categories));
-        return $response;
+      $login_data = $this->loginAction($request);
+      $response =  $this->render(':default:index.html.twig',array(
+        'categories' => $categories,
+        'login_data' => $login_data
+      ));
+      return $response;
 
+    }
+
+    public function accountsAction(Request $request)
+    {
+
+      $login_data = $this->loginAction($request);
+      $register_data = $this->registroAction($request);
+      //Comprobamos si se ha registrado
+      if(isset($register_data['registered'])){
+        //la respuesta será una redirección al perfil del usuario.
+        $response = $register_data['redirect'];
+      }else{
+        $response = $this->render('juzzUsuariosBundle:Usuarios:accounts.html.twig',array(
+          'tab' => $request->query->get('tab'),
+          'login_data' => $login_data,
+          'register_data' => $register_data
+        ));
+      }
+      return $response;
     }
 
     public function profileAction(Request $request)
@@ -32,75 +55,57 @@ class UsuariosController extends Controller
     //Muestra el formulario de Login.
     public function loginAction(Request $request)
     {
-          $sesion = $request->getSession();
+      
+      $sesion = $request->getSession();
+      $error = $request->attributes->get(
+        SecurityContext::AUTHENTICATION_ERROR,
+        $sesion->get(SecurityContext::AUTHENTICATION_ERROR)
+      );
 
-          $defaultData = array('message' => 'Type your message here');
-          $form = $this->createFormBuilder($defaultData)
-          ->add('email', 'email',array(
-              'constraints' => array(
-                new NotBlank(),
-                new Length(array('min' => 3)),
-              )
-          ))
-          ->add('password', 'password')
-          ->add('send', 'submit')
-          ->getForm();
-
-          $form->handleRequest($request);
-
-          if ($form->isValid()) {
-              // data es un array con claves 'name', 'email', y 'message'
-              $data = $form->getData();
-          }
-
-          $error = $request->attributes->get(
-              SecurityContext::AUTHENTICATION_ERROR,
-              $sesion->get(SecurityContext::AUTHENTICATION_ERROR)
-          );
-
-          return $this->render('juzzUsuariosBundle:Usuarios:login.html.twig', array(
-              'last_username' => $sesion->get(SecurityContext::LAST_USERNAME),
-              'error'         => $error,
-              'form' => $form
-          ));
+      return array(
+        'last_email' => $sesion->get(SecurityContext::LAST_USERNAME),
+        'error' => $error
+      );
 
     }
 
-    /**
- * Muestra el formulario para que se registren los nuevos usuarios. Además
- * se encarga de procesar la información y de guardar la información en la base de datos
- */
- public function registroAction(Request $request){
+  // Muestra el formulario para que se registren los nuevos usuarios.
+  public function registroAction(Request $request){
 
-  $em = $this->getDoctrine()->getManager();
-  $user = new UsuarioEntity();
+  
+    $user = new UsuarioEntity();
 
-  $form = $this->createForm(new UsuarioRegistroType(), $user);
-  $form->handleRequest($request);
+    $form = $this->createForm(new UsuarioRegistroType(), $user);
+    $form->handleRequest($request);
 
-  if ($form->isValid()) {
-    //Necesitamos saber el algoritmo de codificación utilizado en la contraseña.
-    //Para poderlo aplicar a nuestros usuarios.
-    $encoder = $this->get('security.encoder_factory')->getEncoder($user);
-    $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
-    $user->setPassword($password);
-    $user->setIngreso(new \DateTime());
-    // Guardar el nuevo usuario en la base de datos
-    $em->persist($user);
-    $em->flush();
+    if ($form->isValid()) {
+      $em = $this->getDoctrine()->getManager();
+      //Necesitamos saber el algoritmo de codificación utilizado en la contraseña.
+      //Para poderlo aplicar a nuestros usuarios.
+      $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+      $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
+      $user->setPassword($password);
+      $user->setIngreso(new \DateTime());
+      // Guardar el nuevo usuario en la base de datos
+      $em->persist($user);
+      $em->flush();
 
-    // Crear un mensaje flash para notificar al usuario que se ha registrado correctamente
-    $this->get('ras_flash_alert.alert_reporter')->addSuccess('¡Enhorabuena! Te has registrado correctamente en Juzz');
+      // Crear un mensaje flash para notificar al usuario que se ha registrado correctamente
+      $this->get('ras_flash_alert.alert_reporter')->addSuccess('¡Enhorabuena! Te has registrado correctamente en Juzz');
+      $this->get('ras_flash_alert.alert_reporter')->addSuccess("Tu contraseña es " .$password . " y tiene ");
+      // Loguear al usuario automáticamente
+      $token = new UsernamePasswordToken($user, $user->getPassword(), 'frontend', $user->getRoles());
+      $this->container->get('security.context')->setToken($token);
 
-    // Loguear al usuario automáticamente
-    $token = new UsernamePasswordToken($user, null, 'juzz', $user->getRoles());
-    $this->container->get('security.context')->setToken($token);
+      return array(
+        'registered' => true,
+        'redirect' => $this->redirect($this->generateUrl('perfil'))
+      );
+    }
 
-    return $this->redirect($this->generateUrl('perfil'));
+    return array(
+      'form' => $form->createView()
+    );
   }
 
-  return $this->render('juzzUsuariosBundle:Usuarios:registro.html.twig', array(
-    'form' => $form->createView()
-  ));
-  }
 }

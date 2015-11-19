@@ -458,7 +458,7 @@ class Usuarios implements UserInterface, \Serializable
 
     public function getUsername()
     {
-        return $this->nombre;
+        return $this->email;
     }
 
     public function getSalt()

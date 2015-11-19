@@ -29,12 +29,13 @@
               <span class="sr-only">Toggle player</span>
               <span class="glyphicon glyphicon-search"></span>
           </button>
-          <a class="navbar-brand" href="">Juzz</a>
+          {% set route = app.user ? 'perfil' : 'portada' %}
+          <a class="navbar-brand" href="{{path(route)}}">Juzz</a>
         </div>
         <div class="navbar-collapse collapse in" id="main-navbar">
           <ul class="nav navbar-nav navbar-left">
             <li class="active">
-              <a href="#">Inicio</a>
+              <a href="{{path(route)}}">Inicio</a>
             </li>
             <li>
               <a href="#">Explorar</a>
@@ -47,18 +48,30 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li>
-              <a href="#">
+            {% if app.user %}
+              <li>
+                <a href="#">
                   <span class="glyphicon glyphicon-open"></span>&nbsp;
                   <span class="hidden-sm">Subir</span>
-              </a>
-            </li>
-            <li>
-              <a data-toggle="modal" href="#login">Entra</a>
-            </li>
-            <li>
-              <a href="#">Registrate</a>
-            </li>
+                </a>
+              </li>
+            {% endif %}
+
+            {% if not app.user %}
+              <li>
+                <a data-toggle="modal" href="#login">Entra</a>
+              </li>
+              <li>
+                <a href="{{path('accounts',{tab:'register'})}}">Registrate</a>
+              </li>
+            {% elseif app.user %}
+              <li>
+                <a href="{{path('logout')}}">
+                  <span class="glyphicon glyphicon-log-out"></span>&nbsp;
+                  <span class="hidden-sm">Salir</span>
+                </a>
+              </li>
+            {% endif %}
           </ul>
         </div>
       </div>

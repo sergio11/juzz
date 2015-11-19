@@ -17,26 +17,12 @@
               <h4 class="modal-title" id="modalLoginLabel">Entra.</h4>
             </div>
             <div class="modal-body">
-              <div class="social-buttons row">
-                <div class="col-md-12">
-                  <a class="btn btn-block btn-social btn-facebook btn-lg" rel="nofollow" href="{{ url('dcs_opauth_connect', {'strategy' : 'facebook'}) }}">
-                    <span class="fa fa-facebook"></span> Iniciar Sesión con Facebook
-                  </a>
-                  <a class="btn btn-block btn-social btn-twitter btn-lg" rel="nofollow" href="{{ url('dcs_opauth_connect', {'strategy' : 'twitter'}) }}">
-                    <span class="fa fa-twitter"></span> Iniciar Sesión con Twitter
-                  </a>
-                  <a class="btn btn-block btn-social btn-google btn-lg" rel="nofollow" href="{{ url('dcs_opauth_connect', {'strategy' : 'google'}) }}">
-                    <span class="fa fa-google"></span> Iniciar Sesión con Google +
-                  </a>
-                </div>
-              </div>
-              <hr>
-              <h5 class="text-center">o también...</h5>
+              {% include "juzzUsuariosBundle:Usuarios:login.html.twig" with {'data':login_data} %}
             </div>
         </div>
       </div>
   </div>
-  <section class="section section-main flex-block flex-block-full flex-direction-column">
+  <section id='section-bg-1' class="section section-main section-bg flex-block flex-block-full flex-direction-column">
 	    <hgroup>
           <h2 class="large">Escucha</h2>
           <h3>lo que te interesa, cuando quieras, donde quieras.</h3>
