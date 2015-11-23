@@ -1,6 +1,6 @@
 <?php
 
-namespace juzz\juzzBundle\Entity;
+namespace juzz\CanalesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -38,7 +38,7 @@ class ActividadesCanales
     /**
      * @var \Usuarios
      *
-     * @ORM\ManyToOne(targetEntity="Usuarios")
+     * @ORM\ManyToOne(targetEntity="\juzz\UsuariosBundle\Entity\Usuarios")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
      * })
@@ -50,7 +50,7 @@ class ActividadesCanales
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -61,7 +61,6 @@ class ActividadesCanales
      * Set fecha
      *
      * @param \DateTime $fecha
-     *
      * @return ActividadesCanales
      */
     public function setFecha($fecha)
@@ -74,7 +73,7 @@ class ActividadesCanales
     /**
      * Get fecha
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getFecha()
     {
@@ -85,7 +84,6 @@ class ActividadesCanales
      * Set tipo
      *
      * @param string $tipo
-     *
      * @return ActividadesCanales
      */
     public function setTipo($tipo)
@@ -98,7 +96,7 @@ class ActividadesCanales
     /**
      * Get tipo
      *
-     * @return string
+     * @return string 
      */
     public function getTipo()
     {
@@ -108,11 +106,10 @@ class ActividadesCanales
     /**
      * Set usuario
      *
-     * @param \juzz\juzzBundle\Entity\Usuarios $usuario
-     *
+     * @param \juzz\UsuariosBundle\Entity\Usuarios $usuario
      * @return ActividadesCanales
      */
-    public function setUsuario(\juzz\juzzBundle\Entity\Usuarios $usuario = null)
+    public function setUsuario(\juzz\UsuariosBundle\Entity\Usuarios $usuario = null)
     {
         $this->usuario = $usuario;
 
@@ -122,7 +119,7 @@ class ActividadesCanales
     /**
      * Get usuario
      *
-     * @return \juzz\juzzBundle\Entity\Usuarios
+     * @return \juzz\UsuariosBundle\Entity\Usuarios 
      */
     public function getUsuario()
     {

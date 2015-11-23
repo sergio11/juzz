@@ -5,6 +5,7 @@ namespace juzz\UsuariosBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use juzz\FilesBundle\Form\FileType;
 use Doctrine\ORM\EntityRepository;
 
 class UsuarioRegistroType extends AbstractType
@@ -37,6 +38,7 @@ class UsuarioRegistroType extends AbstractType
                     'placeholder' => 'p.g esperanto36'
                 )
             ))
+            ->add('avatar',new FileType())
             ->add('registrarme', 'submit')
         ;
     }

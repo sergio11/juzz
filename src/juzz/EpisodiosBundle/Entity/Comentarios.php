@@ -33,12 +33,12 @@ class Comentarios
      *
      * @ORM\Column(name="valido", type="boolean", nullable=false)
      */
-    private $valido = '1';
+    private $valido;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="contenido", type="text", length=16777215, nullable=false)
+     * @ORM\Column(name="contenido", type="text", nullable=false)
      */
     private $contenido;
 
@@ -52,7 +52,7 @@ class Comentarios
     /**
      * @var \Comentarios
      *
-     * @ORM\ManyToOne(targetEntity="Comentarios")
+     * @ORM\ManyToOne(targetEntity="\juzz\EpisodiosBundle\Entity\Comentarios")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      * })
@@ -74,7 +74,7 @@ class Comentarios
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -85,7 +85,6 @@ class Comentarios
      * Set fecha
      *
      * @param \DateTime $fecha
-     *
      * @return Comentarios
      */
     public function setFecha($fecha)
@@ -98,7 +97,7 @@ class Comentarios
     /**
      * Get fecha
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getFecha()
     {
@@ -109,7 +108,6 @@ class Comentarios
      * Set valido
      *
      * @param boolean $valido
-     *
      * @return Comentarios
      */
     public function setValido($valido)
@@ -122,7 +120,7 @@ class Comentarios
     /**
      * Get valido
      *
-     * @return boolean
+     * @return boolean 
      */
     public function getValido()
     {
@@ -133,7 +131,6 @@ class Comentarios
      * Set contenido
      *
      * @param string $contenido
-     *
      * @return Comentarios
      */
     public function setContenido($contenido)
@@ -146,7 +143,7 @@ class Comentarios
     /**
      * Get contenido
      *
-     * @return string
+     * @return string 
      */
     public function getContenido()
     {
@@ -157,7 +154,6 @@ class Comentarios
      * Set target
      *
      * @param integer $target
-     *
      * @return Comentarios
      */
     public function setTarget($target)
@@ -170,7 +166,7 @@ class Comentarios
     /**
      * Get target
      *
-     * @return integer
+     * @return integer 
      */
     public function getTarget()
     {
@@ -180,11 +176,10 @@ class Comentarios
     /**
      * Set parent
      *
-     * @param \juzz\juzzBundle\Entity\Comentarios $parent
-     *
+     * @param \juzz\EpisodiosBundle\Entity\Comentarios $parent
      * @return Comentarios
      */
-    public function setParent(\juzz\juzzBundle\Entity\Comentarios $parent = null)
+    public function setParent(\juzz\EpisodiosBundle\Entity\Comentarios $parent = null)
     {
         $this->parent = $parent;
 
@@ -194,7 +189,7 @@ class Comentarios
     /**
      * Get parent
      *
-     * @return \juzz\juzzBundle\Entity\Comentarios
+     * @return \juzz\EpisodiosBundle\Entity\Comentarios 
      */
     public function getParent()
     {
@@ -204,11 +199,10 @@ class Comentarios
     /**
      * Set propietario
      *
-     * @param \juzz\juzzBundle\Entity\Usuarios $propietario
-     *
+     * @param \juzz\UsuariosBundle\Entity\Usuarios $propietario
      * @return Comentarios
      */
-    public function setPropietario(\juzz\juzzBundle\Entity\Usuarios $propietario = null)
+    public function setPropietario(\juzz\UsuariosBundle\Entity\Usuarios $propietario = null)
     {
         $this->propietario = $propietario;
 
@@ -218,7 +212,7 @@ class Comentarios
     /**
      * Get propietario
      *
-     * @return \juzz\juzzBundle\Entity\Usuarios
+     * @return \juzz\UsuariosBundle\Entity\Usuarios 
      */
     public function getPropietario()
     {

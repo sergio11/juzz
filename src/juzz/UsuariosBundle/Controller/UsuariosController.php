@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use juzz\UsuariosBundle\Entity\Usuarios AS UsuarioEntity;
+use juzz\FilesBundle\Entity\Imagenes AS ImagenEntity;
 use juzz\UsuariosBundle\Form\UsuarioRegistroType;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -74,18 +75,25 @@ class UsuariosController extends Controller
 
   
     $user = new UsuarioEntity();
+    $avatar = new ImagenEntity();
+    $user->setAvatar($avatar);
 
     $form = $this->createForm(new UsuarioRegistroType(), $user);
     $form->handleRequest($request);
 
     if ($form->isValid()) {
       $em = $this->getDoctrine()->getManager();
+
+      //Persistimos el avatar.
+      $em->persist($avatar);
       //Necesitamos saber el algoritmo de codificación utilizado en la contraseña.
       //Para poderlo aplicar a nuestros usuarios.
       $encoder = $this->get('security.encoder_factory')->getEncoder($user);
       $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
       $user->setPassword($password);
       $user->setIngreso(new \DateTime());
+      $user->setActivo(1);
+      $user->setProfileBg($avatar);
       // Guardar el nuevo usuario en la base de datos
       $em->persist($user);
       $em->flush();

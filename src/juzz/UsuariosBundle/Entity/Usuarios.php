@@ -2,18 +2,17 @@
 
 namespace juzz\UsuariosBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 use Symfony\Component\Validator\ExecutionContextInterface;
 
-
 /**
  * Usuarios
  *
- * @ORM\Table(name="usuarios", uniqueConstraints={@ORM\UniqueConstraint(name="USU_EMA_UK", columns={"email"})})
+ * @ORM\Table(name="usuarios", uniqueConstraints={@ORM\UniqueConstraint(name="USU_EMA_UK", columns={"email"})}, indexes={@ORM\Index(name="USU_AVA_FK", columns={"avatar"}), @ORM\Index(name="USU_PRO_FK", columns={"profile_bg"})})
  * @ORM\Entity
  */
 class Usuarios implements UserInterface, \Serializable
@@ -67,7 +66,7 @@ class Usuarios implements UserInterface, \Serializable
      *
      * @ORM\Column(name="activo", type="boolean", nullable=false)
      */
-    private $activo = '0';
+    private $activo;
 
     /**
      * @var \DateTime
@@ -75,6 +74,26 @@ class Usuarios implements UserInterface, \Serializable
      * @ORM\Column(name="ingreso", type="date", nullable=false)
      */
     private $ingreso;
+
+    /**
+     * @var \Imagenes
+     *
+     * @ORM\ManyToOne(targetEntity="\juzz\FilesBundle\Entity\Imagenes")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="avatar", referencedColumnName="id")
+     * })
+     */
+    private $avatar;
+
+    /**
+     * @var \Imagenes
+     *
+     * @ORM\ManyToOne(targetEntity="\juzz\FilesBundle\Entity\Imagenes")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="profile_bg", referencedColumnName="id")
+     * })
+     */
+    private $profileBg;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -94,7 +113,7 @@ class Usuarios implements UserInterface, \Serializable
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="juzz\ProgramasBundle\Entity\Programas", inversedBy="subscriptor")
+     * @ORM\ManyToMany(targetEntity="\juzz\ProgramasBundle\Entity\Programas", inversedBy="subscriptor")
      * @ORM\JoinTable(name="likes_programas",
      *   joinColumns={
      *     @ORM\JoinColumn(name="subscriptor_id", referencedColumnName="id")
@@ -109,14 +128,14 @@ class Usuarios implements UserInterface, \Serializable
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="juzz\UsuariosBundle\Entity\Usuarios", mappedBy="seguidor")
+     * @ORM\ManyToMany(targetEntity="Usuarios", mappedBy="seguidor")
      */
     private $seguido;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="juzz\ProgramasBundle\Entity\Programas", inversedBy="usuario")
+     * @ORM\ManyToMany(targetEntity="\juzz\ProgramasBundle\Entity\Programas", inversedBy="usuario")
      * @ORM\JoinTable(name="subscripciones_programas",
      *   joinColumns={
      *     @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
@@ -143,7 +162,7 @@ class Usuarios implements UserInterface, \Serializable
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -154,7 +173,6 @@ class Usuarios implements UserInterface, \Serializable
      * Set nombre
      *
      * @param string $nombre
-     *
      * @return Usuarios
      */
     public function setNombre($nombre)
@@ -167,7 +185,7 @@ class Usuarios implements UserInterface, \Serializable
     /**
      * Get nombre
      *
-     * @return string
+     * @return string 
      */
     public function getNombre()
     {
@@ -178,7 +196,6 @@ class Usuarios implements UserInterface, \Serializable
      * Set ape1
      *
      * @param string $ape1
-     *
      * @return Usuarios
      */
     public function setApe1($ape1)
@@ -191,7 +208,7 @@ class Usuarios implements UserInterface, \Serializable
     /**
      * Get ape1
      *
-     * @return string
+     * @return string 
      */
     public function getApe1()
     {
@@ -202,7 +219,6 @@ class Usuarios implements UserInterface, \Serializable
      * Set ape2
      *
      * @param string $ape2
-     *
      * @return Usuarios
      */
     public function setApe2($ape2)
@@ -215,7 +231,7 @@ class Usuarios implements UserInterface, \Serializable
     /**
      * Get ape2
      *
-     * @return string
+     * @return string 
      */
     public function getApe2()
     {
@@ -226,7 +242,6 @@ class Usuarios implements UserInterface, \Serializable
      * Set email
      *
      * @param string $email
-     *
      * @return Usuarios
      */
     public function setEmail($email)
@@ -239,7 +254,7 @@ class Usuarios implements UserInterface, \Serializable
     /**
      * Get email
      *
-     * @return string
+     * @return string 
      */
     public function getEmail()
     {
@@ -250,7 +265,6 @@ class Usuarios implements UserInterface, \Serializable
      * Set password
      *
      * @param string $password
-     *
      * @return Usuarios
      */
     public function setPassword($password)
@@ -263,7 +277,7 @@ class Usuarios implements UserInterface, \Serializable
     /**
      * Get password
      *
-     * @return string
+     * @return string 
      */
     public function getPassword()
     {
@@ -274,7 +288,6 @@ class Usuarios implements UserInterface, \Serializable
      * Set activo
      *
      * @param boolean $activo
-     *
      * @return Usuarios
      */
     public function setActivo($activo)
@@ -287,7 +300,7 @@ class Usuarios implements UserInterface, \Serializable
     /**
      * Get activo
      *
-     * @return boolean
+     * @return boolean 
      */
     public function getActivo()
     {
@@ -298,7 +311,6 @@ class Usuarios implements UserInterface, \Serializable
      * Set ingreso
      *
      * @param \DateTime $ingreso
-     *
      * @return Usuarios
      */
     public function setIngreso($ingreso)
@@ -311,7 +323,7 @@ class Usuarios implements UserInterface, \Serializable
     /**
      * Get ingreso
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getIngreso()
     {
@@ -319,33 +331,78 @@ class Usuarios implements UserInterface, \Serializable
     }
 
     /**
-     * Add categorium
+     * Set avatar
      *
-     * @param \juzz\EpisodiosBundle\Entity\Categorias $categorium
-     *
+     * @param \juzz\FilesBundle\Entity\Imagenes $avatar
      * @return Usuarios
      */
-    public function addCategorium(\juzz\EpisodiosBundle\Entity\Categorias $categorium)
+    public function setAvatar(\juzz\FilesBundle\Entity\Imagenes $avatar = null)
     {
-        $this->categoria[] = $categorium;
+        $this->avatar = $avatar;
 
         return $this;
     }
 
     /**
-     * Remove categorium
+     * Get avatar
      *
-     * @param \juzz\EpisodiosBundle\Entity\Categorias $categorium
+     * @return \juzz\FilesBundle\Entity\Imagenes 
      */
-    public function removeCategorium(\juzz\EpisodiosBundle\Entity\Categorias $categorium)
+    public function getAvatar()
     {
-        $this->categoria->removeElement($categorium);
+        return $this->avatar;
+    }
+
+    /**
+     * Set profileBg
+     *
+     * @param \juzz\FilesBundle\Entity\Imagenes $profileBg
+     * @return Usuarios
+     */
+    public function setProfileBg(\juzz\FilesBundle\Entity\Imagenes $profileBg = null)
+    {
+        $this->profileBg = $profileBg;
+
+        return $this;
+    }
+
+    /**
+     * Get profileBg
+     *
+     * @return \juzz\FilesBundle\Entity\Imagenes 
+     */
+    public function getProfileBg()
+    {
+        return $this->profileBg;
+    }
+
+    /**
+     * Add categoria
+     *
+     * @param \juzz\EpisodiosBundle\Entity\Categorias $categoria
+     * @return Usuarios
+     */
+    public function addCategorium(\juzz\EpisodiosBundle\Entity\Categorias $categoria)
+    {
+        $this->categoria[] = $categoria;
+
+        return $this;
+    }
+
+    /**
+     * Remove categoria
+     *
+     * @param \juzz\EpisodiosBundle\Entity\Categorias $categoria
+     */
+    public function removeCategorium(\juzz\EpisodiosBundle\Entity\Categorias $categoria)
+    {
+        $this->categoria->removeElement($categoria);
     }
 
     /**
      * Get categoria
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getCategoria()
     {
@@ -356,7 +413,6 @@ class Usuarios implements UserInterface, \Serializable
      * Add subscripcion
      *
      * @param \juzz\ProgramasBundle\Entity\Programas $subscripcion
-     *
      * @return Usuarios
      */
     public function addSubscripcion(\juzz\ProgramasBundle\Entity\Programas $subscripcion)
@@ -379,7 +435,7 @@ class Usuarios implements UserInterface, \Serializable
     /**
      * Get subscripcion
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getSubscripcion()
     {
@@ -390,7 +446,6 @@ class Usuarios implements UserInterface, \Serializable
      * Add seguido
      *
      * @param \juzz\UsuariosBundle\Entity\Usuarios $seguido
-     *
      * @return Usuarios
      */
     public function addSeguido(\juzz\UsuariosBundle\Entity\Usuarios $seguido)
@@ -413,7 +468,7 @@ class Usuarios implements UserInterface, \Serializable
     /**
      * Get seguido
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getSeguido()
     {
@@ -424,7 +479,6 @@ class Usuarios implements UserInterface, \Serializable
      * Add programa
      *
      * @param \juzz\ProgramasBundle\Entity\Programas $programa
-     *
      * @return Usuarios
      */
     public function addPrograma(\juzz\ProgramasBundle\Entity\Programas $programa)
@@ -447,37 +501,30 @@ class Usuarios implements UserInterface, \Serializable
     /**
      * Get programa
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getPrograma()
     {
         return $this->programa;
     }
 
-
-
     public function getUsername()
     {
         return $this->email;
     }
-
     public function getSalt()
     {
         // you *may* need a real salt depending on your encoder
         // see section on salt below
         return null;
     }
-
-
     public function getRoles()
     {
         return array('ROLE_USER');
     }
-
     public function eraseCredentials()
     {
     }
-
      /** @see \Serializable::serialize() */
     public function serialize()
     {
@@ -489,7 +536,6 @@ class Usuarios implements UserInterface, \Serializable
             // $this->salt,
         ));
     }
-
     /** @see \Serializable::unserialize() */
     public function unserialize($serialized)
     {

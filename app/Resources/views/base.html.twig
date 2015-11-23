@@ -30,7 +30,7 @@
               <span class="glyphicon glyphicon-search"></span>
           </button>
           {% set route = app.user ? 'perfil' : 'portada' %}
-          <a class="navbar-brand" href="{{path(route)}}">Juzz</a>
+          <a class="navbar-brand" href="{{path(route)}}"><img src="{{ asset('img/logo.gif') }}" width="50px"></a>
         </div>
         <div class="navbar-collapse collapse in" id="main-navbar">
           <ul class="nav navbar-nav navbar-left">
@@ -59,10 +59,16 @@
 
             {% if not app.user %}
               <li>
-                <a data-toggle="modal" href="#login">Entra</a>
+                <a data-toggle="modal" href="#login">
+                  <span class='glyphicon glyphicon-log-in'></span>&nbsp;
+                  <span class="hidden-sm">Entra</span>
+                </a>
               </li>
               <li>
-                <a href="{{path('accounts',{tab:'register'})}}">Registrate</a>
+                <a href="{{path('accounts',{tab:'register'})}}">
+                  <span class='glyphicon glyphicon-pencil'></span>&nbsp;
+                  <span class="hidden-sm">Registrate</span>
+                </a>
               </li>
             {% elseif app.user %}
               <li>

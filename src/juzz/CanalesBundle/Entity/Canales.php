@@ -31,7 +31,7 @@ class Canales
     /**
      * @var string
      *
-     * @ORM\Column(name="descripcion", type="text", length=16777215, nullable=true)
+     * @ORM\Column(name="descripcion", type="text", nullable=true)
      */
     private $descripcion;
 
@@ -57,7 +57,7 @@ class Canales
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -68,7 +68,6 @@ class Canales
      * Set nombre
      *
      * @param string $nombre
-     *
      * @return Canales
      */
     public function setNombre($nombre)
@@ -81,7 +80,7 @@ class Canales
     /**
      * Get nombre
      *
-     * @return string
+     * @return string 
      */
     public function getNombre()
     {
@@ -92,7 +91,6 @@ class Canales
      * Set descripcion
      *
      * @param string $descripcion
-     *
      * @return Canales
      */
     public function setDescripcion($descripcion)
@@ -105,7 +103,7 @@ class Canales
     /**
      * Get descripcion
      *
-     * @return string
+     * @return string 
      */
     public function getDescripcion()
     {
@@ -116,7 +114,6 @@ class Canales
      * Set creacion
      *
      * @param \DateTime $creacion
-     *
      * @return Canales
      */
     public function setCreacion($creacion)
@@ -129,7 +126,7 @@ class Canales
     /**
      * Get creacion
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getCreacion()
     {
@@ -140,7 +137,6 @@ class Canales
      * Set usuario
      *
      * @param \juzz\UsuariosBundle\Entity\Usuarios $usuario
-     *
      * @return Canales
      */
     public function setUsuario(\juzz\UsuariosBundle\Entity\Usuarios $usuario = null)
@@ -153,7 +149,7 @@ class Canales
     /**
      * Get usuario
      *
-     * @return \juzz\UsuariosBundle\Entity\Usuarios
+     * @return \juzz\UsuariosBundle\Entity\Usuarios 
      */
     public function getUsuario()
     {

@@ -9,6 +9,32 @@ h1,h2,h3,h4{
 }
 
 
+.text-xs-left { text-align: left; }
+.text-xs-right { text-align: right; }
+.text-xs-center { text-align: center; }
+.text-xs-justify { text-align: justify; }
+
+@media (min-width: @screen-sm-min) {
+  .text-sm-left { text-align: left; }
+  .text-sm-right { text-align: right; }
+  .text-sm-center { text-align: center; }
+  .text-sm-justify { text-align: justify; }
+}
+
+@media (min-width: @screen-md-min) {
+  .text-md-left { text-align: left; }
+  .text-md-right { text-align: right; }
+  .text-md-center { text-align: center; }
+  .text-md-justify { text-align: justify; }
+}
+
+@media (min-width: @screen-lg-min) {
+  .text-lg-left { text-align: left; }
+  .text-lg-right { text-align: right; }
+  .text-lg-center { text-align: center; }
+  .text-lg-justify { text-align: justify; }
+}
+
 
 /*
   Flex Block Layout
@@ -225,21 +251,32 @@ header .navbar .navbar-right li:nth-child(odd) a{
   =============
 */
 
+/*
+  Cuerpo
+  ==================
+*/
+
 .section{
   text-align: center;
   color: #fff;
   padding: 50px 0 ;
-  height: 70vh;
+  min-height: 70vh;
 }
 
 .section.section-fill{
-  background-color: #297a4d;
+  background-color: #5E9275;
 }
 
 .section.section-bg{
-  background-size: cover;
   background-repeat: no-repeat;
+  /*Propiedad clave para el efecto.*/
+  background-attachment: fixed;
+  background-size: cover;
   background-position: center;
+}
+
+.section.section-bg:hover{
+
 }
 
 #section-bg-1{
@@ -250,12 +287,6 @@ header .navbar .navbar-right li:nth-child(odd) a{
   background-image: url("../img/parallax-3.jpg");
 }
 
-.section.section-fill-background{
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 0 0;
-  background-color: transparent;
-}
 
 .section h2.large {
     font-size: 7rem;

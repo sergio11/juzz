@@ -1,0 +1,3 @@
+juzz_files_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: juzzFilesBundle:Default:index }

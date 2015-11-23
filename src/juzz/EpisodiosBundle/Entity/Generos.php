@@ -31,7 +31,7 @@ class Generos
     /**
      * @var string
      *
-     * @ORM\Column(name="descripcion", type="text", length=16777215, nullable=true)
+     * @ORM\Column(name="descripcion", type="text", nullable=true)
      */
     private $descripcion;
 
@@ -40,7 +40,7 @@ class Generos
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -51,7 +51,6 @@ class Generos
      * Set nombre
      *
      * @param string $nombre
-     *
      * @return Generos
      */
     public function setNombre($nombre)
@@ -64,7 +63,7 @@ class Generos
     /**
      * Get nombre
      *
-     * @return string
+     * @return string 
      */
     public function getNombre()
     {
@@ -75,7 +74,6 @@ class Generos
      * Set descripcion
      *
      * @param string $descripcion
-     *
      * @return Generos
      */
     public function setDescripcion($descripcion)
@@ -88,7 +86,7 @@ class Generos
     /**
      * Get descripcion
      *
-     * @return string
+     * @return string 
      */
     public function getDescripcion()
     {

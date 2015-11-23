@@ -31,7 +31,7 @@ class Programas
     /**
      * @var string
      *
-     * @ORM\Column(name="descripcion", type="text", length=16777215, nullable=true)
+     * @ORM\Column(name="descripcion", type="text", nullable=true)
      */
     private $descripcion;
 
@@ -55,14 +55,14 @@ class Programas
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="juzz\UsuariosBundle\Entity\Usuarios", mappedBy="subscripcion")
+     * @ORM\ManyToMany(targetEntity="\juzz\UsuariosBundle\Entity\Usuarios", mappedBy="subscripcion")
      */
     private $subscriptor;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="juzz\UsuariosBundle\Entity\Usuarios", mappedBy="programa")
+     * @ORM\ManyToMany(targetEntity="\juzz\UsuariosBundle\Entity\Usuarios", mappedBy="programa")
      */
     private $usuario;
 
@@ -79,7 +79,7 @@ class Programas
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -90,7 +90,6 @@ class Programas
      * Set nombre
      *
      * @param string $nombre
-     *
      * @return Programas
      */
     public function setNombre($nombre)
@@ -103,7 +102,7 @@ class Programas
     /**
      * Get nombre
      *
-     * @return string
+     * @return string 
      */
     public function getNombre()
     {
@@ -114,7 +113,6 @@ class Programas
      * Set descripcion
      *
      * @param string $descripcion
-     *
      * @return Programas
      */
     public function setDescripcion($descripcion)
@@ -127,7 +125,7 @@ class Programas
     /**
      * Get descripcion
      *
-     * @return string
+     * @return string 
      */
     public function getDescripcion()
     {
@@ -138,7 +136,6 @@ class Programas
      * Set creacion
      *
      * @param \DateTime $creacion
-     *
      * @return Programas
      */
     public function setCreacion($creacion)
@@ -151,7 +148,7 @@ class Programas
     /**
      * Get creacion
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getCreacion()
     {
@@ -162,7 +159,6 @@ class Programas
      * Set canal
      *
      * @param \juzz\CanalesBundle\Entity\Canales $canal
-     *
      * @return Programas
      */
     public function setCanal(\juzz\CanalesBundle\Entity\Canales $canal = null)
@@ -175,7 +171,7 @@ class Programas
     /**
      * Get canal
      *
-     * @return \juzz\CanalesBundle\Entity\Canales
+     * @return \juzz\CanalesBundle\Entity\Canales 
      */
     public function getCanal()
     {
@@ -186,7 +182,6 @@ class Programas
      * Add subscriptor
      *
      * @param \juzz\UsuariosBundle\Entity\Usuarios $subscriptor
-     *
      * @return Programas
      */
     public function addSubscriptor(\juzz\UsuariosBundle\Entity\Usuarios $subscriptor)
@@ -209,7 +204,7 @@ class Programas
     /**
      * Get subscriptor
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getSubscriptor()
     {
@@ -220,7 +215,6 @@ class Programas
      * Add usuario
      *
      * @param \juzz\UsuariosBundle\Entity\Usuarios $usuario
-     *
      * @return Programas
      */
     public function addUsuario(\juzz\UsuariosBundle\Entity\Usuarios $usuario)
@@ -243,7 +237,7 @@ class Programas
     /**
      * Get usuario
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getUsuario()
     {

@@ -3,6 +3,15 @@ CREATE DATABASE juzz;
 
 use juzz;
 
+
+CREATE TABLE IF NOT EXISTS IMAGENES(
+	id 			BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	name 		CHAR(60) NOT NULL,
+		CONSTRAINT IMG_UK UNIQUE(name),
+	path        VARCHAR(250) NOT NULL,
+	type 		ENUM('AVATAR','PROFILE_BACKGROUND') DEFAULT 'AVATAR' NOT NULL
+)ENGINE=INNODB CHARSET=LATIN1 COMMENT="Tabla de Images";
+
 CREATE TABLE IF NOT EXISTS USUARIOS(
 	id 			BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	nombre		VARCHAR(30) NOT NULL,
@@ -12,7 +21,15 @@ CREATE TABLE IF NOT EXISTS USUARIOS(
             CONSTRAINT USU_EMA_UK UNIQUE(email),
     password    CHAR(60) NOT NULL,
     activo 		BOOLEAN DEFAULT FALSE NOT NULL,
-    ingreso		DATE NOT NULL
+    ingreso		DATE NOT NULL,
+    avatar 		BIGINT UNSIGNED NOT NULL,
+    	CONSTRAINT USU_AVA_FK FOREIGN KEY(avatar) REFERENCES IMAGENES(id)
+    		ON DELETE CASCADE
+    		ON UPDATE CASCADE,
+   	profile_bg  BIGINT UNSIGNED NOT NULL,
+   		CONSTRAINT USU_PRO_FK FOREIGN KEY(profile_bg) REFERENCES IMAGENES(id)
+   			ON DELETE CASCADE
+   			ON UPDATE CASCADE
 )ENGINE=INNODB CHARSET=LATIN1 COMMENT="Tabla de Usuario";
 
 CREATE TABLE IF NOT EXISTS CANALES(
@@ -226,10 +243,17 @@ mapping_types:
             varbinary: string
             tinyblob: text
 
-php app/console generate:bundle --namespace=juzz/juzzBundle --format=yml
-php app/console doctrine:mapping:convert xml ./src/juzz/juzzBundle/Resources/config/doctrine/metadata/orm --from-database --force
-php app/console doctrine:mapping:import AppBundlejuzzBundle annotation
-php app/console doctrine:generate:entities AppBundlejuzzBundle --no-backup
+--Crear BD
+php app/console doctrine:database:create
+--Borrar BD
+php app/console doctrine:database:drop --force
+-- Crear Schema.
+php app/console doctrine:schema:update --force
+
+php app/console generate:bundle --namespace=juzz/DoctrineMetadaBundle --format=yml
+php app/console doctrine:mapping:convert xml ./src/juzz/DoctrineMetadaBundle/Resources/config/doctrine/metadata/orm --from-database --force
+php app/console doctrine:mapping:import juzzDoctrineMetadaBundle annotation
+php app/console doctrine:generate:entities juzzDoctrineMetadaBundle --no-backup
 -- Para Cargar Fixtures
 php app/console doctrine:fixtures:load
 -- Cargar Fixtures de un bundle
@@ -237,3 +261,7 @@ php app/console doctrine:fixtures:load --fixtures src/juzz/UsuariosBundle/DataFi
 php app/console doctrine:fixtures:load --fixtures src/juzz/CanalesBundle/DataFixtures/ORM/ --append
 php app/console doctrine:fixtures:load --fixtures src/juzz/ProgramasBundle/DataFixtures/ORM/ --append
 php app/console doctrine:fixtures:load --fixtures src/juzz/EpisodiosBundle/DataFixtures/ORM/ --append
+php app/console doctrine:fixtures:load --fixtures src/juzz/EpisodiosBundle/DataFixtures/ORM/categorias --append
+
+--Habilitar esta extensión php.ini 
+extension=php_fileinfo.dll

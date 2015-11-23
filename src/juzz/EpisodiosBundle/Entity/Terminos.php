@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Terminos
  *
- * @ORM\Table(name="terminos", uniqueConstraints={@ORM\UniqueConstraint(name="TER_UK", columns={"nombre"}), @ORM\UniqueConstraint(name="SLU_UK", columns={"nombre"})})
+ * @ORM\Table(name="terminos", uniqueConstraints={@ORM\UniqueConstraint(name="TER_UK", columns={"nombre"})})
  * @ORM\Entity
  */
 class Terminos
@@ -38,7 +38,7 @@ class Terminos
     /**
      * @var string
      *
-     * @ORM\Column(name="descripcion", type="text", length=16777215, nullable=true)
+     * @ORM\Column(name="descripcion", type="text", nullable=true)
      */
     private $descripcion;
 
@@ -47,7 +47,7 @@ class Terminos
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -58,7 +58,6 @@ class Terminos
      * Set nombre
      *
      * @param string $nombre
-     *
      * @return Terminos
      */
     public function setNombre($nombre)
@@ -71,7 +70,7 @@ class Terminos
     /**
      * Get nombre
      *
-     * @return string
+     * @return string 
      */
     public function getNombre()
     {
@@ -82,7 +81,6 @@ class Terminos
      * Set slug
      *
      * @param string $slug
-     *
      * @return Terminos
      */
     public function setSlug($slug)
@@ -95,7 +93,7 @@ class Terminos
     /**
      * Get slug
      *
-     * @return string
+     * @return string 
      */
     public function getSlug()
     {
@@ -106,7 +104,6 @@ class Terminos
      * Set descripcion
      *
      * @param string $descripcion
-     *
      * @return Terminos
      */
     public function setDescripcion($descripcion)
@@ -119,7 +116,7 @@ class Terminos
     /**
      * Get descripcion
      *
-     * @return string
+     * @return string 
      */
     public function getDescripcion()
     {

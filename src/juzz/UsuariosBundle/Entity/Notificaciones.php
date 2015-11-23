@@ -1,6 +1,6 @@
 <?php
 
-namespace juzz\juzzBundle\Entity;
+namespace juzz\UsuariosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -40,7 +40,7 @@ class Notificaciones
      *
      * @ORM\Column(name="vista", type="boolean", nullable=false)
      */
-    private $vista = '0';
+    private $vista;
 
     /**
      * @var integer
@@ -52,7 +52,7 @@ class Notificaciones
     /**
      * @var \Usuarios
      *
-     * @ORM\ManyToOne(targetEntity="Usuarios")
+     * @ORM\ManyToOne(targetEntity="\juzz\UsuariosBundle\Entity\Usuarios")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="target_id", referencedColumnName="id")
      * })
@@ -64,7 +64,7 @@ class Notificaciones
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -75,7 +75,6 @@ class Notificaciones
      * Set fecha
      *
      * @param \DateTime $fecha
-     *
      * @return Notificaciones
      */
     public function setFecha($fecha)
@@ -88,7 +87,7 @@ class Notificaciones
     /**
      * Get fecha
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getFecha()
     {
@@ -99,7 +98,6 @@ class Notificaciones
      * Set tipo
      *
      * @param string $tipo
-     *
      * @return Notificaciones
      */
     public function setTipo($tipo)
@@ -112,7 +110,7 @@ class Notificaciones
     /**
      * Get tipo
      *
-     * @return string
+     * @return string 
      */
     public function getTipo()
     {
@@ -123,7 +121,6 @@ class Notificaciones
      * Set vista
      *
      * @param boolean $vista
-     *
      * @return Notificaciones
      */
     public function setVista($vista)
@@ -136,7 +133,7 @@ class Notificaciones
     /**
      * Get vista
      *
-     * @return boolean
+     * @return boolean 
      */
     public function getVista()
     {
@@ -147,7 +144,6 @@ class Notificaciones
      * Set fuente
      *
      * @param integer $fuente
-     *
      * @return Notificaciones
      */
     public function setFuente($fuente)
@@ -160,7 +156,7 @@ class Notificaciones
     /**
      * Get fuente
      *
-     * @return integer
+     * @return integer 
      */
     public function getFuente()
     {
@@ -170,11 +166,10 @@ class Notificaciones
     /**
      * Set target
      *
-     * @param \juzz\juzzBundle\Entity\Usuarios $target
-     *
+     * @param \juzz\UsuariosBundle\Entity\Usuarios $target
      * @return Notificaciones
      */
-    public function setTarget(\juzz\juzzBundle\Entity\Usuarios $target = null)
+    public function setTarget(\juzz\UsuariosBundle\Entity\Usuarios $target = null)
     {
         $this->target = $target;
 
@@ -184,7 +179,7 @@ class Notificaciones
     /**
      * Get target
      *
-     * @return \juzz\juzzBundle\Entity\Usuarios
+     * @return \juzz\UsuariosBundle\Entity\Usuarios 
      */
     public function getTarget()
     {

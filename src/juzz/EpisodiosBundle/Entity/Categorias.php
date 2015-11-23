@@ -15,7 +15,7 @@ class Categorias
     /**
      * @var \Categorias
      *
-     * @ORM\ManyToOne(targetEntity="Categorias")
+     * @ORM\ManyToOne(targetEntity="\juzz\EpisodiosBundle\Entity\Categorias")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="parent_id", referencedColumnName="termino_id")
      * })
@@ -27,7 +27,7 @@ class Categorias
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Terminos")
+     * @ORM\OneToOne(targetEntity="\juzz\EpisodiosBundle\Entity\Terminos")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="termino_id", referencedColumnName="id")
      * })
@@ -54,7 +54,6 @@ class Categorias
      * Set parent
      *
      * @param \juzz\EpisodiosBundle\Entity\Categorias $parent
-     *
      * @return Categorias
      */
     public function setParent(\juzz\EpisodiosBundle\Entity\Categorias $parent = null)
@@ -67,7 +66,7 @@ class Categorias
     /**
      * Get parent
      *
-     * @return \juzz\EpisodiosBundle\Entity\Categorias
+     * @return \juzz\EpisodiosBundle\Entity\Categorias 
      */
     public function getParent()
     {
@@ -78,7 +77,6 @@ class Categorias
      * Set termino
      *
      * @param \juzz\EpisodiosBundle\Entity\Terminos $termino
-     *
      * @return Categorias
      */
     public function setTermino(\juzz\EpisodiosBundle\Entity\Terminos $termino)
@@ -91,7 +89,7 @@ class Categorias
     /**
      * Get termino
      *
-     * @return \juzz\EpisodiosBundle\Entity\Terminos
+     * @return \juzz\EpisodiosBundle\Entity\Terminos 
      */
     public function getTermino()
     {
@@ -102,7 +100,6 @@ class Categorias
      * Add usuario
      *
      * @param \juzz\UsuariosBundle\Entity\Usuarios $usuario
-     *
      * @return Categorias
      */
     public function addUsuario(\juzz\UsuariosBundle\Entity\Usuarios $usuario)
@@ -125,7 +122,7 @@ class Categorias
     /**
      * Get usuario
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getUsuario()
     {

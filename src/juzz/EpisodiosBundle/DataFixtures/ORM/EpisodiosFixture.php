@@ -16,7 +16,7 @@ class EpisodiosFixture extends AbstractFixture implements FixtureInterface
   public function load(ObjectManager $manager)
   {
       //Categorías de la Aplicación
-      $episodes = array(
+      /*$episodes = array(
          array(
            'titulo' => "9X02 Fallout 4 Análisis",
            'file' => 'audio_00001',
@@ -33,7 +33,7 @@ class EpisodiosFixture extends AbstractFixture implements FixtureInterface
         $manager->persist($episodeEntity);
       }
 
-      $manager->flush();
+      $manager->flush();*/
 
 
   }

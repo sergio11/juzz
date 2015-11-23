@@ -38,7 +38,7 @@ class Episodios
     /**
      * @var string
      *
-     * @ORM\Column(name="descripcion", type="text", length=16777215, nullable=true)
+     * @ORM\Column(name="descripcion", type="text", nullable=true)
      */
     private $descripcion;
 
@@ -59,7 +59,7 @@ class Episodios
     /**
      * @var \Categorias
      *
-     * @ORM\ManyToOne(targetEntity="Categorias")
+     * @ORM\ManyToOne(targetEntity="\juzz\EpisodiosBundle\Entity\Categorias")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="categoria_id", referencedColumnName="termino_id")
      * })
@@ -69,7 +69,7 @@ class Episodios
     /**
      * @var \Generos
      *
-     * @ORM\ManyToOne(targetEntity="Generos")
+     * @ORM\ManyToOne(targetEntity="\juzz\EpisodiosBundle\Entity\Generos")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="genero_id", referencedColumnName="id")
      * })
@@ -91,7 +91,7 @@ class Episodios
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -102,7 +102,6 @@ class Episodios
      * Set titulo
      *
      * @param string $titulo
-     *
      * @return Episodios
      */
     public function setTitulo($titulo)
@@ -115,7 +114,7 @@ class Episodios
     /**
      * Get titulo
      *
-     * @return string
+     * @return string 
      */
     public function getTitulo()
     {
@@ -126,7 +125,6 @@ class Episodios
      * Set file
      *
      * @param string $file
-     *
      * @return Episodios
      */
     public function setFile($file)
@@ -139,7 +137,7 @@ class Episodios
     /**
      * Get file
      *
-     * @return string
+     * @return string 
      */
     public function getFile()
     {
@@ -150,7 +148,6 @@ class Episodios
      * Set descripcion
      *
      * @param string $descripcion
-     *
      * @return Episodios
      */
     public function setDescripcion($descripcion)
@@ -163,7 +160,7 @@ class Episodios
     /**
      * Get descripcion
      *
-     * @return string
+     * @return string 
      */
     public function getDescripcion()
     {
@@ -174,7 +171,6 @@ class Episodios
      * Set poster
      *
      * @param string $poster
-     *
      * @return Episodios
      */
     public function setPoster($poster)
@@ -187,7 +183,7 @@ class Episodios
     /**
      * Get poster
      *
-     * @return string
+     * @return string 
      */
     public function getPoster()
     {
@@ -198,7 +194,6 @@ class Episodios
      * Set duracion
      *
      * @param \DateTime $duracion
-     *
      * @return Episodios
      */
     public function setDuracion($duracion)
@@ -211,7 +206,7 @@ class Episodios
     /**
      * Get duracion
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getDuracion()
     {
@@ -221,11 +216,10 @@ class Episodios
     /**
      * Set categoria
      *
-     * @param \juzz\juzzBundle\Entity\Categorias $categoria
-     *
+     * @param \juzz\EpisodiosBundle\Entity\Categorias $categoria
      * @return Episodios
      */
-    public function setCategoria(\juzz\juzzBundle\Entity\Categorias $categoria = null)
+    public function setCategoria(\juzz\EpisodiosBundle\Entity\Categorias $categoria = null)
     {
         $this->categoria = $categoria;
 
@@ -235,7 +229,7 @@ class Episodios
     /**
      * Get categoria
      *
-     * @return \juzz\juzzBundle\Entity\Categorias
+     * @return \juzz\EpisodiosBundle\Entity\Categorias 
      */
     public function getCategoria()
     {
@@ -245,11 +239,10 @@ class Episodios
     /**
      * Set genero
      *
-     * @param \juzz\juzzBundle\Entity\Generos $genero
-     *
+     * @param \juzz\EpisodiosBundle\Entity\Generos $genero
      * @return Episodios
      */
-    public function setGenero(\juzz\juzzBundle\Entity\Generos $genero = null)
+    public function setGenero(\juzz\EpisodiosBundle\Entity\Generos $genero = null)
     {
         $this->genero = $genero;
 
@@ -259,7 +252,7 @@ class Episodios
     /**
      * Get genero
      *
-     * @return \juzz\juzzBundle\Entity\Generos
+     * @return \juzz\EpisodiosBundle\Entity\Generos 
      */
     public function getGenero()
     {
@@ -269,11 +262,10 @@ class Episodios
     /**
      * Set programa
      *
-     * @param \juzz\juzzBundle\Entity\Programas $programa
-     *
+     * @param \juzz\ProgramasBundle\Entity\Programas $programa
      * @return Episodios
      */
-    public function setPrograma(\juzz\juzzBundle\Entity\Programas $programa = null)
+    public function setPrograma(\juzz\ProgramasBundle\Entity\Programas $programa = null)
     {
         $this->programa = $programa;
 
@@ -283,7 +275,7 @@ class Episodios
     /**
      * Get programa
      *
-     * @return \juzz\juzzBundle\Entity\Programas
+     * @return \juzz\ProgramasBundle\Entity\Programas 
      */
     public function getPrograma()
     {

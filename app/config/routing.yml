@@ -1,3 +1,11 @@
+juzz_doctrine_metada:
+    resource: "@juzzDoctrineMetadaBundle/Resources/config/routing.yml"
+    prefix:   /
+
+juzz_files:
+    resource: "@juzzFilesBundle/Resources/config/routing.yml"
+    prefix:   /
+
 
 # Rutas importadas del bundle UsuariosBundle
 juzz_usuarios:

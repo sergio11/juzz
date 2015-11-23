@@ -23,7 +23,9 @@ class AppKernel extends Kernel
             new juzz\ProgramasBundle\juzzProgramasBundle(),
             new juzz\EpisodiosBundle\juzzEpisodiosBundle(),
             new juzz\UsuariosBundle\juzzUsuariosBundle(),
-            new Ras\Bundle\FlashAlertBundle\RasFlashAlertBundle()
+            new Ras\Bundle\FlashAlertBundle\RasFlashAlertBundle(),
+            new juzz\FilesBundle\juzzFilesBundle(),
+            new juzz\DoctrineMetadaBundle\juzzDoctrineMetadaBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

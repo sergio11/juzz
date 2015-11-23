@@ -1,0 +1,4 @@
+services:
+#    juzz_files.example:
+#        class: juzz\FilesBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Usuarios" table="usuarios">
+    <indexes>
+      <index name="USU_AVA_FK" columns="avatar"/>
+      <index name="USU_PRO_FK" columns="profile_bg"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="USU_EMA_UK" columns="email"/>
+    </unique-constraints>
+    <id name="id" type="bigint" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="nombre" length="30" nullable="false"/>
+    <field name="ape1" type="string" column="ape1" length="30" nullable="false"/>
+    <field name="ape2" type="string" column="ape2" length="30" nullable="false"/>
+    <field name="email" type="string" column="email" length="90" nullable="false"/>
+    <field name="password" type="string" column="password" length="60" nullable="false"/>
+    <field name="activo" type="boolean" column="activo" nullable="false"/>
+    <field name="ingreso" type="date" column="ingreso" nullable="false"/>
+    <many-to-one field="avatar" target-entity="Imagenes">
+      <join-columns>
+        <join-column name="avatar" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="profileBg" target-entity="Imagenes">
+      <join-columns>
+        <join-column name="profile_bg" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="programa" target-entity="Programas" inversed-by="usuario">
+      <join-table name="subscripciones_programas">
+        <join-columns>
+          <join-column name="usuario_id" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="programa_id" referenced-column-name="id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+    <many-to-many field="seguido" target-entity="Usuarios" mapped-by="seguidor"/>
+    <many-to-many field="categoria" target-entity="Categorias" inversed-by="usuario">
+      <join-table name="categorias_usuarios">
+        <join-columns>
+          <join-column name="usuario_id" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="categoria_id" referenced-column-name="termino_id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+    <many-to-many field="subscripcion" target-entity="Programas" inversed-by="subscriptor">
+      <join-table name="likes_programas">
+        <join-columns>
+          <join-column name="subscriptor_id" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="subscripcion_id" referenced-column-name="id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>

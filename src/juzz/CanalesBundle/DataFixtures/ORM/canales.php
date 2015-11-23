@@ -23,7 +23,7 @@ class Canales extends AbstractFixture implements FixtureInterface
               "nombre" => "Meristation",
               "descripcion" => "Para los gamers",
               "creacion" => new \DateTime(),
-              "usuario_id" => 5
+              "usuario_id" => 1
             )
         );
 
