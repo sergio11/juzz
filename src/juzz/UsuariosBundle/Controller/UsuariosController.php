@@ -48,9 +48,18 @@ class UsuariosController extends Controller
       return $response;
     }
 
-    public function profileAction(Request $request)
+    public function profileAction(Request $request,$user)
     {
-      return $this->render('juzzUsuariosBundle:Usuarios:profile.html.twig');
+      if ($user == 'default') {
+        $user = $this->getUser();
+      }else{
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('juzzUsuariosBundle:Usuarios')->findOneBy(array('nick' => $user));
+      }
+
+      return $this->render('juzzUsuariosBundle:Usuarios:profile.html.twig',array(
+        'avatar' => $user->getAvatar()->getWebPath()
+      ));
     }
 
     //Muestra el formulario de Login.
@@ -92,7 +101,7 @@ class UsuariosController extends Controller
       $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
       $user->setPassword($password);
       $user->setIngreso(new \DateTime());
-      $user->setActivo(1);
+      $user->setActivo(2);
       $user->setProfileBg($avatar);
       // Guardar el nuevo usuario en la base de datos
       $em->persist($user);
@@ -107,7 +116,7 @@ class UsuariosController extends Controller
 
       return array(
         'registered' => true,
-        'redirect' => $this->redirect($this->generateUrl('perfil'))
+        'redirect' => $this->redirect($this->generateUrl('perfil',array('user' => $user->getNick() )))
       );
     }
 

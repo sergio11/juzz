@@ -34,6 +34,16 @@ class Usuarios implements UserInterface, \Serializable
     private $nombre;
 
     /**
+    *
+    *  @var string
+    *   
+    *  @ORM\Column(name="nick", type="string", length=90, nullable=false)
+    *
+    */
+
+    private $nick;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="ape1", type="string", length=30, nullable=false)
@@ -168,6 +178,31 @@ class Usuarios implements UserInterface, \Serializable
     {
         return $this->id;
     }
+
+    /**
+    *
+    * Get Nick
+    * @return string
+    *
+    */
+
+    public function getNick()
+    {
+        return $this->nick;
+    }
+
+    /**
+     * Set nick
+     *
+     * @param string $nick
+     * @return Usuarios
+     */
+    public function setNick($nick)
+    {
+        $this->nick = $nick;
+        return $this;
+    }
+    
 
     /**
      * Set nombre
@@ -532,6 +567,7 @@ class Usuarios implements UserInterface, \Serializable
             $this->id,
             $this->nombre,
             $this->password,
+            $this->nick
             // see section on salt below
             // $this->salt,
         ));
@@ -543,6 +579,7 @@ class Usuarios implements UserInterface, \Serializable
             $this->id,
             $this->nombre,
             $this->password,
+            $this->nick
             // see section on salt below
             // $this->salt
         ) = unserialize($serialized);

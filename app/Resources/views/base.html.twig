@@ -29,13 +29,15 @@
               <span class="sr-only">Toggle player</span>
               <span class="glyphicon glyphicon-search"></span>
           </button>
-          {% set route = app.user ? 'perfil' : 'portada' %}
-          <a class="navbar-brand" href="{{path(route)}}"><img src="{{ asset('img/logo.gif') }}" width="50px"></a>
+
+          {% set route = app.user ? path('perfil',{ 'user' : app.user.nick }) : path('portada') %}
+          <a class="navbar-brand" href="{{route}}"><img src="{{ asset('img/logo.gif') }}" width="50px"></a>
+  
         </div>
         <div class="navbar-collapse collapse in" id="main-navbar">
           <ul class="nav navbar-nav navbar-left">
             <li class="active">
-              <a href="{{path(route)}}">Inicio</a>
+              <a href="{{route}}">Inicio</a>
             </li>
             <li>
               <a href="#">Explorar</a>

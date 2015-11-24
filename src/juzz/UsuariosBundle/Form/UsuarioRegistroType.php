@@ -14,6 +14,13 @@ class UsuarioRegistroType extends AbstractType
     {
         $builder
             ->add('nombre')
+            ->add('nick','text',array(
+                'label' => 'Nick',
+                'attr' => array(
+                    'placeholder' => 'p.e sergio11',
+                    'maxlength' => 30
+                )
+            ))
             ->add('ape1','text',array(
                 'label' => 'Primer Apellido',
                 'attr' => array(

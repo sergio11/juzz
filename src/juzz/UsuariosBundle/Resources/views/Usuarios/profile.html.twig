@@ -6,6 +6,15 @@
 {% endblock %}
 {% block main %}
 	<section id='section-bg-2' class="section section-main section-bg">
+		<div class="profile-header">
+			<div class="profile-header-bg">
+				<img class="profile-header-avatar" src="{{ asset(avatar) }}" >
+			</div>
+			<div class="page-header">
+  				<h1>Manuela <small>Subtext for header</small></h1>
+			</div>
+		</div>
+		
 		<div class="container container-md">
   			{{ render_flash_alerts() }}
   		</div>

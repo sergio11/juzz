@@ -69,6 +69,7 @@
   <section class="section section-bg container-fluid" id='playlists'>
     <h2>¿Qué te interesa?</h2>
     <div class="row">
+      {% if categories|length > 0 %}
         {% set column = 2 %}
         {% set groups = categories|length / column | round(0, 'floor') %}
         {% for category_group in categories|batch(groups, false) %}
@@ -83,6 +84,7 @@
               </ul>
             </div>
         {% endfor %}
+      {% endif %}
     </div>
     <div class="section-footer">
         <a href="" class="btn btn-transparent">Explorar todas</a>

@@ -1,12 +1,14 @@
-perfil:
-    path:     /perfil
-    defaults: { _controller: juzzUsuariosBundle:Usuarios:profile }
-accounts:
-    path:     /accounts
-    defaults: { _controller: juzzUsuariosBundle:Usuarios:accounts}
 # Ruta para la acción que comprueba el login del frontend
 login_check:
     path:   /login_check
 # Ruta para la acción de logout de los usuarios del frontend extranet
 logout:
     path:   /logout
+accounts:
+    path:     /accounts
+    defaults: { _controller: juzzUsuariosBundle:Usuarios:accounts}
+perfil:
+    path:     /{user}
+    defaults: { _controller: juzzUsuariosBundle:Usuarios:profile, user:'default' }
+
+

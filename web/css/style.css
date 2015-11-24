@@ -35,6 +35,10 @@ h1,h2,h3,h4{
   .text-lg-justify { text-align: justify; }
 }
 
+.row{
+  width: 100%;
+}
+
 
 /*
   Flex Block Layout
@@ -259,9 +263,11 @@ header .navbar .navbar-right li:nth-child(odd) a{
 .section{
   text-align: center;
   color: #fff;
-  padding: 50px 0 ;
   min-height: 70vh;
 }
+
+
+
 
 .section.section-fill{
   background-color: #5E9275;
@@ -639,3 +645,43 @@ form .form-group{
   text-align: left;
   color: #297a4d;
 }
+
+
+
+/*
+  
+  Profile Header
+
+*/
+
+.profile-header{
+  height: 30vh;
+  background-color: #fff;
+}
+
+.profile-header .profile-header-bg{
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-image: url("../img/pattern_profile_bg_1.png");
+  height: 80%;
+  border-bottom: 1px solid #297a4d;
+  position: relative;
+}
+
+.profile-header .profile-header-bg .profile-header-avatar{
+  position: absolute;
+  width: 145px;
+  height: 145px;
+  top: calc(100% - 72px);
+  left: 50%;
+  transform:translateX(-50%);
+  border-radius: 50%;
+  border: 2px solid #297a4d;
+  
+}
+
+
+
+
+/**/
