@@ -54,9 +54,38 @@ class EpisodiosController extends Controller
      * @param int $episode identificador del episodio
      */
     public function comentariosAction($channel,$program,$episode) {
-        echo "<p>Hello!!!</p>";
-        echo "<p>CANAL : $channel</p>";
-        echo "<p>PROGRMA : $program</p>";
-        echo "<p>EPISODIO : $episode</p>";
+
+    }
+
+
+    /**
+    * Mustra los últimos episodios subidos por un usuario
+    *
+    */
+
+    public function lastUploadedEpisodesAction($idUser){
+
+        $episodes = array(
+            array(
+                'name' => 'MeriPodcast 9x11: Bloodborn & Especial',
+                'podcast' => 'Meripodcast',
+                'duration' => '01:32:22'
+            ),
+            array(
+                'name' => 'MeriPodcast 9x10: Star Wars Battlefront y Starcraft 2, Legacy of the Void',
+                'podcast' => 'Meripodcast',
+                'duration' => '01:24:59'
+            ),
+            array(
+                'name' => 'MeriPodcast 9x09: Fallout 4, Rise of the Tomb Raider y Blizzcon 2015',
+                'podcast' => 'Meripodcast',
+                'duration' => '01:47:43'
+            )
+        );
+
+    
+        return $this->render("juzzEpisodiosBundle:Default:last_uploaded_episodes.html.twig",array(
+            'episodes' => $episodes
+        ));
     }
 }

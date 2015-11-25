@@ -1,0 +1,19 @@
+<div class="row">
+	<div class="col-md-9">
+		{# Carga Asíncrona de controladores #}
+
+
+	</div>
+	<!-- SIDEBAR -->
+	<div class="col-md-3">
+		{# Last Upload Audios #}
+		{{ render_hinclude(controller('juzzEpisodiosBundle:Episodios:lastUploadedEpisodes',{'idUser' : 3}), {
+    		'default': 'Cargando Últimos Episodios ...'
+		}) }}
+
+		{# Current User Followers #}
+		{{ render_hinclude(controller('juzzUsuariosBundle:Usuarios:followers'), {
+    		'default': 'Cargando ...'
+		}) }}
+	</div>
+</div>

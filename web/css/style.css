@@ -39,6 +39,68 @@ h1,h2,h3,h4{
   width: 100%;
 }
 
+.panel-default{
+  color: #777;
+  text-align: left;
+}
+
+.panel-default .fa{
+  color: #297a4d !important;
+}
+
+.panel-default>.panel-heading{
+  background-color: #297a4d;
+  color: #fff !important;
+}
+
+.panel-default *{
+  color: inherit !important;
+}
+
+.single-line{
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 100%;
+  text-overflow:ellipsis;
+}
+
+
+
+.content .popover-plus{
+  width:0;
+  background: #F5F5F5;
+  display: block;
+  position: absolute;
+  height: 100%;
+  top:0;bottom:0;
+  left:52px;
+  text-align: center;
+  overflow: hidden;
+  transition: width 0.2s ease-in-out;
+}
+
+.content .popover-plus .fa{
+  display: inline-block;
+  height: 20px;
+}
+
+.content.active .popover-plus{
+  width: 52px;
+} 
+
+.content.active{
+  margin-left: 90px;
+}
+
+
+
+
+
+
+
+
+
 
 /*
   Flex Block Layout
@@ -297,15 +359,19 @@ header .navbar .navbar-right li:nth-child(odd) a{
 .section h2.large {
     font-size: 7rem;
 }
-.section h2 {
-    margin-top: 0;
-    margin-bottom: 3rem;
-    font-size:5.5rem;
-    line-height: 4rem;
+.section .section-title {
+  margin-top: 0;
+  margin-bottom: 3rem;
 }
-.section h3 {
-    font-size: 3rem;
-    font-weight: 300;
+
+.section h2.section-title{
+  font-size:5.5rem;
+  line-height: 4rem;
+}
+
+.section h3.section-title {
+  font-size: 3rem;
+  font-weight: 300;
 }
 
 .section .section-footer {
@@ -646,6 +712,113 @@ form .form-group{
   color: #297a4d;
 }
 
+.tabs {
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+  width: 100%;
+  font-weight: 300;
+  font-size: 1.25em;
+}
+
+/* Nav */
+.tabs nav {
+  text-align: center;
+}
+
+.tabs nav ul {
+  position: relative;
+  display: flex;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1200px;
+  list-style: none;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.tabs nav ul li {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin: 0;
+  text-align: center;
+  flex: 1;
+}
+
+.tabs nav a {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 2.5;
+}
+
+.tabs nav a span {
+  vertical-align: middle;
+  font-size: 0.75em;
+}
+
+.tabs nav li.tab-current a {
+  color: #74777b;
+}
+
+.tabs nav a:focus {
+  outline: none;
+}
+
+.tabs-style-linemove nav {
+  background: #fff;
+}
+
+.tabs-style-linemove nav li:last-child::before {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: #2CC185;
+  content: '';
+  transition: transform 0.3s;
+}
+
+/* Move the line */
+.tabs-style-linemove nav li:first-child.tab-current ~ li:last-child::before {
+  transform: translate3d(-400%,0,0);
+}
+
+.tabs-style-linemove nav li:nth-child(2).tab-current ~ li:last-child::before {
+  transform: translate3d(-300%,0,0);
+}
+
+.tabs-style-linemove nav li:nth-child(3).tab-current ~ li:last-child::before {
+  transform: translate3d(-200%,0,0);
+}
+
+.tabs-style-linemove nav li:nth-child(4).tab-current ~ li:last-child::before {
+  transform: translate3d(-100%,0,0);
+}
+
+.tabs-style-linemove nav a {
+  padding: 1em 0;
+  color: #74777b;
+  line-height: 1;
+  text-decoration: none;
+  outline: none;
+  font-size: 1.9rem;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.tabs-style-linemove nav li.tab-current a {
+  color: #2CC185;
+  transform: translate3d(0,8px,0);
+}
+
+.tabs-style-linemove nav a span {
+  font-weight: 700;
+}
+
 
 
 /*
@@ -655,7 +828,7 @@ form .form-group{
 */
 
 .profile-header{
-  height: 30vh;
+  height: 25vh;
   background-color: #fff;
 }
 
@@ -664,7 +837,7 @@ form .form-group{
   background-position: center;
   background-attachment: fixed;
   background-image: url("../img/pattern_profile_bg_1.png");
-  height: 80%;
+  height: 60%;
   border-bottom: 1px solid #297a4d;
   position: relative;
 }
@@ -677,8 +850,37 @@ form .form-group{
   left: 50%;
   transform:translateX(-50%);
   border-radius: 50%;
-  border: 2px solid #297a4d;
-  
+  border: 2px solid #297a4d; 
+}
+
+.profile-header .profile-header-details{
+  margin: 1rem 0;
+  overflow: hidden;
+}
+
+.profile-header .profile-header-details .profile-header-owner{
+  float: left;
+  margin-left: 30px;
+  color: #297a4d;
+}
+
+.profile-header .profile-header-details .profile-header-statistics{
+  float: right;
+  margin-right: 30px;
+}
+
+.profile-header .profile-header-details .profile-header-statistics > li{
+  display: inline-block;
+  vertical-align: middle;
+  padding:.2rem 1rem;
+}
+
+.profile-header .profile-header-details .profile-header-statistics > li:not(:last-child){
+  border-right: 1px solid #297a4d;
+}
+
+.profile-header .profile-header-details .profile-header-statistics > li a{
+  color: #297a4d;
 }
 
 

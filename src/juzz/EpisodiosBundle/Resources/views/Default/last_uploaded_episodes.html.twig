@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+   <div class="panel-heading">Últimos episodios subidos</div>
+   <ul class="list-group">
+      	{% for episode in episodes %}
+      		<li class="list-group-item">
+      			<span class='fa fa-2x fa-pull-left fa-play-circle'></span>
+      			<div class="content">
+      				<a rel="nofollow" href="" class="popover-plus" title="">
+      					<span class='fa fa-2x fa-plus-circle'></span>
+      				</a>
+      				<a href="" class='single-line' title="Ir a escuchar {{ episode.name }}">{{ episode.name }}</a>
+      				<p>En <strong><a href="" title="{{ episode.podcast }}">{{ episode.podcast }}</a> </strong> | {{ episode.duration }} min</p>
+      			</div>
+      		</li>
+      	{% endfor %}
+   		<li class="list-group-item text-center">
+         	<a href="#">
+            	<span class='fa fa-plus-circle'></span>&nbsp;
+            	Ver Todos
+         	</a>
+      	</li>
+   </ul>
+</div>

@@ -250,6 +250,11 @@ class Usuarios implements UserInterface, \Serializable
         return $this->ape1;
     }
 
+
+    public function getAppellidos(){
+        return $this->ape1 . " " . $this->ape2;
+    }
+
     /**
      * Set ape2
      *

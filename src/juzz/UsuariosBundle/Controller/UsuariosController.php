@@ -58,7 +58,10 @@ class UsuariosController extends Controller
       }
 
       return $this->render('juzzUsuariosBundle:Usuarios:profile.html.twig',array(
+        'name' => $user->getNombre(),
+        'apellidos' => $user->getAppellidos(),
         'avatar' => $user->getAvatar()->getWebPath()
+
       ));
     }
 
@@ -124,5 +127,38 @@ class UsuariosController extends Controller
       'form' => $form->createView()
     );
   }
+
+
+  public function followersAction(Request $request){
+
+    $dummyPhoto = $this->getUser()->getAvatar()->getWebPath();
+    $followers = array(
+      array(
+        'photo' => $dummyPhoto,
+        'name' => 'Jose David Quirós',
+        'followers' => 0
+      ),
+      array(
+        'photo' => $dummyPhoto,
+        'name' => 'David Martín Sánchez',
+        'followers' => 0
+      ),
+      array(
+        'photo' => $dummyPhoto,
+        'name' => 'Jose David Quirós',
+        'followers' => 0
+      )
+    );
+
+    return $this->render('juzzUsuariosBundle:Usuarios:last_followers.html.twig',array(
+      'followers' => $followers
+    ));
+  }
+
+  public function recentUserActivityAction(){
+    
+    return $this->render('juzzUsuariosBundle:Usuarios:recent_user_activity.html.twig');
+  }
+
 
 }

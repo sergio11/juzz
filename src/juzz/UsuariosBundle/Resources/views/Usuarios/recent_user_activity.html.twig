@@ -1,0 +1,20 @@
+<div class = "panel panel-default">
+   <div class ="panel-heading">Actividad reciente</div>
+   <ul class = "list-group">
+   {% for activity in activities %}
+    <li class="list-group-item">
+        <div class="media">
+            <div class="media-left">
+                <a href="#">
+                    <img class="media-object img-circle" width='60px' src="{{ asset(activity.photo) }}" alt="">
+                </a>
+            </div>
+            <div class="media-body">
+            	<h4 class="media-heading">{{ activity.desc }}</h4>
+                <p>{{ activity.data }}</p>
+            </div>
+        </div>
+    </li>
+   {% endfor %}
+   </ul>
+</div>

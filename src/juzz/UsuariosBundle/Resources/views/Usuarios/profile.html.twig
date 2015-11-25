@@ -10,13 +10,66 @@
 			<div class="profile-header-bg">
 				<img class="profile-header-avatar" src="{{ asset(avatar) }}" >
 			</div>
-			<div class="page-header">
-  				<h1>Manuela <small>Subtext for header</small></h1>
+			<div class="profile-header-details">
+  				<h2 class="profile-header-owner">{{ name }} <small>{{ apellidos }}</small></h2>
+  				<ul class="profile-header-statistics">
+	                <li>
+	                    <a href="" rel="nofollow" title="">
+	                    	<span class='fa fa-microphone'></span>&nbsp;
+	                        56
+	                    </a>
+	                </li>
+	                <li>
+	                    <a href="" rel="nofollow" title="">
+	                    	<span class='fa fa-users'></span>&nbsp;
+	                        12
+	                    </a>
+	                </li>
+            	</ul>
 			</div>
 		</div>
 		
-		<div class="container container-md">
-  			{{ render_flash_alerts() }}
-  		</div>
+		<div class="tabs tabs-style-linemove">
+			<nav>
+				<ul>
+					<li class="tab-current">
+						<a href="#section-linemove-1">
+							<span class='fa fa-home'></span>&nbsp;
+							<span>Perfil</span>
+						</a>
+					</li>
+					<li>
+						<a href="#section-linemove-2" class="icon icon-box">
+							<span>Archive</span>
+						</a>
+					</li>
+					<li>
+						<a href="#section-linemove-3" class="icon icon-display">
+							<span>Analytics</span>
+						</a>
+					</li>
+					<li>
+						<a href="#section-linemove-4" class="icon icon-upload">
+							<span>Upload</span>
+						</a>
+					</li>
+					<li>
+						<a href="#section-linemove-5" class="icon icon-tools">
+							<span>Settings</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+			<div class="container-fluid">
+				{{ render_flash_alerts() }}
+				
+				{% include "juzzUsuariosBundle:Usuarios:tab-profile.html.twig" %}
+			</div><!-- /content -->
+		</div><!-- /tabs -->
+  		
   	</section>
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+    <script src="{{ asset('bower_components/hinclude/hinclude.js') }}"></script>
 {% endblock %}

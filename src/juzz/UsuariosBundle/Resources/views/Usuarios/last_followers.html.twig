@@ -1,0 +1,38 @@
+<div class = "panel panel-default">
+   <div class ="panel-heading">Seguidores ({{ followers|length }})</div>
+   <ul class = "list-group">
+      {% if followers %}
+         {% for follower in followers %}
+            <li class="list-group-item">
+               <div class="media">
+                  <div class="media-left">
+                     <a href="#">
+                        <img class="media-object img-circle" width='60px' src="{{ asset(follower.photo) }}" alt="">
+                     </a>
+                  </div>
+                  <div class="media-body">
+                     <h4 class="media-heading">{{ follower.name }}</h4>
+                     <p>
+                        {{ follower.followers }} seguidores
+                        <a class="btn btn-default pull-right" href="#" role="button">Seguir</a>
+                     </p>
+                  </div>
+               </div>
+            </li>
+         {% endfor %}
+      {% else %}
+         <li class="list-group-item list-group-item-info text-center">
+            <span class="fa fa-info fa-lg"></span>&nbsp;
+            <span class="list-group-item-text">No Tienes Followers</span>
+         </li>
+      {% endif %}
+      <li class="list-group-item {{ not followers ? 'disabled' }} text-center">
+         <a href="#">
+            <span class='fa fa-plus-circle'></span>&nbsp;
+            Ver Todos
+         </a>
+      </li>
+      
+   </ul>
+
+</div>
