@@ -2,7 +2,10 @@
 	<div class="col-md-9">
 		{# Carga Asíncrona de controladores #}
 
-
+		{# comments wall #}
+		{{ render_hinclude(controller('juzzCommentsBundle:Comments:commentsWall',{'target' : 3}), {
+    		'default': 'Cargando Comentarios ...'
+		}) }}
 	</div>
 	<!-- SIDEBAR -->
 	<div class="col-md-3">

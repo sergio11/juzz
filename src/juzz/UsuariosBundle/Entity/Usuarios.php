@@ -251,7 +251,7 @@ class Usuarios implements UserInterface, \Serializable
     }
 
 
-    public function getAppellidos(){
+    public function getApellidos(){
         return $this->ape1 . " " . $this->ape2;
     }
 
@@ -276,6 +276,11 @@ class Usuarios implements UserInterface, \Serializable
     public function getApe2()
     {
         return $this->ape2;
+    }
+
+    public function getNombreCompleto()
+    {
+        return $this->nombre . " " . $this->ape1 . " " . $this->ape2; 
     }
 
     /**

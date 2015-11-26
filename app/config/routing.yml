@@ -1,3 +1,7 @@
+juzz_comments:
+    resource: "@juzzCommentsBundle/Resources/config/routing.yml"
+    prefix:   /
+
 juzz_doctrine_metada:
     resource: "@juzzDoctrineMetadaBundle/Resources/config/routing.yml"
     prefix:   /

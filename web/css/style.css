@@ -35,6 +35,30 @@ h1,h2,h3,h4{
   .text-lg-justify { text-align: justify; }
 }
 
+/*
+  
+  Dropdown Custom Styles
+  =========================
+  
+*/
+
+.dropdown-menu{
+  padding: 0;
+}
+
+.dropdown-menu[data-placement="left"] {
+  left: 0;
+  right: auto;
+}
+
+.dropdown-menu > li > a {
+  padding: 7px 8px 7px 17px;
+}
+
+.dropdown-menu > li > a .badge{
+  background-color: #3CB371;
+}
+
 .row{
   width: 100%;
 }
@@ -45,11 +69,11 @@ h1,h2,h3,h4{
 }
 
 .panel-default .fa{
-  color: #297a4d !important;
+  color: #3CB371 !important;
 }
 
 .panel-default>.panel-heading{
-  background-color: #297a4d;
+  background-color: #3CB371;
   color: #fff !important;
 }
 
@@ -64,8 +88,6 @@ h1,h2,h3,h4{
   max-width: 100%;
   text-overflow:ellipsis;
 }
-
-
 
 .content .popover-plus{
   width:0;
@@ -249,6 +271,11 @@ header .navbar-default .navbar-nav > li.active > a:hover {
 header .navbar .navbar-right li:nth-child(odd) a{
   color: #297a4d;
   font-weight: bold;
+}
+
+header .navbar-default .navbar-nav>li>a.user {
+  padding-top: 2px;
+  padding-bottom: 3px;
 }
 
 

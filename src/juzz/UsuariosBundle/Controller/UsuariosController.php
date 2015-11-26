@@ -59,7 +59,7 @@ class UsuariosController extends Controller
 
       return $this->render('juzzUsuariosBundle:Usuarios:profile.html.twig',array(
         'name' => $user->getNombre(),
-        'apellidos' => $user->getAppellidos(),
+        'apellidos' => $user->getApellidos(),
         'avatar' => $user->getAvatar()->getWebPath()
 
       ));

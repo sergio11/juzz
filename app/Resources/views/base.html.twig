@@ -53,7 +53,7 @@
             {% if app.user %}
               <li>
                 <a href="#">
-                  <span class="glyphicon glyphicon-open"></span>&nbsp;
+                  <span class="fa fa-microphone"></span>&nbsp;
                   <span class="hidden-sm">Subir</span>
                 </a>
               </li>
@@ -74,10 +74,34 @@
               </li>
             {% elseif app.user %}
               <li>
-                <a href="{{path('logout')}}">
-                  <span class="glyphicon glyphicon-log-out"></span>&nbsp;
-                  <span class="hidden-sm">Salir</span>
+                <a class='user dropdown-toggle' href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <img class='img-circle' width='45' src="{{ asset(app.user.getAvatar().getWebPath()) }}">
+                  <span class="hidden-sm"> {{ app.user.getNombreCompleto() }}</span>
                 </a>
+                <ul class="dropdown-menu text-capitalize" data-placement="left" role='menu'>
+                  <li>
+                    <a rel='nofollow' href="">
+                      <span class='fa fa-clock-o'></span>&nbsp;Escuchar Más Tarde
+                      <span class="badge">14</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a rel='nofollow' href="">
+                      <span class='fa fa-rss'></span>&nbsp;Mis Subscripciones
+                      <span class="badge">1</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a rel='nofollow' href="">
+                      <span class="fa fa-lock"></span>&nbsp;Zona Privada
+                    </a>
+                  </li>
+                  <li>
+                    <a rel='nofollow' href="{{path('logout')}}">
+                      <span class="glyphicon glyphicon-log-out"></span>&nbsp;Cerrar Sesión
+                    </a>
+                  </li>
+                </ul>
               </li>
             {% endif %}
           </ul>
