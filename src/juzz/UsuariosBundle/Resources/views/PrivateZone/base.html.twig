@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+	{% if is_mobile() %} 
+		<div class="dropdown mobile-dropdown visible-sm visible-xs">
+	    	<a data-toggle="dropdown" class="activador" href="#">Selecciona menu</a>
+	    	<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+	        	{% include "juzzUsuariosBundle:Usuarios:profile-nav-options.html.twig" %}
+	        </ul>
+	    </div>
+	{% else %}
+		<div class="custom-tabs tabs-style-underline">
+			<nav>
+				<ul>
+	    			{% include "juzzUsuariosBundle:Usuarios:profile-nav-options.html.twig" %}
+	    		</ul>
+			</nav>
+	    	<div class="container-fluid">
+	    		<h2 class="section-title text-center">Mi Perfil</h2>
+	    		
+	    		<div class="container">
+	    			{# Tab Content #}
+	    			{% block tabContent %}{% endblock %}
+	    		</div>
+				
+	    	</div>
+	    </div>
+	{% endif %}
+
+	
+{% endblock %}

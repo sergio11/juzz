@@ -6,11 +6,11 @@ security:
             provider:       users
             anonymous:      ~
             form_login:
-                login_path: accounts
+                login_path: login
                 check_path: login_check
                 username_parameter: email
                 password_parameter: password
-                default_target_path: perfil
+                success_handler: security.authentication.success_handler
             logout:
                 path:    logout
                 target:  /
@@ -19,7 +19,7 @@ security:
                 lifetime:   604800  # 604.800 = 3.600 * 24 * 7 = 1 semana
 
     access_control:
-        - { path: ^/usuarios/accounts, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/usuarios/(register|login), roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/usuarios/*, roles: ROLE_USER }
 
     encoders:

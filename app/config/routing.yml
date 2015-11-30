@@ -40,7 +40,7 @@ juzz_episodios:
 
 portada:
   path:  /
-  defaults: { _controller: juzzUsuariosBundle:Usuarios:index }
+  defaults: { _controller: juzzUsuariosBundle:Default:index }
 
 dcs_opauth_connect:
     resource: "@DCSOpauthBundle/Resources/config/routing/connect.xml"

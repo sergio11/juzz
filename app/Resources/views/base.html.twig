@@ -67,7 +67,7 @@
                 </a>
               </li>
               <li>
-                <a href="{{path('accounts',{tab:'register'})}}">
+                <a href="{{path('register')}}">
                   <span class='glyphicon glyphicon-pencil'></span>&nbsp;
                   <span class="hidden-sm">Registrate</span>
                 </a>
@@ -92,7 +92,7 @@
                     </a>
                   </li>
                   <li>
-                    <a rel='nofollow' href="">
+                    <a rel='nofollow' href="{{ path('editar_perfil',{user:app.user.nick}) }}">
                       <span class="fa fa-lock"></span>&nbsp;Zona Privada
                     </a>
                   </li>

@@ -1,0 +1,14 @@
+{% extends 'juzzUsuariosBundle:Accounts:base.html.twig' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block tabcontent %}
+	{{form(form, {'action': path('register'), 'method': 'POST'})}}
+	<h5 class="text-center">o también ...</h5>
+	</hr>
+	<div>
+	{% include ':default:social-buttons.html.twig' %}
+	</div>
+	<p class="text-muted text-center">Juzz no publicará nada en Facebook o Twitter sin tu consentimiento</p>
+
+{% endblock %}
+

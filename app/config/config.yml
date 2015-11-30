@@ -97,3 +97,12 @@ dcs_opauth:
             strategy_class: Facebook
             options:
                 scope: ['public_profile','email']
+
+services:
+    twig.mobile_detect_extension:
+        class: Bes\Twig\Extension\MobileDetectExtension
+        tags:
+            - { name: twig.extension }
+    security.authentication.success_handler:
+        class:  juzz\UsuariosBundle\Service\LoginSuccessHandler
+        arguments: [@router, @security.context]

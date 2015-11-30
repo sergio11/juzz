@@ -17,8 +17,9 @@
               <h4 class="modal-title" id="modalLoginLabel">Entra.</h4>
             </div>
             <div class="modal-body">
-              {% include "juzzUsuariosBundle:Usuarios:login.html.twig" with {'data':login_data} %}
-            </div>
+              {# Login Form #}
+              {% include 'juzzUsuariosBundle:Accounts:form_login.html.twig' %}
+            </div> 
         </div>
       </div>
   </div>
