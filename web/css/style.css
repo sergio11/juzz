@@ -1,11 +1,15 @@
 @charset "UTF-8";
 
-body{
-  font-family: helvetica,sans-serif !important;
-}
-
-h1,h2,h3,h4{
+body {
+  background-color:#F9F9F9;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: antialiased;
   font-family: 'Comfortaa', cursive;
+  position: relative;
+  overflow-x: hidden;
+  padding-top: 54px;
+
 }
 
 
@@ -33,6 +37,15 @@ h1,h2,h3,h4{
   .text-lg-right { text-align: right; }
   .text-lg-center { text-align: center; }
   .text-lg-justify { text-align: justify; }
+}
+
+
+.container{
+  background-color: #fff;
+  padding: 20px 30px;
+  margin-top: 2rem;
+  border-radius: 12px;
+  box-shadow: #CEC3C3 0px 0px 10px 6px;
 }
 
 /*
@@ -210,21 +223,6 @@ h1,h2,h3,h4{
   }
 }
 
-body {
-    padding-top: 52px;
-}
-
-
-body {
-  background-color: rgba(60, 179, 113, 0.49);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-smoothing: antialiased;
-  font-size: 14px;
-  font-family: 'Open Sans';
-  position: relative;
-  overflow-x: hidden;
-}
 
 
 header .navbar {

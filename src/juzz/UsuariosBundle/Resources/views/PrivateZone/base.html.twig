@@ -15,15 +15,9 @@
 	    			{% include "juzzUsuariosBundle:Usuarios:profile-nav-options.html.twig" %}
 	    		</ul>
 			</nav>
-	    	<div class="container-fluid">
-	    		<h2 class="section-title text-center">Mi Perfil</h2>
-	    		
-	    		<div class="container">
-	    			{# Tab Content #}
-	    			{% block tabContent %}{% endblock %}
-	    		</div>
-				
-	    	</div>
+			{# Tab Content #}
+	    	{% block tabContent %}{% endblock %}
+	
 	    </div>
 	{% endif %}
 

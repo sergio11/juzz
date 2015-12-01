@@ -1,5 +1,15 @@
 {% extends 'juzzUsuariosBundle:PrivateZone:base.html.twig' %}
 
 {% block tabContent %}
-	<p>Vamos!!</p>
+	<div class="row">
+		<div class="col-md-3">
+			<h2 class="section-title text-center">Mi Perfil</h2>
+		</div>
+		<div class="col-md-3 col-md-offset-4">
+			<p class="text-center">Te uniste el : {{ user.ingreso | date('Y-m-d') }}</p>
+		</div>
+	</div>
+	<div class="container">
+		{{form(edit_form, {'action': path('editar_perfil',{user:user.nick}), 'method': 'POST'})}}
+	</div>
 {% endblock %}

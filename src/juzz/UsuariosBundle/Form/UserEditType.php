@@ -8,19 +8,12 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use juzz\FilesBundle\Form\FileType;
 use Doctrine\ORM\EntityRepository;
 
-class UsuarioRegistroType extends AbstractType
+class UserEditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('nombre')
-            ->add('nick','text',array(
-                'label' => 'Nick',
-                'attr' => array(
-                    'placeholder' => 'p.e sergio11',
-                    'maxlength' => 30
-                )
-            ))
             ->add('ape1','text',array(
                 'label' => 'Primer Apellido',
                 'attr' => array(
@@ -39,12 +32,6 @@ class UsuarioRegistroType extends AbstractType
                 'placeholder' => 'p.e usuario@servidor',
                 'autocomplete' => 'off'
             )))
-            ->add('password','password',array(
-                'label' => 'Password',
-                'attr' => array(
-                    'placeholder' => 'p.g esperanto36'
-                )
-            ))
             ->add('avatar',new FileType())
             ->add('Guardar', 'submit')
         ;
@@ -60,6 +47,6 @@ class UsuarioRegistroType extends AbstractType
 
     public function getName()
     {
-        return 'singup_usuario';
+        return 'edit_user_profile';
     }
 }

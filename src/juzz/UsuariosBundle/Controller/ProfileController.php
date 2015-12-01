@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use juzz\UsuariosBundle\Entity\Usuarios AS UsuarioEntity;
 use juzz\FilesBundle\Entity\Imagenes AS ImagenEntity;
-use juzz\UsuariosBundle\Form\UsuarioRegistroType;
+use juzz\UsuariosBundle\Form\UserEditType;
 
 class ProfileController extends Controller
 {
@@ -43,19 +43,24 @@ class ProfileController extends Controller
         $user = $em->getRepository('juzzUsuariosBundle:Usuarios')->findOneBy(array('nick' => $user));
         //Si no existe el usuario lanzamos 404
         if (!$user) {
-            throw $this->createNotFoundException();
+            throw $this->createNotFoundException("El usuario no existe");
         }
         //Si el usuario de la sesión no es el propietario del perfil.
         if ($this->getUser()->getNick() != $user->getNick()) {
             throw $this->createAccessDeniedException();
         }
-        /*$form = $this->createForm(new UsuarioRegistroType(), $user);
+        
+        $form = $this->createForm(new UserEditType(), $user);
         $form->handleRequest($request);
         if ($form->isValid()) {
             $em->persist($user);
             $em->flush();
-        }*/
-        return $this->render('juzzUsuariosBundle:PrivateZone:edit_profile.html.twig');
-        
+            $this->get('ras_flash_alert.alert_reporter')->addSuccess('Cambios Guardados con Éxito');
+        }
+
+        return $this->render('juzzUsuariosBundle:PrivateZone:edit_profile.html.twig', array(
+            'user'      => $user,
+            'edit_form'   => $form->createView()
+        ));   
     }
 }
