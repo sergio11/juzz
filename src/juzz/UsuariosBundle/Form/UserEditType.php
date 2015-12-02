@@ -32,8 +32,15 @@ class UserEditType extends AbstractType
                 'placeholder' => 'p.e usuario@servidor',
                 'autocomplete' => 'off'
             )))
+            ->add('genero', 'choice', array(
+                'choices' => array('Hombre' => 'H','Mujer' => 'M'),
+                'expanded' => true,
+                'multiple' => false,
+                'required' => false,
+                'label' => true,
+            ))
             ->add('avatar',new FileType())
-            ->add('Guardar', 'submit')
+            ->add('guardar', 'submit')
         ;
     }
 

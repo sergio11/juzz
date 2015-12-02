@@ -6,6 +6,7 @@
         {% block stylesheets %}
           <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}">
           <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}" charset="utf-8">
+          <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/flat-ui/dist/css/flat-ui.min.css ') }}">
           <link rel="stylesheet" href="{{ asset('css/style.css') }}" charset="utf-8">
         {% endblock %}
         {% block fonts %}
@@ -31,7 +32,7 @@
           </button>
 
           {% set route = app.user ? path('perfil',{ 'user' : app.user.nick }) : path('portada') %}
-          <a class="navbar-brand" href="{{route}}"><img src="{{ asset('img/logo.gif') }}" width="50px"></a>
+          <a class="navbar-brand" href="{{route}}"></a>
   
         </div>
         <div class="navbar-collapse collapse in" id="main-navbar">
@@ -81,24 +82,24 @@
                 <ul class="dropdown-menu text-capitalize" data-placement="left" role='menu'>
                   <li>
                     <a rel='nofollow' href="">
-                      <span class='fa fa-clock-o'></span>&nbsp;Escuchar Más Tarde
+                      <span class='fa fa-clock-o'></span>&nbsp;&nbsp;Escuchar Más Tarde
                       <span class="badge">14</span>
                     </a>
                   </li>
                   <li>
                     <a rel='nofollow' href="">
-                      <span class='fa fa-rss'></span>&nbsp;Mis Subscripciones
+                      <span class='fa fa-rss'></span>&nbsp;&nbsp;Mis Subscripciones
                       <span class="badge">1</span>
                     </a>
                   </li>
                   <li>
                     <a rel='nofollow' href="{{ path('editar_perfil',{user:app.user.nick}) }}">
-                      <span class="fa fa-lock"></span>&nbsp;Zona Privada
+                      <span class="fa fa-lock"></span>&nbsp;&nbsp;Zona Privada
                     </a>
                   </li>
                   <li>
                     <a rel='nofollow' href="{{path('logout')}}">
-                      <span class="glyphicon glyphicon-log-out"></span>&nbsp;Cerrar Sesión
+                      <span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;Cerrar Sesión
                     </a>
                   </li>
                 </ul>
@@ -115,20 +116,15 @@
               	</p>
               </div>
               <div class="col-md-4">
-                <div id="searchBarSuggest">
-        		        <div class="input-group">
-            		        <input class="form-control btn-block" autocomplete="off" type="text" id="words" value="">
-                    		<div class="input-group-btn">
-                    			<input class="btn btn-default" id="searchb" data-main-item="AUDIO" type="button" value="Buscar">
-                    		</div>
-            	      </div>
-                    <div class="suggestionsBox" id="suggestions">
-                	     <div class="suggestionList" id="suggestionsList"> &nbsp; </div>
-				            </div>
-                  </div>
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search" id="search">
+                  <span class="input-group-btn">
+                    <button type="submit" class="btn"><span class="fui-search"></span></button>
+                  </span>
                 </div>
-              </form>
-          </div>
+              </div>
+            </form>
+        </div>
     </nav>
   </header>
   <main>

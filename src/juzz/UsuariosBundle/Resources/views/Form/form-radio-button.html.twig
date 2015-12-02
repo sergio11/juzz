@@ -1,0 +1,23 @@
+{% block choice_widget_expanded %}
+{% spaceless %}
+    <div class="my-form-choices-container">
+        <div {{ block('widget_container_attributes') }} class="my-form-choices">
+        {% for child in form %}
+            {{ form_widget(child) }}
+        {% endfor %}
+        </div>
+    </div>
+{% endspaceless %}
+{% endblock choice_widget_expanded %}
+
+{% block radio_widget %}
+{% spaceless %}
+    <label class="radio" for="{{ id }}">
+    	<input type="radio" class="custom-radio" data-toggle="radio" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+    	<span class="icons"><span class="icon-unchecked"></span><span class="icon-checked"></span></span>
+        {{ label|trans({}, translation_domain) }}
+    </label>
+{% endspaceless %}
+{% endblock radio_widget %}
+
+

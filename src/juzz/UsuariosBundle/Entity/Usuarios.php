@@ -34,6 +34,21 @@ class Usuarios implements UserInterface, \Serializable
     private $nombre;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="genero", type="string", length=1, nullable=false)
+     */
+    private $genero;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="text", nullable=true)
+     */
+    private $descripcion;
+
+
+    /**
     *
     *  @var string
     *   
@@ -94,6 +109,26 @@ class Usuarios implements UserInterface, \Serializable
      * })
      */
     private $avatar;
+
+    /**
+     * @var \Paises
+     *
+     * @ORM\ManyToOne(targetEntity="\juzz\UsuariosBundle\Entity\Paises")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="origen", referencedColumnName="id")
+     * })
+     */
+    private $origen;
+
+    /**
+     * @var \PoliticaComentarios
+     *
+     * @ORM\ManyToOne(targetEntity="\juzz\UsuariosBundle\Entity\PoliticaComentarios")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="politica_comentarios", referencedColumnName="id")
+     * })
+     */
+    private $politicaComentarios;
 
     /**
      * @var \Imagenes
@@ -228,6 +263,52 @@ class Usuarios implements UserInterface, \Serializable
     }
 
     /**
+     * Set genero
+     *
+     * @param string $genero
+     * @return Usuarios
+     */
+    public function setGenero($genero)
+    {
+        $this->genero = $genero;
+
+        return $this;
+    }
+
+    /**
+     * Get genero
+     *
+     * @return string 
+     */
+    public function getGenero()
+    {
+        return $this->genero;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return Usuarios
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    /**
      * Set ape1
      *
      * @param string $ape1
@@ -281,6 +362,52 @@ class Usuarios implements UserInterface, \Serializable
     public function getNombreCompleto()
     {
         return $this->nombre . " " . $this->ape1 . " " . $this->ape2; 
+    }
+
+    /**
+     * Set origen
+     *
+     * @param \juzz\UsuariosBundle\Entity\Paises $origen
+     * @return Usuarios
+     */
+    public function setOrigen(\juzz\UsuariosBundle\Entity\Paises $origen = null)
+    {
+        $this->origen = $origen;
+
+        return $this;
+    }
+
+    /**
+     * Get origen
+     *
+     * @return \juzz\UsuariosBundle\Entity\Paises 
+     */
+    public function getOrigen()
+    {
+        return $this->origen;
+    }
+
+    /**
+     * Set politicaComentarios
+     *
+     * @param \juzz\UsuariosBundle\Entity\PoliticaComentarios $politicaComentarios
+     * @return Usuarios
+     */
+    public function setPoliticaComentarios(\juzz\UsuariosBundle\Entity\PoliticaComentarios $politicaComentarios = null)
+    {
+        $this->politicaComentarios = $politicaComentarios;
+
+        return $this;
+    }
+
+    /**
+     * Get politicaComentarios
+     *
+     * @return \juzz\UsuariosBundle\Entity\PoliticaComentarios 
+     */
+    public function getPoliticaComentarios()
+    {
+        return $this->politicaComentarios;
     }
 
     /**

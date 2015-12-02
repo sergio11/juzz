@@ -9,7 +9,23 @@
 			<p class="text-center">Te uniste el : {{ user.ingreso | date('Y-m-d') }}</p>
 		</div>
 	</div>
-	<div class="container">
-		{{form(edit_form, {'action': path('editar_perfil',{user:user.nick}), 'method': 'POST'})}}
+	<div class="container container-card">
+		{{ form_start(edit_form,{'action': path('editar_perfil',{user:user.nick}), 'method': 'POST'}) }}
+    	{{ form_errors(edit_form) }}
+    	<div class="row">
+    		<div class="col-md-6 col-xs-12">
+    			{{ form_row(edit_form.nombre) }}
+    			{{ form_row(edit_form.ape1) }}
+    			{{ form_row(edit_form.ape2) }}
+    			{{ form_row(edit_form.email) }}
+    			{{ form_row(edit_form.genero) }}
+    		</div>
+    		<div class="col-md-6 col-xs-12">
+    			
+    		</div>
+    	</div>
+    	
+		{{ form_row(edit_form.guardar) }}
+		{{ form_end(edit_form) }}
 	</div>
 {% endblock %}

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Usuarios
  *
- * @ORM\Table(name="usuarios", uniqueConstraints={@ORM\UniqueConstraint(name="USU_EMA_UK", columns={"email"})}, indexes={@ORM\Index(name="USU_AVA_FK", columns={"avatar"}), @ORM\Index(name="USU_PRO_FK", columns={"profile_bg"})})
+ * @ORM\Table(name="usuarios", uniqueConstraints={@ORM\UniqueConstraint(name="USU_NICK_UK", columns={"nick"}), @ORM\UniqueConstraint(name="USU_EMA_UK", columns={"email"})}, indexes={@ORM\Index(name="USU_POLI_FK", columns={"politica_comentarios"}), @ORM\Index(name="USU_ORI_FK", columns={"origen"}), @ORM\Index(name="USU_AVA_FK", columns={"avatar"}), @ORM\Index(name="USU_PRO_FK", columns={"profile_bg"})})
  * @ORM\Entity
  */
 class Usuarios
@@ -27,6 +27,27 @@ class Usuarios
      * @ORM\Column(name="nombre", type="string", length=30, nullable=false)
      */
     private $nombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="genero", type="string", length=1, nullable=false)
+     */
+    private $genero;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="text", nullable=true)
+     */
+    private $descripcion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nick", type="string", length=30, nullable=false)
+     */
+    private $nick;
 
     /**
      * @var string
@@ -79,6 +100,26 @@ class Usuarios
      * })
      */
     private $avatar;
+
+    /**
+     * @var \Paises
+     *
+     * @ORM\ManyToOne(targetEntity="Paises")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="origen", referencedColumnName="id")
+     * })
+     */
+    private $origen;
+
+    /**
+     * @var \PoliticaComentarios
+     *
+     * @ORM\ManyToOne(targetEntity="PoliticaComentarios")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="politica_comentarios", referencedColumnName="id")
+     * })
+     */
+    private $politicaComentarios;
 
     /**
      * @var \Imagenes
@@ -185,6 +226,75 @@ class Usuarios
     public function getNombre()
     {
         return $this->nombre;
+    }
+
+    /**
+     * Set genero
+     *
+     * @param string $genero
+     * @return Usuarios
+     */
+    public function setGenero($genero)
+    {
+        $this->genero = $genero;
+
+        return $this;
+    }
+
+    /**
+     * Get genero
+     *
+     * @return string 
+     */
+    public function getGenero()
+    {
+        return $this->genero;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return Usuarios
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    /**
+     * Set nick
+     *
+     * @param string $nick
+     * @return Usuarios
+     */
+    public function setNick($nick)
+    {
+        $this->nick = $nick;
+
+        return $this;
+    }
+
+    /**
+     * Get nick
+     *
+     * @return string 
+     */
+    public function getNick()
+    {
+        return $this->nick;
     }
 
     /**
@@ -346,6 +456,52 @@ class Usuarios
     public function getAvatar()
     {
         return $this->avatar;
+    }
+
+    /**
+     * Set origen
+     *
+     * @param \juzz\DoctrineMetadaBundle\Entity\Paises $origen
+     * @return Usuarios
+     */
+    public function setOrigen(\juzz\DoctrineMetadaBundle\Entity\Paises $origen = null)
+    {
+        $this->origen = $origen;
+
+        return $this;
+    }
+
+    /**
+     * Get origen
+     *
+     * @return \juzz\DoctrineMetadaBundle\Entity\Paises 
+     */
+    public function getOrigen()
+    {
+        return $this->origen;
+    }
+
+    /**
+     * Set politicaComentarios
+     *
+     * @param \juzz\DoctrineMetadaBundle\Entity\PoliticaComentarios $politicaComentarios
+     * @return Usuarios
+     */
+    public function setPoliticaComentarios(\juzz\DoctrineMetadaBundle\Entity\PoliticaComentarios $politicaComentarios = null)
+    {
+        $this->politicaComentarios = $politicaComentarios;
+
+        return $this;
+    }
+
+    /**
+     * Get politicaComentarios
+     *
+     * @return \juzz\DoctrineMetadaBundle\Entity\PoliticaComentarios 
+     */
+    public function getPoliticaComentarios()
+    {
+        return $this->politicaComentarios;
     }
 
     /**

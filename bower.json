@@ -6,6 +6,7 @@
   "dependencies": {
     "bootstrap": "~3.3.5",
     "bootstrap-social": "~4.10.1",
-    "prefixfree": "*"
+    "prefixfree": "*",
+    "flat-ui": "~2.2.2"
   }
 }

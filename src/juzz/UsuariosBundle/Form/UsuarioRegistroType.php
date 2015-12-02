@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use juzz\FilesBundle\Form\FileType;
+use juzz\UsuariosBundle\Form\ChoiceCountryType;
 use Doctrine\ORM\EntityRepository;
 
 class UsuarioRegistroType extends AbstractType
@@ -35,6 +36,13 @@ class UsuarioRegistroType extends AbstractType
                     'maxlength' => 30
                 )
             ))
+            ->add('genero', 'choice', array(
+                'choices'   => array('m' => 'Hombre', 'f' => 'Mujer'),
+                'required'  => false,
+                'expanded' => true,
+                'multiple' => false
+            ))
+            ->add('origen', new ChoiceCountryType())
             ->add('email', 'email',  array('label' => 'Correo electrónico', 'attr' => array(
                 'placeholder' => 'p.e usuario@servidor',
                 'autocomplete' => 'off'
@@ -46,8 +54,7 @@ class UsuarioRegistroType extends AbstractType
                 )
             ))
             ->add('avatar',new FileType())
-            ->add('Guardar', 'submit')
-        ;
+            ->add('Guardar', 'submit');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
@@ -57,7 +64,6 @@ class UsuarioRegistroType extends AbstractType
             'validation_groups' => array('default', 'registro')
         ));
     }
-
     public function getName()
     {
         return 'singup_usuario';

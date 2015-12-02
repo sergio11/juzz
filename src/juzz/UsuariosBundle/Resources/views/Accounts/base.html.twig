@@ -4,10 +4,9 @@
   <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-social/bootstrap-social.css') }}" charset="utf-8">
 {% endblock %}
 {% block main %}
-<section id='section-bg-2' class="section section-main section-bg">
 	<div class="container container-md">
-		<h2 class="section-title text-center">Debes estar logado para poder publicar</h2>
-		<div class="big-tabs-container">
+		<h2 class="text-center">Debes estar logado para poder publicar</h2>
+		<div class="big-tabs-container container-card">
 			<ul class="nav nav-tabs" role='tablist'>
 				<li class="{{ tab is not defined ? 'active' }}">
 		            <a role="tab" href="{{ path('login') }}">Con mi cuenta</a>
@@ -17,14 +16,9 @@
 		        </li>
 			</ul>
 			<div class="tab-content">
-				<div  class="container tab-pane active">
-					{# Tab Content #}
-					{% block tabcontent %}{% endblock %}
-					
-				</div>
-				
+				{# Tab Content #}
+				{% block tabcontent %}{% endblock %}
 			</div>
 		</div>
 	</div>
-</section>
 {% endblock %}
