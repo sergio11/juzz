@@ -1,31 +1,42 @@
 {% extends 'juzzUsuariosBundle:PrivateZone:base.html.twig' %}
 
 {% block tabContent %}
-	<div class="row">
-		<div class="col-md-3">
-			<h2 class="section-title text-center">Mi Perfil</h2>
-		</div>
-		<div class="col-md-3 col-md-offset-4">
-			<p class="text-center">Te uniste el : {{ user.ingreso | date('Y-m-d') }}</p>
-		</div>
-	</div>
-	<div class="container container-card">
-		{{ form_start(edit_form,{'action': path('editar_perfil',{user:user.nick}), 'method': 'POST'}) }}
-    	{{ form_errors(edit_form) }}
-    	<div class="row">
-    		<div class="col-md-6 col-xs-12">
-    			{{ form_row(edit_form.nombre) }}
-    			{{ form_row(edit_form.ape1) }}
-    			{{ form_row(edit_form.ape2) }}
-    			{{ form_row(edit_form.email) }}
-    			{{ form_row(edit_form.genero) }}
-    		</div>
-    		<div class="col-md-6 col-xs-12">
-    			
-    		</div>
-    	</div>
-    	
-		{{ form_row(edit_form.guardar) }}
-		{{ form_end(edit_form) }}
-	</div>
+    <div class="container">
+
+        <div class="row">
+            {{ render_flash_alerts() }}
+            <div class="col-md-3">
+                <h2 class="section-title text-center">Mi Perfil</h2>
+            </div>
+            <div class="col-md-3 col-md-offset-4">
+                <h4 class="text-center">Te uniste el : {{ user.ingreso | date('Y-m-d') }}</h4>
+            </div>
+        </div>
+
+        <div class="container-card">
+            {{ form_start(edit_form,{'action': path('editar_perfil',{user:user.nick}), 'method': 'POST'}) }}
+            <legend>Editar Perfil</legend>
+            {{ form_errors(edit_form) }}
+            <div class="row">
+                <div class="col-md-7 col-xs-12">
+                    {{ form_row(edit_form.nick) }}
+                    {{ form_row(edit_form.nombre) }}
+                    {{ form_row(edit_form.ape1) }}
+                    {{ form_row(edit_form.ape2) }}
+                    {{ form_row(edit_form.email) }}
+                    
+                </div>
+                <div class="col-md-5 col-xs-12">
+                    {{ form_row(edit_form.genero) }}
+                    {{ form_row(edit_form.origen) }}
+                    {{ form_row(edit_form.descripcion) }}
+                </div>
+            </div>
+            {{ form_row(edit_form.guardar) }}
+            {{ form_end(edit_form) }}
+        </div>
+
+    </div>
+	
+	
 {% endblock %}

@@ -31,7 +31,8 @@ class ProfileController extends Controller
         return $this->render('juzzUsuariosBundle:Usuarios:profile.html.twig',array(
             'name' => $user->getNombre(),
             'apellidos' => $user->getApellidos(),
-            'avatar' => $user->getAvatar()->getWebPath()
+            'avatar' => $user->getAvatar()->getWebPath(),
+            'descripcion' =>  $user->getDescripcion()
         ));
     }
     /**

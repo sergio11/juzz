@@ -50,8 +50,11 @@ h5{font-size: 1.6rem;}
   padding: 20px 30px;
   margin-top: 2rem;
   border-radius: 12px;
+  overflow: hidden;
   box-shadow: #CEC3C3 0px 0px 10px 6px;
 }
+
+
 
 /*
   
@@ -79,11 +82,13 @@ h5{font-size: 1.6rem;}
 
 .row{
   width: 100%;
+  margin: 0 auto;
 }
 
 .panel-default{
   color: #1ABC9C;
   text-align: left;
+  box-shadow: #CEC3C3 0px 0px 10px 6px;
 }
 
 .panel-default .fa{
@@ -695,14 +700,17 @@ header .navbar-default .navbar-nav>li>a.user {
 */
 
 .big-tabs-container{
-  background: #FFF;
-  border-bottom: 2px solid #CCCCCC;
-  padding: 10px 10px 0 10px;
-  margin: 2.5rem auto 1rem;
+  border:0 solid #ccc;
+  border-bottom-width: 3px;
+  border-top-width: 1px;
+  padding: 1rem 0;
+  margin: 0 0 1rem;
 }
 
 .big-tabs-container .nav-tabs {
-  margin: -10px -10px 55px -10px;
+  background: #FFF;
+  margin: -10px -10px 55px 0px;
+  padding: 0 1rem;
 }
 
 .big-tabs-container .nav-tabs {
@@ -730,9 +738,6 @@ header .navbar-default .navbar-nav>li>a.user {
   text-align: center;
 }
 
-.big-tabs-container .container{
-  width: 100%;
-}
 
 form .form-group{
   text-align: left;

@@ -1,5 +1,21 @@
 <div class="row">
-	<div class="col-md-9">
+	<div class="col-md-9 col-xs-12">
+		{# Información Personal #}
+		<div class="panel panel-default">
+		   <div class="panel-heading">Información</div>
+		   <div class="panel-body">
+		    	<h3>Descripción</h3>
+		    	<p>{{ descripcion }}</p>
+		  	</div>
+		   	<!-- List group -->
+			<ul class="list-group">
+			   	<li class="list-group-item">Cras justo odio</li>
+			    <li class="list-group-item">Dapibus ac facilisis in</li>
+			    <li class="list-group-item">Morbi leo risus</li>
+			    <li class="list-group-item">Porta ac consectetur ac</li>
+			    <li class="list-group-item">Vestibulum at eros</li>
+			</ul>
+		</div>
 		{# Carga Asíncrona de controladores #}
 
 		{# comments wall #}
@@ -8,7 +24,7 @@
 		}) }}
 	</div>
 	<!-- SIDEBAR -->
-	<div class="col-md-3">
+	<div class="col-md-3 col-xs-12">
 		{# Last Upload Audios #}
 		{{ render_hinclude(controller('juzzEpisodiosBundle:Episodios:lastUploadedEpisodes',{'idUser' : 3}), {
     		'default': 'Cargando Últimos Episodios ...'

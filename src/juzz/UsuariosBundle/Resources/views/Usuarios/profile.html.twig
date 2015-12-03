@@ -5,78 +5,73 @@
   <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-social/bootstrap-social.css') }}" charset="utf-8">
 {% endblock %}
 {% block main %}
-	<section id='section-bg-2' class="section section-main section-bg">
-		<div class="profile-header">
-			<div class="profile-header-bg">
-				<img class="profile-header-avatar" src="{{ asset(avatar) }}" >
-			</div>
-			<div class="profile-header-details">
-  				<h3 class="profile-header-owner">{{ name }} <small>{{ apellidos }}</small></h3>
-  				<ul class="profile-header-statistics">
-	                <li>
-	                    <a href="" rel="nofollow" title="">
-	                    	<span class='fa fa-microphone'></span>&nbsp;
-	                        56
-	                    </a>
-	                </li>
-	                <li>
-	                    <a href="" rel="nofollow" title="">
-	                    	<span class='fa fa-users'></span>&nbsp;
-	                        12
-	                    </a>
-	                </li>
-            	</ul>
-			</div>
+	<div class="profile-header">
+		<div class="profile-header-bg">
+			<img class="profile-header-avatar" src="{{ asset(avatar) }}" >
 		</div>
-		
-		<div class="custom-tabs tabs-style-underline">
-			<nav>
-				<ul>
-					<li class="tab-current">
-						<a href="#section-linemove-1">
-							<span>Perfil</span>
-						</a>
-					</li>
-					<li>
-						<a href="#section-linemove-2">
-							<span>Programas</span>
-						</a>
-					</li>
-					<li>
-						<a href="#section-linemove-3">
-							<span>Episodios</span>
-						</a>
-					</li>
-					<li>
-						<a href="#section-linemove-4">
-							<span>Listas</span>
-						</a>
-					</li>
-					<li>
-						<a href="#section-linemove-5">
-							<span>Favoritos</span>
-						</a>
-					</li>
-					<li>
-						<a href="#section-linemove-5" >
-							<span>Seguidores</span>
-						</a>
-					</li>
-					<li>
-						<a href="#section-linemove-5">
-							<span>Siguiendo</span>
-						</a>
-					</li>
-				</ul>
-			</nav>
-			<div class="container-fluid">
-				{{ render_flash_alerts() }}
+		<div class="profile-header-details">
+  			<h3 class="profile-header-owner">{{ name }} <small>{{ apellidos }}</small></h3>
+  			<ul class="profile-header-statistics">
+	            <li>
+	                <a href="" rel="nofollow" title="">
+	                    <span class='fa fa-microphone'></span>&nbsp;
+	                    56
+	                </a>
+	            </li>
+	            <li>
+	            	<a href="" rel="nofollow" title="">
+	                   	<span class='fa fa-users'></span>&nbsp;
+	                    12
+	                </a>
+	            </li>
+           	</ul>
+		</div>
+	</div>
+	<div class="big-tabs-container">
+		<ul class="nav nav-tabs">
+			<li class="active">
+				<a href="">
+					<span>Perfil</span>
+				</a>
+			</li>
+			<li>
+				<a href="">
+					<span>Programas</span>
+				</a>
+			</li>
+			<li>
+				<a href="">
+					<span>Episodios</span>
+				</a>
+			</li>
+			<li>
+				<a href="">
+					<span>Listas</span>
+				</a>
+			</li>
+			<li>
+				<a href="">
+					<span>Favoritos</span>
+				</a>
+			</li>
+			<li>
+				<a href="" >
+					<span>Seguidores</span>
+				</a>
+			</li>
+			<li>
+				<a href="">
+					<span>Siguiendo</span>
+				</a>
+			</li>
+		</ul>
+
+		<div class="container-fluid">
+			{{ render_flash_alerts() }}
 				
-				{% include "juzzUsuariosBundle:Usuarios:tab-profile.html.twig" %}
-			</div><!-- /content -->
-		</div><!-- /tabs -->
-  		
-  	</section>
+			{% include "juzzUsuariosBundle:Usuarios:tab-profile.html.twig" %}
+		</div><!-- /content -->
+	</div><!-- /tabs -->
 {% endblock %}
 {% block javascripts %}
 	{{ parent() }}

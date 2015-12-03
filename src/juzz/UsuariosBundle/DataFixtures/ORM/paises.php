@@ -64,7 +64,9 @@ class PaisesFixture extends AbstractFixture implements FixtureInterface
           array("id" => 44,"iso" => 'TD',"nombre" => 'Chad'),
           array("id" => 45,"iso" => 'CZ',"nombre" => 'República Checa'),
           array("id" => 46,"iso" => 'CL',"nombre" => 'Chile'),
-          array("id" => 47,"iso" => 'CN',"nombre" => 'China')
+          array("id" => 47,"iso" => 'CN',"nombre" => 'China'),
+          array("id" => 73,"iso" => 'ES',"nombre" => 'España')
+          
         );
 
         foreach ($countries as $country) {
