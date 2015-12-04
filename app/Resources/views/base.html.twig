@@ -75,11 +75,40 @@
               </li>
             {% elseif app.user %}
               <li>
+                <a class='dropdown-toggle' href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class='fa fa-bell'></span>&nbsp;
+                  <span class='badge badge-danger'>23</span>
+                </a>
+                <div class="dropdown-menu text-capitalize notification-box" data-placement="left" role='menu'>
+                  <span class="dropdown-header">Notificaciones</span>
+                  <ul class="list-group">
+                    <li class="list-group-item">
+                      <div class="media">
+                        <div class="media-left media-middle">
+                          <a href="#">
+                            <img class="media-object img-circle" width='60px' src="{{ asset(app.user.avatar.getWebPath()) }}" alt="">
+                          </a>
+                        </div>
+                        <div class="media-body">
+                          <h4 class="media-heading">Middle aligned media</h4>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li>
                 <a class='user dropdown-toggle' href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <img class='img-circle' width='45' src="{{ asset(app.user.getAvatar().getWebPath()) }}">
                   <span class="hidden-sm"> {{ app.user.getNombreCompleto() }}</span>
                 </a>
                 <ul class="dropdown-menu text-capitalize" data-placement="left" role='menu'>
+                  <li>
+                    <a rel='nofollow' href="{{ path('perfil',{user:app.user.nick}) }}">
+                      <span class='fa fa-user'></span>&nbsp;&nbsp;Mi Perfil
+                    </a>
+                  </li>
                   <li>
                     <a rel='nofollow' href="">
                       <span class='fa fa-clock-o'></span>&nbsp;&nbsp;Escuchar Más Tarde
@@ -136,6 +165,18 @@
     <script src="{{ asset('bower_components/prefixfree/prefixfree.min.js') }}" charset="utf-8"></script>
     <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bower_components/pusher/dist/pusher.min.js') }}"></script>
+    <script type="text/javascript">
+      var socket = new Pusher('e3feeec9c2b05b1c6f12');
+      var my_channel = socket.subscribe('my-channel');
+        socket.bind('profile_visited',
+        function(data) {
+          var user = JSON.parse(data);
+          console.log(user);
+          // add comment into page
+        }
+      );
+    </script>
   {% endblock %}
 </body>
 </html>

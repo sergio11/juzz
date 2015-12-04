@@ -62,8 +62,7 @@ class UserEditType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'juzz\UsuariosBundle\Entity\Usuarios',
-            'validation_groups' => array('default', 'registro')
+            'data_class' => 'juzz\UsuariosBundle\Entity\Usuarios'
         ));
     }
 

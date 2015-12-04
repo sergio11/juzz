@@ -24,7 +24,9 @@
         "opauth/facebook": "^0.2.1",
         "opauth/twitter": "^0.3.1",
         "ras/flash-alert-bundle": "dev-master",
-        "bes/mobiledetect-twig-extension": "v1.0"
+        "bes/mobiledetect-twig-extension": "v1.0",
+        "laupifrpar/pusher-bundle": "^1.2",
+        "jms/serializer-bundle": "^1.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

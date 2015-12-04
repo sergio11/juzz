@@ -30,6 +30,14 @@ class Usuarios implements UserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=30, nullable=false)
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 30,
+     *      minMessage = "Your first name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     * )
      */
     private $nombre;
 
@@ -62,6 +70,14 @@ class Usuarios implements UserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="ape1", type="string", length=30, nullable=false)
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 30,
+     *      minMessage = "Your first name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     * )
      */
     private $ape1;
 
@@ -76,6 +92,10 @@ class Usuarios implements UserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=90, nullable=false)
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = true
+     * )
      */
     private $email;
 

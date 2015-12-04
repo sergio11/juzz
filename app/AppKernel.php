@@ -27,6 +27,8 @@ class AppKernel extends Kernel
             new juzz\FilesBundle\juzzFilesBundle(),
             new juzz\DoctrineMetadaBundle\juzzDoctrineMetadaBundle(),
             new juzz\CommentsBundle\juzzCommentsBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+            new Lopi\Bundle\PusherBundle\LopiPusherBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

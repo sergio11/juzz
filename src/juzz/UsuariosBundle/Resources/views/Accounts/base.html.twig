@@ -8,10 +8,10 @@
 		<h2 class="text-center">Debes estar logado para poder publicar</h2>
 		<div class="big-tabs-container container-card">
 			<ul class="nav nav-tabs" role='tablist'>
-				<li class="{{ tab is not defined ? 'active' }}">
+				<li class="tab_item {{ tab is not defined ? 'active' }}">
 		            <a role="tab" href="{{ path('login') }}">Con mi cuenta</a>
 		        </li>
-		        <li class="{{ tab is defined and tab == 'register' ? 'active' }}">
+		        <li class="tab_item {{ tab is defined and tab == 'register' ? 'active' }}">
 		            <a role="tab" href="{{ path('register') }}">Crear cuenta</a>
 		        </li>
 			</ul>

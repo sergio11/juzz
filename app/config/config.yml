@@ -17,7 +17,7 @@ framework:
         strict_requirements: ~
     form:            ~
     csrf_protection: ~
-    validation:      { enable_annotations: true }
+    validation:      { enabled: true , enable_annotations: true }
     #serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
@@ -97,6 +97,18 @@ dcs_opauth:
             strategy_class: Facebook
             options:
                 scope: ['public_profile','email']
+
+lopi_pusher:
+    app_id: 158835
+    key: 'e3feeec9c2b05b1c6f12'
+    secret: 'f08efc75370710229fdd'
+
+    # Default configuration
+    debug: true # true if you want use the debug of all requests
+    host: http://api.pusherapp.com
+    port: 80
+    timeout: 30
+
 
 services:
     twig.mobile_detect_extension:

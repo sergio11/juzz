@@ -26,6 +26,18 @@ class ProfileController extends Controller
             if (!$user) {
                 throw $this->createNotFoundException();
             }
+
+            if($this->getUser()->getId() != $user->getId()){
+                $pusher = $this->container->get('lopi_pusher.pusher');
+                $serializer = $this->get('jms_serializer');
+                $message = array(
+                    'name' => $this->getUser()->getNombreCompleto(),
+                    'avatar' => $this->getUser()->getAvatar()->getWebPath(),
+                    'profile' => $this->generateUrl('perfil',array('user' => $this->getUser()->getNick()))
+                );
+                $pusher->trigger( 'my-channel', 'profile_visited', $serializer->serialize($message, 'json'));
+            }
+            
         }
 
         return $this->render('juzzUsuariosBundle:Usuarios:profile.html.twig',array(
@@ -53,6 +65,7 @@ class ProfileController extends Controller
         
         $form = $this->createForm(new UserEditType(), $user);
         $form->handleRequest($request);
+
         if ($form->isValid()) {
             $em->persist($user);
             $em->flush();
