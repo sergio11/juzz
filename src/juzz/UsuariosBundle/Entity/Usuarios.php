@@ -7,13 +7,24 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\ExecutionContextInterface;
+
+
 
 /**
  * Usuarios
  *
  * @ORM\Table(name="usuarios", uniqueConstraints={@ORM\UniqueConstraint(name="USU_EMA_UK", columns={"email"})}, indexes={@ORM\Index(name="USU_AVA_FK", columns={"avatar"}), @ORM\Index(name="USU_PRO_FK", columns={"profile_bg"})})
  * @ORM\Entity
+ * @UniqueEntity(
+ *     fields="email",
+ *     message="Ya existe un usuario con este email"
+ * )
+ * @UniqueEntity(
+ *     fields="nick",
+ *     message="Ya existe un usuario con este nick"
+ * )
  */
 class Usuarios implements UserInterface, \Serializable
 {
@@ -38,6 +49,11 @@ class Usuarios implements UserInterface, \Serializable
      *      minMessage = "Your first name must be at least {{ limit }} characters long",
      *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
      * )
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Your name cannot contain a number"
+     * )
      */
     private $nombre;
 
@@ -45,6 +61,7 @@ class Usuarios implements UserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="genero", type="string", length=1, nullable=false)
+     * @Assert\Choice(choices = {"m", "f"}, message = "Choose a valid gender.")
      */
     private $genero;
 
@@ -52,6 +69,11 @@ class Usuarios implements UserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="descripcion", type="text", nullable=true)
+     * @Assert\Length(
+     *      min = 0,
+     *      max = 500,
+     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     * )
      */
     private $descripcion;
 
@@ -61,6 +83,8 @@ class Usuarios implements UserInterface, \Serializable
     *  @var string
     *   
     *  @ORM\Column(name="nick", type="string", length=90, nullable=false)
+    *  @Assert\NotBlank()
+    *  @Assert\NotNull()
     *
     */
 
@@ -78,6 +102,11 @@ class Usuarios implements UserInterface, \Serializable
      *      minMessage = "Your first name must be at least {{ limit }} characters long",
      *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
      * )
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Your first ape cannot contain a number"
+     * )
      */
     private $ape1;
 
@@ -85,6 +114,11 @@ class Usuarios implements UserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="ape2", type="string", length=30, nullable=false)
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Your Secod ape cannot contain a number"
+     * )
      */
     private $ape2;
 
@@ -103,6 +137,9 @@ class Usuarios implements UserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=60, nullable=false)
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     * 
      */
     private $password;
 

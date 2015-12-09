@@ -1,0 +1,28 @@
+{% block _edit_user_profile_categoria_widget %}
+    {% if expanded %}
+        {{ block('choice_widget_expanded') }}
+    {% else %}
+        {{ block('tags_input_widget') }}
+    {% endif %}
+{% endblock %}
+
+{% block tags_input_widget %}
+{% spaceless %}
+    <select class="form-control multiselect multiselect-success" {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+        {% if empty_value is not none %}
+            <option value="">{{ empty_value|trans({}, translation_domain) }}</option>
+        {% endif %}
+        {% set options = choices %}
+        {{ block('tags_input_options') }}
+    </select>
+{% endspaceless %}
+{% endblock tags_input_widget %}
+
+{% block tags_input_options %}
+{% spaceless %}
+    {% for group_label, choice in options %}
+        {# here you can access choice #}
+        <option value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>{{ choice.label|trans({}, translation_domain) }}</option>
+    {% endfor %}
+{% endspaceless %}
+{% endblock tags_input_options %}

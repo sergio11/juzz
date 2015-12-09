@@ -6,6 +6,18 @@
 		   <div class="panel-body">
 		    	<h3>Descripción</h3>
 		    	<p>{{ descripcion }}</p>
+		    	{% if intereses|length > 0 %}
+		    		<hr>
+		    		<h3>Intereses</h3>
+		    		{% for interes in intereses %}
+		    			<a href="{{ path('episodios_categorias',{category:interes.termino.slug}) }}">
+		    				<span class="label label-pill label-success">{{ interes.termino.nombre }}</span>
+		    			</a>
+		    			
+		    		{% endfor %}
+
+		    	{% endif %}
+		    	
 		  	</div>
 		   	<!-- List group -->
 			<ul class="list-group">

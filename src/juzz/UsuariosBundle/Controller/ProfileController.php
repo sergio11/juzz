@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use juzz\UsuariosBundle\Entity\Usuarios AS UsuarioEntity;
 use juzz\FilesBundle\Entity\Imagenes AS ImagenEntity;
 use juzz\UsuariosBundle\Form\UserEditType;
+use juzz\UsuariosBundle\Form\UserChangeEmailType;
 
 class ProfileController extends Controller
 {
@@ -44,7 +45,8 @@ class ProfileController extends Controller
             'name' => $user->getNombre(),
             'apellidos' => $user->getApellidos(),
             'avatar' => $user->getAvatar()->getWebPath(),
-            'descripcion' =>  $user->getDescripcion()
+            'descripcion' =>  $user->getDescripcion(),
+            'intereses' => $user->getCategoria()
         ));
     }
     /**
@@ -72,9 +74,12 @@ class ProfileController extends Controller
             $this->get('ras_flash_alert.alert_reporter')->addSuccess('Cambios Guardados con Éxito');
         }
 
+        $changeEmailForm = $this->createForm(new UserChangeEmailType());
+
         return $this->render('juzzUsuariosBundle:PrivateZone:edit_profile.html.twig', array(
             'user'      => $user,
-            'edit_form'   => $form->createView()
+            'edit_form'   => $form->createView(),
+            'change_email_form' => $changeEmailForm->createView()
         ));   
     }
 }

@@ -71,9 +71,9 @@ h5{font-size: 1.6rem;}
 
 
 .container-card{
+  margin-top: 2rem;
   background-color: #fff;
   padding: 20px 30px;
-  margin-top: 2rem;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: #CEC3C3 0px 0px 10px 6px;
@@ -111,7 +111,6 @@ h5{font-size: 1.6rem;}
 }
 
 .panel-default{
-  color: #1ABC9C;
   text-align: left;
   box-shadow: #CEC3C3 0px 0px 10px 6px;
 }

@@ -36,7 +36,7 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     form:
-        resources: ['bootstrap_3_horizontal_layout.html.twig','juzzUsuariosBundle:Form:form-radio-button.html.twig']
+        resources: ['bootstrap_3_layout.html.twig','juzzUsuariosBundle:Form:form-radio-button.html.twig','juzzUsuariosBundle:Form:terminos-tags-input.html.twig']
 
 # Assetic Configuration
 assetic:

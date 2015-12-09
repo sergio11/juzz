@@ -51,11 +51,13 @@ class UsuarioRegistroType extends AbstractType
                 'placeholder' => 'p.e usuario@servidor',
                 'autocomplete' => 'off'
             )))
-            ->add('password','password',array(
-                'label' => 'Password',
-                'attr' => array(
-                    'placeholder' => 'p.g esperanto36'
-                )
+            ->add('password', 'repeated', array(
+                'type' => 'password',
+                'invalid_message' => 'The password fields must match.',
+                'options' => array('attr' => array('class' => 'password-field')),
+                'required' => true,
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password'),
             ))
             ->add('avatar',new FileType())
             ->add('Guardar', 'submit');

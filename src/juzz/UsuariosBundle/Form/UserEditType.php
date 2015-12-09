@@ -35,10 +35,6 @@ class UserEditType extends AbstractType
                     'maxlength' => 30
                 )
             ))
-            ->add('email', 'email',  array('label' => 'Correo electrónico', 'attr' => array(
-                'placeholder' => 'p.e usuario@servidor',
-                'autocomplete' => 'off'
-            )))
             ->add('genero', 'choice', array(
                 'choices'   => array('m' => 'Hombre', 'f' => 'Mujer'),
                 'required'  => true,
@@ -54,7 +50,17 @@ class UserEditType extends AbstractType
             ->add('descripcion','textarea', array(
                 'label' => 'Descripción Personal'
             ))
+            ->add('categoria', 'entity', array(
+                'class'     => 'juzz\EpisodiosBundle\Entity\Categorias',
+                'expanded'  => false,
+                'multiple'  => true,
+                'label' => 'Intereses',
+                'choice_label' => function ($category) {
+                    return $category->getTermino()->getNombre();
+                }
+            ))
             ->add('avatar',new FileType())
+            ->add('reset', 'reset')
             ->add('guardar', 'submit')
         ;
     }
