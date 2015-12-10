@@ -4,8 +4,8 @@ namespace juzz\UsuariosBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use juzz\FilesBundle\Form\FileType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use juzz\FilesBundle\Form\ProfileImageType;
 use Doctrine\ORM\EntityRepository;
 
 class UserEditType extends AbstractType
@@ -59,18 +59,22 @@ class UserEditType extends AbstractType
                     return $category->getTermino()->getNombre();
                 }
             ))
-            ->add('avatar',new FileType())
-            ->add('reset', 'reset')
+            ->add('avatar','profile_image',array(
+                'label' => false,
+                'required'  => false
+            ))
             ->add('guardar', 'submit')
         ;
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'juzz\UsuariosBundle\Entity\Usuarios'
+            'data_class' => 'juzz\UsuariosBundle\Entity\Usuarios',
+            'cascade_validation' => false
         ));
     }
+
 
     public function getName()
     {

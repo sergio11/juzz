@@ -1,0 +1,15 @@
+{% block profile_image_widget %}
+    {% spaceless %}
+    	<div class="media">
+		  <a class="media-left" href="#">
+		    {% if avatar is not null %}
+	        	<img width='80' class='img-circle' src="{{ asset(avatar) }}"/>
+	    	{% endif %}
+		  </a>
+		  <div class="media-body">
+		    <h4 class="media-heading">Añade una imagen a tu perfil. Máx 200Kb</h4>
+		    {{ block('form_widget') }}
+		  </div>
+		</div>
+    {% endspaceless %}
+{% endblock %}

@@ -23,6 +23,7 @@ class RegistrationController extends Controller{
     $avatar = new ImagenEntity();
     $user->setAvatar($avatar);
 
+
     if ($request->getMethod() == 'GET') {
       //Usar getClientIp.
       $content = @file_get_contents('http://www.geoplugin.net/php.gp?ip=212.128.152.1');
@@ -49,7 +50,6 @@ class RegistrationController extends Controller{
       $user->setPassword($password);
       $user->setIngreso(new \DateTime());
       $user->setActivo(2);
-      $user->setProfileBg($avatar);
       //Establecemos politica de comentarios por defecto.
       $policy = $em->getRepository('juzzUsuariosBundle:PoliticaComentarios')->find(1);
       $user->setPoliticaComentarios($policy);

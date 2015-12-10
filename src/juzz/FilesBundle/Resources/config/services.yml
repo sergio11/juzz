@@ -1,4 +1,10 @@
 services:
-#    juzz_files.example:
-#        class: juzz\FilesBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    profile_image:
+        class: juzz\FilesBundle\Form\ProfileImageType
+        tags:
+            - { name: form.type }
+    profile_background_image:
+        class: juzz\FilesBundle\Form\ProfileBackgroundType
+        tags:
+            - { name: form.type }
+

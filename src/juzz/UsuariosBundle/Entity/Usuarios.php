@@ -170,7 +170,7 @@ class Usuarios implements UserInterface, \Serializable
     /**
      * @var \Paises
      *
-     * @ORM\ManyToOne(targetEntity="\juzz\UsuariosBundle\Entity\Paises")
+     * @ORM\ManyToOne(targetEntity="\juzz\UsuariosBundle\Entity\Paises",cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="origen", referencedColumnName="id")
      * })
@@ -190,7 +190,7 @@ class Usuarios implements UserInterface, \Serializable
     /**
      * @var \Imagenes
      *
-     * @ORM\ManyToOne(targetEntity="\juzz\FilesBundle\Entity\Imagenes")
+     * @ORM\ManyToOne(targetEntity="\juzz\FilesBundle\Entity\ProfileBackground",cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="profile_bg", referencedColumnName="id")
      * })
@@ -585,10 +585,10 @@ class Usuarios implements UserInterface, \Serializable
     /**
      * Set profileBg
      *
-     * @param \juzz\FilesBundle\Entity\Imagenes $profileBg
+     * @param \juzz\FilesBundle\Entity\ProfileBackground $profileBg
      * @return Usuarios
      */
-    public function setProfileBg(\juzz\FilesBundle\Entity\Imagenes $profileBg = null)
+    public function setProfileBg(\juzz\FilesBundle\Entity\ProfileBackground $profileBg = null)
     {
         $this->profileBg = $profileBg;
 
@@ -598,7 +598,7 @@ class Usuarios implements UserInterface, \Serializable
     /**
      * Get profileBg
      *
-     * @return \juzz\FilesBundle\Entity\Imagenes 
+     * @return \juzz\FilesBundle\Entity\ProfileBackground 
      */
     public function getProfileBg()
     {

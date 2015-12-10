@@ -26,7 +26,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
           </button>
-          <button type="button" class="navbar-toggle  pull-right active collapsed" data-toggle="collapse" data-target="#searchbar">
+          <button type="button" class="navbar-toggle pull-right active collapsed" data-toggle="collapse" data-target="#searchbar">
               <span class="sr-only">Toggle player</span>
               <span class="glyphicon glyphicon-search"></span>
           </button>
@@ -86,7 +86,7 @@
                       <div class="media">
                         <div class="media-left media-middle">
                           <a href="#">
-                            <img class="media-object img-circle" width='60px' src="{{ asset(app.user.avatar.getWebPath()) }}" alt="">
+                            <img class="media-object img-circle" width='60px' src="{{ asset(app.user.avatar.webPath) }}" alt="">
                           </a>
                         </div>
                         <div class="media-body">
@@ -96,6 +96,16 @@
                       </div>
                     </li>
                   </ul>
+                  <div class="row">
+                    <div class="col-lg-7">
+                      <span>Aviso Notificaciones</span>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="bootstrap-switch-square ">
+                        <input type="checkbox" checked data-toggle="switch" name="square-switch" id="switch-02" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </li>
               <li>
@@ -167,7 +177,7 @@
     <script type="text/javascript" src="{{ asset('bower_components/flat-ui/dist/js/flat-ui.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/pusher/dist/pusher.min.js') }}"></script>
     <script type="text/javascript">
-      var socket = new Pusher('e3feeec9c2b05b1c6f12');
+      /*var socket = new Pusher('e3feeec9c2b05b1c6f12');
       var my_channel = socket.subscribe('my-channel');
         socket.bind('profile_visited',
         function(data) {
@@ -175,7 +185,13 @@
           console.log(user);
           // add comment into page
         }
-      );
+      );*/
+      $(function(){
+        $("#switch-02").bootstrapSwitch().parent().on("click",function(e){
+          e.preventDefault();
+          e.stopPropagation();
+        });
+      })
     </script>
   {% endblock %}
 </body>

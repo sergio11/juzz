@@ -59,7 +59,9 @@ class UsuarioRegistroType extends AbstractType
                 'first_options'  => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat Password'),
             ))
-            ->add('avatar',new FileType())
+            ->add('avatar','profile_image',array(
+                'label' => false
+            ))
             ->add('Guardar', 'submit');
     }
 

@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: "@juzzFilesBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -36,7 +37,7 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     form:
-        resources: ['bootstrap_3_layout.html.twig','juzzUsuariosBundle:Form:form-radio-button.html.twig','juzzUsuariosBundle:Form:terminos-tags-input.html.twig']
+        resources: ['bootstrap_3_horizontal_layout.html.twig','juzzUsuariosBundle:Form:form-radio-button.html.twig','juzzUsuariosBundle:Form:terminos-tags-input.html.twig','juzzUsuariosBundle:Form:select-control.html.twig','juzzFilesBundle:Form:profile-image.html.twig','juzzUsuariosBundle:Form:form-row.html.twig']
 
 # Assetic Configuration
 assetic:

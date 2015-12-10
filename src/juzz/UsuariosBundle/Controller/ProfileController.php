@@ -8,6 +8,7 @@ use juzz\UsuariosBundle\Entity\Usuarios AS UsuarioEntity;
 use juzz\FilesBundle\Entity\Imagenes AS ImagenEntity;
 use juzz\UsuariosBundle\Form\UserEditType;
 use juzz\UsuariosBundle\Form\UserChangeEmailType;
+use juzz\FilesBundle\Form\ProfileBackgroundType;
 
 class ProfileController extends Controller
 {
@@ -41,10 +42,13 @@ class ProfileController extends Controller
             
         }
 
+        $profilebg = $user->getProfileBg() instanceof ImagenEntity ?  $user->getProfileBg()->getWebPath() : null;
+
         return $this->render('juzzUsuariosBundle:Usuarios:profile.html.twig',array(
             'name' => $user->getNombre(),
             'apellidos' => $user->getApellidos(),
             'avatar' => $user->getAvatar()->getWebPath(),
+            'profilebg' => $profilebg,
             'descripcion' =>  $user->getDescripcion(),
             'intereses' => $user->getCategoria()
         ));
@@ -54,6 +58,7 @@ class ProfileController extends Controller
      */
     public function editAction(Request $request,$user)
     {
+        
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('juzzUsuariosBundle:Usuarios')->findOneBy(array('nick' => $user));
         //Si no existe el usuario lanzamos 404
@@ -64,7 +69,7 @@ class ProfileController extends Controller
         if ($this->getUser()->getNick() != $user->getNick()) {
             throw $this->createAccessDeniedException();
         }
-        
+
         $form = $this->createForm(new UserEditType(), $user);
         $form->handleRequest($request);
 
@@ -76,10 +81,16 @@ class ProfileController extends Controller
 
         $changeEmailForm = $this->createForm(new UserChangeEmailType());
 
+        $profileBackgroundForm = $this->createForm(new ProfileBackgroundType());
+
         return $this->render('juzzUsuariosBundle:PrivateZone:edit_profile.html.twig', array(
             'user'      => $user,
             'edit_form'   => $form->createView(),
-            'change_email_form' => $changeEmailForm->createView()
+            'change_email_form' => $changeEmailForm->createView(),
+            'change_profile_background_form' => $profileBackgroundForm->createView()
         ));   
     }
+
+
+
 }
