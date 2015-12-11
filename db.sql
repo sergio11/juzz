@@ -299,3 +299,6 @@ php app/console doctrine:fixtures:load --fixtures src/juzz/EpisodiosBundle/DataF
 
 --Habilitar esta extensión php.ini 
 extension=php_fileinfo.dll
+
+-- Instalar Assets
+php app/console assets:install web --symlink

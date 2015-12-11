@@ -1,0 +1,33 @@
+{
+  "name": "juzz",
+  "version": "1.0.0",
+  "description": "Juzz Podcasting App",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sergio11/juzz.git"
+  },
+  "keywords": [
+    "podcasting"
+  ],
+  "author": "Sergio Sánchez Sánchez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sergio11/juzz/issues"
+  },
+  "homepage": "https://github.com/sergio11/juzz#readme",
+  "dependencies": {
+    "react": "^0.14.3"
+  },
+  "devDependencies": {
+    "babelify": "^7.2.0",
+    "browserify": "^12.0.1",
+    "gulp": "^3.9.0",
+    "gulp-minify-css": "^1.2.2",
+    "nib": "^1.1.0",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}

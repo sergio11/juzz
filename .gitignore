@@ -11,3 +11,4 @@
 /web/bundles/
 /nbproject/*
 /web/bower_components/*
+/node_modules/
