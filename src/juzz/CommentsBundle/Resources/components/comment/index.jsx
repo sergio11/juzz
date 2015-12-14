@@ -2,7 +2,7 @@ import React from 'react'
 
 class Comment extends React.Component {
 	render() {
-	    return (
+	    return(
 	      	<div className="text-center">
                 {this.props.data.text}
             </div>

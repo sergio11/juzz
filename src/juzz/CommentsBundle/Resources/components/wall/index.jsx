@@ -3,10 +3,12 @@ import Comment from '../comment'
 import Post from '../posts'
 
 class Wall extends React.Component {
+    /*For ES6 classes, getInitialState has been deprecated in favor 
+    of declaring an initial state object in the constructor*/
+    constructor(props, context) {
+        super(props, context);
 
-    getInitialState(){
-        return {
-            title: 'Comentarios',
+        this.state = {
             posts: [{
                 id: 0,
                 text: "Hello World",
@@ -27,10 +29,14 @@ class Wall extends React.Component {
                 }]
             }]
         };
-    }
+    };
+
 
     deletePost(post) {
         //Eliminamos post.
+        console.log("Post ...");
+        console.log(post);
+        console.log(this);
         var index = this.state.posts.indexOf(post);
         this.state.posts.splice(index,1);
         //Forzamos actualización de la vista.
@@ -58,17 +64,16 @@ class Wall extends React.Component {
 
     render() {
 
+        console.log("Estos son los posts ....");
+        console.log(this.state.posts);
         //Posts
         var posts = this.state.posts.reverse().map(function(post) {
+            console.log(this);
             return <Post key={post.id} data={post} onDelete={this.deletePost}/>;
         }.bind(this));
 
         return (
-            <div className="panel panel-default">
-                <div className="panel-heading">
-                    <span className='glyphicon glyphicon-comment'></span>
-                    {this.state.title}
-                </div>
+            <div>
                 <textarea placeholder="Post Something" onKeyPress={this.createPost}></textarea>
                 <ul className="list-group">
                     { posts }

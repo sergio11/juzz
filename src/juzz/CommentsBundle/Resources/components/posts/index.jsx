@@ -3,11 +3,15 @@ import Comment from '../comment'
 
 class Post extends React.Component {
 
-    getInitialState(){
-        return {
+    constructor(props, context) {
+        super(props, context);
+
+        this.props = props;
+        this.state = {
             editMode: false
-        };
+        }
     }
+
 
     editHandler() {
         this.setState({
@@ -16,6 +20,8 @@ class Post extends React.Component {
     }
 
     deleteHandler(e) {
+        console.log("Valor de This");
+        console.log(this);
         this.props.onDelete(this.props.data);
     }
 
@@ -63,7 +69,7 @@ class Post extends React.Component {
         if(this.state.editMode) {
             content = <textarea onKeyDown={this.saveEditHandler} autofocus>{this.props.data.text}</textarea>;
         }else{
-            content = <h3>{ this.props.data.text }</h3>;
+            content = <h4>{ this.props.data.text }</h4>;
         }
 
         comments = this.props.data.comments.map(function(comment){
@@ -72,19 +78,19 @@ class Post extends React.Component {
 
     
         return (
-            <div className="ui raised segment">
+            <div className="list-group-item">
                 {content}
-                <div className="ui button right floated" onClick={this.editHandler}>Edit</div>
-                <div className="ui red button right floated" onClick={this.deleteHandler}>Delete</div>
+                <button className="btn btn-primary" onClick={this.editHandler.bind(this)}>Edit</button>
+                <button className="btn btn-danger" onClick={this.deleteHandler.bind(this)}>Danger</button>
                 <h4 className="ui horizontal header divider">
                     Comments
                 </h4>
                 <div className="field">
-                    <textarea placeholder="Reply" className="comment" onKeyDown={this.addComment}></textarea>
+                    <textarea placeholder="Reply" className="comment" onKeyDown={this.addComment.bind(this)}></textarea>
                 </div>
                 {comments}
             </div>
-        );
+        )
     }
 }
 

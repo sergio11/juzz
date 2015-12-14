@@ -8,6 +8,7 @@
     "bootstrap-social": "~4.10.1",
     "prefixfree": "*",
     "flat-ui": "~2.2.2",
-    "pusher": "~3.0.0"
+    "pusher": "~3.0.0",
+    "hinclude": "~0.9.5"
   }
 }

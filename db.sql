@@ -302,3 +302,5 @@ extension=php_fileinfo.dll
 
 -- Instalar Assets
 php app/console assets:install web --symlink
+
+--https://github.com/ulas-atila/hinclude
