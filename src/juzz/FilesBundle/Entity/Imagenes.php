@@ -149,6 +149,12 @@ class Imagenes
             : $this->getUploadDir().'/'.$this->path;
     }
 
+    public function toDataUrl(){
+
+        $data = file_get_contents($this->getAbsolutePath());
+        return sprintf('data:%s;base64,%s', 'image/png', base64_encode($data));
+    }
+
     protected function getUploadRootDir()
     {
         // la ruta absoluta del directorio donde se deben

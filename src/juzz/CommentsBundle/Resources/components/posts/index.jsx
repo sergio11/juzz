@@ -3,26 +3,19 @@ import Comment from '../comment'
 
 class Post extends React.Component {
 
-    constructor(props, context) {
-        super(props, context);
+    constructor(props) {
+        super(props);
 
-        this.props = props;
         this.state = {
             editMode: false
         }
     }
 
-
-    editHandler() {
+    editHandler(e) {
+        e.preventDefault();
         this.setState({
             editMode : true
         });
-    }
-
-    deleteHandler(e) {
-        console.log("Valor de This");
-        console.log(this);
-        this.props.onDelete(this.props.data);
     }
 
     saveEditHandler(e) {
@@ -43,16 +36,14 @@ class Post extends React.Component {
     }
 
     addComment(e) {
-        var elemVal,
-            curId,
-            comments = this.props.data.comments;
         if(e.which == 13) {
-            elemVal = e.target.value;
-            if(elemVal.trim() != "") {
-                curId = comments.length ? comments[(comments.length)-1].id : -1;
+            var text = e.target.value.trim();
+            if(text != "") {
+                var comments = this.props.data.comments;
+                var currentId = comments.length ? comments[(comments.length)-1].id : -1;
                 comments.push({
-                    id: curId+1,
-                    text: elemVal
+                    id: currentId+1,
+                    text: text
                 });
                 e.target.value = "";
                 this.forceUpdate();
@@ -67,7 +58,7 @@ class Post extends React.Component {
         var comments,content;
 
         if(this.state.editMode) {
-            content = <textarea onKeyDown={this.saveEditHandler} autofocus>{this.props.data.text}</textarea>;
+            content = <textarea onKeyDown={this.saveEditHandler} autofocus>{this.props.value}</textarea>;
         }else{
             content = <h4>{ this.props.data.text }</h4>;
         }
@@ -80,8 +71,8 @@ class Post extends React.Component {
         return (
             <div className="list-group-item">
                 {content}
-                <button className="btn btn-primary" onClick={this.editHandler.bind(this)}>Edit</button>
-                <button className="btn btn-danger" onClick={this.deleteHandler.bind(this)}>Danger</button>
+                <a href='' onClick={this.editHandler.bind(this)}><span className='fui-new'></span></a>
+                <a href='' onClick={this.props.onDelete}><span className='fui-trash'></span></a>
                 <h4 className="ui horizontal header divider">
                     Comments
                 </h4>

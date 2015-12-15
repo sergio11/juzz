@@ -49,3 +49,6 @@ dcs_opauth_connect:
 dcs_opauth_response:
     resource: "@DCSOpauthBundle/Resources/config/routing/response.xml"
     prefix: /connect
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

@@ -754,6 +754,15 @@ class Usuarios implements UserInterface, \Serializable
     public function eraseCredentials()
     {
     }
+
+    public function getUserInformationSummary(){
+        return array(
+            'id' => $this->id,
+            'avatar' => $this->avatar->toDataUrl(),
+            'fullName' => $this->getNombreCompleto()
+        );
+    }
+
      /** @see \Serializable::serialize() */
     public function serialize()
     {

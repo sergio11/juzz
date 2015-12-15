@@ -45,6 +45,7 @@ class ProfileController extends Controller
         $profilebg = $user->getProfileBg() instanceof ImagenEntity ?  $user->getProfileBg()->getWebPath() : null;
 
         return $this->render('juzzUsuariosBundle:Usuarios:profile.html.twig',array(
+            'id' => $user->getId(),
             'name' => $user->getNombre(),
             'apellidos' => $user->getApellidos(),
             'avatar' => $user->getAvatar()->getWebPath(),

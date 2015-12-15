@@ -52,12 +52,17 @@ class Comentarios
     /**
      * @var \Comentarios
      *
-     * @ORM\ManyToOne(targetEntity="\juzz\EpisodiosBundle\Entity\Comentarios")
+     * @ORM\ManyToOne(targetEntity="\juzz\CommentsBundle\Entity\Comentarios")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      * })
      */
     private $parent;
+
+    /**
+     * @OneToMany(targetEntity="\juzz\CommentsBundle\Entity\Comentarios", mappedBy="id")
+     **/
+    private $comments;
 
     /**
      * @var \Usuarios
@@ -69,7 +74,12 @@ class Comentarios
      */
     private $propietario;
 
+    function __construct()
+    {
 
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+
+    }
 
     /**
      * Get id
@@ -217,5 +227,17 @@ class Comentarios
     public function getPropietario()
     {
         return $this->propietario;
+    }
+
+
+    /**
+    *
+    * Get Comments
+    * @return \juzz\CommentsBundle\Entity\Comentarios
+    *
+    */
+
+    public function getComments(){
+        return $this->comments;
     }
 }

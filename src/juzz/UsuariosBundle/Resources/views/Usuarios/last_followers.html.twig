@@ -14,7 +14,11 @@
                      <h4 class="media-heading">{{ follower.name }}</h4>
                      <p>
                         {{ follower.followers }} seguidores
-                        <a class="btn btn-embossed btn-primary pull-right" href="#" role="button">Seguir</a>
+                        {% if app.user.id != user %}
+                           <a class="btn btn-embossed btn-primary pull-right" href="#" role="button">Seguir</a>
+                        {% else %}
+                           <a class="btn btn-embossed btn-primary pull-right" href="#" role="button">ver pefil</a>
+                        {% endif %}
                      </p>
                   </div>
                </div>

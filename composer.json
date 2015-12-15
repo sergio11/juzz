@@ -26,7 +26,8 @@
         "ras/flash-alert-bundle": "dev-master",
         "bes/mobiledetect-twig-extension": "v1.0",
         "laupifrpar/pusher-bundle": "^1.2",
-        "jms/serializer-bundle": "^1.1"
+        "jms/serializer-bundle": "^1.1",
+        "friendsofsymfony/jsrouting-bundle": "^1.5"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

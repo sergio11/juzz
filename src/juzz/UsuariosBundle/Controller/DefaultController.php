@@ -52,7 +52,7 @@ class DefaultController extends Controller
 
 
 
-  public function followersAction(Request $request){
+  public function followersAction(Request $request,$user){
 
     $dummyPhoto = $this->getUser()->getAvatar()->getWebPath();
     $followers = array(
@@ -74,7 +74,8 @@ class DefaultController extends Controller
     );
 
     return $this->render('juzzUsuariosBundle:Usuarios:last_followers.html.twig',array(
-      'followers' => $followers
+      'followers' => $followers,
+      'user' => $user
     ));
   }
 

@@ -18,8 +18,18 @@
   "bugs": {
     "url": "https://github.com/sergio11/juzz/issues"
   },
+  "browserify-shim": {
+    "jquery": "global:$",
+    "routing": "global:Routing"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
   "homepage": "https://github.com/sergio11/juzz#readme",
   "dependencies": {
+    "browserify-shim": "^3.8.11",
     "react": "^0.14.3",
     "react-dom": "^0.14.3"
   },

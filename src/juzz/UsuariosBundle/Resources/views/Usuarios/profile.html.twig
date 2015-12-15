@@ -76,6 +76,8 @@
 {% endblock %}
 {% block javascripts %}
 	{{ parent() }}
+	<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+	<script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
     <script src="{{ asset('bower_components/hinclude/hinclude.js') }}"></script>
     <script type="text/javascript">
 
@@ -83,20 +85,15 @@
     		var includes = document.getElementsByTagName("hx:include");
     		Array.prototype.slice.call(includes).forEach(function(include){
     			include.addEventListener('ready',function(e){
-    				console.log(this);
     				var child = this.firstElementChild;
-    				console.log(child);
     				if(child && child.hasAttribute("data-component")){
     					var url = child.getAttribute("data-component");
-    					console.log("URL : " + url);
     					var s = document.createElement('script');
 				        s.type = 'text/javascript';
 				        s.async = true;
 				        s.src = url;
 				        var x = document.getElementsByTagName('script')[0];
 				        x.parentNode.insertBefore(s, x);
-    				}else{
-    					console.log("Nada de nada");
     				}
     			});
     		});

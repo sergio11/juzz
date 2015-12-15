@@ -42,7 +42,7 @@
 		}) }}
 
 		{# Current User Followers #}
-		{{ render_hinclude(controller('juzzUsuariosBundle:Default:followers'), {
+		{{ render_hinclude(controller('juzzUsuariosBundle:Default:followers',{ 'user' : id }), {
     		'default': 'Cargando ...'
 		}) }}
 	</div>

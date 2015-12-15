@@ -1,3 +1,12 @@
-comments_wall:
-    path:     /hello/{name}
-    defaults: { _controller: juzzCommentsBundle:Default:index }
+comments:
+    path:     /comments/{target}
+    defaults: { _controller: juzzCommentsBundle:Comments:getPosts }
+    methods:  [GET]
+    condition: "request.isXmlHttpRequest()"
+    requirements:
+        target:  \d*
+post_comment:
+    path:     /comments/new
+    defaults: { _controller: juzzCommentsBundle:Comments:new }
+    methods:  [POST]
+    condition: "request.isXmlHttpRequest()"
