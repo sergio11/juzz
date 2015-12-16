@@ -9,6 +9,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\ExecutionContextInterface;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\Accessor;
 
 
 
@@ -25,6 +29,7 @@ use Symfony\Component\Validator\ExecutionContextInterface;
  *     fields="nick",
  *     message="Ya existe un usuario con este nick"
  * )
+ * @ExclusionPolicy("all")
  */
 class Usuarios implements UserInterface, \Serializable
 {
@@ -34,6 +39,7 @@ class Usuarios implements UserInterface, \Serializable
      * @ORM\Column(name="id", type="bigint", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Expose
      */
     private $id;
 
@@ -54,6 +60,9 @@ class Usuarios implements UserInterface, \Serializable
      *     match=false,
      *     message="Your name cannot contain a number"
      * )
+     * @Expose
+     * @Accessor(getter="getNombreCompleto")
+     * @SerializedName("fullName")
      */
     private $nombre;
 
@@ -74,6 +83,7 @@ class Usuarios implements UserInterface, \Serializable
      *      max = 500,
      *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
      * )
+     * @Expose
      */
     private $descripcion;
 
@@ -85,6 +95,7 @@ class Usuarios implements UserInterface, \Serializable
     *  @ORM\Column(name="nick", type="string", length=90, nullable=false)
     *  @Assert\NotBlank()
     *  @Assert\NotNull()
+    *  @Expose
     *
     */
 
@@ -164,6 +175,7 @@ class Usuarios implements UserInterface, \Serializable
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="avatar", referencedColumnName="id")
      * })
+     * @Expose
      */
     private $avatar;
 

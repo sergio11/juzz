@@ -1,14 +1,19 @@
 <?php
 
-namespace juzz\EpisodiosBundle\Entity;
+namespace juzz\CommentsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\MaxDepth;
 
 /**
  * Comentarios
  *
  * @ORM\Table(name="comentarios", indexes={@ORM\Index(name="COM_PAR_FK", columns={"parent_id"}), @ORM\Index(name="COM_PRO_FK", columns={"propietario_id"})})
  * @ORM\Entity
+ * @ExclusionPolicy("all")
  */
 class Comentarios
 {
@@ -18,6 +23,7 @@ class Comentarios
      * @ORM\Column(name="id", type="bigint", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Expose
      */
     private $id;
 
@@ -25,6 +31,8 @@ class Comentarios
      * @var \DateTime
      *
      * @ORM\Column(name="fecha", type="date", nullable=false)
+     * @Expose
+     * @SerializedName("datetime")
      */
     private $fecha;
 
@@ -39,6 +47,8 @@ class Comentarios
      * @var string
      *
      * @ORM\Column(name="contenido", type="text", nullable=false)
+     * @Expose
+     * @SerializedName("text")
      */
     private $contenido;
 
@@ -46,6 +56,7 @@ class Comentarios
      * @var integer
      *
      * @ORM\Column(name="target", type="bigint", nullable=false)
+     * @Expose
      */
     private $target;
 
@@ -59,10 +70,6 @@ class Comentarios
      */
     private $parent;
 
-    /**
-     * @OneToMany(targetEntity="\juzz\CommentsBundle\Entity\Comentarios", mappedBy="id")
-     **/
-    private $comments;
 
     /**
      * @var \Usuarios
@@ -71,8 +78,19 @@ class Comentarios
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="propietario_id", referencedColumnName="id")
      * })
+     * @Expose
+     * @SerializedName("owner")
+     * @MaxDepth(1)
      */
     private $propietario;
+
+    /**
+    *  @var \Comentarios
+    *  @ORM\OneToMany(targetEntity="juzz\CommentsBundle\Entity\Comentarios", mappedBy="parent", cascade={"remove"})
+    *  @Expose
+    */
+
+    private $comments;
 
     function __construct()
     {
@@ -189,7 +207,7 @@ class Comentarios
      * @param \juzz\EpisodiosBundle\Entity\Comentarios $parent
      * @return Comentarios
      */
-    public function setParent(\juzz\EpisodiosBundle\Entity\Comentarios $parent = null)
+    public function setParent(\juzz\CommentsBundle\Entity\Comentarios $parent = null)
     {
         $this->parent = $parent;
 
@@ -219,25 +237,29 @@ class Comentarios
         return $this;
     }
 
-    /**
-     * Get propietario
-     *
-     * @return \juzz\UsuariosBundle\Entity\Usuarios 
-     */
-    public function getPropietario()
+    public function getComments()
     {
-        return $this->propietario;
+        return $this->comments->toArray();
+    }
+
+    public function addComment(\juzz\CommentsBundle\Entity\Comentarios $comment)
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(\juzz\CommentsBundle\Entity\Comentarios $comment)
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+        }
+
+        return $this;
     }
 
 
-    /**
-    *
-    * Get Comments
-    * @return \juzz\CommentsBundle\Entity\Comentarios
-    *
-    */
 
-    public function getComments(){
-        return $this->comments;
-    }
 }

@@ -304,3 +304,5 @@ extension=php_fileinfo.dll
 php app/console assets:install web --symlink
 
 --https://github.com/ulas-atila/hinclude
+
+php app/console generate:bundle

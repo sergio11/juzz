@@ -1,3 +1,7 @@
+juzz_notifications:
+    resource: "@juzzNotificationsBundle/Resources/config/routing.yml"
+    prefix:   /
+
 juzz_comments:
     resource: "@juzzCommentsBundle/Resources/config/routing.yml"
     prefix:   /

@@ -1,6 +1,6 @@
 <?php
 
-namespace juzz\UsuariosBundle\Entity;
+namespace juzz\NotificationsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

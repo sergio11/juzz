@@ -112,7 +112,7 @@ lopi_pusher:
 
 # FOSJsRoutingBundle configuration see more https://github.com/FriendsOfSymfony/FOSJsRoutingBundle/blob/master/Resources/doc/index.md
 fos_js_routing:
-    routes_to_expose: [ 'comments' , 'post_comment' ]
+    routes_to_expose: [ 'comments' , 'post_comment' , 'push_notifications' , 'perfil']
 
 
 services:

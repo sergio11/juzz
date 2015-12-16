@@ -18,14 +18,27 @@ class Wall extends React.Component {
     };
 
     componentWillMount() {
+
+        /*var stream = new EventSource(Routing.generate('push_notifications'));
+        console.log(stream);
+        stream.addEventListener('message', function (event) {
+            console.log(event);
+        });
+
+        stream.addEventListener('error', function (event) {
+            console.log(event);
+        });*/
         //generate url
-        let url = Routing.generate('comments',{target:this.props.user.id});
+        let url = Routing.generate('comments',{target:this.props.target});
         //Obtenemos los Posts.
         $.getJSON(url).done((response) => {
             if(response.success){
+                console.log("POST");
+                console.log(response.data);
                 this.setState({ posts : response.data });
             }
         }).fail((response) => {
+            console.log("Fail!!!");
             console.log(response);
         })
         .always(() => {
@@ -52,15 +65,18 @@ class Wall extends React.Component {
                 
                 $.post(Routing.generate('post_comment'),{
                     data:{
-                        contenido:val
+                        content:val,
+                        target:this.props.target,
+                        parent:null,
+                        owner:this.props.user.id,
                     }
                 }).done((response) => {
-                    console.log("Respuesta!!!");
-                    console.log(response);
+                    response = JSON.parse(response);
                     if(response.success){
-                        //this.state.posts.push(response.post)
+                        this.state.posts.push(response.data);
+                        this.forceUpdate();
                     }
-                    //this.forceUpdate();
+                    
                 }).fail((response) => {
                     console.log("Fail!!!");
                     console.log(response);
@@ -83,7 +99,7 @@ class Wall extends React.Component {
         }else{
             content = this.state.posts.reverse().map((post) => {
                 let deletePost = this.deletePost.bind(this, post);
-                return <Post key={post.id} data={post} onDelete={deletePost}/>
+                return <Post key={post.id} data={post} user={this.props.user.id} onDelete={deletePost}/>
             })
         }
 

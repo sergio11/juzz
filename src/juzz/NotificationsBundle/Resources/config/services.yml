@@ -1,0 +1,4 @@
+services:
+#    juzz_notifications.example:
+#        class: juzz\NotificationsBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

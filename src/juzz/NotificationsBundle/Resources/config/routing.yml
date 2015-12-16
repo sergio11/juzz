@@ -1,0 +1,3 @@
+push_notifications:
+    path:     /push_notifications
+    defaults: { _controller: juzzNotificationsBundle:Notifications:pushNotification }
