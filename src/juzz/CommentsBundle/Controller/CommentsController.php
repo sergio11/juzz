@@ -21,7 +21,7 @@ class CommentsController extends Controller
 			$em = $this->getDoctrine()->getManager();
 			//Obtenemos el conjunto de comentarios para el target especificado.
             $posts = $em->getRepository('juzzCommentsBundle:Comentarios')
-                    ->findBy(array('target' => $target),null,$count,$start);
+                    ->getComments($target,$start,$count);
 
             $serializer = $this->get('jms_serializer');
 
@@ -31,7 +31,6 @@ class CommentsController extends Controller
             ], 'json');
 
             return new Response($response);
-
 
 	    } catch (\Exception $exception) {
 

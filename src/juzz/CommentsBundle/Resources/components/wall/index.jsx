@@ -1,7 +1,7 @@
 import React from 'react'
 import Routing from 'routing'
-import Comment from '../comment'
 import Post from '../posts'
+import UserPost from '../userpost'
 import $ from 'jquery'
 
 
@@ -99,30 +99,16 @@ class Wall extends React.Component {
         }else{
             content = this.state.posts.reverse().map((post) => {
                 let deletePost = this.deletePost.bind(this, post);
-                return <Post key={post.id} data={post} user={this.props.user.id} onDelete={deletePost}/>
+                return <Post key={post.id} data={post} user={this.props.user} onDelete={deletePost}/>
             })
         }
 
         return (
             <div className='container'>
                 <div className='row v-padding'> 
-                    <div className='col-lg-12'>
-                        <div className="media">
-                            <div className="media-left">
-                                <a href="#">
-                                  <img className="media-object img-circle" width='75' src={this.props.user.avatar} alt="" />
-                                </a>
-                            </div>
-                            <div className="media-body">
-                                <h4 className="media-heading">{this.props.user.fullName}</h4>
-                                <div className="form-group">
-                                    <textarea className="form-control" rows="3" onKeyPress={this.createPost.bind(this)} placeholder="Post Something"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <UserPost user={this.props.user} onSave={this.createPost.bind(this)}/>
                 </div>
-                <ul className="list-group">
+                <ul className="list-group list-group-root">
                     {content}
                 </ul>
             </div>

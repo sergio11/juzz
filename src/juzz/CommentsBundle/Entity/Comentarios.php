@@ -13,6 +13,7 @@ use JMS\Serializer\Annotation\MaxDepth;
  *
  * @ORM\Table(name="comentarios", indexes={@ORM\Index(name="COM_PAR_FK", columns={"parent_id"}), @ORM\Index(name="COM_PRO_FK", columns={"propietario_id"})})
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="juzz\CommentsBundle\Entity\CommentsRepository")
  * @ExclusionPolicy("all")
  */
 class Comentarios
@@ -30,7 +31,7 @@ class Comentarios
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha", type="date", nullable=false)
+     * @ORM\Column(name="fecha", type="datetime", nullable=false)
      * @Expose
      * @SerializedName("datetime")
      */

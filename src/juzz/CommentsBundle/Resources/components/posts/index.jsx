@@ -1,43 +1,24 @@
 import React from 'react'
-import Comment from '../comment'
+import UserPost from '../userpost'
 import Routing from 'routing'
 
 class Post extends React.Component {
 
     constructor(props) {
         super(props);
-
+        //estado del post
         this.state = {
-            editMode: false
+            answerMode: false,
+            comments: props.data.comments
         }
     }
 
-    editHandler(e) {
-        e.preventDefault();
-        this.setState({
-            editMode : true
-        });
-    }
+    saveAnswer(e) {
 
-    saveEditHandler(e) {
-        var elemVal = e.target.value;
-        if(e.which == 13 && elemVal.trim() != "") {
-            this.props.data.text = elemVal;
-            this.setState({
-                editMode : false
-            });
-            e.stopPropagation();
-        } else if(e.which == 27) {
-            this.setState({
-                editMode : false
-            });
-            e.target.value = "";
-            e.stopPropagation();
-        }
-    }
-
-    answer(e) {
         if(e.which == 13) {
+            this.setState({
+                answerMode : false
+            });
             var text = e.target.value.trim();
             if(text != "") {
 
@@ -46,7 +27,7 @@ class Post extends React.Component {
                         content:text,
                         target:this.props.data.target,
                         parent:this.props.data.id,
-                        owner:this.props.user,
+                        owner:this.props.user.id,
                     }
                 }).done((response) => {
                     response = JSON.parse(response);
@@ -66,22 +47,59 @@ class Post extends React.Component {
         }
     }
 
+    answer(e) {
+
+        e.preventDefault();
+
+        this.setState({
+            answerMode : true
+        });
+        
+    }
+
+    cancel(e){
+        e.preventDefault();
+        this.setState({
+            answerMode : false
+        });
+    }
+
     render() {
 
-        var comments,content;
+        let comments,content;
+        //Si no es el propietario del comentario.
+        if(this.props.data.owner.id != this.props.user.id){
+            //Comprobamos si el modo respuesta está activado.
+            if(this.state.answerMode) {
+                content = 
+                    <div className='row'>
+                        <UserPost user={this.props.user} onSave={this.saveAnswer.bind(this)} placeholder={ "Contestación para " + this.props.data.owner.fullName  }/>
+                        <div className='col-lg-4 col-lg-offset-8 text-right v-padding'>
+                            <a href='#' className='btn btn-danger' onClick={ this.cancel.bind(this) }>Cancelar</a>
+                        </div>
+                    </div>
+            }else{
+                content =
+                    <div className='row'>
+                        <div className='col-lg-4 col-lg-offset-8 text-right v-padding'>
+                            <a href='#' className="btn btn-primary" onClick={ this.answer.bind(this) }>Responder</a>
+                        </div>
+                    </div>
+            }
 
-        if(this.state.editMode) {
-            content = <textarea onKeyDown={this.saveEditHandler} autofocus>{this.props.value}</textarea>;
-        }else{
-            content = <p>{ this.props.data.text }</p>;
+        }
+        //Cargamos listado de comentarios 
+        if(this.state.comments.length){
+            comments = 
+            <ul className="list-group">
+                {this.state.comments.map((comment) => {
+                    return <Post key={comment.id} data={comment} user={this.props.user}/>
+                })}
+            </ul>
         }
 
-        comments = this.props.data.comments.map(function(comment){
-            return <Post key={comment.id} data={comment} user={this.props.user}/>
-        });
-    
         return (
-            <div className="list-group-item">
+            <li className="list-group-item">
                 <div className="media">
                     <div className="media-left">
                         <a href={ Routing.generate('perfil',{'user': this.props.data.owner.nick }) }>
@@ -96,25 +114,17 @@ class Post extends React.Component {
                             <li>
                                 { new Date(this.props.data.datetime).toLocaleString() }
                             </li>
-                            <li>
-                                <a href='' onClick={this.editHandler.bind(this)}><span className='fui-new'></span></a>
-                            </li>
-                            <li>
-                                <a href='' onClick={this.props.onDelete}><span className='fui-trash'></span></a>
-                            </li>
                         </ul>
-                        {content}
+                        <p>{ this.props.data.text }</p>
+                        
                     </div>
                 </div>
                 
-                <h4 className="ui horizontal header divider">
-                    Comments
-                </h4>
-                <div className="field">
-                    <textarea placeholder="Reply" className="comment" onKeyDown={this.answer.bind(this)}></textarea>
-                </div>
                 {comments}
-            </div>
+               
+                { content }
+                
+            </li>
         )
     }
 }

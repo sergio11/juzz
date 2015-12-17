@@ -213,7 +213,7 @@ CREATE TABLE IF NOT EXISTS EPISODIOS(
 
 CREATE TABLE IF NOT EXISTS COMENTARIOS(
 	id 			BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-	fecha 		DATE NOT NULL,
+	fecha 		DATETIME NOT NULL,
 	valido 		BOOLEAN NOT NULL DEFAULT TRUE,
 	contenido	MEDIUMTEXT NOT NULL,
 	parent_id		BIGINT UNSIGNED,
@@ -229,6 +229,8 @@ CREATE TABLE IF NOT EXISTS COMENTARIOS(
 	target	BIGINT UNSIGNED NOT NULL
 )ENGINE=INNODB CHARSET=LATIN1 COMMENT='Tabla de Comentarios';
 
+--ALTER TABLE COMENTARIOS MODIFY fecha DATETIME;
+
 /* Implemetar disparador para que el target y el propietario no sean el mismo*/
 
 /* Implementar disparador para que cuando se borre una tupla que sea objetivo de mucho comentarios, se borre dichos comentarios*/
@@ -236,7 +238,7 @@ CREATE TABLE IF NOT EXISTS COMENTARIOS(
 CREATE TABLE IF NOT EXISTS NOTIFICACIONES(
 	id 			BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	fecha		DATETIME NOT NULL,
-	tipo		ENUM('NUEVO_EPISODIO','RESPUESTA_COMENTARIO') NOT NULL,
+	tipo		ENUM('NEW_COMMENT','REPLY_TO_COMMENT') NOT NULL,
 	vista		BOOLEAN NOT NULL DEFAULT FALSE,
 	target_id      BIGINT UNSIGNED NOT NULL,
 		CONSTRAINT NOT_FK FOREIGN KEY(target_id)
@@ -306,3 +308,35 @@ php app/console assets:install web --symlink
 --https://github.com/ulas-atila/hinclude
 
 php app/console generate:bundle
+
+
+-- Disparadores
+
+DELIMITER /
+
+CREATE TRIGGER comentarios_ai_trigger
+AFTER INSERT ON comentarios FOR EACH ROW
+BEGIN
+
+	DECLARE fecha DATETIME DEFAULT CURTIME();
+	DECLARE responded BIGINT(20) UNSIGNED;
+
+	INSERT INTO notificaciones (fecha,tipo,target_id,fuente)
+	VALUES(fecha,'NEW_COMMENT',NEW.target,NEW.propietario_id);
+
+	IF NEW.parent_id IS NOT NULL THEN
+		SELECT propietario_id INTO responded 
+		FROM comentarios 
+		WHERE id = NEW.parent_id;
+
+		INSERT INTO notificaciones (fecha,tipo,target_id,fuente)
+		VALUES(fecha,'REPLY_TO_COMMENT',responded,NEW.propietario_id);
+		
+	END IF;
+
+	
+END;
+
+/
+
+DELIMITER ;
