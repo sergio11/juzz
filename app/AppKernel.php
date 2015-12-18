@@ -25,12 +25,12 @@ class AppKernel extends Kernel
             new juzz\UsuariosBundle\juzzUsuariosBundle(),
             new Ras\Bundle\FlashAlertBundle\RasFlashAlertBundle(),
             new juzz\FilesBundle\juzzFilesBundle(),
-            new juzz\DoctrineMetadaBundle\juzzDoctrineMetadaBundle(),
             new juzz\CommentsBundle\juzzCommentsBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Lopi\Bundle\PusherBundle\LopiPusherBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new juzz\NotificationsBundle\juzzNotificationsBundle(),
+            
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

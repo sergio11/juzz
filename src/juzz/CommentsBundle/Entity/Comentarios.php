@@ -93,10 +93,19 @@ class Comentarios
 
     private $comments;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AssessComment", mappedBy="comment", cascade={"persist"})
+     * @Expose
+     * @SerializedName("assess")
+     * @MaxDepth(1)
+     */
+    private $assess;
+
     function __construct()
     {
 
         $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->assess = new \Doctrine\Common\Collections\ArrayCollection();
 
     }
 
@@ -259,6 +268,40 @@ class Comentarios
         }
 
         return $this;
+    }
+
+    /**
+     * Add Like o Dislike
+     *
+     * @param \juzz\CommentsBundle\Entity\AssessComment $usuario
+     * @return Comentario
+     */
+    public function addAssess(\juzz\CommentsBundle\Entity\AssessComment $assess)
+    {
+
+        $this->assess[] = $assess;
+
+        return $this;
+    }
+
+    /**
+     * Remove like or dislike 
+     *
+     * @param \juzz\UsuariosBundle\Entity\Usuarios $usuario
+     */
+    public function removeAssess(\juzz\CommentsBundle\Entity\AssessComment $assess)
+    {
+        $this->assess->removeElement($assess);
+    }
+
+    /**
+     * Get Likes Dislikes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAssess()
+    {
+        return $this->assess;
     }
 
 

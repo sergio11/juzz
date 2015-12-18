@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use juzz\CommentsBundle\Entity\Comentarios AS Comment;
+use juzz\CommentsBundle\Entity\AssessComment AS AssessComment;
 
 class CommentsController extends Controller
 {
@@ -104,6 +105,54 @@ class CommentsController extends Controller
         }
 
     }
+
+    public function assessAction(Request $request,$target){
+        //recogemos datos de la petición.
+        $data = $request->request->get('data');
+
+        try {
+
+            $em = $this->getDoctrine()->getManager();
+            $user = $em->getRepository('juzzUsuariosBundle:Usuarios')->find($data['user']);
+            $comment = $em->getRepository('juzzCommentsBundle:Comentarios')->find($data['comment']);
+            
+            if(!$comment || !$user){
+                throw $this->createNotFoundException();
+            }
+
+            $assess = new AssessComment();
+            $assess->setUser($user);
+            $assess->setComment($comment);
+            $assess->setAssess($data['value']);
+            $assess->setDate(new \DateTime('now'));
+
+            $comment->addAssess($assess);
+
+            $em->persist($comment);
+            $em->flush();
+
+            $serializer = $this->get('jms_serializer');
+
+            $response = $serializer->serialize([
+                'success' => true,
+                'data'    => $assess
+            ], 'json');
+
+            return new JsonResponse($response);
+            
+        } catch (Exception $e) {
+            return new JsonResponse([
+                'success' => false,
+                'code'    => $e->getCode(),
+                'message' => $e->getMessage(),
+            ]);
+        }
+        return new JsonResponse([
+            'data' => $data
+        ]);
+ 
+    }
+
 
     public function commentsWallAction($target)
     {

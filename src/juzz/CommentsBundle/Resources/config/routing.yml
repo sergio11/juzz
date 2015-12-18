@@ -10,3 +10,8 @@ post_comment:
     defaults: { _controller: juzzCommentsBundle:Comments:new }
     methods:  [POST]
     condition: "request.isXmlHttpRequest()"
+comment_assess:
+    path:     /comments/assess/{target}
+    defaults: { _controller: juzzCommentsBundle:Comments:assess }
+    methods:  [POST]
+    condition: "request.isXmlHttpRequest()"

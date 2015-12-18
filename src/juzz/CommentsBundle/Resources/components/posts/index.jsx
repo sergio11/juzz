@@ -1,5 +1,6 @@
 import React from 'react'
 import UserPost from '../userpost'
+import LikesDisLikesBar from '../likes_dislikes_bar'
 import Routing from 'routing'
 
 class Post extends React.Component {
@@ -115,6 +116,7 @@ class Post extends React.Component {
                                 { new Date(this.props.data.datetime).toLocaleString() }
                             </li>
                         </ul>
+                        <LikesDisLikesBar user={this.props.user.id} comment={this.props.data.id} assess={this.props.data.assess}/>
                         <p>{ this.props.data.text }</p>
                         
                     </div>

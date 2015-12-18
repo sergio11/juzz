@@ -1,3 +1,4 @@
+
 juzz_notifications:
     resource: "@juzzNotificationsBundle/Resources/config/routing.yml"
     prefix:   /
@@ -6,9 +7,6 @@ juzz_comments:
     resource: "@juzzCommentsBundle/Resources/config/routing.yml"
     prefix:   /
 
-juzz_doctrine_metada:
-    resource: "@juzzDoctrineMetadaBundle/Resources/config/routing.yml"
-    prefix:   /
 
 juzz_files:
     resource: "@juzzFilesBundle/Resources/config/routing.yml"

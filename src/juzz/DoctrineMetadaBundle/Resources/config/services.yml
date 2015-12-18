@@ -1,4 +1,0 @@
-services:
-#    juzz_doctrine_metada.example:
-#        class: juzz\DoctrineMetadaBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]

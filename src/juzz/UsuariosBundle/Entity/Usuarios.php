@@ -224,6 +224,7 @@ class Usuarios implements UserInterface, \Serializable
      */
     private $categoria;
 
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
@@ -270,6 +271,7 @@ class Usuarios implements UserInterface, \Serializable
         $this->subscripcion = new \Doctrine\Common\Collections\ArrayCollection();
         $this->seguido = new \Doctrine\Common\Collections\ArrayCollection();
         $this->programa = new \Doctrine\Common\Collections\ArrayCollection();
+       
     }
 
 
@@ -748,6 +750,7 @@ class Usuarios implements UserInterface, \Serializable
     {
         return $this->programa;
     }
+
 
     public function getUsername()
     {

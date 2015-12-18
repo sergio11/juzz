@@ -1,3 +1,0 @@
-juzz_doctrine_metada_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: juzzDoctrineMetadaBundle:Default:index }
