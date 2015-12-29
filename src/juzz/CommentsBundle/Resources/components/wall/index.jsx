@@ -104,7 +104,7 @@ class Wall extends React.Component {
         }
 
         return (
-            <div className='container'>
+            <div className='container-fluid'>
                 <div className='row v-padding'> 
                     <UserPost user={this.props.user} onSave={this.createPost.bind(this)}/>
                 </div>

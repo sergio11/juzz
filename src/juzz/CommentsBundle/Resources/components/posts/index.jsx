@@ -67,7 +67,7 @@ class Post extends React.Component {
 
     render() {
 
-        let comments,content;
+        let comments,content,assessbar;
         //Si no es el propietario del comentario.
         if(this.props.data.owner.id != this.props.user.id){
             //Comprobamos si el modo respuesta está activado.
@@ -99,6 +99,13 @@ class Post extends React.Component {
             </ul>
         }
 
+        //Si no es el propietario del post, puede valorarlo.
+        if(this.props.data.owner.id != this.props.user.id)
+            assessbar = <LikesDisLikesBar user={this.props.user.id} comment={this.props.data.id} assess={this.props.data.assess}/>
+
+
+
+
         return (
             <li className="list-group-item">
                 <div className="media">
@@ -116,14 +123,12 @@ class Post extends React.Component {
                                 { new Date(this.props.data.datetime).toLocaleString() }
                             </li>
                         </ul>
-                        <LikesDisLikesBar user={this.props.user.id} comment={this.props.data.id} assess={this.props.data.assess}/>
+                        {assessbar}
                         <p>{ this.props.data.text }</p>
                         
                     </div>
                 </div>
-                
                 {comments}
-               
                 { content }
                 
             </li>

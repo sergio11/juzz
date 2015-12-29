@@ -1,0 +1,35 @@
+mapping_types:
+            enum: string
+            set: string
+            varbinary: string
+            tinyblob: text
+
+--Crear BD
+php app/console doctrine:database:create
+--Borrar BD
+php app/console doctrine:database:drop --force
+-- Crear Schema.
+php app/console doctrine:schema:update --force
+
+php app/console generate:bundle --namespace=juzz/DoctrineMetadaBundle --format=yml
+php app/console doctrine:mapping:convert xml ./src/juzz/DoctrineMetadaBundle/Resources/config/doctrine/metadata/orm --from-database --force
+php app/console doctrine:mapping:import juzzDoctrineMetadaBundle annotation
+php app/console doctrine:generate:entities juzzDoctrineMetadaBundle --no-backup
+-- Para Cargar Fixtures
+php app/console doctrine:fixtures:load
+-- Cargar Fixtures de un bundle
+php app/console doctrine:fixtures:load --fixtures src/juzz/UsuariosBundle/DataFixtures/ORM/ --append
+php app/console doctrine:fixtures:load --fixtures src/juzz/CanalesBundle/DataFixtures/ORM/ --append
+php app/console doctrine:fixtures:load --fixtures src/juzz/ProgramasBundle/DataFixtures/ORM/ --append
+php app/console doctrine:fixtures:load --fixtures src/juzz/EpisodiosBundle/DataFixtures/ORM/ --append
+php app/console doctrine:fixtures:load --fixtures src/juzz/EpisodiosBundle/DataFixtures/ORM/categorias --append
+
+--Habilitar esta extensión php.ini 
+extension=php_fileinfo.dll
+
+-- Instalar Assets
+php app/console assets:install web --symlink
+
+--https://github.com/ulas-atila/hinclude
+
+php app/console generate:bundle
