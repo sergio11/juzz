@@ -2,62 +2,11 @@
 
 {% block tabContent %}
 
-    
-    <div id="changeEmail" class="modal fade in">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">
-                    <span aria-hidden="true">×</span>
-                    <span class="sr-only">Close</span>
-                  </button>
-                  <h4 class="modal-title">Cambia Tu Correo.</h4>
-                </div>
-                {{ form_start(change_email_form,{'action': path('editar_perfil',{user:user.nick}), 'method': 'POST'}) }}
-                <div class="modal-body">
-                    {{ form_row(change_email_form.email) }}
-                </div>
-                <div class="modal-footer">
-                    {{ form_row(change_email_form.cambiar) }}
-                </div>
-                {{ form_end(change_email_form) }} 
-            </div>
-        </div>
-    </div>
+    {# Incluimos formulario cambio de email #}
+    {% include 'juzzUsuariosBundle:PrivateZone:change-email.html.twig' %}
 
-    <div id="changeProfileBackground" class="modal fade in">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">
-                    <span aria-hidden="true">×</span>
-                    <span class="sr-only">Close</span>
-                  </button>
-                  <h4 class="modal-title">Cambia Tu Imagen de Perfil.</h4>
-                </div>
-                {{ form_start(change_profile_background_form,{'action': path('editar_perfil',{user:user.nick}), 'method': 'POST'}) }}
-                <div class="modal-body">
-                    {{ form_row(change_profile_background_form.file) }}
-                </div>
-                <div class="modal-footer">
-                    {{ form_row(change_profile_background_form.guardar) }}
-                </div>
-                {{ form_end(change_profile_background_form) }} 
-            </div>
-        </div>
-    </div>
-
-
-    <div id="changeEmail" data-urlorigin="" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            
-            
-        </div>
-      </div>
-    </div>
-
-
+    {# Incluimos formulario cambio de imagen de perfil #}
+    {% include 'juzzUsuariosBundle:PrivateZone:change-profile-background.html.twig' %}    
 
     <div class="container">
 
@@ -78,6 +27,7 @@
             {{ form_errors(edit_form) }}
             <div class="row">
                 <div class="col-md-12">
+                    {{ form_row(edit_form.avatar) }}
                     {{ form_row(edit_form.nick) }}
                     {{ form_row(edit_form.nombre) }}
                     {{ form_row(edit_form.ape1) }}
@@ -86,7 +36,8 @@
                     {{ form_row(edit_form.origen) }}
                     {{ form_row(edit_form.categoria) }}
                     {{ form_row(edit_form.descripcion) }}
-                    {{ form_row(edit_form.avatar) }}
+                    {{ form_row(edit_form.politicaComentarios) }}
+                    
             </div>
             <div class="row">
                 <div class="col-md-8">

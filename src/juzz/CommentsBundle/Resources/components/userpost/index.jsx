@@ -8,7 +8,7 @@ class UserPost extends React.Component {
                 <div className="media">
                     <div className="media-left">
                         <a href={ Routing.generate('perfil',{'user': this.props.user.nick }) }>
-                            <img className="media-object img-circle" width='75' src={this.props.user.avatar} alt="" />
+                            <img className="media-object img-circle" width='75' src={this.props.user.avatar.data} alt="" />
                         </a>
                     </div>
                     <div className="media-body">

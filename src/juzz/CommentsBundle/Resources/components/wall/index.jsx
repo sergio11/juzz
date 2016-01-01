@@ -4,8 +4,10 @@ import Post from '../posts'
 import UserPost from '../userpost'
 import $ from 'jquery'
 
+const NO_COMMENTS_ALLOWED = 5;
 
 class Wall extends React.Component {
+
     /*For ES6 classes, getInitialState has been deprecated in favor 
     of declaring an initial state object in the constructor*/
     constructor(props, context) {
@@ -15,19 +17,11 @@ class Wall extends React.Component {
             load:false,
             posts: []
         };
+
     };
 
-    componentWillMount() {
+    componentDidMount() {
 
-        /*var stream = new EventSource(Routing.generate('push_notifications'));
-        console.log(stream);
-        stream.addEventListener('message', function (event) {
-            console.log(event);
-        });
-
-        stream.addEventListener('error', function (event) {
-            console.log(event);
-        });*/
         //generate url
         let url = Routing.generate('comments',{target:this.props.target});
         //Obtenemos los Posts.
@@ -49,7 +43,7 @@ class Wall extends React.Component {
     //Borrar Post
     deletePost(post) {
         //Obtenemos índice del post.
-        var index = this.state.posts.indexOf(post);
+        let index = this.state.posts.indexOf(post);
         //Eliminamos el post.
         this.state.posts.splice(index,1);
         //Forzamos actualización de la vista.
@@ -60,7 +54,7 @@ class Wall extends React.Component {
     createPost(e) {
 
         if(e.charCode == 13) {
-            var val = e.target.value;
+            let val = e.target.value;
             if(val && val != "") {
                 
                 $.post(Routing.generate('post_comment'),{
@@ -89,7 +83,20 @@ class Wall extends React.Component {
         }
     }
 
-    render() {
+    renderHeader(){
+
+        let header;
+        if (this.props.policy.id == NO_COMMENTS_ALLOWED) {
+            header = <div className='alert alert-danger'>El usuario no permite comentarios</div>
+        }else{
+            header = <UserPost user={this.props.user} onSave={this.createPost.bind(this)}/>
+        }
+
+        return header;
+
+    }
+
+    renderContent(){
 
         let content;
         if(!this.state.load){
@@ -103,13 +110,18 @@ class Wall extends React.Component {
             })
         }
 
+        return content;
+    }
+
+    render() {
+
         return (
             <div className='container-fluid'>
                 <div className='row v-padding'> 
-                    <UserPost user={this.props.user} onSave={this.createPost.bind(this)}/>
+                    {this.renderHeader()}
                 </div>
                 <ul className="list-group list-group-root">
-                    {content}
+                    {this.renderContent()}
                 </ul>
             </div>
         )

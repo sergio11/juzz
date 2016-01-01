@@ -30,7 +30,7 @@ class AppKernel extends Kernel
             new Lopi\Bundle\PusherBundle\LopiPusherBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new juzz\NotificationsBundle\juzzNotificationsBundle(),
-            
+            new juzz\DoctrineMetadaBundle\juzzDoctrineMetadaBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -63,6 +63,12 @@ class UserEditType extends AbstractType
                 'label' => false,
                 'required'  => false
             ))
+            ->add('politicaComentarios', 'entity', array(
+                'class' => 'juzz\CommentsBundle\Entity\PoliticaComentarios',
+                'label' => 'Política Comentarios',
+                'required' => true,
+                'property' => 'name'
+            ))
             ->add('guardar', 'submit')
         ;
     }

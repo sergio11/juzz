@@ -1,23 +1,28 @@
 <?php
 
-namespace juzz\UsuariosBundle\Entity;
+namespace juzz\CommentsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+
 
 /**
  * PoliticaComentarios
  *
  * @ORM\Table(name="politica_comentarios")
  * @ORM\Entity
+ * @ExclusionPolicy("all")
  */
 class PoliticaComentarios
 {
     /**
-     * @var boolean
+     * @var integer
      *
-     * @ORM\Column(name="id", type="boolean", nullable=false)
+     * @ORM\Column(name="id", type="bigint", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Expose
      */
     private $id;
 
@@ -27,6 +32,7 @@ class PoliticaComentarios
      * @ORM\Column(name="name", type="string", length=60, nullable=false)
      */
     private $name;
+
 
 
     /**

@@ -1,4 +1,4 @@
-<div class="panel panel-default" id="comment_wall_container" data-component="{{ asset('bundles/juzzcomments/js/bundle.min.js') }}" data-target="{{ target }}" data-user="{{ user|json_encode() }}">
+<div class="panel panel-default" id="comment_wall_container" data-component="{{ asset('bundles/juzzcomments/js/bundle.min.js') }}" data-target="{{ target }}" data-user="{{ user|serialize('json') }}" data-policy="{{ policy|serialize('json') }}">
    <div class="panel-heading">
    		<span class='glyphicon glyphicon-comment'></span>&nbsp;Comentarios
    </div>

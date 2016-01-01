@@ -9,7 +9,7 @@ class CommentsRepository extends EntityRepository{
 
 	public function getComments($target,$start,$count){
 		$query = $this->createQueryBuilder('C')
-		    ->where('C.target = :target')
+		    ->where('C.target = :target AND C.valido = 1')
 		    ->andWhere('C.parent IS NULL')
 		    ->setParameter('target', $target)
 		    ->getQuery();

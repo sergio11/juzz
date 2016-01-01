@@ -29,7 +29,7 @@
 			</ul>
 		</div>
 		{# comments wall #}
-		{{ render_hinclude(controller('juzzCommentsBundle:Comments:commentsWall',{'target' : id}), {
+		{{ render_hinclude(controller('juzzCommentsBundle:Comments:commentsWall',{'target' : id,'owner_target':id}), {
     		'default': 'Cargando Comentarios ...'
 		}) }}
 	</div>

@@ -154,13 +154,22 @@ class CommentsController extends Controller
     }
 
 
-    public function commentsWallAction($target)
+    public function commentsWallAction($owner_target,$target)
     {
+        $em = $this->getDoctrine()->getManager();
+        $owner = $em->getRepository("juzzUsuariosBundle:Usuarios")->find($owner_target);
+        //Si no existe el usuario lanzamos 404
+        if (!$owner) {
+            throw $this->createNotFoundException();
+        }
+
+
         $user = $this->getUser();
         return $this->render('juzzCommentsBundle:Default:comments-wall.html.twig',array(
         	'comments' => array(),
+            'policy' => $owner->getPoliticaComentarios(),
             'target' => $target,
-            'user' => $user->getUserInformationSummary()
+            'user' => $user
         ));
     }
 }

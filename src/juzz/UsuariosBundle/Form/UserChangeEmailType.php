@@ -16,8 +16,8 @@ class UserChangeEmailType extends AbstractType
                 'invalid_message' => 'The email fields must match.',
                 'options' => array('attr' => array('autocomplete' => 'off')),
                 'required' => true,
-                'first_options'  => array('label' => 'new email'),
-                'second_options' => array('label' => 'Repeat new email'),
+                'first_options'  => array('label' => 'Tu nuevo email'),
+                'second_options' => array('label' => 'Repite el nuevo email'),
             ))
             ->add('cambiar', 'submit');
     }

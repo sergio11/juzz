@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Imagenes" table="imagenes">
+    <unique-constraints>
+      <unique-constraint name="IMG_UK" columns="name"/>
+    </unique-constraints>
+    <id name="id" type="bigint" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="name" type="string" column="name" length="60" nullable="false"/>
+    <field name="path" type="string" column="path" length="250" nullable="false"/>
+    <field name="type" type="string" column="type" nullable="false"/>
+  </entity>
+</doctrine-mapping>

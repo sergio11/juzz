@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="juzz\DoctrineMetadaBundle\Entity\Notificaciones" table="notificaciones">
+    <indexes>
+      <index name="TAR_FK" columns="target_id"/>
+      <index name="SOUR_FK" columns="source"/>
+    </indexes>
+    <id name="id" type="bigint" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fecha" type="datetime" column="fecha" nullable="false"/>
+    <field name="type" type="string" column="type" nullable="false"/>
+    <field name="vista" type="boolean" column="vista" nullable="false"/>
+    <field name="objetive" type="bigint" column="objetive" nullable="false"/>
+    <many-to-one field="target" target-entity="Usuarios">
+      <join-columns>
+        <join-column name="target_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="source" target-entity="Usuarios">
+      <join-columns>
+        <join-column name="source" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

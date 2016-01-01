@@ -75,40 +75,7 @@
                 </a>
               </li>
             {% elseif app.user %}
-              <li>
-                <a class='dropdown-toggle' href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class='fa fa-bell'></span>&nbsp;
-                  <span class='badge badge-danger'>23</span>
-                </a>
-                <div class="dropdown-menu text-capitalize notification-box" data-placement="left" role='menu'>
-                  <span class="dropdown-header">Notificaciones</span>
-                  <ul class="list-group">
-                    <li class="list-group-item">
-                      <div class="media">
-                        <div class="media-left media-middle">
-                          <a href="#">
-                            <img class="media-object img-circle" width='60px' src="{{ asset(app.user.avatar.webPath) }}" alt="">
-                          </a>
-                        </div>
-                        <div class="media-body">
-                          <h4 class="media-heading">Middle aligned media</h4>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                  <div class="row">
-                    <div class="col-lg-7">
-                      <span>Aviso Notificaciones</span>
-                    </div>
-                    <div class="col-lg-3">
-                      <div class="bootstrap-switch-square ">
-                        <input type="checkbox" checked data-toggle="switch" name="square-switch" id="switch-02" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
+              <li id='notificacion-component-mount-point'></li>
               <li>
                 <a class='user dropdown-toggle' href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <img class='img-circle' width='45' src="{{ asset(app.user.getAvatar().getWebPath()) }}">
@@ -177,23 +144,33 @@
     <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/flat-ui/dist/js/flat-ui.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/pusher/dist/pusher.min.js') }}"></script>
-    <script type="text/javascript">
-      /*var socket = new Pusher('e3feeec9c2b05b1c6f12');
-      var my_channel = socket.subscribe('my-channel');
-        socket.bind('profile_visited',
-        function(data) {
-          var user = JSON.parse(data);
-          console.log(user);
-          // add comment into page
-        }
-      );*/
-      $(function(){
-        $("#switch-02").bootstrapSwitch().parent().on("click",function(e){
-          e.preventDefault();
-          e.stopPropagation();
-        });
-      })
-    </script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+
+    {% if app.user %}
+      <script type="text/javascript" src="{{ asset('bundles/juzznotifications/js/bundle.min.js') }}"></script>
+      <script type="text/javascript">
+        /*var socket = new Pusher('e3feeec9c2b05b1c6f12');
+        var my_channel = socket.subscribe('my-channel');
+          socket.bind('profile_visited',
+          function(data) {
+            var user = JSON.parse(data);
+            console.log(user);
+            // add comment into page
+          }
+        );*/
+        $(function(){
+          $("#switch-02").bootstrapSwitch().parent().on("click",function(e){
+            e.preventDefault();
+            e.stopPropagation();
+          });
+
+
+
+        })
+      </script>
+    {% endif %}
+    
   {% endblock %}
 </body>
 </html>

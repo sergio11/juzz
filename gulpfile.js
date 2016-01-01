@@ -19,7 +19,8 @@ var shell = require('gulp-shell')
 gulp.task('build', function() {
 
   var tasks = [],bundles = [
-    './src/juzz/CommentsBundle'
+    './src/juzz/CommentsBundle',
+    './src/juzz/NotificationsBundle'
   ];
 
   bundles.map(function(bundle){

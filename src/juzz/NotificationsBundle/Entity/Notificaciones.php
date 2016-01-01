@@ -3,12 +3,17 @@
 namespace juzz\NotificationsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\MaxDepth;
 
 /**
  * Notificaciones
  *
- * @ORM\Table(name="notificaciones", indexes={@ORM\Index(name="NOT_FK", columns={"target_id"})})
+ * @ORM\Table(name="notificaciones", indexes={@ORM\Index(name="TAR_FK", columns={"target_id"}), @ORM\Index(name="SOUR_FK", columns={"source"})})
  * @ORM\Entity
+ * @ExclusionPolicy("all")
  */
 class Notificaciones
 {
@@ -18,6 +23,7 @@ class Notificaciones
      * @ORM\Column(name="id", type="bigint", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Expose
      */
     private $id;
 
@@ -25,15 +31,18 @@ class Notificaciones
      * @var \DateTime
      *
      * @ORM\Column(name="fecha", type="datetime", nullable=false)
+     * @Expose
+     * @SerializedName("data")
      */
     private $fecha;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="tipo", type="string", nullable=false)
+     * @ORM\Column(name="type", type="string", nullable=false)
+     * @Expose
      */
-    private $tipo;
+    private $type;
 
     /**
      * @var boolean
@@ -45,31 +54,34 @@ class Notificaciones
     /**
      * @var integer
      *
-     * @ORM\Column(name="fuente", type="bigint", nullable=false)
+     * @ORM\Column(name="objetive", type="bigint", nullable=false)
+     * 
      */
-    private $fuente;
+    private $objetive;
 
     /**
      * @var \Usuarios
      *
-     * @ORM\ManyToOne(targetEntity="\juzz\UsuariosBundle\Entity\Usuarios")
+     * @ORM\ManyToOne(targetEntity="juzz\UsuariosBundle\Entity\Usuarios")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="source", referencedColumnName="id")
+     * })
+     * @Expose
+     * @MaxDepth(1)
+     * @SerializedName("user")
+     *
+     */
+    private $source;
+
+    /**
+     * @var \Usuarios
+     *
+     * @ORM\ManyToOne(targetEntity="juzz\UsuariosBundle\Entity\Usuarios")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="target_id", referencedColumnName="id")
      * })
      */
     private $target;
-
-
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * Set fecha
@@ -95,26 +107,26 @@ class Notificaciones
     }
 
     /**
-     * Set tipo
+     * Set type
      *
-     * @param string $tipo
+     * @param string $type
      * @return Notificaciones
      */
-    public function setTipo($tipo)
+    public function setType($type)
     {
-        $this->tipo = $tipo;
+        $this->type = $type;
 
         return $this;
     }
 
     /**
-     * Get tipo
+     * Get type
      *
      * @return string 
      */
-    public function getTipo()
+    public function getType()
     {
-        return $this->tipo;
+        return strtoupper($this->type);
     }
 
     /**
@@ -141,35 +153,45 @@ class Notificaciones
     }
 
     /**
-     * Set fuente
+     * Set objetive
      *
-     * @param integer $fuente
+     * @param integer $objetive
      * @return Notificaciones
      */
-    public function setFuente($fuente)
+    public function setObjetive($objetive)
     {
-        $this->fuente = $fuente;
+        $this->objetive = $objetive;
 
         return $this;
     }
 
     /**
-     * Get fuente
+     * Get objetive
      *
      * @return integer 
      */
-    public function getFuente()
+    public function getObjetive()
     {
-        return $this->fuente;
+        return $this->objetive;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
      * Set target
      *
-     * @param \juzz\UsuariosBundle\Entity\Usuarios $target
+     * @param \juzz\DoctrineMetadaBundle\Entity\Usuarios $target
      * @return Notificaciones
      */
-    public function setTarget(\juzz\UsuariosBundle\Entity\Usuarios $target = null)
+    public function setTarget(\juzz\DoctrineMetadaBundle\Entity\Usuarios $target = null)
     {
         $this->target = $target;
 
@@ -179,10 +201,33 @@ class Notificaciones
     /**
      * Get target
      *
-     * @return \juzz\UsuariosBundle\Entity\Usuarios 
+     * @return \juzz\DoctrineMetadaBundle\Entity\Usuarios 
      */
     public function getTarget()
     {
         return $this->target;
+    }
+
+    /**
+     * Set source
+     *
+     * @param \juzz\DoctrineMetadaBundle\Entity\Usuarios $source
+     * @return Notificaciones
+     */
+    public function setSource(\juzz\DoctrineMetadaBundle\Entity\Usuarios $source = null)
+    {
+        $this->source = $source;
+
+        return $this;
+    }
+
+    /**
+     * Get source
+     *
+     * @return \juzz\DoctrineMetadaBundle\Entity\Usuarios 
+     */
+    public function getSource()
+    {
+        return $this->source;
     }
 }

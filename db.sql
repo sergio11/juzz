@@ -253,14 +253,19 @@ CREATE TABLE IF NOT EXISTS comments_assess(
 CREATE TABLE IF NOT EXISTS notificaciones(
 	id 			BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	fecha		DATETIME NOT NULL,
-	tipo		ENUM('NEW_COMMENT','REPLY_TO_COMMENT') NOT NULL,
+	type		ENUM('NEW_COMMENT','REPLY_TO_COMMENT') NOT NULL,
 	vista		BOOLEAN NOT NULL DEFAULT FALSE,
-	target_id      BIGINT UNSIGNED NOT NULL,
-		CONSTRAINT NOT_FK FOREIGN KEY(target_id)
+	target_id   BIGINT UNSIGNED NOT NULL,
+		CONSTRAINT TAR_FK FOREIGN KEY(target_id)
 			REFERENCES usuarios(id)
 				ON DELETE CASCADE
 				ON UPDATE CASCADE,
-	fuente      BIGINT UNSIGNED NOT NULL
+	source      BIGINT UNSIGNED NOT NULL,
+		CONSTRAINT SOUR_FK FOREIGN KEY(source)
+			REFERENCES usuarios(id)
+				ON DELETE CASCADE
+				ON UPDATE CASCADE,
+	objetive	BIGINT UNSIGNED NOT NULL		
 )ENGINE=INNODB CHARSET=LATIN1 COMMENT='Tabla de Notificaciones';
 
 /* Trabajar más tema de las actividades*/
@@ -298,16 +303,17 @@ BEGIN
 	DECLARE fecha DATETIME DEFAULT CURTIME();
 	DECLARE responded BIGINT(20) UNSIGNED;
 
-	INSERT INTO notificaciones (fecha,tipo,target_id,fuente)
-	VALUES(fecha,'NEW_COMMENT',NEW.target,NEW.propietario_id);
+	INSERT INTO notificaciones (fecha,type,target_id,source,objetive)
+	VALUES(fecha,'NEW_COMMENT',NEW.target,NEW.propietario_id,NEW.id);
 
 	IF NEW.parent_id IS NOT NULL THEN
+
 		SELECT propietario_id INTO responded 
 		FROM comentarios 
 		WHERE id = NEW.parent_id;
 
-		INSERT INTO notificaciones (fecha,tipo,target_id,fuente)
-		VALUES(fecha,'REPLY_TO_COMMENT',responded,NEW.propietario_id);
+		INSERT INTO notificaciones (fecha,type,target_id,source,objetive)
+		VALUES(fecha,'REPLY_TO_COMMENT',responded,NEW.propietario_id,NEW.id);
 		
 	END IF;
 

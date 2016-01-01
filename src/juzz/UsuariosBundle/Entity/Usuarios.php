@@ -139,7 +139,7 @@ class Usuarios implements UserInterface, \Serializable
      * @ORM\Column(name="email", type="string", length=90, nullable=false)
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email.",
-     *     checkMX = true
+     *     checkMX = false
      * )
      */
     private $email;
@@ -192,7 +192,7 @@ class Usuarios implements UserInterface, \Serializable
     /**
      * @var \PoliticaComentarios
      *
-     * @ORM\ManyToOne(targetEntity="\juzz\UsuariosBundle\Entity\PoliticaComentarios")
+     * @ORM\ManyToOne(targetEntity="\juzz\CommentsBundle\Entity\PoliticaComentarios")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="politica_comentarios", referencedColumnName="id")
      * })
@@ -461,10 +461,10 @@ class Usuarios implements UserInterface, \Serializable
     /**
      * Set politicaComentarios
      *
-     * @param \juzz\UsuariosBundle\Entity\PoliticaComentarios $politicaComentarios
+     * @param \juzz\CommentsBundle\Entity\PoliticaComentarios $politicaComentarios
      * @return Usuarios
      */
-    public function setPoliticaComentarios(\juzz\UsuariosBundle\Entity\PoliticaComentarios $politicaComentarios = null)
+    public function setPoliticaComentarios(\juzz\CommentsBundle\Entity\PoliticaComentarios $politicaComentarios = null)
     {
         $this->politicaComentarios = $politicaComentarios;
 
@@ -474,7 +474,7 @@ class Usuarios implements UserInterface, \Serializable
     /**
      * Get politicaComentarios
      *
-     * @return \juzz\UsuariosBundle\Entity\PoliticaComentarios 
+     * @return \juzz\CommentsBundle\Entity\PoliticaComentarios 
      */
     public function getPoliticaComentarios()
     {
@@ -770,13 +770,6 @@ class Usuarios implements UserInterface, \Serializable
     {
     }
 
-    public function getUserInformationSummary(){
-        return array(
-            'id' => $this->id,
-            'avatar' => $this->avatar->toDataUrl(),
-            'fullName' => $this->getNombreCompleto()
-        );
-    }
 
      /** @see \Serializable::serialize() */
     public function serialize()
