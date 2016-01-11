@@ -42,7 +42,7 @@ class Comentarios
      *
      * @ORM\Column(name="valido", type="boolean", nullable=false)
      */
-    private $valido;
+    private $valido = true;
 
     /**
      * @var string

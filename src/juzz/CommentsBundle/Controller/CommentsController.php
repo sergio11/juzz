@@ -47,7 +47,6 @@ class CommentsController extends Controller
     public function newAction(Request $request){
         //recogemos datos de la petición.
         $data = $request->request->get('data');
-
         try {
 
             $em = $this->getDoctrine()->getManager();
@@ -56,6 +55,13 @@ class CommentsController extends Controller
             $comment->setFecha(new \DateTime('now'));
             $comment->setContenido($data['content']);
             $comment->setTarget($data['target']);
+            if($data['target'] != $data['owner']){
+                //Comprobamos Política de comentarios.
+                $target = $em->getRepository('juzzUsuariosBundle:Usuarios')->find($data['target']);
+                if($target->getPoliticaComentarios()->getId() == 4){
+                    $comment->setValido(false);
+                }
+            }
             $parent = null;
             if (isset($data['parent']) && is_numeric($data['parent'])) {
                 $parent = $em->getRepository('juzzCommentsBundle:Comentarios')->find($data['parent']);
@@ -66,7 +72,7 @@ class CommentsController extends Controller
                 $owner = $em->getRepository('juzzUsuariosBundle:Usuarios')->find($data['owner']);
             }
             $comment->setPropietario($owner);
-            $comment->setValido(true);
+            
             //Validamos entidad.
             $validator = $this->get('validator'); 
             $errors = $validator->validate($comment); 

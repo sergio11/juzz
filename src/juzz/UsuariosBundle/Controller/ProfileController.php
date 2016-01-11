@@ -84,12 +84,28 @@ class ProfileController extends Controller
 
         $profileBackgroundForm = $this->createForm(new ProfileBackgroundType());
 
-        return $this->render('juzzUsuariosBundle:PrivateZone:edit_profile.html.twig', array(
+        return $this->render('juzzUsuariosBundle:PrivateZone:edit-profile.html.twig', array(
             'user'      => $user,
             'edit_form'   => $form->createView(),
             'change_email_form' => $changeEmailForm->createView(),
             'change_profile_background_form' => $profileBackgroundForm->createView()
         ));   
+    }
+
+    public function myCommentsAction(Request $request,$user){
+        $start = $request->query->getInt('start',0);
+        $count = $request->query->getInt('count',10);
+        try {
+
+            $em = $this->getDoctrine()->getManager();
+            //Obtenemos el conjunto de comentarios para el target especificado.
+            $posts = $em->getRepository('juzzCommentsBundle:Comentarios')
+                    ->getComments($target,$start,$count);
+        }catch(Exception $e){
+
+            
+        }
+        return $this->render('juzzUsuariosBundle:PrivateZone:my-comments.html.twig');
     }
 
 

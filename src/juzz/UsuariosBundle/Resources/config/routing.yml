@@ -22,6 +22,11 @@ editar_perfil:
     defaults: { _controller: juzzUsuariosBundle:Profile:edit}
     requirements:
         user:  \w+
+mis_comentarios:
+    path:   /{user}/myComments
+    defaults: {_controller: juzzUsuariosBundle:Profile:myComments}
+    requirements:
+        user:  \w+
 
 
 

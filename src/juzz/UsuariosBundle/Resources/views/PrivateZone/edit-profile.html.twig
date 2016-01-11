@@ -1,0 +1,75 @@
+{% extends 'juzzUsuariosBundle:PrivateZone:base.html.twig' %}
+
+{% block tabContent %}
+
+    {# Incluimos formulario cambio de email #}
+    {% include 'juzzUsuariosBundle:PrivateZone:change-email.html.twig' %}
+
+    {# Incluimos formulario cambio de imagen de perfil #}
+    {% include 'juzzUsuariosBundle:PrivateZone:change-profile-background.html.twig' %}    
+
+    <div class="container">
+
+        {{ render_flash_alerts() }}
+        <!--<div class="row">
+            
+            <div class="col-md-3">
+                <h2 class="section-title text-center">Mi Perfil</h2>
+            </div>
+            <div class="col-md-3 col-md-offset-4">
+                <h4 class="text-center">Te uniste el : {{ user.ingreso | date('Y-m-d') }}</h4>
+            </div>
+        </div>-->
+        
+        <div class="container-card">
+            {{ form_start(edit_form,{'action': path('editar_perfil',{user:user.nick}), 'method': 'POST'}) }}
+            <legend>Editar Perfil</legend>
+            {{ form_errors(edit_form) }}
+            <div class="row">
+                <div class="col-md-12">
+                    {{ form_row(edit_form.avatar) }}
+                    {{ form_row(edit_form.nick) }}
+                    {{ form_row(edit_form.nombre) }}
+                    {{ form_row(edit_form.ape1) }}
+                    {{ form_row(edit_form.ape2) }}
+                    {{ form_row(edit_form.genero) }}
+                    {{ form_row(edit_form.origen) }}
+                    {{ form_row(edit_form.categoria) }}
+                    {{ form_row(edit_form.descripcion) }}
+                    {{ form_row(edit_form.politicaComentarios) }}
+                    
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <a data-toggle="modal" href="#changeEmail">
+                        <span class='glyphicon glyphicon-envelope'></span>&nbsp;
+                        <span class="hidden-sm">Cambiar Email</span>
+                    </a>
+                    <a data-toggle="modal" href="#changeProfileBackground">
+                        <span class='glyphicon glyphicon-envelope'></span>&nbsp;
+                        <span class="hidden-sm">Cambiar Foto Perfil</span>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    {{ form_row(edit_form.guardar) }}
+                </div>
+            </div>
+            {{ form_end(edit_form) }}
+            
+        </div>
+
+    </div>
+	
+	
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    
+    <script type="text/javascript">
+        $(function(){
+            $("select").select2({dropdownCssClass: 'dropdown-inverse'});
+        })
+    </script>
+{% endblock %}
+
