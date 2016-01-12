@@ -140,6 +140,9 @@
   </main>
   <footer></footer>
   {% block javascripts %}
+    {% if app.environment == 'dev' %}
+      <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+    {% endif %}
     <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/flat-ui/dist/js/flat-ui.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/pusher/dist/pusher.min.js') }}"></script>

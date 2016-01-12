@@ -10,8 +10,8 @@ gulp.task('build', [
   'vendor',
 ]);
 
-gulp.task('default', ['build'], function() {
-  return gulp.start('serve', 'watch');
+gulp.task('default', ['build'],function(){
+	return gulp.start('watch');
 });
 
 /*npm install babel-preset-react

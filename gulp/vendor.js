@@ -7,6 +7,7 @@ var size = require('gulp-size');
 
 var libs = [
   'react',
+  'react-dom',
   'react/lib/ReactCSSTransitionGroup'
 ];
 

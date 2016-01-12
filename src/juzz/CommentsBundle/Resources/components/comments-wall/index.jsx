@@ -6,8 +6,6 @@ var container = document.getElementById('comment_wall_container');
 var user = container.dataset['user'] && JSON.parse(container.dataset['user']);
 var target = container.dataset['target'];
 var policy = container.dataset['policy'] && JSON.parse(container.dataset['policy']);
-console.log("Política de comentarios recibida ....");
-console.log(policy);
 
 ReactDOM.render(
     <Wall user={user} target={target} policy={policy}/>,
