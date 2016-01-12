@@ -140,12 +140,13 @@
   </main>
   <footer></footer>
   {% block javascripts %}
-    <script src="{{ asset('bower_components/prefixfree/prefixfree.min.js') }}" charset="utf-8"></script>
     <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/flat-ui/dist/js/flat-ui.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/pusher/dist/pusher.min.js') }}"></script>
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+    <!-- Vendor Bundle -->
+    <script type="text/javascript" src="{{ asset('js/vendor.min.js') }}"></script>
 
     {% if app.user %}
       <script type="text/javascript" src="{{ asset('bundles/juzznotifications/js/bundle.min.js') }}"></script>
