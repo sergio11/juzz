@@ -5,7 +5,7 @@ var babelify = require('babelify')
 var source = require('vinyl-source-stream')  
 var libs = require('./vendor').libs;
 var uglify = require('gulp-uglify');
-var es  = require('event-stream');
+var merge = require('merge-stream')();
 var buffer = require('vinyl-buffer');
 var glob = require("glob");
 var size = require('gulp-size');
@@ -27,16 +27,13 @@ var globalLibs = getNPMPackageBrowser();
 
 gulp.task('app', function() {
 
-	var tasks = [],bundles = [
+	var bundles = [
 	    './src/juzz/CommentsBundle',
 	    './src/juzz/NotificationsBundle'
   	];
 
   	bundles.map(function(bundle){
 	    glob("/Resources/components/**/*.jsx", {root:bundle}, function (er, entries) {
-
-	    	console.log("Libs... " + bundle);
-	    	console.log(libs);
 
 	    	var b = browserify({
 	      		entries:entries,
@@ -67,18 +64,14 @@ gulp.task('app', function() {
 		   .pipe(gulp.dest(bundle+'/Resources/public/js'))
 		   .pipe(size({
 			 	title: bundle + " size"
-			}))
-		    .on('error',function(err){
-			  console.log("Error");
-			  console.log(err);
-			});
+			}));
 
-			tasks.push(task);
+		   merge.add(task);
   
 	    });
   	});
 
   	// create a merged stream
-  	return es.merge.apply(null, tasks);
+  	return merge;
 
 });
