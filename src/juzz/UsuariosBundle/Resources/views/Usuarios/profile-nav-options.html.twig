@@ -1,24 +1,9 @@
-<li class="tab_item active">
-    <a href="{{ path('editar_perfil',{user:app.user.nick}) }}">Perfil</a>
-</li>
-<li class="tab_item">
-    <a href="">Mi contenido</a>
-</li>
-<li class="tab_item">
-    <a href="">Mis estadísticas</a>
-</li>
-<li class="tab_item">
-    <a href="{{ path('mis_comentarios', {'user': app.user.nick}) }}">Comentarios</a>
-</li>
-<li class="tab_item">
-    <a href="">Mensajes</a>
-</li>
-<li class="tab_item">
-    <a href="">Colaboradores</a>
-</li>
-<li class="tab_item">
-    <a href="">Notificaciones</a>
-</li>
-<li class="tab_item">
-    <a href="">Difusión</a>
-</li>
+
+{% set nav = {
+    editar_perfil:    { title: "Perfil", path: "editar_perfil", params: {user:app.user.nick} },
+    mis_comentarios:  { title: "Comentarios", path: "mis_comentarios", params: {user:app.user.nick} }
+} %}
+
+{% for item in nav %}
+    <li class="tab_item {{ app.request.attributes.get('_route') == item.path ? 'active' : '' }}"><a href="{{ path(item.path,item.params) }}">{{ item.title }}</a></li>
+{% endfor %}

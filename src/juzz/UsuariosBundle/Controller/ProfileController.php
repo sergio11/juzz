@@ -95,7 +95,7 @@ class ProfileController extends Controller
     public function myCommentsAction(Request $request,$user){
         $start = $request->query->getInt('start',0);
         $count = $request->query->getInt('count',10);
-        try {
+        /*try {
 
             $em = $this->getDoctrine()->getManager();
             //Obtenemos el conjunto de comentarios para el target especificado.
@@ -104,7 +104,7 @@ class ProfileController extends Controller
         }catch(Exception $e){
 
             
-        }
+        }*/
         return $this->render('juzzUsuariosBundle:PrivateZone:my-comments.html.twig');
     }
 
