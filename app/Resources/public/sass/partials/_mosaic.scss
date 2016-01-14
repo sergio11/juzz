@@ -1,0 +1,26 @@
+.mosaic{
+    max-width: 100%;
+    height: 263px;
+    white-space: nowrap;
+    overflow: hidden;
+    @extend %flexbox;
+	@include flex-direction(row);
+	.slide {
+		&:nth-child(odd) {
+			width: 200px;
+			@extend %flexbox;
+			@include flex-direction(column);
+		}
+		&:nth-child(odd) img {
+		  	max-height: 50%;
+		}
+		&:nth-child(even) img {
+		  	width: 330px;
+		}
+		img {
+			@include flex(1,1);
+		    max-height: 100%;
+		    width: 100%;
+		}
+	}
+}
