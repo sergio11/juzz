@@ -6,12 +6,14 @@ require('./gulp/vendor');
 require('./gulp/watch');
 require('./gulp/sass');
 require('./gulp/fonts');
+require('./gulp/images');
 
 gulp.task('build', [
   'app',
   'vendor',
   'sass',
-  'fonts'
+  'fonts',
+  'images'
 ]);
 
 gulp.task('default', ['build'],function(){
