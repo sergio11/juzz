@@ -1,14 +1,20 @@
 'use strict';
-var gulp = require('gulp');
-var browserify = require('browserify')  
-var babelify = require('babelify')  
-var source = require('vinyl-source-stream')  
-var libs = require('./vendor').libs;
-var uglify = require('gulp-uglify');
-var merge = require('merge-stream')();
-var buffer = require('vinyl-buffer');
-var glob = require("glob");
-var size = require('gulp-size');
+const gulp = require('gulp');
+const glob = require('glob');
+const browserify = require('browserify');
+const source = require('vinyl-source-stream');
+const buffer = require('vinyl-buffer');
+const plugins = require('gulp-load-plugins')({
+	rename: {
+	    'vinyl-source-stream': 'source',
+	    'vinyl-buffer': 'buffer',
+	    'gulp-uglify' : 'uglify',
+	    'gulp-size': 'size'
+	},
+	scope: 'devDependencies'
+});
+const merge = require('merge-stream')();
+const libs = require('./vendor').libs;
 
 // function to fetch the 'browserify-shim' json field from the package.json file
 function getNPMPackageBrowser() {
@@ -22,18 +28,18 @@ function getNPMPackageBrowser() {
   return packageManifest['browserify-shim'] || {};
 }
 
-var globalLibs = getNPMPackageBrowser();
 
+const bundles = [
+	'./src/juzz/CommentsBundle',
+	'./src/juzz/NotificationsBundle'
+];
 
-gulp.task('app', function() {
+const globalLibs = getNPMPackageBrowser();
 
-	var bundles = [
-	    './src/juzz/CommentsBundle',
-	    './src/juzz/NotificationsBundle'
-  	];
+gulp.task('app', () => {
 
-  	bundles.map(function(bundle){
-	    glob("/Resources/components/**/*.jsx", {root:bundle}, function (er, entries) {
+  	bundles.map((bundle) => {
+	    glob("/Resources/components/**/*.jsx", {root:bundle}, (er, entries) => {
 
 	    	var b = browserify({
 	      		entries:entries,
@@ -44,7 +50,7 @@ gulp.task('app', function() {
 	      	.transform('browserify-shim');
 
 	      	// The following requirements are loaded from the vendor bundle
-			libs.forEach(function(lib) {
+			libs.forEach((lib) => {
 			    console.log("Add external library : " + lib);
 			    b.external(lib);
 			});
@@ -60,9 +66,9 @@ gulp.task('app', function() {
 		   var task =  b.bundle()
 		   .pipe(source('bundle.min.js'))
 		   .pipe(buffer())
-		   .pipe(uglify())
+		   .pipe(plugins.uglify())
 		   .pipe(gulp.dest(bundle+'/Resources/public/js'))
-		   .pipe(size({
+		   .pipe(plugins.size({
 			 	title: bundle + " size"
 			}));
 
