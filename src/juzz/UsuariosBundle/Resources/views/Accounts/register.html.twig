@@ -2,25 +2,9 @@
 
 {% block tabcontent %}
 	<div  class="container-fluid tab-pane active">
-		{{ form_start(form,{'action': path('register'), 'method': 'POST'}) }}
-	    	{{ form_errors(form) }}
-	    	<div class="row">
-	    		<div class="col-md-7 col-xs-12">
-	    		    {{ form_row(form.nick) }}
-	    			{{ form_row(form.nombre) }}
-	    			{{ form_row(form.ape1) }}
-	    			{{ form_row(form.ape2) }}
-	    			{{ form_row(form.email) }}
-	    			
-	    		</div>
-	    		<div class="col-md-5 col-xs-12">
-	    			{{ form_row(form.genero) }}
-	    			{{ form_row(form.origen) }}
-	    			{{ form_row(form.password) }}
-	    		</div>
-	    	</div>
-	    	
-		{{ form_end(form) }}
+
+		{{ form(form, { 'action': path('register'), 'method': 'POST','style': 'horizontal'}) }}
+
 		<h5 class="text-center">o también ...</h5>
 		</hr>
 		<div>

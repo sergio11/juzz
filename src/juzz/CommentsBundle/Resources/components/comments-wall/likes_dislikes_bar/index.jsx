@@ -98,13 +98,13 @@ static get DISLIKE() {
     		<ul className="list-inline">
                 <li>
                     <a href='#' onClick={this.addLike.bind(this)}>
-                    	<span className='glyphicon glyphicon-thumbs-up'></span> 
+                    	<span className='fa fa-thumbs-o-up'></span> 
                     	&nbsp;Me gusta <span>({this.state.likes.length})</span>
                     </a>
                 </li>
                 <li>
                    	<a href='#' onClick={this.addDislike.bind(this)}>
-                   		<span className='glyphicon glyphicon-thumbs-down'></span> 
+                   		<span className='fa fa-thumbs-o-down'></span> 
                    		&nbsp;No Me Gusta <span>({this.state.dislikes.length})</span>
                    	</a>
                 </li>

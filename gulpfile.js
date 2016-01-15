@@ -4,14 +4,14 @@ var gulp = require('gulp');
 require('./gulp/app');
 require('./gulp/vendor');
 require('./gulp/watch');
-require('./gulp/sass');
+require('./gulp/less');
 require('./gulp/fonts');
 require('./gulp/images');
 
 gulp.task('build', [
   'app',
   'vendor',
-  'sass',
+  'less',
   'fonts',
   'images'
 ]);

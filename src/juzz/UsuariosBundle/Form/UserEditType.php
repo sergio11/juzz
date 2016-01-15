@@ -13,6 +13,10 @@ class UserEditType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('avatar','profile_image',array(
+                'label' => false,
+                'required'  => false
+            ))
             ->add('nick','text',array(
                 'label' => 'Nick',
                 'attr' => array(
@@ -20,7 +24,11 @@ class UserEditType extends AbstractType
                     'maxlength' => 30
                 )
             ))
-            ->add('nombre')
+            ->add('nombre','text',array(
+                'attr' => array(
+                    'help_text' => 'Letters, numbers and underscores are allowed.',
+                )
+            ))
             ->add('ape1','text',array(
                 'label' => 'Primer Apellido',
                 'attr' => array(
@@ -39,7 +47,8 @@ class UserEditType extends AbstractType
                 'choices'   => array('m' => 'Hombre', 'f' => 'Mujer'),
                 'required'  => true,
                 'expanded' => true,
-                'multiple' => false
+                'multiple' => false,
+                'attr' => array('align_with_widget' => true)
             ))
             ->add('origen','entity', array(
                 'class' => 'juzz\UsuariosBundle\Entity\Paises',
@@ -59,18 +68,18 @@ class UserEditType extends AbstractType
                     return $category->getTermino()->getNombre();
                 }
             ))
-            ->add('avatar','profile_image',array(
-                'label' => false,
-                'required'  => false
-            ))
             ->add('politicaComentarios', 'entity', array(
                 'class' => 'juzz\CommentsBundle\Entity\PoliticaComentarios',
                 'label' => 'Política Comentarios',
                 'required' => true,
                 'property' => 'name'
             ))
-            ->add('guardar', 'submit')
-        ;
+            ->add('actions', 'form_actions', [
+                'buttons' => [
+                    'save' => ['type' => 'submit', 'options' => ['label' => 'Guardar']],
+                    'cancel' => ['type' => 'reset', 'options' => ['label' => 'Restablecer']],
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

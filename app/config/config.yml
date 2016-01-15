@@ -37,7 +37,7 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     form:
-        resources: ['bootstrap_3_horizontal_layout.html.twig','juzzUsuariosBundle:Form:form-radio-button.html.twig','juzzUsuariosBundle:Form:terminos-tags-input.html.twig','juzzUsuariosBundle:Form:select-control.html.twig','juzzFilesBundle:Form:profile-image.html.twig','juzzUsuariosBundle:Form:form-row.html.twig']
+        resources: ['juzzUsuariosBundle:Form:form-radio-button.html.twig','juzzUsuariosBundle:Form:terminos-tags-input.html.twig','juzzUsuariosBundle:Form:select-control.html.twig','juzzFilesBundle:Form:profile-image.html.twig']
 
 # Assetic Configuration
 assetic:
@@ -114,6 +114,13 @@ lopi_pusher:
 fos_js_routing:
     routes_to_expose: [ 'comments' , 'post_comment' , 'push_notifications' , 'perfil' , 'comment_assess']
 
+braincrafted_bootstrap:
+    icon_prefix: fa
+    auto_configure:
+        assetic: false
+        twig: true
+        knp_menu: true
+        knp_paginator: true
 
 services:
     twig.mobile_detect_extension:

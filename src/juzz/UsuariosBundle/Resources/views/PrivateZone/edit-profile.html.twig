@@ -22,23 +22,15 @@
         </div>-->
         
         <div class="container-card">
-            {{ form_start(edit_form,{'action': path('editar_perfil',{user:user.nick}), 'method': 'POST'}) }}
-            <legend>Editar Perfil</legend>
-            {{ form_errors(edit_form) }}
+            <h2 class="text-center">Edita los datos de tu perfil</h2> 
+
             <div class="row">
-                <div class="col-md-12">
-                    {{ form_row(edit_form.avatar) }}
-                    {{ form_row(edit_form.nick) }}
-                    {{ form_row(edit_form.nombre) }}
-                    {{ form_row(edit_form.ape1) }}
-                    {{ form_row(edit_form.ape2) }}
-                    {{ form_row(edit_form.genero) }}
-                    {{ form_row(edit_form.origen) }}
-                    {{ form_row(edit_form.categoria) }}
-                    {{ form_row(edit_form.descripcion) }}
-                    {{ form_row(edit_form.politicaComentarios) }}
-                    
+                <div class="col-sm-12">
+                    {{ form(edit_form, { 'action': path('editar_perfil',{user:user.nick}), 'method': 'POST','style': 'horizontal'}) }}
+                </div>
             </div>
+           
+            
             <div class="row">
                 <div class="col-md-8">
                     <a data-toggle="modal" href="#changeEmail">
@@ -50,12 +42,8 @@
                         <span class="hidden-sm">Cambiar Foto Perfil</span>
                     </a>
                 </div>
-                <div class="col-md-4">
-                    {{ form_row(edit_form.guardar) }}
-                </div>
             </div>
-            {{ form_end(edit_form) }}
-            
+
         </div>
 
     </div>

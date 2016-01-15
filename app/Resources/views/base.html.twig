@@ -6,8 +6,9 @@
         <title>{% block title %}{% endblock %} | juzz</title>
         {% block stylesheets %}
           <link rel="stylesheet" type="text/css" href="{{ asset('css/master.css') }}">
-          <!--<link rel="stylesheet" type="text/css" href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}">-->
+          <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}">
           <link rel="stylesheet" href="{{ asset('css/style.css') }}" charset="utf-8">
+
         {% endblock %}
         {% block fonts %}
           <link href='https://fonts.googleapis.com/css?family=Comfortaa:400,700,300' rel='stylesheet' type='text/css'>
@@ -83,19 +84,19 @@
                 <ul class="dropdown-menu text-capitalize" data-placement="left" role='menu'>
                   <li>
                     <a rel='nofollow' href="{{ path('perfil',{user:app.user.nick}) }}">
-                      <span class='fa fa-user'></span>&nbsp;&nbsp;Mi Perfil
+                      <span class='fui-user'></span></span>&nbsp;&nbsp;Mi Perfil
                     </a>
                   </li>
                   <li>
                     <a rel='nofollow' href="">
                       <span class='fui-time'></span>&nbsp;&nbsp;Escuchar Más Tarde
-                      <span class="badge">14</span>
+                      {{ badge('14') }}
                     </a>
                   </li>
                   <li>
                     <a rel='nofollow' href="">
                       <span class='fui-star-2'></span>&nbsp;&nbsp;Mis Subscripciones
-                      <span class="badge">1</span>
+                      {{ badge('1') }}
                     </a>
                   </li>
                   <li>
@@ -140,6 +141,8 @@
   <footer></footer>
   {% block javascripts %}
     <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bower_components/flat-ui/dist/js/flat-ui.min.js') }}"></script>
+
     <script type="text/javascript" src="{{ asset('bower_components/pusher/dist/pusher.min.js') }}"></script>
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
@@ -158,15 +161,16 @@
             // add comment into page
           }
         );*/
-        /*$(function(){
-          $("#switch-02").bootstrapSwitch().parent().on("click",function(e){
+        $(function(){
+          /*$("#switch-02").bootstrapSwitch().parent().on("click",function(e){
             e.preventDefault();
             e.stopPropagation();
-          });
+          });*/
+
+          //$("select").select2();
 
 
-
-        })*/
+        })
       </script>
     {% endif %}
     

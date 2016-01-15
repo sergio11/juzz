@@ -10,8 +10,8 @@ const plugins = require('gulp-load-plugins')({
 
 gulp.task('fonts',() => {
     return gulp.src([
-    		'./web/bower_components/bootstrap-sass/assets/fonts/bootstrap/*',
-    		'./web/bower_components/flat-ui-sass/vendor/assets/fonts/flat-ui/*'
+    		'./web/bower_components/bootstrap/dist/fonts/*',
+    		'./web/bower_components/flat-ui/dist/fonts/**/*'
     	])
         .pipe(plugins.copy('./web/fonts', {prefix: 7}))
         .pipe(plugins.size({

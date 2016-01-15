@@ -27,7 +27,8 @@
         "bes/mobiledetect-twig-extension": "v1.0",
         "laupifrpar/pusher-bundle": "^1.2",
         "jms/serializer-bundle": "^1.1",
-        "friendsofsymfony/jsrouting-bundle": "^1.5"
+        "friendsofsymfony/jsrouting-bundle": "^1.5",
+        "braincrafted/bootstrap-bundle": "~2.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

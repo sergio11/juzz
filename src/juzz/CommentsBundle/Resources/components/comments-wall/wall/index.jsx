@@ -105,7 +105,7 @@ class Wall extends React.Component {
         }else{
             content = this.state.posts.map((post) => {
                 let deletePost = this.deletePost.bind(this, post);
-                return <Post key={post.id} data={post} user={this.props.user} onDelete={deletePost}/>
+                return <Post key={post.id} data={post} user={this.props.user} policy={this.props.policy} onDelete={deletePost}/>
             })
         }
 

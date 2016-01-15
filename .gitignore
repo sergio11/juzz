@@ -11,4 +11,5 @@
 /web/bundles/
 /nbproject/*
 /web/bower_components/*
+/web/fonts/
 /node_modules/
