@@ -94,7 +94,7 @@ class Comentarios
     private $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity="AssessComment", mappedBy="comment", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="AssessComment", mappedBy="comment", cascade={"persist","remove"})
      * @Expose
      * @SerializedName("assess")
      * @MaxDepth(1)
@@ -278,9 +278,9 @@ class Comentarios
      */
     public function addAssess(\juzz\CommentsBundle\Entity\AssessComment $assess)
     {
-
+    
         $this->assess[] = $assess;
-
+        
         return $this;
     }
 
@@ -292,6 +292,18 @@ class Comentarios
     public function removeAssess(\juzz\CommentsBundle\Entity\AssessComment $assess)
     {
         $this->assess->removeElement($assess);
+    }
+
+    /**
+    *  Update Assess
+    *
+    **/
+    public function updateAssess($key, $newAssess)
+    {   
+
+        $this->assess->set($key, $newAssess);
+
+        return $this->assess->get($key);
     }
 
     /**

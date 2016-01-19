@@ -24,6 +24,9 @@ class AssessComment
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      * })
+     * @Expose
+     * @SerializedName("owner")
+     * @MaxDepth(1)
      * 
      * 
      */

@@ -1,0 +1,10 @@
+export const POSTS_OBTAINED = 'POSTS:OBTAINED';
+export const DELETE_POST = 'POST:DELETE';
+export const CREATE_POST = 'POST:CREATE';
+export const ASSESS_COMMENT = 'ASSESS:COMMENT';
+export default {
+	POSTS_OBTAINED,
+	DELETE_POST,
+	CREATE_POST,
+	ASSESS_COMMENT
+}

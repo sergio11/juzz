@@ -15,3 +15,5 @@ comment_assess:
     defaults: { _controller: juzzCommentsBundle:Comments:assess }
     methods:  [POST]
     condition: "request.isXmlHttpRequest()"
+    requirements:
+        target:  \d*

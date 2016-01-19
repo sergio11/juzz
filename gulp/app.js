@@ -9,7 +9,8 @@ const plugins = require('gulp-load-plugins')({
 	    'vinyl-source-stream': 'source',
 	    'vinyl-buffer': 'buffer',
 	    'gulp-uglify' : 'uglify',
-	    'gulp-size': 'size'
+	    'gulp-size': 'size',
+	    'gulp-es6-module-jstransform': 'transform'
 	},
 	scope: 'devDependencies'
 });
@@ -34,12 +35,22 @@ const bundles = [
 	'./src/juzz/NotificationsBundle'
 ];
 
-const globalLibs = getNPMPackageBrowser();
+/*const commonLibs = [
+	'./app/Resources/public/js/appDispatcher.js'
+];/*
+
+
+/*gulp.task('transform',() => {
+	return gulp.src(commonLibs)
+	.pipe(plugins.transform())
+	.pipe(gulp.dest('./tmp'));
+});*/
+
 
 gulp.task('app', () => {
 
   	bundles.map((bundle) => {
-	    glob("/Resources/components/**/*.jsx", {root:bundle}, (er, entries) => {
+	    glob("/Resources/components/**/views/**/*.jsx", {root:bundle}, (er, entries) => {
 
 	    	var b = browserify({
 	      		entries:entries,
@@ -54,14 +65,6 @@ gulp.task('app', () => {
 			    console.log("Add external library : " + lib);
 			    b.external(lib);
 			});
-	      	
-
-	      	for (globalLib in globalLibs) {
-			    if (globalLibs.hasOwnProperty(globalLib)) {
-			      b.require(globalLib);
-			    }
-			}
-
 			
 		   var task =  b.bundle()
 		   .pipe(source('bundle.min.js'))

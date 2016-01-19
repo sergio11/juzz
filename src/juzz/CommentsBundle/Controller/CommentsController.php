@@ -121,7 +121,7 @@ class CommentsController extends Controller
             $em = $this->getDoctrine()->getManager();
             $user = $em->getRepository('juzzUsuariosBundle:Usuarios')->find($data['user']);
             $comment = $em->getRepository('juzzCommentsBundle:Comentarios')->find($data['comment']);
-            
+
             if(!$comment || !$user){
                 throw $this->createNotFoundException();
             }
@@ -132,16 +132,31 @@ class CommentsController extends Controller
             $assess->setAssess($data['value']);
             $assess->setDate(new \DateTime('now'));
 
-            $comment->addAssess($assess);
 
+            $users = $comment->getAssess()->map(function($current){
+                return $current->getUser()->getId();
+            });
+            
+            $key = count($users) ? $users->indexOf($assess->getUser()->getId()) : null;
+            $replace = false;
+            if($key >= 0){
+                $oldAssess = $comment->getAssess()->get($key);
+                $replace = true;
+                $em->remove($oldAssess);
+                $em->flush();
+            }
+
+            $comment->addAssess($assess);
             $em->persist($comment);
+
+            
             $em->flush();
 
             $serializer = $this->get('jms_serializer');
 
             $response = $serializer->serialize([
                 'success' => true,
-                'data'    => $assess
+                'data'    => array("replace" => $replace, "assess" => $assess)
             ], 'json');
 
             return new JsonResponse($response);
