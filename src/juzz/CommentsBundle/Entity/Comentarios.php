@@ -68,6 +68,8 @@ class Comentarios
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      * })
+     * @Expose
+     * @MaxDepth(1)
      */
     private $parent;
 

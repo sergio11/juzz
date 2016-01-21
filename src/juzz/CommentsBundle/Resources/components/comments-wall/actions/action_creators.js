@@ -26,7 +26,7 @@ export function createPost(data){
 	api.createPost(data).done(post => {
 		Dispatcher.dispatch({       
 			type: ActionTypes.CREATE_POST,       
-			post    
+			post:post    
 		});
 	}).fail(err => {
 		console.log("Error!!!");
@@ -41,5 +41,13 @@ export function assessComment(data){
         	comment: data.comment
 
         });
+	});
+}
+
+export function changePostMode(post,mode){
+	Dispatcher.dispatch({
+		type: ActionTypes.POST_CHANGE_MODE,
+		post: post,
+		mode: mode
 	});
 }

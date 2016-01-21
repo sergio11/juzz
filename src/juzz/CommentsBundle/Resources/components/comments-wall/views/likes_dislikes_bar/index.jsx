@@ -39,8 +39,6 @@ class LikesDisLikesBar extends React.Component {
     render() {
 
         let likes = [],dislikes = [];
-        console.log("assess");
-        console.log(this.props.assess);
 
         this.props.assess.forEach((item) => {
             if(item.assess == 1) 

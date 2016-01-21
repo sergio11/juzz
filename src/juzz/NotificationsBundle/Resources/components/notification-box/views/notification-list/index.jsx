@@ -9,6 +9,11 @@ class NotificationList extends React.Component{
         super(props, context);
     };
 
+    componentDidMount() {
+    	let toggle = this.refs.switch02;
+    	$(toggle).bootstrapSwitch();
+    }
+
     render(){
 
     	return (
@@ -34,7 +39,7 @@ class NotificationList extends React.Component{
 	                <div className="col-lg-3">
 	                    <div className="bootstrap-switch-square ">
 	                  
-	                        <input type="checkbox" defaultChecked={this.props.enabled} data-toggle="switch" name="square-switch" id="switch-02" />
+	                        <input type="checkbox" defaultChecked={this.props.enabled} data-toggle="switch" name="square-switch" ref="switch02" />
 	                    
 	                    </div>
 	                </div>

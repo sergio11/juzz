@@ -3,54 +3,29 @@ import UserPost from '../userpost'
 import LikesDisLikesBar from '../likes_dislikes_bar'
 import Routing from 'routing'
 import * as constants from '../../constants.js';
+import {createPost,changePostMode} from '../../actions/action_creators';
 
 class Post extends React.Component {
 
     constructor(props) {
         super(props);
-        //estado del post
-        this.state = {
-            answerMode: false,
-            reviseMode: false,
-            comments: props.data.comments
-        }
     }
 
     saveAnswer(e) {
 
         if(e.which == 13) {
-            this.setState({
-                answerMode : false
-            });
             var text = e.target.value.trim();
             if(text != "") {
-
-                $.post(Routing.generate('post_comment'),{
-                    data:{
-                        content:text,
-                        target:this.props.data.target,
-                        parent:this.props.data.id,
-                        owner:this.props.user.id,
-                    }
-                }).done((response) => {
-                    response = JSON.parse(response);
-                    if(response.success){
-                        this.state.comments.unshift(response.data);
-                        if(this.props.policy.id == constants.NO_POST_COMMENTS_TO_REVISE){
-                            this.setState({
-                                reviseMode: true
-                            })
-                        }else{
-                            this.forceUpdate();
-                        }
-                        
-                        
-                    }
-                    
-                }).fail((response) => {
-                    console.log("Fail!!!");
-                    console.log(response);
+                //Cambiamos el modo del post.
+                changePostMode(this.props.data.id,'normal');
+                //Creamos Post.
+                createPost({
+                    content:text,
+                    target:this.props.data.target,
+                    parent:this.props.data.id,
+                    owner:this.props.user.id
                 });
+                
                 e.target.value = "";
                 e.preventDefault();
                 e.stopPropagation();
@@ -59,20 +34,17 @@ class Post extends React.Component {
     }
 
     answer(e) {
-
         e.preventDefault();
-
-        this.setState({
-            answerMode : true
-        });
-        
+        console.log("Sus props");
+        console.log(this.props);
+        //Cambiamos el modo del post.
+        changePostMode(this.props.data.id,'answer');
     }
 
     cancel(e){
         e.preventDefault();
-        this.setState({
-            answerMode : false
-        });
+        //Cambiamos el modo del post.
+        changePostMode(this.props.data.id,'normal');
     }
 
     // Render Assess Bar
@@ -87,10 +59,10 @@ class Post extends React.Component {
     renderCommentsList() {
         let comments = null;
         //Cargamos listado de comentarios 
-        if(this.state.comments.length){
+        if(this.props.data.comments.length){
             comments = 
             <ul className="list-group">
-                {this.state.comments.map((comment) => {
+                {this.props.data.comments.map((comment) => {
                     return <Post key={comment.id} data={comment} user={this.props.user}/>
                 })}
             </ul>
@@ -103,7 +75,7 @@ class Post extends React.Component {
         //Si no es el propietario del comentario.
         if(this.props.data.owner.id != this.props.user.id){
             //Comprobamos si el modo respuesta está activado.
-            if(this.state.answerMode) {
+            if(this.props.data.mode == 'answer') {
                 content = 
                     <div className='row'>
                         <UserPost user={this.props.user} onSave={this.saveAnswer.bind(this)} placeholder={ "Contestación para " + this.props.data.owner.fullName  }/>
@@ -111,7 +83,7 @@ class Post extends React.Component {
                             <a href='#' className='btn btn-danger' onClick={ this.cancel.bind(this) }>Cancelar</a>
                         </div>
                     </div>
-            }else if(this.state.reviseMode){
+            }else if(this.props.data.mode == 'revision'){
                 content = 
                     <div className='row'>
                         <div className='alert alert-warning'><span className='fa fa-exclamation-triangle'></span>El comentario debe ser revisado, cuando sea publicado recibirás una notificación</div>

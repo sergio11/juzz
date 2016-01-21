@@ -1,6 +1,7 @@
 export const POSTS_OBTAINED = 'POSTS:OBTAINED';
 export const DELETE_POST = 'POST:DELETE';
 export const CREATE_POST = 'POST:CREATE';
+export const POST_CHANGE_MODE = 'POST:CHANGE:MODE';
 export const ASSESS_COMMENT = 'ASSESS:COMMENT';
 export default {
 	POSTS_OBTAINED,

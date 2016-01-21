@@ -27,7 +27,24 @@ class WallStore extends Store {
 			case ActionTypes.ASSESS_COMMENT:
 				this._onAssessComment(action.comment,action.assess);
 			break;
+			case ActionTypes.POST_CHANGE_MODE:
+				this._onChangeModePost(action.post,action.mode);
+			break;
 		}
+	}
+
+	_searchPost(needle,haystack){
+		let result = null;
+		for (var i = 0; i < haystack.length; i++) {
+			if (haystack[i].id == needle){
+				result = haystack[i];
+				break;
+			}else{
+				result = haystack[i].comments && this._searchPost(needle,haystack[i].comments)
+			} 
+				
+		};
+		return result;
 	}
 
 	_onGetPosts(posts){
@@ -37,7 +54,12 @@ class WallStore extends Store {
 	}
 
 	_onCreatePost(post){
-		this.state.posts.unshift(post);
+		if(post.parent){
+			let target = this._searchPost(post.parent.id,this.state.posts);
+			target.comments.unshift(post);
+		}else{
+			this.state.posts.unshift(post);
+		}
 		this.__emitChange();
 	}
 
@@ -49,20 +71,26 @@ class WallStore extends Store {
 		this.__emitChange();
 	}
 
-	_onAssessComment(comment,assess){
-		console.log(assess);
-		let post = this.state.posts.find((post) => {
-			if (post.id == comment) return post;
-		});
-
-		if (assess.replace) {
-			let index = post.assess.map((item) => { return item.owner.id }).indexOf(assess.assess.owner.id)
-			post.assess[index] = assess.assess;
-		}else{
-			post.assess.push(assess.assess);
+	_onAssessComment(id,assess){
+		let post = this._searchPost(id,this.state.posts);
+		if(post){
+			if (assess.replace) {
+				let index = post.assess.map((item) => { return item.owner.id }).indexOf(assess.assess.owner.id)
+				post.assess[index] = assess.assess;
+			}else{
+				post.assess.push(assess.assess);
+			}
+			this.__emitChange();
 		}
+	}
 
-		this.__emitChange();
+	_onChangeModePost(id,mode){
+		let post = this._searchPost(id,this.state.posts);
+		if (post) {
+			post.mode = mode;
+			this.__emitChange();
+		};
+		
 	}
 
 	getState() {

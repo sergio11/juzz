@@ -139,7 +139,8 @@ class CommentsController extends Controller
             
             $key = count($users) ? $users->indexOf($assess->getUser()->getId()) : null;
             $replace = false;
-            if($key >= 0){
+
+            if(is_numeric($key) && $key >= 0){
                 $oldAssess = $comment->getAssess()->get($key);
                 $replace = true;
                 $em->remove($oldAssess);

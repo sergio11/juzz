@@ -75,7 +75,7 @@
                 </a>
               </li>
             {% elseif app.user %}
-              <li id='notificacion-component-mount-point'></li>
+              <li id='notificacion-component-mount-point' data-target="{{ app.user.id }}"></li>
               <li>
                 <a class='user dropdown-toggle' href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <img class='img-circle' width='45' src="{{ asset(app.user.getAvatar().getWebPath()) }}">
@@ -161,16 +161,6 @@
             // add comment into page
           }
         );*/
-        $(function(){
-          /*$("#switch-02").bootstrapSwitch().parent().on("click",function(e){
-            e.preventDefault();
-            e.stopPropagation();
-          });*/
-
-          //$("select").select2();
-
-
-        })
       </script>
     {% endif %}
     
