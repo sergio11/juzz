@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use juzz\UsuariosBundle\Entity\Usuarios AS UsuarioEntity;
 use juzz\FilesBundle\Entity\Imagenes AS ImagenEntity;
+use juzz\FilesBundle\Entity\ProfileBackground;
 use juzz\UsuariosBundle\Entity\Paises AS CountryEntity;
 use juzz\UsuariosBundle\Form\UsuarioRegistroType;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -51,8 +52,15 @@ class RegistrationController extends Controller{
       $user->setIngreso(new \DateTime());
       $user->setActivo(2);
       //Establecemos politica de comentarios por defecto.
-      $policy = $em->getRepository('juzzUsuariosBundle:PoliticaComentarios')->find(1);
+      $policy = $em->getRepository('juzzCommentsBundle:PoliticaComentarios')->find(1);
       $user->setPoliticaComentarios($policy);
+      //Aplicamos Imagen de perfil por defecto.
+      $profileBg = new ProfileBackground();
+      $profileBg->setName('default');
+      $profileBg->setType('png');
+      $profileBg->setPath('default.png');
+      $user->setProfileBg($profileBg);
+
       // Guardar el nuevo usuario en la base de datos
       $em->persist($user);
       $em->flush();

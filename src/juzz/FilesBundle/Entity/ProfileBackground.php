@@ -5,6 +5,10 @@ namespace juzz\FilesBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\Accessor;
 
 /**
  * Imagenes
@@ -12,6 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="imagenes", uniqueConstraints={@ORM\UniqueConstraint(name="IMG_UK", columns={"name"})})
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
+ * @ExclusionPolicy("all")
  */
 class ProfileBackground
 {
@@ -35,6 +40,10 @@ class ProfileBackground
      * @var string
      *
      * @ORM\Column(name="path", type="string", length=250, nullable=false)
+     * @Expose
+     * @Accessor(getter="toDataUrl")
+     * @SerializedName("data")
+     *
      */
     protected $path;
 
@@ -52,6 +61,8 @@ class ProfileBackground
      *     minHeight = 200,
      *     maxHeight = 400
      * )
+     *
+     * 
      */
     protected $file;
 
@@ -147,6 +158,12 @@ class ProfileBackground
         return null === $this->path
             ? null
             : $this->getUploadDir().'/'.$this->path;
+    }
+
+    public function toDataUrl(){
+
+        $data = file_get_contents($this->getAbsolutePath());
+        return sprintf('data:%s;base64,%s', 'image/png', base64_encode($data));
     }
 
     protected function getUploadRootDir()

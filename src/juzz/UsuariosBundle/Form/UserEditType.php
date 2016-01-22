@@ -6,7 +6,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use juzz\FilesBundle\Form\ProfileImageType;
+use juzz\FilesBundle\Form\ProfileBackgroundType;
 use Doctrine\ORM\EntityRepository;
+
 
 class UserEditType extends AbstractType
 {
@@ -21,7 +23,11 @@ class UserEditType extends AbstractType
                 'label' => 'Nick',
                 'attr' => array(
                     'placeholder' => 'p.e sergio11',
-                    'maxlength' => 30
+                    'maxlength' => 30,
+                    'data-toggle' => 'popover',
+                    'data-trigger' => 'focus',
+                    'data-content' => 'Tu Nick de Usuario',
+                    'data-placement' => 'left'
                 )
             ))
             ->add('nombre','text',array(
@@ -67,12 +73,17 @@ class UserEditType extends AbstractType
                 'choice_label' => function ($category) {
                     return $category->getTermino()->getNombre();
                 }
+                
             ))
             ->add('politicaComentarios', 'entity', array(
                 'class' => 'juzz\CommentsBundle\Entity\PoliticaComentarios',
                 'label' => 'Política Comentarios',
                 'required' => true,
                 'property' => 'name'
+            ))
+            ->add('profileBg','profile_background_image',array(
+                'label' => false,
+                'required'  => false
             ))
             ->add('actions', 'form_actions', [
                 'buttons' => [

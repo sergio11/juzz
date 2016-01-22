@@ -35,17 +35,6 @@ const bundles = [
 	'./src/juzz/NotificationsBundle'
 ];
 
-/*const commonLibs = [
-	'./app/Resources/public/js/appDispatcher.js'
-];/*
-
-
-/*gulp.task('transform',() => {
-	return gulp.src(commonLibs)
-	.pipe(plugins.transform())
-	.pipe(gulp.dest('./tmp'));
-});*/
-
 
 gulp.task('app', () => {
 

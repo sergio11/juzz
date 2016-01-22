@@ -72,7 +72,7 @@ class Wall extends React.Component {
         let content;
         if(!this.props.load){
             content = <div className='alert alert-info'>Cargándo</div>
-        }else if(this.props.load && !this.props.posts.length){
+        }else if(this.props.load && !this.props.posts.length && this.props.policy.id != constants.NO_COMMENTS_ALLOWED){
             content = <div className='alert alert-info'>No hay comentarios, sé el primero.</div>
         }else{
             content = this.props.posts.map((post) => {

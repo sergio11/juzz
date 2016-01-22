@@ -5,7 +5,7 @@ namespace juzz\EpisodiosBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use juzz\UsuariosBundle\Entity\PoliticaComentarios AS CommentPolicyEntity;
+use juzz\CommentsBundle\Entity\PoliticaComentarios AS CommentPolicyEntity;
 
 /*
     Los accesorios de Doctrine2 son clases PHP que pueden crear y persistir objetos a la base de datos.

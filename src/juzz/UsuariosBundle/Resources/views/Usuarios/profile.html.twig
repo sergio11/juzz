@@ -6,7 +6,6 @@
 {% endblock %}
 {% block main %}
 	<div class="profile-header">
-		{% set profilebg =  profilebg ? profilebg : 'img/pattern_profile_bg_1.png' %}
 		<div class="profile-header-bg" style="background-image:url({{ asset(profilebg) }})">
 			<img class="profile-header-avatar" src="{{ asset(avatar) }}" >
 		</div>

@@ -15,7 +15,9 @@ class ProfileBackgroundType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'juzz\FilesBundle\Entity\ProfileBackground',
-            'compound' => true
+            'compound' => true,
+            'invalid_message' => 'Imagen de Perfil no válida',
+            'constraints' => null
         ));
     }
 
@@ -30,11 +32,11 @@ class ProfileBackgroundType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('file', 'file', array('label' => false))
-            ->add('guardar','submit');
+        $builder->add('file', 'file', array('label' => false));
 
     }
+
+
 
     
 }

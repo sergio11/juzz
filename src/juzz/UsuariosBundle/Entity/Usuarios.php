@@ -202,7 +202,7 @@ class Usuarios implements UserInterface, \Serializable
     /**
      * @var \Imagenes
      *
-     * @ORM\ManyToOne(targetEntity="\juzz\FilesBundle\Entity\ProfileBackground",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="\juzz\FilesBundle\Entity\ProfileBackground",cascade={"persist","remove"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="profile_bg", referencedColumnName="id")
      * })

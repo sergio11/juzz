@@ -42,7 +42,7 @@ class ProfileController extends Controller
             
         }
 
-        $profilebg = $user->getProfileBg() instanceof ImagenEntity ?  $user->getProfileBg()->getWebPath() : null;
+        $profilebg = $user->getProfileBg()->getWebPath();
 
         return $this->render('juzzUsuariosBundle:Usuarios:profile.html.twig',array(
             'id' => $user->getId(),
@@ -82,15 +82,13 @@ class ProfileController extends Controller
 
         $changeEmailForm = $this->createForm(new UserChangeEmailType());
 
-        $profileBackgroundForm = $this->createForm(new ProfileBackgroundType());
-
         return $this->render('juzzUsuariosBundle:PrivateZone:edit-profile.html.twig', array(
             'user'      => $user,
             'edit_form'   => $form->createView(),
-            'change_email_form' => $changeEmailForm->createView(),
-            'change_profile_background_form' => $profileBackgroundForm->createView()
+            'change_email_form' => $changeEmailForm->createView()
         ));   
     }
+
 
     public function myCommentsAction(Request $request,$user){
         $start = $request->query->getInt('start',0);
