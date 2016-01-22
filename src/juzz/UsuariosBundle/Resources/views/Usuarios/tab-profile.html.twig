@@ -5,11 +5,11 @@
 		   <div class="panel-heading">Información</div>
 		   <div class="panel-body">
 		    	<h3>Descripción</h3>
-		    	<p>{{ descripcion }}</p>
-		    	{% if intereses|length > 0 %}
+		    	<p>{{ owner.descripcion }}</p>
+		    	{% if owner.categoria|length > 0 %}
 		    		<hr>
 		    		<h3>Intereses</h3>
-		    		{% for interes in intereses %}
+		    		{% for interes in owner.categoria %}
 		    			<a href="{{ path('episodios_categorias',{category:interes.termino.slug}) }}">
 		    				<span class="label label-pill label-success">{{ interes.termino.nombre }}</span>
 		    			</a>
@@ -29,7 +29,7 @@
 			</ul>
 		</div>
 		{# comments wall #}
-		{{ render_hinclude(controller('juzzCommentsBundle:Comments:commentsWall',{'target' : id,'owner_target':id}), {
+		{{ render_hinclude(controller('juzzCommentsBundle:Comments:commentsWall',{'target' : owner.id,'owner_target':owner.id}), {
     		'default': 'Cargando Comentarios ...'
 		}) }}
 	</div>
@@ -42,7 +42,7 @@
 		}) }}
 
 		{# Current User Followers #}
-		{{ render_hinclude(controller('juzzUsuariosBundle:Default:followers',{ 'user' : id }), {
+		{{ render_hinclude(controller('juzzUsuariosBundle:Default:followers',{ 'user' : owner.id }), {
     		'default': 'Cargando ...'
 		}) }}
 	</div>

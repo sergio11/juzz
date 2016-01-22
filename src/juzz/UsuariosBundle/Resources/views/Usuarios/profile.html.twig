@@ -6,11 +6,11 @@
 {% endblock %}
 {% block main %}
 	<div class="profile-header">
-		<div class="profile-header-bg" style="background-image:url({{ asset(profilebg) }})">
-			<img class="profile-header-avatar" src="{{ asset(avatar) }}" >
+		<div class="profile-header-bg" style="background-image:url({{ asset(owner.profilebg.webPath) }})">
+			<img class="profile-header-avatar" src="{{ asset(owner.avatar.webPath) }}" >
 		</div>
 		<div class="profile-header-details">
-  			<h3 class="profile-header-owner">{{ name }} <small>{{ apellidos }}</small></h3>
+  			<h3 class="profile-header-owner">{{ owner.nombre }} <small>{{ owner.apellidos }}</small></h3>
   			<ul class="profile-header-statistics">
 	            <li>
 	                <a href="" rel="nofollow" title="">
