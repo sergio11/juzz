@@ -46,7 +46,7 @@ gulp.task('app', () => {
 	      		extensions: ['.jsx'], 
 	      		debug: true
 	      	})
-	      	.transform('babelify',{presets: ["es2015", "react"]})
+	      	.transform('babelify',{presets: ["es2015", "react"],plugins:["transform-decorators-legacy"]})
 	      	.transform('browserify-shim');
 
 	      	// The following requirements are loaded from the vendor bundle

@@ -24,7 +24,9 @@
   },
   "homepage": "https://github.com/sergio11/juzz#readme",
   "dependencies": {
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "browserify-shim": "^3.8.11",
+    "classnames": "^2.2.3",
     "flux": "^2.1.1",
     "react": "^0.14.3",
     "react-dom": "^0.14.3"
@@ -58,6 +60,7 @@
     "gulp-util": "^3.0.7",
     "imagemin-jpegtran": "^4.3.2",
     "imagemin-pngquant": "^4.2.0",
+    "merge-stream": "^1.0.0",
     "nib": "^1.1.0",
     "reactify": "^1.1.1",
     "vinyl-buffer": "^1.0.0",
