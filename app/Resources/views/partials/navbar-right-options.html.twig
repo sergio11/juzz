@@ -1,0 +1,58 @@
+<ul class="nav navbar-nav navbar-right">
+    {% if app.user %}
+    <li>
+        <a href="#">
+            <span class="fui-mic"></span>&nbsp;
+            <span class="hidden-sm">Subir</span>
+        </a>
+    </li>
+    {% endif %} {% if not app.user %}
+    <li>
+        <a data-toggle="modal" href="#login">
+            <span class='fui-user'></span>&nbsp;
+            <span class="hidden-sm">Entra</span>
+        </a>
+    </li>
+    <li>
+        <a href="{{path('register')}}">
+            <span class='fui-new'></span>&nbsp;
+            <span class="hidden-sm">Registrate</span>
+        </a>
+    </li>
+    {% elseif app.user %}
+    <li id='notificacion-component-mount-point' data-target="{{ app.user.id }}"></li>
+    <li>
+        <a class='user dropdown-toggle' href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class='img-circle' width='45' src="{{ asset(app.user.getAvatar().getWebPath()) }}">
+            <span class="hidden-sm"> {{ app.user.getNombreCompleto() }}</span>
+        </a>
+        <ul class="dropdown-menu text-capitalize" data-placement="left" role='menu'>
+            <li>
+                <a rel='nofollow' href="{{ path('perfil',{user:app.user.nick}) }}">
+                    <span class='fui-user'></span></span>&nbsp;&nbsp;Mi Perfil
+                </a>
+            </li>
+            <li>
+                <a rel='nofollow' href="">
+                    <span class='fui-time'></span>&nbsp;&nbsp;Escuchar Más Tarde {{ badge('14') }}
+                </a>
+            </li>
+            <li>
+                <a rel='nofollow' href="">
+                    <span class='fui-star-2'></span>&nbsp;&nbsp;Mis Subscripciones {{ badge('1') }}
+                </a>
+            </li>
+            <li>
+                <a rel='nofollow' href="{{ path('editar_perfil',{user:app.user.nick}) }}">
+                    <span class="fui-lock"></span>&nbsp;&nbsp;Zona Privada
+                </a>
+            </li>
+            <li>
+                <a rel='nofollow' href="{{path('logout')}}">
+                    <span class="fui-exit"></span>&nbsp;&nbsp;Cerrar Sesión
+                </a>
+            </li>
+        </ul>
+    </li>
+    {% endif %}
+</ul>

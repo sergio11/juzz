@@ -4,13 +4,9 @@
 	<div  class="container-fluid tab-pane active">
 
 		{{ form(form, { 'action': path('register'), 'method': 'POST','style': 'horizontal'}) }}
-
-		<h5 class="text-center">o también ...</h5>
-		</hr>
-		<div>
-		{% include ':default:social-buttons.html.twig' %}
-		</div>
-		<p class="text-muted text-center">Juzz no publicará nada en Facebook o Twitter sin tu consentimiento</p>
+        {# Incluímos las social options #}
+        {% include 'juzzUsuariosBundle:Accounts:partials/social-options.html.twig' %}
+		
 	</div>
 {% endblock %}
 

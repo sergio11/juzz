@@ -1,15 +1,11 @@
-{% extends 'juzzUsuariosBundle:PrivateZone:base.html.twig' %}
+{% extends 'juzzUsuariosBundle:PrivateZone:base.html.twig' %} 
 
-{% block tabContent %}
+{% block tabContent %} 
 
-    {# Incluimos formulario cambio de email #}
-    {% include 'juzzUsuariosBundle:PrivateZone:change-email.html.twig' %}
+<div class="container">
 
-  
-    <div class="container">
-
-        {{ render_flash_alerts() }}
-        <!--<div class="row">
+    {{ render_flash_alerts() }}
+    <!--<div class="row">
             
             <div class="col-md-3">
                 <h2 class="section-title text-center">Mi Perfil</h2>
@@ -18,44 +14,35 @@
                 <h4 class="text-center">Te uniste el : {{ user.ingreso | date('Y-m-d') }}</h4>
             </div>
         </div>-->
-        
-        <div class="container-card">
-            <h2 class="text-center">Edita los datos de tu perfil</h2> 
 
-            <div class="row">
-                <div class="col-sm-12">
-                    {{ form(edit_form, { 'action': path('editar_perfil',{user:user.nick}), 'method': 'POST','style': 'horizontal'}) }}
-                </div>
-            </div>
-           
-            
-            <div class="row">
-                <div class="col-md-8">
-                    <a data-toggle="modal" href="#changeEmail">
-                        <span class='glyphicon glyphicon-envelope'></span>&nbsp;
-                        <span class="hidden-sm">Cambiar Email</span>
-                    </a>
-                    <a data-toggle="modal" href="#changeProfileBackground">
-                        <span class='glyphicon glyphicon-envelope'></span>&nbsp;
-                        <span class="hidden-sm">Cambiar Foto Perfil</span>
-                    </a>
-                </div>
-            </div>
+    <div class="container-card">
+        <h2 class="text-center">Edita los datos de tu perfil</h2>
 
+        <div class="row">
+            <div class="col-sm-12">
+                {{ form(edit_form, { 'action': path('editar_perfil',{user:user.nick}), 'method': 'POST','style': 'horizontal'}) }}
+            </div>
         </div>
+        
+        {% include 'juzzUsuariosBundle:PrivateZone:partials/other-edit-options.html.twig' %}
 
     </div>
-	
-	
+
+</div>
+
+{# Incluimos formulario cambio de email#} 
+{% include 'juzzUsuariosBundle:PrivateZone:partials/change-email.html.twig' %}
+
 {% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    
-    <script type="text/javascript">
-        $(function(){
+{% block javascripts %} 
+
+{{ parent() }}
+
+<script type="text/javascript">
+    $(function(){
             $("select").select2({dropdownCssClass: 'dropdown-inverse'});
         })
-    </script>
+</script>
 {% endblock %}
 

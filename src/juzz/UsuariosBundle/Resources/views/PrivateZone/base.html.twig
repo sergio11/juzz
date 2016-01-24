@@ -5,13 +5,13 @@
 		<div class="dropdown mobile-dropdown visible-sm visible-xs">
 	    	<a data-toggle="dropdown" class="activador" href="#">Selecciona menu</a>
 	    	<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-	        	{% include "juzzUsuariosBundle:Usuarios:profile-nav-options.html.twig" %}
+	        	{% include "juzzUsuariosBundle:PrivateZone:partials/private-zone-nav-options.html.twig" %}
 	        </ul>
 	    </div>
 	{% else %}
 		<div class="big-tabs-container">
 			<ul class="nav nav-tabs">
-	    		{% include "juzzUsuariosBundle:Usuarios:profile-nav-options.html.twig" %}
+	    		{% include "juzzUsuariosBundle:PrivateZone:partials/private-zone-nav-options.html.twig" %}
 	    	</ul>
 			{# Tab Content #}
 	    	{% block tabContent %}{% endblock %}

@@ -1,0 +1,23 @@
+{% set nav = {
+    perfil:    { title: "Perfil", path: "perfil", params: {user:app.user.nick} }
+} %}
+
+<ul class="nav nav-tabs">
+    {% for item in nav %}
+        <li class="tab_item {{ app.request.attributes.get('_route') == item.path ? 'active' : '' }}">
+            <a href="{{ path(item.path,item.params) }}">{{ item.title }}</a>
+        </li>
+    {% endfor %}
+</ul>
+
+{# 
+
+programas:  { title: "Programas", path: "", params: null },
+    episodios: { title: "Episodios", path: "", params: null },
+    listas: { title: "Listas", path: "", params: null },
+    favoritos: { title: "Favoritos", path: "", params: null },
+    seguidores: { title: "Seguidores", path: "", params: null },
+    siguiendo: { title: "Siguiendo", path: "", params: null },
+
+#}
+		

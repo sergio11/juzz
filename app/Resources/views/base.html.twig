@@ -17,157 +17,16 @@
 
 </head>
 <body>
-  <header>
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div>
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle pull-left collapsed" data-toggle="collapse" data-target="#main-navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-          </button>
-          <button type="button" class="navbar-toggle pull-right active collapsed" data-toggle="collapse" data-target="#searchbar">
-              <span class="sr-only">Toggle player</span>
-              <span class="fui-search"></span>
-          </button>
-
-          {% set route = app.user ? path('perfil',{ 'user' : app.user.nick }) : path('portada') %}
-          <a class="navbar-brand" href="{{route}}"></a>
-  
-        </div>
-        <div class="navbar-collapse collapse in" id="main-navbar">
-          <ul class="nav navbar-nav navbar-left">
-            <li class="active">
-              <a href="{{route}}">Inicio</a>
-            </li>
-            <li>
-              <a href="#">Explorar</a>
-            </li>
-            <li class="hidden-xs">
-                <a data-toggle="collapse" data-target="#searchbar">
-                    <span class="fui-search"></span>&nbsp;
-                    <span class="hidden-sm">Buscar</span>
-                </a>
-            </li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            {% if app.user %}
-              <li>
-                <a href="#">
-                  <span class="fui-mic"></span>&nbsp;
-                  <span class="hidden-sm">Subir</span>
-                </a>
-              </li>
-            {% endif %}
-
-            {% if not app.user %}
-              <li>
-                <a data-toggle="modal" href="#login">
-                  <span class='fui-user'></span>&nbsp;
-                  <span class="hidden-sm">Entra</span>
-                </a>
-              </li>
-              <li>
-                <a href="{{path('register')}}">
-                  <span class='fui-new'></span>&nbsp;
-                  <span class="hidden-sm">Registrate</span>
-                </a>
-              </li>
-            {% elseif app.user %}
-              <li id='notificacion-component-mount-point' data-target="{{ app.user.id }}"></li>
-              <li>
-                <a class='user dropdown-toggle' href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <img class='img-circle' width='45' src="{{ asset(app.user.getAvatar().getWebPath()) }}">
-                  <span class="hidden-sm"> {{ app.user.getNombreCompleto() }}</span>
-                </a>
-                <ul class="dropdown-menu text-capitalize" data-placement="left" role='menu'>
-                  <li>
-                    <a rel='nofollow' href="{{ path('perfil',{user:app.user.nick}) }}">
-                      <span class='fui-user'></span></span>&nbsp;&nbsp;Mi Perfil
-                    </a>
-                  </li>
-                  <li>
-                    <a rel='nofollow' href="">
-                      <span class='fui-time'></span>&nbsp;&nbsp;Escuchar Más Tarde
-                      {{ badge('14') }}
-                    </a>
-                  </li>
-                  <li>
-                    <a rel='nofollow' href="">
-                      <span class='fui-star-2'></span>&nbsp;&nbsp;Mis Subscripciones
-                      {{ badge('1') }}
-                    </a>
-                  </li>
-                  <li>
-                    <a rel='nofollow' href="{{ path('editar_perfil',{user:app.user.nick}) }}">
-                      <span class="fui-lock"></span>&nbsp;&nbsp;Zona Privada
-                    </a>
-                  </li>
-                  <li>
-                    <a rel='nofollow' href="{{path('logout')}}">
-                      <span class="fui-exit"></span>&nbsp;&nbsp;Cerrar Sesión
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            {% endif %}
-          </ul>
-        </div>
-      </div>
-      <div id="searchbar" class="container collapse" data-target="#words" data-baseurl="http://www.ivoox.com/">
-            <form id="buscador" method="get" action="">
-              <div class="col-md-8">
-              	<p class="visible-lg visible-md">
-              		Busca podcasts, programas, episodios, canales, radios online, usuarios...
-              	</p>
-              </div>
-              <div class="col-md-4">
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search" id="search">
-                  <span class="input-group-btn">
-                    <button type="submit" class="btn"><span class="fui-search"></span></button>
-                  </span>
-                </div>
-              </div>
-            </form>
-        </div>
-    </nav>
-  </header>
+  {#  Header  #}
+  {% include '::partials/header.html.twig' %}
   <main>
-    {% block main %}
-    {% endblock %}
+    {% block main %}{% endblock %}
   </main>
-  <footer></footer>
+  {# Footer #}
+  {% include '::partials/footer.html.twig' %}
+  
   {% block javascripts %}
-    <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bower_components/flat-ui/dist/js/flat-ui.min.js') }}"></script>
-
-    <script type="text/javascript" src="{{ asset('bower_components/pusher/dist/pusher.min.js') }}"></script>
-    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
-    <!-- Vendor Bundle -->
-    <script type="text/javascript" src="{{ asset('js/vendor.min.js') }}"></script>
-
-    {% if app.user %}
-      <script type="text/javascript" src="{{ asset('bundles/juzznotifications/js/bundle.min.js') }}"></script>
-      <script type="text/javascript">
-        /*var socket = new Pusher('e3feeec9c2b05b1c6f12');
-        var my_channel = socket.subscribe('my-channel');
-          socket.bind('profile_visited',
-          function(data) {
-            var user = JSON.parse(data);
-            console.log(user);
-            // add comment into page
-          }
-        );*/
-
-        $(function () {
-          $('[data-toggle="popover"]').popover()
-        })
-      </script>
-    {% endif %}
-    
+    {% include '::partials/javascripts.html.twig' %}
   {% endblock %}
 </body>
 </html>

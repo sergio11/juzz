@@ -73,7 +73,7 @@ class DefaultController extends Controller
       )
     );
 
-    return $this->render('juzzUsuariosBundle:Usuarios:last_followers.html.twig',array(
+    return $this->render('juzzUsuariosBundle:Usuarios:partials/last_followers.html.twig',array(
       'followers' => $followers,
       'user' => $user
     ));
