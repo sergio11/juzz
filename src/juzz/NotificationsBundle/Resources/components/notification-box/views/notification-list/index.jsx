@@ -15,15 +15,12 @@ class NotificationList extends React.Component{
 
     componentDidMount() {
     	let toggle = this.refs.switch02;
-    	$(toggle).bootstrapSwitch();
+    	$(toggle).bootstrapSwitch().parent().on("click",(e) => {
+            e.stopPropagation();
+            toggleNotifications();
+        });
     }
     
-    _ontoggle(e){
-        console.log("Toggle...");
-        console.log(e);
-        e.cancelBubble = true;
-        toggleNotifications();
-    }
     
     //Compone los elementos de la lista.
     _renderNotificationItems(){
@@ -69,7 +66,7 @@ class NotificationList extends React.Component{
 	                    <span>Aviso Notificaciones</span>
 	                </div>
 	                <div className="col-xs-3">
-	                    <div className="bootstrap-switch-square " onClick={this._ontoggle.bind(this)}>
+	                    <div className="bootstrap-switch-square " >
 	                        <input type="checkbox"  defaultChecked={this.props.enabled} data-toggle="switch" name="square-switch" ref="switch02" />
 	                    </div>
 	                </div>

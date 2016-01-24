@@ -20,7 +20,6 @@ class NotificationComponent extends React.Component{
         
     };
     
- 
     render(){
 
         return (
