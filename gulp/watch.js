@@ -10,15 +10,12 @@ const plugins = require('gulp-load-plugins')({
 });
 
 gulp.task('watch', () => {
-  var onChange = (event) => {
-    plugins.gutil.log(gutil.colors.bgGreen('File '+event.path+' has been '+event.type));
-    // Tell LiveReload to reload the window
-    plugins.livereload.changed();
-  };
   // Starts the server
   plugins.livereload.listen();
-  gulp.watch('./src/juzz/*/Resources/components/**/*.jsx', ['app'])
-  .on('change', onChange);
+  plugins.gutil.log("Start Watch for ReactJS components");
+  gulp.watch('./src/juzz/*/Resources/components/**/views/**/*.jsx', ['app']).on('change',(event) => {
+      plugins.gutil.log(plugins.gutil.colors.bgGreen('File '+event.path+' has been '+event.type));
+  })
 
   plugins.gutil.log(plugins.gutil.colors.bgGreen('Watching for changes...'));
   

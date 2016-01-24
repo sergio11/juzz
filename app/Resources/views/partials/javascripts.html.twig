@@ -7,6 +7,10 @@
 <!-- Vendor Bundle -->
 <script type="text/javascript" src="{{ asset('js/vendor.min.js') }}"></script>
 
+{% if app.debug %}
+    <script type="text/javascript">document.write('<script src="//localhost:35729/livereload.js?snipver=1" type="text/javascript"><\/script>')</script>
+{% endif %}
+
 {% if app.user %}
 <script type="text/javascript">
     /*var socket = new Pusher('e3feeec9c2b05b1c6f12');

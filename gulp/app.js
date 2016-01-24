@@ -12,7 +12,8 @@ const plugins = require('gulp-load-plugins')({
         'gulp-size': 'size',
         'gulp-es6-module-jstransform': 'transform',
         'gulp-sourcemaps': 'sourcemaps',
-        'gulp-util': 'gutil'
+        'gulp-util': 'gutil',
+        'gulp-livereload': 'livereload'
     },
     scope: 'devDependencies'
 });
@@ -89,7 +90,9 @@ gulp.task('app', () => {
 
     });
     
-    return merge;
+    return merge.pipe( plugins.livereload({ start: true }) ).on('error',(error) => {
+        plugins.gutil.error(error);
+    });
 
 });
 
