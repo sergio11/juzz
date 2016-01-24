@@ -40,9 +40,10 @@
 	{{ parent() }}
 	
     <script src="{{ asset('bower_components/hinclude/hinclude.js') }}"></script>
+    <script src="{{ asset('js/profile-bundle.min.js') }}"></script>
     <script type="text/javascript">
 
-    	$(function(){
+    	/*$(function(){
     		var includes = document.getElementsByTagName("hx:include");
     		Array.prototype.slice.call(includes).forEach(function(include){
     			include.addEventListener('ready',function(e){
@@ -59,7 +60,7 @@
     			});
     		});
 
-    	})
+    	})*/
     	
     </script>
 {% endblock %}

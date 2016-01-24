@@ -19,17 +19,42 @@ const plugins = require('gulp-load-plugins')({
 const merge = require('merge-stream')();
 const libs = require('./vendor').libs;
 
-const bundles = [
-    './src/juzz/CommentsBundle',
-    './src/juzz/NotificationsBundle'
-];
+const PATTERN_PATH = "/Resources/components/**/views/**/*.jsx";
+const BUNDLES_DEST = "./web/js";
+const SOURCEMAPS_DEST = './maps';
+
+//JavaScript Components
+const APP_COMPONENTS = {
+    commentWall: './src/juzz/CommentsBundle',
+    notificationBox: './src/juzz/NotificationsBundle'
+}
+
+const pages = [
+    {
+        name: 'profile',
+        components: ['notificationBox', 'commentWall']
+    }
+]
+
+var getComponentsSources = (components) => {
+    return Promise.all(components.map(component => {
+        return new Promise((resolve,reject) => {
+            glob(PATTERN_PATH, { root: APP_COMPONENTS[component] },(err,entries) => {
+                !err ? resolve(entries) : reject(err);   
+            });
+        }); 
+    }));
+}
 
 
 gulp.task('app', () => {
 
-    bundles.map((bundle) => {
-        glob("/Resources/components/**/views/**/*.jsx", { root: bundle }, (er, entries) => {
+    pages.forEach((page) => {
 
+        plugins.gutil.log("Create Bundle for page : " + page.name);
+        plugins.gutil.log("Get Component Sources ");
+        getComponentsSources(page.components).then(entries => {
+            plugins.gutil.log("Init browserify ");
             var b = browserify({
                 entries: entries,
                 extensions: ['.jsx'],
@@ -39,29 +64,32 @@ gulp.task('app', () => {
                 .transform('browserify-shim');
 
             // The following requirements are loaded from the vendor bundle
+            plugins.gutil.log("Add External Libreries");
             libs.forEach((lib) => {
-                console.log("Add external library : " + lib);
                 b.external(lib);
             });
             //Browserify + Uglify2 with sourcemaps
             var task = b.bundle()
-                .pipe(source('bundle.min.js'))
+                .pipe(source(page.name + '-bundle.min.js'))
                 .pipe(buffer())
                 .pipe(plugins.sourcemaps.init({ loadMaps: true }))
                 .pipe(plugins.uglify())
                 .on('error', plugins.gutil.log)
-                .pipe(plugins.sourcemaps.write('/.'))
-                .pipe(gulp.dest(bundle + '/Resources/public/js'))
+                .pipe(plugins.sourcemaps.write(SOURCEMAPS_DEST))
+                .pipe(gulp.dest(BUNDLES_DEST))
                 .pipe(plugins.size({
-                    title: bundle + " size"
+                    title: page.name + " bundle size"
                 }));
 
             merge.add(task);
+        }).catch(err => {
+            plugins.gutil.error("Error ");
+            plugins.gutil.error(err);
+        })
 
-        });
     });
-
-    // create a merged stream
+    
     return merge;
 
 });
+
