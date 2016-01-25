@@ -16,3 +16,4 @@
 npm-debug
 *.map
 /web/js
+/web/img

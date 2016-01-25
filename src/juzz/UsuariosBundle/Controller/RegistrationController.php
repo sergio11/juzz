@@ -21,9 +21,6 @@ class RegistrationController extends Controller{
     $em = $this->getDoctrine()->getManager();
 
     $user = new UsuarioEntity();
-    $avatar = new ImagenEntity();
-    $user->setAvatar($avatar);
-
 
     if ($request->getMethod() == 'GET') {
       //Usar getClientIp.
@@ -41,9 +38,7 @@ class RegistrationController extends Controller{
     $form->handleRequest($request);
 
     if ($form->isValid()) {
-    
-      //Persistimos el avatar.
-      $em->persist($avatar);
+
       //Necesitamos saber el algoritmo de codificación utilizado en la contraseña.
       //Para poderlo aplicar a nuestros usuarios.
       $encoder = $this->get('security.encoder_factory')->getEncoder($user);
@@ -54,12 +49,6 @@ class RegistrationController extends Controller{
       //Establecemos politica de comentarios por defecto.
       $policy = $em->getRepository('juzzCommentsBundle:PoliticaComentarios')->find(1);
       $user->setPoliticaComentarios($policy);
-      //Aplicamos Imagen de perfil por defecto.
-      $profileBg = new ProfileBackground();
-      $profileBg->setName('default');
-      $profileBg->setType('png');
-      $profileBg->setPath('default.png');
-      $user->setProfileBg($profileBg);
 
       // Guardar el nuevo usuario en la base de datos
       $em->persist($user);

@@ -15,9 +15,9 @@ class UserEditType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('avatar','profile_image',array(
+           ->add('avatarFile','file',array(
                 'label' => false,
-                'required'  => false
+                'required' => false
             ))
             ->add('nick','text',array(
                 'label' => 'Nick',
@@ -69,6 +69,7 @@ class UserEditType extends AbstractType
                 'class'     => 'juzz\EpisodiosBundle\Entity\Categorias',
                 'expanded'  => false,
                 'multiple'  => true,
+                'required' => false,
                 'label' => 'Intereses',
                 'choice_label' => function ($category) {
                     return $category->getTermino()->getNombre();
@@ -81,9 +82,9 @@ class UserEditType extends AbstractType
                 'required' => true,
                 'property' => 'name'
             ))
-            ->add('profileBg','profile_background_image',array(
+            ->add('profileBgFile','file',array(
                 'label' => false,
-                'required'  => false
+                'required' => false
             ))
             ->add('actions', 'form_actions', [
                 'buttons' => [

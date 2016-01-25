@@ -6,8 +6,8 @@
 {% endblock %}
 {% block main %}
 	<div class="profile-header">
-		<div class="profile-header-bg" style="background-image:url({{ asset(owner.profilebg.webPath) }})">
-			<img class="profile-header-avatar" src="{{ asset(owner.avatar.webPath) }}" >
+		<div class="profile-header-bg" style="background-image:url({{ asset((vich_uploader_asset(owner, 'profileBgFile'))) }})">
+			<img class="profile-header-avatar" src="{{ asset(vich_uploader_asset(owner, 'avatarFile')) }}" alt="{{ owner.getFullName() }}" />
 		</div>
 		<div class="profile-header-details">
   			<h3 class="profile-header-owner">{{ owner.nombre }} <small>{{ owner.apellidos }}</small></h3>

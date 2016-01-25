@@ -9,6 +9,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\ExecutionContextInterface;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\SerializedName;
@@ -29,6 +31,7 @@ use JMS\Serializer\Annotation\Accessor;
  *     fields="nick",
  *     message="Ya existe un usuario con este nick"
  * )
+ * @Vich\Uploadable
  * @ExclusionPolicy("all")
  */
 class Usuarios implements UserInterface, \Serializable
@@ -61,7 +64,7 @@ class Usuarios implements UserInterface, \Serializable
      *     message="Your name cannot contain a number"
      * )
      * @Expose
-     * @Accessor(getter="getNombreCompleto")
+     * @Accessor(getter="getFullName")
      * @SerializedName("fullName")
      */
     private $nombre;
@@ -169,15 +172,30 @@ class Usuarios implements UserInterface, \Serializable
     private $ingreso;
 
     /**
-     * @var \Imagenes
-     *
-     * @ORM\ManyToOne(targetEntity="\juzz\FilesBundle\Entity\Imagenes")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="avatar", referencedColumnName="id")
-     * })
+     * @var File
+     * @Assert\File(
+     *     maxSize="1M",
+     *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
+     * )
+     * @Vich\UploadableField(mapping="user_avatar", fileNameProperty="avatar")
+     * 
+     */
+    private $avatarFile;
+
+    /**
+     * @var string
+     * @ORM\Column(name="avatar",type="string", length=255)
      * @Expose
      */
     private $avatar;
+
+    /**
+     * @ORM\Column(name="updated_avatar_at",type="datetime")
+     *
+     * @var \DateTime
+     */
+    private $updatedAvatarAt;
+
 
     /**
      * @var \Paises
@@ -199,15 +217,33 @@ class Usuarios implements UserInterface, \Serializable
      */
     private $politicaComentarios;
 
+
     /**
-     * @var \Imagenes
-     *
-     * @ORM\ManyToOne(targetEntity="\juzz\FilesBundle\Entity\ProfileBackground",cascade={"persist","remove"})
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="profile_bg", referencedColumnName="id")
-     * })
+     * @var File
+     * @Assert\File(
+     *     maxSize="1M",
+     *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
+     * )
+     * @Vich\UploadableField(mapping="user_profile_bg", fileNameProperty="profileBg")
+     * 
+     */
+    private $profileBgFile;
+
+    /**
+     * @var string
+     * @ORM\Column(name="profile_bg",type="string", length=255)
+     * 
      */
     private $profileBg;
+
+    /**
+     * @ORM\Column(name="updated_profilebg_at",type="datetime")
+     *
+     * @var \DateTime
+     */
+    private $updatedProfileBgAt;
+
+    
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -430,7 +466,7 @@ class Usuarios implements UserInterface, \Serializable
         return $this->ape2;
     }
 
-    public function getNombreCompleto()
+    public function getFullName()
     {
         return $this->nombre . " " . $this->ape1 . " " . $this->ape2; 
     }
@@ -574,22 +610,46 @@ class Usuarios implements UserInterface, \Serializable
     }
 
     /**
-     * Set avatar
      *
-     * @param \juzz\FilesBundle\Entity\Imagenes $avatar
-     * @return Usuarios
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+     *
+     * @return Usuario
      */
-    public function setAvatar(\juzz\FilesBundle\Entity\Imagenes $avatar = null)
+    public function setAvatarFile(File $image = null)
     {
-        $this->avatar = $avatar;
+        $this->avatarFile = $image;
+
+        if ($image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAvatarAt = new \DateTime('now');
+        }
 
         return $this;
     }
 
     /**
+     * @return File
+     */
+    public function getAvatarFile()
+    {
+        return $this->avatarFile;
+    }
+
+    /**
+     * Set Avatar File Name
+     * @param string $avatar
+     * @return Usuarios
+     */
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
+        return $this;
+    }
+
+    /**
      * Get avatar
-     *
-     * @return \juzz\FilesBundle\Entity\Imagenes 
+     * @return string
      */
     public function getAvatar()
     {
@@ -597,12 +657,39 @@ class Usuarios implements UserInterface, \Serializable
     }
 
     /**
-     * Set profileBg
      *
-     * @param \juzz\FilesBundle\Entity\ProfileBackground $profileBg
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+     *
+     * @return Usuario
+     */
+    public function setProfileBgFile(File $image = null)
+    {
+        $this->profileBgFile = $image;
+
+        if ($image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedProfileBgAt = new \DateTime('now');
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return File
+     */
+    public function getProfileBgFile()
+    {
+        return $this->profileBgFile;
+    }
+
+    /**
+     * Set profileBg name
+     *
+     * @param string $profileBg
      * @return Usuarios
      */
-    public function setProfileBg(\juzz\FilesBundle\Entity\ProfileBackground $profileBg = null)
+    public function setProfileBg($profileBg = null)
     {
         $this->profileBg = $profileBg;
 
@@ -610,9 +697,9 @@ class Usuarios implements UserInterface, \Serializable
     }
 
     /**
-     * Get profileBg
+     * Get profileBg name
      *
-     * @return \juzz\FilesBundle\Entity\ProfileBackground 
+     * @return string
      */
     public function getProfileBg()
     {

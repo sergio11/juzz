@@ -122,6 +122,20 @@ braincrafted_bootstrap:
         knp_menu: true
         knp_paginator: true
 
+vich_uploader:
+    db_driver: orm
+    mappings:
+        user_avatar:
+            uri_prefix:         /img/avatares
+            upload_destination: %kernel.root_dir%/../web/img/avatares
+            delete_on_update:   true
+            delete_on_remove:   true
+        user_profile_bg:
+            uri_prefix:         /img/profilesbg
+            upload_destination: %kernel.root_dir%/../web/img/profilesbg
+            delete_on_update:   true
+            delete_on_remove:   true
+
 services:
     twig.mobile_detect_extension:
         class: Bes\Twig\Extension\MobileDetectExtension

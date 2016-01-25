@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             new juzz\NotificationsBundle\juzzNotificationsBundle(),
             new juzz\DoctrineMetadaBundle\juzzDoctrineMetadaBundle(),
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
