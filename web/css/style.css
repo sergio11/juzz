@@ -563,68 +563,7 @@ form .form-group{
 
 
 
-/*
-  
-  Profile Header
 
-*/
-
-.profile-header{
-  height: 25vh;
-  background-color: #fff;
-}
-
-.profile-header .profile-header-bg{
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background-image: url("../img/pattern_profile_bg_1.png");
-  height: 60%;
-  border-bottom: 1px solid #297a4d;
-  position: relative;
-}
-
-.profile-header .profile-header-bg .profile-header-avatar{
-  position: absolute;
-  width: 145px;
-  height: 145px;
-  top: calc(100% - 72px);
-  left: 50%;
-  transform:translateX(-50%);
-  border-radius: 50%;
-  border: 2px solid #297a4d; 
-}
-
-.profile-header .profile-header-details{
-  margin: 1rem 0;
-  overflow: hidden;
-}
-
-.profile-header .profile-header-details .profile-header-owner{
-  float: left;
-  font-size: 3rem;
-  margin-left: 30px;
-  color: #297a4d;
-}
-
-.profile-header .profile-header-details .profile-header-statistics{
-  float: right;
-  margin-right: 30px;
-}
-
-.profile-header .profile-header-details .profile-header-statistics > li{
-  display: inline-block;
-  vertical-align: middle;
-  padding:.2rem 1rem;
-}
-
-.profile-header .profile-header-details .profile-header-statistics > li:not(:last-child){
-  border-right: 1px solid #297a4d;
-}
-
-.profile-header .profile-header-details .profile-header-statistics > li a{
-  color: #297a4d;
-}
 
 
 
