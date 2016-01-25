@@ -8,7 +8,7 @@
 
 {% block tags_input_widget %}
 {% spaceless %}
-    <select class="form-control multiselect multiselect-success" {% if multiple %} multiple="multiple"{% endif %}>
+    <select class="form-control multiselect multiselect-success" {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
         {% if empty_value is not none %}
             <option value="">{{ empty_value|trans({}, translation_domain) }}</option>
         {% endif %}
