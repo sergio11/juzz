@@ -6,7 +6,10 @@
 {% endblock %}
 {% block main %}
 	<div class="profile-header">
-		<div class="profile-header-bg" style="background-image:url({{ asset((vich_uploader_asset(owner, 'profileBgFile'))) }})">
+		<div class="profile-header-bg-container">
+			<div class="profile-header-bg">
+				<img src="{{ asset((vich_uploader_asset(owner, 'profileBgFile'))) }}">
+			</div>
 			<img class="profile-header-avatar" src="{{ asset(vich_uploader_asset(owner, 'avatarFile')) }}" alt="{{ owner.getFullName() }}" />
 		</div>
 		<div class="profile-header-details">
@@ -27,6 +30,18 @@
            	</ul>
 		</div>
 	</div>
+	<svg class='hide'>
+	  <filter id="monocromatica">
+	   <feColorMatrix in="SourceGraphic"
+	    type="matrix"
+		 values="
+		     1     0 0 0  0 
+		     0.69  0 0 0  0.35 
+		     1     0 0 0  0 
+		     0     0 0 1  0
+		     " />
+	  </filter>
+	</svg>
 	<div class="big-tabs-container">
 		{# Incluimos opciones de navegación #}
         {% include "juzzUsuariosBundle:Usuarios:partials/profile-nav-options.html.twig" %}

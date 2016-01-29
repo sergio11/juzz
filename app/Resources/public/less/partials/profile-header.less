@@ -2,13 +2,23 @@
 .profile-header{
   height: @profile-header-height;
   background-color: @profile-header-bg-color;
-  .profile-header-bg{
-    background:url("../img/pattern_profile_bg_1.png") no-repeat top center fixed;
-    background-size: 100%;
+  position: relative;
+  .profile-header-bg-container{
     height: 70%;
     border-bottom: 1px solid @green-sea;
     .blend-green-sea();
     position: relative;
+    .profile-header-bg{
+      overflow: hidden;
+      &, > img{
+        position: absolute;
+        top: 0;bottom:0;
+        width: 100%;
+      }
+      > img{
+        filter: contrast(2) grayscale(1) url(#monocromatica);
+      }
+    }
     .profile-header-avatar{
       position: absolute;
       width: 145px;
@@ -19,7 +29,9 @@
       border-radius: 50%;
       border: 2px solid @green-sea; 
     }
+
   }
+  
   .profile-header-details{
     margin: 1rem 0;
     overflow: hidden;
