@@ -9,37 +9,26 @@ use juzz\FilesBundle\Entity\Imagenes AS ImagenEntity;
 use juzz\UsuariosBundle\Form\UserEditType;
 use juzz\UsuariosBundle\Form\UserChangeEmailType;
 use juzz\FilesBundle\Form\ProfileBackgroundType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class ProfileController extends Controller
 {
     /**
      * Show the user
+     * @ParamConverter("user", options={"mapping": {"user" = "nick"}})
      */
-    public function showAction(Request $request,$user)
+    public function showAction(Request $request, UsuarioEntity $user)
     {
 
-        if (empty($user)) {
-            //Usuario actual que ha iniciado sesión.
-            $user = $this->getUser();
-        }else{
-            $em = $this->getDoctrine()->getManager();
-            $user = $em->getRepository('juzzUsuariosBundle:Usuarios')->findOneBy(array('nick' => $user));
-            //Si no existe el usuario lanzamos 404
-            if (!$user) {
-                throw $this->createNotFoundException();
-            }
-
-            if($this->getUser()->getId() != $user->getId()){
-                $pusher = $this->container->get('lopi_pusher.pusher');
-                $serializer = $this->get('jms_serializer');
-                $message = array(
-                    'name' => $this->getUser()->getNombreCompleto(),
-                    'avatar' => $this->getUser()->getAvatar()->getWebPath(),
-                    'profile' => $this->generateUrl('perfil',array('user' => $this->getUser()->getNick()))
-                );
-                $pusher->trigger( 'my-channel', 'profile_visited', $serializer->serialize($message, 'json'));
-            }
-            
+        if($this->getUser()->getId() != $user->getId()){
+           $pusher = $this->container->get('lopi_pusher.pusher');
+           $serializer = $this->get('jms_serializer');
+           $message = array(
+              'name' => $this->getUser()->getNombreCompleto(),
+              'avatar' => $this->getUser()->getAvatar()->getWebPath(),
+              'profile' => $this->generateUrl('perfil',array('user' => $this->getUser()->getNick()))
+           );
+           $pusher->trigger( 'my-channel', 'profile_visited', $serializer->serialize($message, 'json'));
         }
         //Renderizamos página de perfil con la información del propietario.
         return $this->render('juzzUsuariosBundle:Usuarios:profile.html.twig',array(
@@ -48,16 +37,11 @@ class ProfileController extends Controller
     }
     /**
      * Edit the user
+     * @ParamConverter("user", options={"mapping": {"user" = "nick"}})
      */
-    public function editAction(Request $request,$user)
+    public function editAction(Request $request, UsuarioEntity $user)
     {
         
-        $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository('juzzUsuariosBundle:Usuarios')->findOneBy(array('nick' => $user));
-        //Si no existe el usuario lanzamos 404
-        if (!$user) {
-            throw $this->createNotFoundException("El usuario no existe");
-        }
         //Si el usuario de la sesión no es el propietario del perfil.
         if ($this->getUser()->getNick() != $user->getNick()) {
             throw $this->createAccessDeniedException();

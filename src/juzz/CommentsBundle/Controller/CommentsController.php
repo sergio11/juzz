@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use juzz\CommentsBundle\Entity\Comentarios AS Comment;
 use juzz\CommentsBundle\Entity\AssessComment AS AssessComment;
+use juzz\UsuariosBundle\Entity\Usuarios AS UsuarioEntity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class CommentsController extends Controller
 {
@@ -175,17 +177,13 @@ class CommentsController extends Controller
  
     }
 
-
-    public function commentsWallAction($owner_target,$target)
+    /**
+     * 
+     * @ParamConverter("owner", options={"mapping": {"owner_target" = "id"}})
+     */
+    public function commentsWallAction(UsuarioEntity $owner,$target)
     {
-        $em = $this->getDoctrine()->getManager();
-        $owner = $em->getRepository("juzzUsuariosBundle:Usuarios")->find($owner_target);
-        //Si no existe el usuario lanzamos 404
-        if (!$owner) {
-            throw $this->createNotFoundException();
-        }
-
-
+  
         $user = $this->getUser();
         return $this->render('juzzCommentsBundle:Default:comments-wall.html.twig',array(
         	'comments' => array(),
