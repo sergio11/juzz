@@ -26,21 +26,15 @@
 			</ul>
 		</div>
 		{# comments wall #}
-		{{ render_hinclude(controller('juzzCommentsBundle:Comments:commentsWall',{'target' : owner.id,'owner_target':owner.id}), {
-    		'default': 'Cargando Comentarios ...'
-		}) }}
+		{{ render_hinclude(controller('juzzCommentsBundle:Comments:commentsWall',{'target' : owner.id,'owner_target':owner.id})) }}
 	</div>
 	<!-- SIDEBAR -->
 	<div class="col-lg-4 col-xs-12">
 		{# Carga Asíncrona de controladores #}
 		{# Last Upload Audios #}
-		{{ render_hinclude(controller('juzzEpisodiosBundle:Episodios:lastUploadedEpisodes',{'idUser' : 3}), {
-    		'default': 'Cargando Últimos Episodios ...'
-		}) }}
+		{{ render_hinclude(controller('juzzEpisodiosBundle:Episodios:lastUploadedEpisodes',{'idUser' : 3})) }}
 
 		{# Current User Followers #}
-		{{ render_hinclude(controller('juzzUsuariosBundle:Default:followers',{ 'user' : owner.id }), {
-    		'default': 'Cargando ...'
-		}) }}
+		{{ render_hinclude(controller('juzzUsuariosBundle:Default:followers',{ 'user' : owner.id })) }}
 	</div>
 </div>
