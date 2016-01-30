@@ -31,7 +31,7 @@ class ProfileController extends Controller
            $pusher->trigger( 'my-channel', 'profile_visited', $serializer->serialize($message, 'json'));
         }*/
         //Renderizamos página de perfil con la información del propietario.
-        return $this->render('juzzUsuariosBundle:Usuarios:profile.html.twig',array(
+        return $this->render('juzzUsuariosBundle:Usuarios:tab-profile.html.twig',array(
             'owner' => $user
         ));
     }
@@ -51,6 +51,7 @@ class ProfileController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
             $this->get('ras_flash_alert.alert_reporter')->addSuccess('Cambios Guardados con Éxito');

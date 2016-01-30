@@ -59,7 +59,8 @@ class FollowersController extends Controller{
     public function lastAction(UsuarioEntity $user){
   
         return $this->render('juzzUsuariosBundle:Usuarios:partials/last_followers.html.twig',array(
-            'followers' => $user->getFollowers()
+            'followers' => $user->getFollowers(),
+            'owner_nick' => $user->getNick()
         ));
     }
     

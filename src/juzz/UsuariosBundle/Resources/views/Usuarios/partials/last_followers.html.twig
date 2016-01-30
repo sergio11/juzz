@@ -1,12 +1,12 @@
 <div class = "panel panel-default">
-   <div class ="panel-heading">Seguidores ({{ followers|length }})</div>
+   <div class ="panel-heading">últimos seguidores ({{ followers|length }})</div>
    <ul class = "list-group">
       {% if followers|length %}
          {% for follower in followers %}
             <li class="list-group-item">
                <div class="media">
                   <div class="media-left">
-                     <a href="{{ path('perfil',{'user': follower.nick}) }}" title='{{ follower.getFullName() }}'>
+                     <a href="{{ path('perfil',{'user': follower.nick}) }}" data-toggle="tooltip" data-placement="left" title='{{ follower.getFullName() }}'>
                         <img class="media-object img-circle" width='60px' height="60px" src="{{ asset(vich_uploader_asset(follower, 'avatarFile')) }}" alt="{{ follower.getFullName() }}">
                      </a>
                   </div>
@@ -25,7 +25,7 @@
             </li>
          {% endfor %}
          <li class="list-group-item {{ not followers ? 'disabled' }} text-center">
-            <a href="#">
+            <a href="{{ path('followers',{'user':owner_nick}) }}">
                 <span class='fa fa-plus-circle '></span>&nbsp;
                 <span class='text-capitalize'>ver todos</span>
             </a>
@@ -33,7 +33,7 @@
       {% else %}
          <li class="list-group-item list-group-item-info text-center">
             <span class="fa fa-info fa-lg"></span>&nbsp;
-            <span class="list-group-item-text">No Tiene Followers</span>
+            <span class="list-group-item-text">{% if owner_nick != app.user.nick %}No Tiene Followers {% else %} No tienes Followers {% endif %}</span>
          </li>
       {% endif %}
       

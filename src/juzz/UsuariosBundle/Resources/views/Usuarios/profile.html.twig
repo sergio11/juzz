@@ -29,9 +29,8 @@
 	                </a>
 	            </li>
 	            <li>
-	            	<a href="" rel="nofollow" title="">
-	                   	{{ icon('users') }}&nbsp;
-	                    12
+	            	<a href="{{ path('followers',{'user':owner.nick}) }}" rel="nofollow" data-toggle="tooltip" data-placement="bottom" title="{{ owner.getFullName()  }} tiene {{ owner.followers|length }} seguidores">
+	                   	{{ icon('users') }}&nbsp; {{ owner.followers|length }}
 	                </a>
 	            </li>
            	</ul>
@@ -53,8 +52,8 @@
 		{# Incluimos opciones de navegación #}
         {% include "juzzUsuariosBundle:Usuarios:partials/profile-nav-options.html.twig" %}
 		<div class="container-fluid">
-			{{ render_flash_alerts() }}
-			{% include "juzzUsuariosBundle:Usuarios:tab-profile.html.twig" %}
+        {{ render_flash_alerts() }}
+        {% block profile_tab_content %}{% endblock %}
 		</div><!-- /content -->
 	</div><!-- /tabs -->
 {% endblock %}

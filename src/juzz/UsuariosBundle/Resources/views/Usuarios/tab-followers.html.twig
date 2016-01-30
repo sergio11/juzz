@@ -1,8 +1,11 @@
+{% extends 'juzzUsuariosBundle:Usuarios:profile.html.twig' %}
+{% block profile_tab_content %}
 <div class="row">
 	<div class="col-xs-12">
         <div id='user-list-mount-point'></div>
     <div>
 <div>
+{% endblock %}
 {% block javascripts %}
 	{{ parent() }}
     <script src="{{ asset('js/followers-bundle.min.js') }}"></script>

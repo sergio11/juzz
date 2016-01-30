@@ -1,3 +1,5 @@
+{% extends 'juzzUsuariosBundle:Usuarios:profile.html.twig' %}
+{% block profile_tab_content %}
 <div class="row">
 	<div class="col-lg-8 col-xs-12">
 		{# Información Personal #}
@@ -10,7 +12,7 @@
 		    		<hr>
 		    		<h3>Intereses</h3>
 		    		{% for interes in owner.categoria %}
-		    			<a href="{{ path('episodios_categorias',{category:interes.termino.slug}) }}">
+		    			<a data-toggle="tooltip" data-placement="bottom" title="{{interes.termino.descripcion}}" href="{{ path('episodios_categorias',{category:interes.termino.slug}) }}">
 		    				<span class="label label-pill label-success">{{ interes.termino.nombre }}</span>
 		    			</a>
 		    		{% endfor %}
@@ -38,6 +40,7 @@
 		{{ render_hinclude(controller('juzzUsuariosBundle:Followers:last',{ 'user' : owner.id })) }}
 	</div>
 </div>
+{% endblock %}
 {% block javascripts %}
 	{{ parent() }}
 	
