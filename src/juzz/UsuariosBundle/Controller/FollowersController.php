@@ -65,31 +65,12 @@ class FollowersController extends Controller{
     
     /**
     * Devuelve todos los seguidores para un usuario.
-    * @ParamConverter("user", options={"mapping": {"user" = "id"}})
+    * @ParamConverter("user", options={"mapping": {"user" = "nick"}})
     */
-    public function allAction(UsuarioEntity $user){
-       /* try {
-
-			$user->getSeguido();
-
-            $serializer = $this->get('jms_serializer');
-
-            $response = $serializer->serialize([
-            	'success' => true,
-            	'data'    => $posts
-            ], 'json');
-
-            return new Response($response);
-
-	    } catch (\Exception $exception) {
-
-	        return new JsonResponse([
-	            'success' => false,
-	            'code'    => $exception->getCode(),
-	            'message' => $exception->getMessage(),
-	        ]);
-
-	    }*/
+    public function showAction(UsuarioEntity $user){
+       return $this->render('juzzUsuariosBundle:Usuarios:tab-followers.html.twig',array(
+           'owner' => $user
+       ));
     }
     
 }

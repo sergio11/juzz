@@ -40,9 +40,9 @@ delete_follower:
     requirements:
         user:  \w+
         follower: \w+
-get_followers:
+followers:
     path:   /{user}/followers/
-    defaults: {_controller: juzzUsuariosBundle:Followers:all}
+    defaults: {_controller: juzzUsuariosBundle:Followers:show}
     requirements:
         user:  \w+
 

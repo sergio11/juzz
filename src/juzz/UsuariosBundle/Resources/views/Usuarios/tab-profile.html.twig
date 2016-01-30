@@ -38,3 +38,31 @@
 		{{ render_hinclude(controller('juzzUsuariosBundle:Followers:last',{ 'user' : owner.id })) }}
 	</div>
 </div>
+{% block javascripts %}
+	{{ parent() }}
+	
+    <script src="{{ asset('bower_components/hinclude/hinclude.js') }}"></script>
+    <script src="{{ asset('js/profile-bundle.min.js') }}"></script>
+    <script type="text/javascript">
+
+    	/*$(function(){
+    		var includes = document.getElementsByTagName("hx:include");
+    		Array.prototype.slice.call(includes).forEach(function(include){
+    			include.addEventListener('ready',function(e){
+    				var child = this.firstElementChild;
+    				if(child && child.hasAttribute("data-component")){
+    					var url = child.getAttribute("data-component");
+    					var s = document.createElement('script');
+				        s.type = 'text/javascript';
+				        s.async = true;
+				        s.src = url;
+				        var x = document.getElementsByTagName('script')[0];
+				        x.parentNode.insertBefore(s, x);
+    				}
+    			});
+    		});
+
+    	})*/
+    	
+    </script>
+{% endblock %}

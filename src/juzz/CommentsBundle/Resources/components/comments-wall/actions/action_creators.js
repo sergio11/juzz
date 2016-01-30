@@ -1,6 +1,6 @@
 import ActionTypes from './action_types';
 import Dispatcher from '../../../../../../../app/Resources/public/js/appDispatcher';
-import api from '../lib/api';
+import api from '../../../../../../../app/Resources/public/js/lib/api';
 
 export function getPosts(target){
 	api.getPosts(target)   

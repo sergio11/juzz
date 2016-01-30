@@ -29,7 +29,9 @@
     "classnames": "^2.2.3",
     "flux": "^2.1.1",
     "react": "^0.14.3",
-    "react-dom": "^0.14.3"
+    "react-dom": "^0.14.3",
+    "react-loader": "^2.0.0",
+    "react-waypoint": "^1.2.3"
   },
   "devDependencies": {
     "babel-core": "^6.4.0",

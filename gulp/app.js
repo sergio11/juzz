@@ -27,13 +27,18 @@ const SOURCEMAPS_DEST = './maps';
 //JavaScript Components
 const APP_COMPONENTS = {
     commentWall: './src/juzz/CommentsBundle',
-    notificationBox: './src/juzz/NotificationsBundle'
+    notificationBox: './src/juzz/NotificationsBundle',
+    usersProfileGrid: './src/juzz/UsuariosBundle'
 }
 
 const pages = [
     {
         name: 'profile',
         components: ['notificationBox', 'commentWall']
+    },
+    {
+        name: 'followers',
+        components: ['notificationBox','usersProfileGrid']
     }
 ]
 
