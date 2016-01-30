@@ -46,39 +46,7 @@ class DefaultController extends Controller
       ));
 
     }
-
-  
-
-
-
-
-  public function followersAction(Request $request,$user){
-
-    $dummyPhoto = $this->getUser()->getAvatar()->getWebPath();
-    $followers = array(
-      array(
-        'photo' => $dummyPhoto,
-        'name' => 'Jose David Quirós',
-        'followers' => 0
-      ),
-      array(
-        'photo' => $dummyPhoto,
-        'name' => 'David Martín Sánchez',
-        'followers' => 0
-      ),
-      array(
-        'photo' => $dummyPhoto,
-        'name' => 'Jose David Quirós',
-        'followers' => 0
-      )
-    );
-
-    return $this->render('juzzUsuariosBundle:Usuarios:partials/last_followers.html.twig',array(
-      'followers' => $followers,
-      'user' => $user
-    ));
-  }
-
+    
   public function recentUserActivityAction(){
     
     return $this->render('juzzUsuariosBundle:Usuarios:recent_user_activity.html.twig');

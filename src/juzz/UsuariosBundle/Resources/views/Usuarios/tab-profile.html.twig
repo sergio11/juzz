@@ -35,6 +35,6 @@
 		{{ render_hinclude(controller('juzzEpisodiosBundle:Episodios:lastUploadedEpisodes',{'idUser' : 3})) }}
 
 		{# Current User Followers #}
-		{{ render_hinclude(controller('juzzUsuariosBundle:Default:followers',{ 'user' : owner.id })) }}
+		{{ render_hinclude(controller('juzzUsuariosBundle:Followers:last',{ 'user' : owner.id })) }}
 	</div>
 </div>

@@ -27,6 +27,24 @@ mis_comentarios:
     defaults: {_controller: juzzUsuariosBundle:Profile:myComments}
     requirements:
         user:  \w+
+#Followers
+add_follower:
+    path:   /{user}/followers/{follower}/add
+    defaults: {_controller: juzzUsuariosBundle:Followers:add}
+    requirements:
+        user:  \w+
+        follower: \w+
+delete_follower:
+    path:   /{user}/followers/{follower}/delete
+    defaults: {_controller: juzzUsuariosBundle:Followers:delete}
+    requirements:
+        user:  \w+
+        follower: \w+
+get_followers:
+    path:   /{user}/followers/
+    defaults: {_controller: juzzUsuariosBundle:Followers:all}
+    requirements:
+        user:  \w+
 
 
 

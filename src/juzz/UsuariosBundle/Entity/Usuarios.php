@@ -275,13 +275,16 @@ class Usuarios implements UserInterface, \Serializable
      * )
      */
     private $subscripcion;
-
+    
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Usuarios", mappedBy="seguidor")
+     * @ORM\OneToMany(targetEntity="\juzz\UsuariosBundle\Entity\Followers", mappedBy="following", cascade={"persist", "remove","all"})
      */
-    private $seguido;
+    protected $followers;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="\juzz\UsuariosBundle\Entity\Followers", mappedBy="follower", cascade={"persist", "remove","all"})
+     */
+    protected $following;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -305,8 +308,9 @@ class Usuarios implements UserInterface, \Serializable
     {
         $this->categoria = new \Doctrine\Common\Collections\ArrayCollection();
         $this->subscripcion = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->seguido = new \Doctrine\Common\Collections\ArrayCollection();
         $this->programa = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->followers = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->following = new \Doctrine\Common\Collections\ArrayCollection();
        
     }
 
@@ -772,37 +776,36 @@ class Usuarios implements UserInterface, \Serializable
         return $this->subscripcion;
     }
 
-    /**
-     * Add seguido
-     *
-     * @param \juzz\UsuariosBundle\Entity\Usuarios $seguido
-     * @return Usuarios
-     */
-    public function addSeguido(\juzz\UsuariosBundle\Entity\Usuarios $seguido)
+     public function getFollowers()
     {
-        $this->seguido[] = $seguido;
+        return $this->followers->map(function($item){
+            return $item->getFollower();
+        });
+    }
+    
+
+    public function addFollower(Followers $follower)
+    {
+        if (!$this->followers->contains($follower)) {
+            $this->followers->add($follower);
+        }
 
         return $this;
     }
 
-    /**
-     * Remove seguido
-     *
-     * @param \juzz\UsuariosBundle\Entity\Usuarios $seguido
-     */
-    public function removeSeguido(\juzz\UsuariosBundle\Entity\Usuarios $seguido)
+    public function removeFollower(Usuarios $follower)
     {
-        $this->seguido->removeElement($seguido);
+        $idx = $this->followers->map(function($item){
+            return $item->getFollower();
+        })->indexOf($follower);
+        
+        $this->followers->remove($idx);
+        
+        return $this;
     }
-
-    /**
-     * Get seguido
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getSeguido()
-    {
-        return $this->seguido;
+    
+    public function getFollowing(){
+        return $this->following;
     }
 
     /**

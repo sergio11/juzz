@@ -1,41 +1,42 @@
 <div class = "panel panel-default">
    <div class ="panel-heading">Seguidores ({{ followers|length }})</div>
    <ul class = "list-group">
-      {% if followers %}
+      {% if followers|length %}
          {% for follower in followers %}
             <li class="list-group-item">
                <div class="media">
                   <div class="media-left">
-                     <a href="#">
-                        <img class="media-object img-circle" width='60px' src="{{ asset(follower.photo) }}" alt="">
+                     <a href="{{ path('perfil',{'user': follower.nick}) }}" title='{{ follower.getFullName() }}'>
+                        <img class="media-object img-circle" width='60px' height="60px" src="{{ asset(vich_uploader_asset(follower, 'avatarFile')) }}" alt="{{ follower.getFullName() }}">
                      </a>
                   </div>
                   <div class="media-body">
-                     <h4 class="media-heading">{{ follower.name }}</h4>
+                     <h4 class="media-heading">{{ follower.getFullName() }}</h4>
                      <p>
-                        {{ follower.followers }} seguidores
-                        {% if app.user.id != user %}
-                           <a class="btn btn-embossed btn-primary pull-right" href="#" role="button">Seguir</a>
+                        {{ follower.followers|length }} seguidores
+                        {% if follower.id != app.user.id and not follower.followers.contains(app.user) %}
+                           <a class="btn btn-embossed btn-primary pull-right" href="{{ path('add_follower',{'user' : follower.id , 'follower' :  app.user.id }) }}" role="button">Seguir</a>
                         {% else %}
-                           <a class="btn btn-embossed btn-primary pull-right" href="#" role="button">ver pefil</a>
+                           <a class="btn btn-embossed btn-primary pull-right" href="{{ path('perfil',{'user': follower.nick}) }}" role="button">ver pefil</a>
                         {% endif %}
                      </p>
                   </div>
                </div>
             </li>
          {% endfor %}
+         <li class="list-group-item {{ not followers ? 'disabled' }} text-center">
+            <a href="#">
+                <span class='fa fa-plus-circle '></span>&nbsp;
+                <span class='text-capitalize'>ver todos</span>
+            </a>
+        </li>
       {% else %}
          <li class="list-group-item list-group-item-info text-center">
             <span class="fa fa-info fa-lg"></span>&nbsp;
-            <span class="list-group-item-text">No Tienes Followers</span>
+            <span class="list-group-item-text">No Tiene Followers</span>
          </li>
       {% endif %}
-      <li class="list-group-item {{ not followers ? 'disabled' }} text-center">
-         <a href="#">
-            <span class='fa fa-plus-circle '></span>&nbsp;
-            <span class='text-capitalize'>ver todos</span>
-         </a>
-      </li>
+      
       
    </ul>
 

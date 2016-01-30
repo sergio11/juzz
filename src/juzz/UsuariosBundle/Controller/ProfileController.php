@@ -20,7 +20,7 @@ class ProfileController extends Controller
     public function showAction(Request $request, UsuarioEntity $user)
     {
 
-        if($this->getUser()->getId() != $user->getId()){
+        /*if($this->getUser()->getId() != $user->getId()){
            $pusher = $this->container->get('lopi_pusher.pusher');
            $serializer = $this->get('jms_serializer');
            $message = array(
@@ -29,7 +29,7 @@ class ProfileController extends Controller
               'profile' => $this->generateUrl('perfil',array('user' => $this->getUser()->getNick()))
            );
            $pusher->trigger( 'my-channel', 'profile_visited', $serializer->serialize($message, 'json'));
-        }
+        }*/
         //Renderizamos página de perfil con la información del propietario.
         return $this->render('juzzUsuariosBundle:Usuarios:profile.html.twig',array(
             'owner' => $user

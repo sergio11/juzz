@@ -4,12 +4,12 @@
     <indexes>
       <index name="USU_POLI_FK" columns="politica_comentarios"/>
       <index name="USU_ORI_FK" columns="origen"/>
-      <index name="USU_AVA_FK" columns="avatar"/>
-      <index name="USU_PRO_FK" columns="profile_bg"/>
     </indexes>
     <unique-constraints>
       <unique-constraint name="USU_NICK_UK" columns="nick"/>
       <unique-constraint name="USU_EMA_UK" columns="email"/>
+      <unique-constraint name="US_AVA_UK" columns="avatar"/>
+      <unique-constraint name="US_PRO_UK" columns="profile_bg"/>
     </unique-constraints>
     <id name="id" type="bigint" column="id">
       <generator strategy="IDENTITY"/>
@@ -24,14 +24,13 @@
     <field name="password" type="string" column="password" length="60" nullable="false"/>
     <field name="activo" type="boolean" column="activo" nullable="false"/>
     <field name="ingreso" type="date" column="ingreso" nullable="false"/>
-    <many-to-one field="avatar" target-entity="Imagenes">
+    <field name="avatar" type="string" column="avatar" length="255" nullable="true"/>
+    <field name="updatedAvatarAt" type="datetime" column="updated_avatar_at" nullable="true"/>
+    <field name="profileBg" type="string" column="profile_bg" length="255" nullable="true"/>
+    <field name="updatedProfilebgAt" type="datetime" column="updated_profilebg_at" nullable="true"/>
+    <many-to-one field="origen" target-entity="Paises">
       <join-columns>
-        <join-column name="avatar" referenced-column-name="id"/>
-      </join-columns>
-    </many-to-one>
-    <many-to-one field="profileBg" target-entity="Imagenes">
-      <join-columns>
-        <join-column name="profile_bg" referenced-column-name="id"/>
+        <join-column name="origen" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
     <many-to-one field="politicaComentarios" target-entity="PoliticaComentarios">
@@ -39,11 +38,7 @@
         <join-column name="politica_comentarios" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="origen" target-entity="Paises">
-      <join-columns>
-        <join-column name="origen" referenced-column-name="id"/>
-      </join-columns>
-    </many-to-one>
+    <many-to-many field="seguido" target-entity="Usuarios" mapped-by="seguidor"/>
     <many-to-many field="programa" target-entity="Programas" inversed-by="usuario">
       <join-table name="subscripciones_programas">
         <join-columns>
@@ -54,17 +49,6 @@
         </inverse-join-columns>
       </join-table>
     </many-to-many>
-    <many-to-many field="seguido" target-entity="Usuarios" mapped-by="seguidor"/>
-    <many-to-many field="categoria" target-entity="Categorias" inversed-by="usuario">
-      <join-table name="categorias_usuarios">
-        <join-columns>
-          <join-column name="usuario_id" referenced-column-name="id"/>
-        </join-columns>
-        <inverse-join-columns>
-          <join-column name="categoria_id" referenced-column-name="termino_id"/>
-        </inverse-join-columns>
-      </join-table>
-    </many-to-many>
     <many-to-many field="comment" target-entity="Comentarios" inversed-by="user">
       <join-table name="comments_assess">
         <join-columns>
@@ -72,6 +56,16 @@
         </join-columns>
         <inverse-join-columns>
           <join-column name="comment" referenced-column-name="id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+    <many-to-many field="categoria" target-entity="Categorias" inversed-by="usuario">
+      <join-table name="categorias_usuarios">
+        <join-columns>
+          <join-column name="usuario_id" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="categoria_id" referenced-column-name="termino_id"/>
         </inverse-join-columns>
       </join-table>
     </many-to-many>
