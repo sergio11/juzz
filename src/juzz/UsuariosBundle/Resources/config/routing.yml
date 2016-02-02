@@ -11,7 +11,21 @@ logout:
 register:
     path:     /register
     defaults: { _controller: juzzUsuariosBundle:Registration:registro}
-
+check_email:
+    path:    /check-email
+    defaults: { _controller: juzzUsuariosBundle:Registration:checkEmail}
+confirm:
+    path:  /confirm/{token}
+    defaults: { _controller: juzzUsuariosBundle:Registration:confirm}
+    requirements:
+        user:  \w*
+        methods: GET
+confirmed:
+    path: /confirmed
+    defaults: { _controller: juzzUsuariosBundle:Registration:confirmed}
+    requirements:
+        user:  \w*
+        methods: GET
 perfil:
     path:     /{user}
     defaults: { _controller: juzzUsuariosBundle:Profile:show}

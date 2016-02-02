@@ -40,7 +40,8 @@ CREATE TABLE IF NOT EXISTS usuarios(
     updated_avatar_at	DATETIME,
    	profile_bg  VARCHAR(255),
     	CONSTRAINT US_PRO_UK UNIQUE(profile_bg),
-    updated_profilebg_at DATETIME
+    updated_profilebg_at DATETIME,
+    confirmation_token CHAR(32)
 )ENGINE=INNODB CHARSET=LATIN1 COMMENT="Tabla de Usuario";
 
 /*ALTER TABLE USUARIOS MODIFY COLUMN profile_bg BIGINT UNSIGNED DEFAULT NULL;*/

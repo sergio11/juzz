@@ -300,6 +300,13 @@ class Usuarios implements UserInterface, \Serializable
      * )
      */
     private $programa;
+    
+    /**
+     * Random string sent to the user email address in order to verify it
+     * @ORM\Column(name="confirmation_token", type="string", length=32, nullable=true)
+     * @var string
+     */
+    protected $confirmationToken;
 
     /**
      * Constructor
@@ -858,6 +865,17 @@ class Usuarios implements UserInterface, \Serializable
     }
     public function eraseCredentials()
     {
+    }
+    
+    public function getConfirmationToken()
+    {
+        return $this->confirmationToken;
+    }
+    
+    public function setConfirmationToken($confirmationToken)
+    {
+        $this->confirmationToken = $confirmationToken;
+        return $this;
     }
 
 
