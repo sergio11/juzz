@@ -5,18 +5,23 @@ namespace juzz\UsuariosBundle\Mailer;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use juzz\UsuariosBundle\Entity\Usuarios as UserEntity;
+use Hip\MandrillBundle\Message;
+use Hip\MandrillBundle\Dispatcher;
 
 class Mailer implements MailerInterface
 {
-    protected $mailer;
+    protected $dispatcher;
     protected $router;
     protected $templating;
     protected $parameters;
-    public function __construct($mailer, UrlGeneratorInterface  $router, EngineInterface $templating, array $parameters)
+    protected $logger;
+
+    public function __construct(Dispatcher $dispatcher, UrlGeneratorInterface  $router, EngineInterface $templating, $logger = null,array $parameters)
     {
-        $this->mailer = $mailer;
+        $this->dispatcher = $dispatcher;
         $this->router = $router;
         $this->templating = $templating;
+        $this->logger = $logger;
         $this->parameters = $parameters;
     }
     /**
@@ -30,7 +35,7 @@ class Mailer implements MailerInterface
             'user' => $user,
             'confirmationUrl' =>  $url
         ));
-        $this->sendEmailMessage($rendered, $this->parameters['from_email']['confirmation'], $user->getEmail());
+        $this->sendEmailMessage($rendered, $user->getEmail());
     }
     /**
      * {@inheritdoc}
@@ -50,17 +55,23 @@ class Mailer implements MailerInterface
      * @param string $fromEmail
      * @param string $toEmail
      */
-    protected function sendEmailMessage($renderedTemplate, $fromEmail, $toEmail)
+    protected function sendEmailMessage($renderedTemplate, $toEmail)
     {
         // Render the email, use the first line as the subject, and the rest as the body
         $renderedLines = explode("\n", trim($renderedTemplate));
         $subject = $renderedLines[0];
         $body = implode("\n", array_slice($renderedLines, 1));
-        $message = \Swift_Message::newInstance()
+        $message = new Message();
+        $message
+            ->setFromName('Equipo Juzz')
+            ->addTo($toEmail)
             ->setSubject($subject)
-            ->setFrom($fromEmail)
-            ->setTo($toEmail)
-            ->setBody($body);
-        $this->mailer->send($message);
+            ->setHtml($body);
+
+        $result = $this->dispatcher->send($message);
+
+        $this->logger->info("Result Mail");
+        $this->logger->info(print_r($result));
+        
     }
 }

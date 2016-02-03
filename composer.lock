@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f75d174d285c1c24b73c10797ebec91a",
-    "content-hash": "81e696a4e710579b8b171cd04fb0c2bb",
+    "hash": "6fb67548e5fca3edebf859c7c7b51318",
+    "content-hash": "32b6d88d595f553488940acd2bc6b5fa",
     "packages": [
         {
             "name": "bes/mobiledetect-twig-extension",
@@ -1093,6 +1093,58 @@
             "time": "2015-01-23 02:44:26"
         },
         {
+            "name": "hipaway-travel/mandrill-bundle",
+            "version": "v1.0.10",
+            "target-dir": "Hip/MandrillBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Hipaway-Travel/HipMandrillBundle.git",
+                "reference": "a6f8bb9789d7208e26d8ca91626ac5a587108aff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Hipaway-Travel/HipMandrillBundle/zipball/a6f8bb9789d7208e26d8ca91626ac5a587108aff",
+                "reference": "a6f8bb9789d7208e26d8ca91626ac5a587108aff",
+                "shasum": ""
+            },
+            "require": {
+                "mandrill/mandrill": "1.*",
+                "symfony/config": ">=2.1",
+                "symfony/http-foundation": ">=2.1"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Hip\\MandrillBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sven Loth",
+                    "email": "sven@hipaway.com",
+                    "homepage": "http://hipaway.com"
+                },
+                {
+                    "name": "Github Community",
+                    "homepage": "https://github.com/Hipaway-Travel/HipMandrillBundle/contributors"
+                }
+            ],
+            "description": "Symfony HipMandrillBundle",
+            "homepage": "https://github.com/Hipaway-Travel/HipMandrillBundle",
+            "keywords": [
+                "email",
+                "mandrill",
+                "messages",
+                "transaction mail",
+                "transactional"
+            ],
+            "time": "2015-12-08 11:49:02"
+        },
+        {
             "name": "incenteev/composer-parameter-handler",
             "version": "v2.1.2",
             "source": {
@@ -1554,6 +1606,49 @@
                 "symfony"
             ],
             "time": "2016-01-25 14:10:07"
+        },
+        {
+            "name": "mandrill/mandrill",
+            "version": "1.0.55",
+            "source": {
+                "type": "git",
+                "url": "https://bitbucket.org/mailchimp/mandrill-api-php.git",
+                "reference": "da3adc10042eafac2e53de141b358a52b8e53596"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://bitbucket.org/mailchimp/mandrill-api-php/get/da3adc10042eafac2e53de141b358a52b8e53596.zip",
+                "reference": "da3adc10042eafac2e53de141b358a52b8e53596",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Mandrill": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Mandrill Devs",
+                    "email": "community@mandrill.com",
+                    "homepage": "http://mandrill.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "API client library for the Mandrill email as a service platform",
+            "homepage": "https://bitbucket.org/mailchimp/mandrill-api-php",
+            "keywords": [
+                "api",
+                "email"
+            ],
+            "time": "2015-09-22 13:58:03"
         },
         {
             "name": "mobiledetect/mobiledetectlib",

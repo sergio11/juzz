@@ -2,7 +2,6 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: "@juzzFilesBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -79,15 +78,16 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
 
-# Swiftmailer Configuration
-swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    spool:     { type: memory }
-    port:      "%mailer_port%"
-    encryption: "%mailer_encryption%"
+hip_mandrill:
+    api_key: 6bbwzrWRJHAJAM-ewoX8vA
+    disable_delivery: false # useful for dev/test environment. Default value is 'false'
+    # debug: passed to \Mandrill causing it to output curl requests. Useful to see output
+    # from CLI script. Default value is 'false'
+    debug: false
+    default:
+        sender: equipo-juzz@gmail.com
+        sender_name: Equipo Juzz # Optionally define a sender name (from name)
+    proxy: ~
 
 dcs_opauth:
     debug_mode: false              # (boolean) Whether debug messages are to be displayed

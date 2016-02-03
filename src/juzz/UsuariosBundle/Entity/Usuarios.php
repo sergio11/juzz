@@ -4,7 +4,7 @@ namespace juzz\UsuariosBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -34,7 +34,7 @@ use JMS\Serializer\Annotation\Accessor;
  * @Vich\Uploadable
  * @ExclusionPolicy("all")
  */
-class Usuarios implements UserInterface, \Serializable
+class Usuarios implements AdvancedUserInterface, \Serializable
 {
     /**
      * @var integer
@@ -876,6 +876,42 @@ class Usuarios implements UserInterface, \Serializable
     {
         $this->confirmationToken = $confirmationToken;
         return $this;
+    }
+
+    /**
+     * Checks whether the user is enabled.
+     *
+     * @return Boolean true if the user is enabled, false otherwise
+     */
+    public function isEnabled(){
+        return $this->activo;
+    }
+
+    /**
+     * Checks whether the user's account has expired.
+     *
+     * @return Boolean true if the user's account is non expired, false otherwise
+     */
+    public function isAccountNonExpired(){
+        return true;
+    }
+
+    /**
+     * Checks whether the user is locked.
+     *
+     * @return Boolean true if the user is not locked, false otherwise
+     */
+    public function isAccountNonLocked(){
+        return true;
+    }
+
+    /**
+     * Checks whether the user's credentials (password) has expired.
+     *
+     * @return Boolean true if the user's credentials are non expired, false otherwise
+     */
+    public function isCredentialsNonExpired(){
+        return true;
     }
 
 
