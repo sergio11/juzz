@@ -7,11 +7,12 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: es
+    required_user_activation: false
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator: { fallback: es }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -85,6 +86,8 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+    port:      "%mailer_port%"
+    encryption: "%mailer_encryption%"
 
 dcs_opauth:
     debug_mode: false              # (boolean) Whether debug messages are to be displayed
@@ -115,6 +118,7 @@ lopi_pusher:
 fos_js_routing:
     routes_to_expose: [ 'comments' , 'post_comment' , 'push_notifications' , 'perfil' , 'comment_assess']
 
+# Bundle Trabajo con bootstrap
 braincrafted_bootstrap:
     icon_prefix: fa
     auto_configure:
@@ -123,6 +127,8 @@ braincrafted_bootstrap:
         knp_menu: true
         knp_paginator: true
 
+
+# Bundle Subida de archivos
 vich_uploader:
     db_driver: orm
     mappings:
@@ -142,6 +148,3 @@ services:
         class: Bes\Twig\Extension\MobileDetectExtension
         tags:
             - { name: twig.extension }
-    security.authentication.success_handler:
-        class:  juzz\UsuariosBundle\Service\LoginSuccessHandler
-        arguments: [@router, @security.context]

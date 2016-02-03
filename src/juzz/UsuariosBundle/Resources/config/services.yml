@@ -1,18 +1,21 @@
 parameters:
-    juzz.resetting.email.template: 'juzz:Resetting:email.txt.twig'
-    juzz.registration.confirmation.template: 'juzz:Registration:email.txt.twig'
-    
+  juzz.resetting.email.template: 'juzz:Resetting:email.txt.twig'
+  juzz.registration.confirmation.template: 'juzzUsuariosBundle:Mail:email.txt.twig'
+  juzz.from_email.confirmation: 'sss4esob@gmail.com'
 services:
-    juzz.mailer:
-       class: juzz\UsuariosBundle\Mailer\Mailer
-       public: false
-       arguments: [mailer,router,templating,{confirmation.template: %juzz.registration.confirmation.template%, resetting.template:%juzz.resetting.email.template%, form_email : {confirmation: '', resetting: ''} }]
-    juzz.util.token_generator:
-       class: juzz\UsuariosBundle\Util\TokenGenerator
-       public: false
-       arguments: [logger]
-    juzz.listener.email_confirmation:
-       class: juzz\UsuariosBundle\EventListener\EmailConfirmationListener
-       arguments: ['@juzz.mailer','@juzz.util.token_generator',router,session]
-       tags:
-            -  { name: kernel.event_subscriber }
+  security.authentication.success_handler:
+    class:  juzz\UsuariosBundle\Service\LoginSuccessHandler
+    arguments: [@router, @security.context]
+  juzz.mailer:
+    class: juzz\UsuariosBundle\Mailer\Mailer
+    public: false
+    arguments: ["@mailer","@router","@templating",{confirmation.template: %juzz.registration.confirmation.template%, resetting.template:%juzz.resetting.email.template%, from_email : {confirmation: %juzz.from_email.confirmation%, resetting: ''} }]
+  juzz.util.token_generator:
+    class: juzz\UsuariosBundle\Util\TokenGenerator
+    public: false
+    arguments: ["@logger"]
+  juzz.listener.email_confirmation:
+    class: juzz\UsuariosBundle\EventListener\EmailConfirmationListener
+    arguments: ['@juzz.mailer','@juzz.util.token_generator',"@router","@session",%required_user_activation%,"@logger"]
+    tags:
+      -  { name: kernel.event_subscriber }

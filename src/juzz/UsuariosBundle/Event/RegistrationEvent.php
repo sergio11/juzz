@@ -3,18 +3,19 @@ namespace juzz\UsuariosBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use juzz\UsuariosBundle\Entity\Usuarios AS UserEntity;
 
-class FormEvent extends Event
+class RegistrationEvent extends Event
 {
     private $form;
-    private $request;
+    private $user;
     private $response;
-    public function __construct(FormInterface $form, Request $request)
+
+    public function __construct(FormInterface $form, UserEntity $user)
     {
         $this->form = $form;
-        $this->request = $request;
+        $this->user = $user;
     }
     /**
      * @return FormInterface
@@ -26,9 +27,9 @@ class FormEvent extends Event
     /**
      * @return Request
      */
-    public function getRequest()
+    public function getUser()
     {
-        return $this->request;
+        return $this->user;
     }
     public function setResponse(Response $response)
     {

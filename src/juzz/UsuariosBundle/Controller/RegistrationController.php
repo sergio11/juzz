@@ -3,6 +3,7 @@
 namespace juzz\UsuariosBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use juzz\UsuariosBundle\Entity\Usuarios AS UsuarioEntity;
@@ -11,18 +12,18 @@ use juzz\FilesBundle\Entity\ProfileBackground;
 use juzz\UsuariosBundle\Entity\Paises AS CountryEntity;
 use juzz\UsuariosBundle\Form\UsuarioRegistroType;
 use juzz\UsuariosBundle\UsuariosBundleEvents;
-use juzz\UsuariosBundle\Event\FormEvent;
+use juzz\UsuariosBundle\Event\RegistrationEvent;
 
 
 
 class RegistrationController extends Controller{
 
 	// Muestra el formulario para que se registren los nuevos usuarios.
-  public function registroAction(Request $request){
+  public function registerAction(Request $request){
 
     $em = $this->getDoctrine()->getManager();
     /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
-   $dispatcher = $this->get('event_dispatcher');
+    $dispatcher = $this->get('event_dispatcher');
 
     $user = new UsuarioEntity();
 
@@ -43,7 +44,7 @@ class RegistrationController extends Controller{
 
     if ($form->isValid()) {
         
-        $event = new FormEvent($form, $request);
+        $event = new RegistrationEvent($form, $user);
         $dispatcher->dispatch(UsuariosBundleEvents::REGISTRATION_SUCCESS, $event);
         
         //Necesitamos saber el algoritmo de codificación utilizado en la contraseña.
@@ -52,23 +53,28 @@ class RegistrationController extends Controller{
         $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
         $user->setPassword($password);
         $user->setIngreso(new \DateTime());
-        $user->setActivo(1);
         //Establecemos politica de comentarios por defecto.
         $policy = $em->getRepository('juzzCommentsBundle:PoliticaComentarios')->find(1);
         $user->setPoliticaComentarios($policy);
-        // Guardar el nuevo usuario en la base de datos
-        $em->persist($user);
-        $em->flush();
 
         if (null === $response = $event->getResponse()) {
+            $user->setActivo(1);
+            
+            $translated = $this->get('translator')->trans('registration.flash.user_created',array(
+                '%username%' => $user->getFullName()
+            ),'juzzUsuariosBundle');
             // Crear un mensaje flash para notificar al usuario que se ha registrado correctamente
-            $this->get('ras_flash_alert.alert_reporter')->addSuccess('¡Enhorabuena! Te has registrado correctamente en Juzz, consulta tu correo para obtener más información');
+            $this->get('ras_flash_alert.alert_reporter')->addSuccess($translated);
             // Loguear al usuario automáticamente
             $token = new UsernamePasswordToken($user, $user->getPassword(), 'frontend', $user->getRoles());
             $this->container->get('security.context')->setToken($token);
             //Redirigimos a su página de perfil.
             $response =  $this->redirect($this->generateUrl('perfil',array('user' => $user->getNick() )));
         }
+
+        // Guardar el nuevo usuario en la base de datos
+        $em->persist($user);
+        $em->flush();
         
         return $response;
 
@@ -85,13 +91,16 @@ class RegistrationController extends Controller{
      */
     public function checkEmailAction()
     {
-        $email = $this->get('session')->get('fos_user_send_confirmation_email/email');
-        $this->get('session')->remove('fos_user_send_confirmation_email/email');
-        $user = $this->get('fos_user.user_manager')->findUserByEmail($email);
+        $email = $this->get('session')->get('juzz_user_send_confirmation_email/email');
+        $this->get('session')->remove('juzz_user_send_confirmation_email/email');
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('juzzUsuariosBundle:Usuarios')->findOneBy(array(
+            'email' => $email
+        ));
         if (null === $user) {
             throw new NotFoundHttpException(sprintf('The user with email "%s" does not exist', $email));
         }
-        return $this->render('FOSUserBundle:Registration:checkEmail.html.twig', array(
+        return $this->render('juzzUsuariosBundle:Accounts:checkEmail.html.twig', array(
             'user' => $user,
         ));
     }

@@ -7,6 +7,7 @@ class TokenGenerator implements TokenGeneratorInterface
 {
     private $logger;
     private $useOpenSsl;
+    
     public function __construct(LoggerInterface $logger = null)
     {
         $this->logger = $logger;

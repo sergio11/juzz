@@ -10,7 +10,7 @@ logout:
 
 register:
     path:     /register
-    defaults: { _controller: juzzUsuariosBundle:Registration:registro}
+    defaults: { _controller: juzzUsuariosBundle:Registration:register}
 check_email:
     path:    /check-email
     defaults: { _controller: juzzUsuariosBundle:Registration:checkEmail}

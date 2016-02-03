@@ -1,0 +1,10 @@
+registration:
+    check_email: 'Se ha enviado un email a %email%. Contiene un enlace de activación que debes presionar para activar tu cuenta.'
+    confirmed: 'Felicidades %username%, tu cuenta está ahora confirmada.'
+    back: 'Volver a la página original.'
+    submit: Registrar
+    flash:
+        user_created: '¡Enhorabuena %username%! Te has registrado correctamente en Juzz, consulta tu correo para obtener más información'
+    email:
+        subject: 'Bienvenido a Juzz %username%!'
+        message: "Hola %username%!\n\nPara completar la validación de tu cuenta - por favor visita %confirmationUrl%\n\nAtentamente,\nel Equipo de juzz.\n"
