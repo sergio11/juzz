@@ -5,8 +5,6 @@ namespace juzz\UsuariosBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use juzz\FilesBundle\Form\ProfileImageType;
-use juzz\FilesBundle\Form\ProfileBackgroundType;
 use Doctrine\ORM\EntityRepository;
 
 

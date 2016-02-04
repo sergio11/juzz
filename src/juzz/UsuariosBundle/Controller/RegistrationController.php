@@ -80,7 +80,7 @@ class RegistrationController extends Controller{
 
     }
 
-    return $this->render('juzzUsuariosBundle:Accounts:register.html.twig',array(
+    return $this->render('juzzUsuariosBundle:Accounts:registration/register.html.twig',array(
         'form' =>  $form->createView(),
         'tab' => 'register'
     ));
@@ -100,7 +100,7 @@ class RegistrationController extends Controller{
         if (null === $user) {
             throw new NotFoundHttpException(sprintf('The user with email "%s" does not exist', $email));
         }
-        return $this->render('juzzUsuariosBundle:Accounts:checkEmail.html.twig', array(
+        return $this->render('juzzUsuariosBundle:Accounts:registration/checkEmail.html.twig', array(
             'user' => $user,
         ));
     }
@@ -140,7 +140,7 @@ class RegistrationController extends Controller{
      */
     public function confirmedAction(UsuarioEntity $user)
     {
-        return $this->render('juzzUsuariosBundle:Accounts:confirmed.html.twig',array(
+        return $this->render('juzzUsuariosBundle:Accounts:registration/confirmed.html.twig',array(
             'user' => $user
         ));
     }

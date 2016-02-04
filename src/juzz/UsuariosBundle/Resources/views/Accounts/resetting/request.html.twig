@@ -1,0 +1,17 @@
+{% extends 'juzzUsuariosBundle:Accounts:base.html.twig' %}
+{% trans_default_domain 'juzzUsuariosBundle' %}
+
+{% block tabcontent %}
+<form action="{{ path('resetting_send_email') }}" method="POST">
+    <div>
+        {% if invalid_username is defined %}
+            <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}</p>
+        {% endif %}
+        <label for="nick">{{ 'resetting.request.username'|trans }}</label>
+        <input type="text" id="nick" name="nick" required="required" />
+    </div>
+    <div>
+        <input type="submit" value="{{ 'resetting.request.submit'|trans }}" />
+    </div>
+</form>
+{% endblock %}

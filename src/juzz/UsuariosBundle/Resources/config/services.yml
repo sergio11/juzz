@@ -1,17 +1,17 @@
 parameters:
-  juzz.resetting.email.template: 'juzz:Resetting:email.txt.twig'
-  juzz.registration.confirmation.template: 'juzzUsuariosBundle:Mail:email.txt.twig'
+  juzz.resetting.email.template: 'juzzUsuariosBundle:Mail:resetting.txt.twig'
+  juzz.registration.confirmation.template: 'juzzUsuariosBundle:Mail:registration.txt.twig'
 services:
   security.authentication.success_handler:
     class:  juzz\UsuariosBundle\Service\LoginSuccessHandler
     arguments: [@router, @security.context]
   juzz.mailer:
     class: juzz\UsuariosBundle\Service\Mailer\Mailer
-    public: false
+    public: true
     arguments: ["@hip_mandrill.dispatcher","@router","@templating","@logger",{confirmation.template: %juzz.registration.confirmation.template%, resetting.template:%juzz.resetting.email.template%}]
   juzz.util.token_generator:
     class: juzz\UsuariosBundle\Service\Util\TokenGenerator
-    public: false
+    public: true
     arguments: ["@logger"]
   juzz.listener.email_confirmation:
     class: juzz\UsuariosBundle\Service\EventListener\EmailConfirmationListener

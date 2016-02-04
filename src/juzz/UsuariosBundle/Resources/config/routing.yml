@@ -20,16 +20,39 @@ check_email:
 confirm:
     path:  /accounts/confirm/{token}
     defaults: { _controller: juzzUsuariosBundle:Registration:confirm}
+    methods:  [GET]
     requirements:
         token:  .{43}
-        methods: GET
 # Ruta para indicar que la cuenta ha sido activada
 confirmed:
     path: /accounts/confirmed/{user}
     defaults: { _controller: juzzUsuariosBundle:Registration:confirmed}
+    methods:  [GET]
     requirements:
         user:  \w*
-        methods: GET
+# Solicitud de reseteo de contraseña
+resetting_request:
+    path: /request
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: juzzUsuariosBundle:Accounts:resetting/request.html.twig
+# Envío de email para completar reseteo de contraseña
+resetting_send_email:
+    path: /send-email
+    defaults: { _controller: juzzUsuariosBundle:Resetting:sendEmail}
+    methods:  [POST]
+# Indica al usuario que compruebe su email para completar el reseteo de la password
+resetting_check_email:
+    path: /check-email
+    defaults: { _controller: juzzUsuariosBundle:Resetting:checkEmail}
+    methods:  [GET]
+# Realiza el reseteo en caso de que el token sea correcto
+resetting_reset:
+    path: /reset/{token}
+    defaults: { _controller: juzzUsuariosBundle:Resetting:reset}
+    methods:  [GET|POST]
+    requirements:
+        token:  .{43}
 # Ruta del perfil del usuario.
 perfil:
     path:     /usuarios/{user}

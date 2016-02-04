@@ -43,12 +43,12 @@ class Mailer implements MailerInterface
     public function sendResettingEmailMessage(UserEntity $user)
     {
         $template = $this->parameters['resetting.template'];
-        $url = $this->router->generate('fos_user_resetting_reset', array('token' => $user->getConfirmationToken()), UrlGeneratorInterface::ABSOLUTE_URL);
+        $url = $this->router->generate('resetting_reset', array('token' => $user->getConfirmationToken()), UrlGeneratorInterface::ABSOLUTE_URL);
         $rendered = $this->templating->render($template, array(
             'user' => $user,
             'confirmationUrl' => $url
         ));
-        $this->sendEmailMessage($rendered, $this->parameters['from_email']['resetting'], $user->getEmail());
+        $this->sendEmailMessage($rendered, $user->getEmail());
     }
     /**
      * @param string $renderedTemplate
