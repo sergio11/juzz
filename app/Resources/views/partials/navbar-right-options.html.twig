@@ -23,7 +23,7 @@
     <li id='notificacion-component-mount-point' data-target="{{ app.user.id }}"></li>
     <li>
         <a class='user dropdown-toggle' href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img class='img-circle' width='45' height='45' src="{{ asset(vich_uploader_asset(app.user, 'avatarFile')) }}" alt="{{ app.user.getFullName() }}" />
+            {{ macros.profile_avatar_mini(app.user) }}
             <span class="hidden-sm"> {{ app.user.getFullName() }}</span>
         </a>
         <ul class="dropdown-menu text-capitalize" data-placement="left" role='menu'>

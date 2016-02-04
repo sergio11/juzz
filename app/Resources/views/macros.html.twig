@@ -1,0 +1,24 @@
+{% macro profile_bg(user) %}
+	<img src="{{ asset(user.profileBg ? vich_uploader_asset(user, 'profileBgFile') : 'img/default_profile.png') }}">
+{% endmacro %}
+
+{% macro _profile_avatar_src(user) %}
+	{% if user.avatar %}
+		{% set avatar = vich_uploader_asset(user, 'avatarFile') %}
+	{% else %}
+		{% set avatar = user.genero == 'm' ? 'img/avatar_hombre.jpg' : 'img/avatar_mujer.jpg'%}
+	{% endif %}
+
+	{{ asset(avatar) }}
+{% endmacro %}
+
+{% macro profile_avatar(user) %}
+	{% import _self as macros %}
+	<img class="profile-header-avatar" src="{{ macros._profile_avatar_src(user) }}" alt="{{ user.getFullName() }}" />
+{% endmacro %}
+
+{% macro profile_avatar_mini(user) %}
+	{% import _self as macros %}
+	<img class='img-circle' width='45' height='45' src="{{ macros._profile_avatar_src(user) }}" alt="{{ user.getFullName() }}" />
+{% endmacro %}
+

@@ -8,9 +8,9 @@
 	<div class="profile-header">
 		<div class="profile-header-bg-container">
 			<div class="profile-header-bg">
-				<img src="{{ asset((vich_uploader_asset(owner, 'profileBgFile'))) }}">
+				{{ macros.profile_bg(owner) }}
 			</div>
-			<img class="profile-header-avatar" src="{{ asset(vich_uploader_asset(owner, 'avatarFile')) }}" alt="{{ owner.getFullName() }}" />
+			{{ macros.profile_avatar(owner) }}
 		</div>
 		<div class="profile-header-details">
   			<h3 class="profile-header-owner">{{ owner.nombre }} <small>{{ owner.apellidos }}</small></h3>
