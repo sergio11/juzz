@@ -1,3 +1,20 @@
+login:
+    modal:
+        header:
+            title: 'Incia Sesión.'
+        footer:
+            alert:
+                text: '¿Aún no tienes cuenta?'
+                link:
+                    title: 'Regitrate ahora y empieza a disfrutar de la mejor plataforma de podcast'
+                    text: 'Registrate gratis'
+    password:
+        label: 'Contraseña'
+        placeholder: 'Tu Contraseña'
+    submit: 'Entrar'
+    recovery:
+        text: 'Recuperar Contraseña'
+        title: '¿Tienes problemas para iniciar sesión?'
 registration:
     check_email: 'Se ha enviado un email a %email%. Contiene un enlace de activación que debes presionar para activar tu cuenta.'
     confirmed: 'Felicidades %username%, tu cuenta está ahora confirmada.'

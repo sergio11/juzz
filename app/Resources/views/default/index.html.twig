@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+{% trans_default_domain 'juzzUsuariosBundle' %}
 
 {% block stylesheets %}
   {{ parent() }}
@@ -14,12 +15,17 @@
                 <span aria-hidden="true">×</span>
                 <span class="sr-only">Close</span>
               </button>
-              <h4 class="modal-title" id="modalLoginLabel">Incia Sesión.</h4>
+              <h4 class="modal-title" id="modalLoginLabel">{{"login.modal.header.title"| trans }}</h4>
             </div>
             <div class="modal-body">
               {# Login Form #}
               {% include 'juzzUsuariosBundle:Accounts:form_login.html.twig' %}
             </div> 
+            <div class="modal-footer">
+                <p class='text-center'>
+                    {{"login.modal.footer.alert.text"| trans }}&nbsp;<a href='{{path('register')}}' title='{{"login.modal.footer.alert.link.title"|trans}}' rel="nofollow" data-toggle="tooltip" data-placement="bottom">{{"login.modal.footer.alert.link.text"|trans}}</a>
+                </p>
+            </div>
         </div>
       </div>
   </div>
