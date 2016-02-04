@@ -6,15 +6,20 @@ services:
     class:  juzz\UsuariosBundle\Service\LoginSuccessHandler
     arguments: [@router, @security.context]
   juzz.mailer:
-    class: juzz\UsuariosBundle\Mailer\Mailer
+    class: juzz\UsuariosBundle\Service\Mailer\Mailer
     public: false
     arguments: ["@hip_mandrill.dispatcher","@router","@templating","@logger",{confirmation.template: %juzz.registration.confirmation.template%, resetting.template:%juzz.resetting.email.template%}]
   juzz.util.token_generator:
-    class: juzz\UsuariosBundle\Util\TokenGenerator
+    class: juzz\UsuariosBundle\Service\Util\TokenGenerator
     public: false
     arguments: ["@logger"]
   juzz.listener.email_confirmation:
-    class: juzz\UsuariosBundle\EventListener\EmailConfirmationListener
+    class: juzz\UsuariosBundle\Service\EventListener\EmailConfirmationListener
     arguments: ['@juzz.mailer','@juzz.util.token_generator',"@router","@session",%required_user_activation%,"@logger"]
+    tags:
+      -  { name: kernel.event_subscriber }
+  juzz.listener.registration_confirmed:
+    class: juzz\UsuariosBundle\Service\EventListener\RegistrationConfirmedListener
+    arguments: ["@router","@security.token_storage","@translator.default","@ras_flash_alert.alert_reporter"]
     tags:
       -  { name: kernel.event_subscriber }

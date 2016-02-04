@@ -1,11 +1,11 @@
 <?php
 
-namespace juzz\UsuariosBundle\EventListener;
+namespace juzz\UsuariosBundle\Service\EventListener;
 
 use juzz\UsuariosBundle\UsuariosBundleEvents;
 use juzz\UsuariosBundle\Event\RegistrationEvent;
-use juzz\UsuariosBundle\Mailer\MailerInterface;
-use juzz\UsuariosBundle\Util\TokenGeneratorInterface;
+use juzz\UsuariosBundle\Service\Mailer\MailerInterface;
+use juzz\UsuariosBundle\Service\Util\TokenGeneratorInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;

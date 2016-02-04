@@ -1,5 +1,5 @@
 <?php
-namespace juzz\UsuariosBundle\Util;
+namespace juzz\UsuariosBundle\Service\Util;
 
 use Psr\Log\LoggerInterface;
 

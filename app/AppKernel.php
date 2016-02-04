@@ -30,7 +30,6 @@ class AppKernel extends Kernel
             new Lopi\Bundle\PusherBundle\LopiPusherBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new juzz\NotificationsBundle\juzzNotificationsBundle(),
-            new juzz\DoctrineMetadaBundle\juzzDoctrineMetadaBundle(),
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
             new Hip\MandrillBundle\HipMandrillBundle()

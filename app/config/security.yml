@@ -19,7 +19,7 @@ security:
                 lifetime:   604800  # 604.800 = 3.600 * 24 * 7 = 1 semana
 
     access_control:
-        - { path: ^/usuarios/(register|login|check-email|confirm), roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/accounts/*, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/usuarios/*, roles: ROLE_USER }
 
     encoders:

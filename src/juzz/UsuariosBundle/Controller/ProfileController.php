@@ -5,10 +5,8 @@ namespace juzz\UsuariosBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use juzz\UsuariosBundle\Entity\Usuarios AS UsuarioEntity;
-use juzz\FilesBundle\Entity\Imagenes AS ImagenEntity;
 use juzz\UsuariosBundle\Form\UserEditType;
 use juzz\UsuariosBundle\Form\UserChangeEmailType;
-use juzz\FilesBundle\Form\ProfileBackgroundType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class ProfileController extends Controller

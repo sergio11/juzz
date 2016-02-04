@@ -35,13 +35,14 @@ CREATE TABLE IF NOT EXISTS usuarios(
     origen      INT(11) UNSIGNED NOT NULL,
     	CONSTRAINT USU_ORI_FK FOREIGN KEY(origen)
     		REFERENCES paises(id),
-    avatar 	VARCHAR(255),
+    avatar 	VARCHAR(255) DEFAULT NULL,
     	CONSTRAINT US_AVA_UK UNIQUE(avatar),
     updated_avatar_at	DATETIME,
-   	profile_bg  VARCHAR(255),
+   	profile_bg  VARCHAR(255) DEFAULT NULL,
     	CONSTRAINT US_PRO_UK UNIQUE(profile_bg),
     updated_profilebg_at DATETIME,
-    confirmation_token CHAR(32)
+    confirmation_token CHAR(43),
+    	CONSTRAINT US_TOK_UK UNIQUE(confirmation_token)
 )ENGINE=INNODB CHARSET=LATIN1 COMMENT="Tabla de Usuario";
 
 /*ALTER TABLE USUARIOS MODIFY COLUMN profile_bg BIGINT UNSIGNED DEFAULT NULL;*/

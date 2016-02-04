@@ -8,6 +8,7 @@ imports:
 parameters:
     locale: es
     required_user_activation: false
+    auto_login_when_confirmed: false
 
 framework:
     #esi:             ~

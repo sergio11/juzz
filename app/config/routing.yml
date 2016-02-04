@@ -1,7 +1,3 @@
-juzz_doctrine_metada:
-    resource: "@juzzDoctrineMetadaBundle/Resources/config/routing.yml"
-    prefix:   /
-
 
 juzz_notifications:
     resource: "@juzzNotificationsBundle/Resources/config/routing.yml"
@@ -20,7 +16,7 @@ juzz_files:
 # Rutas importadas del bundle UsuariosBundle
 juzz_usuarios:
     resource: "@juzzUsuariosBundle/Resources/config/routing.yml"
-    prefix:   /usuarios
+    prefix:   /
 
 # Rutas importadas del bundle CanalesBundle
 juzz_canales:

@@ -7,6 +7,8 @@ namespace juzz\UsuariosBundle;
 final class UsuariosBundleEvents
 {
     
-    const REGISTRATION_SUCCESS = 'fos_user.registration.success';
+    const REGISTRATION_SUCCESS = 'juzz.registration.success';
+    const REGISTRATION_CONFIRM = 'juzz.registration.confirm';
+
     
 }

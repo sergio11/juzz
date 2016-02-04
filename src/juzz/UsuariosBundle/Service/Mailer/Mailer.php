@@ -1,6 +1,6 @@
 <?php
 
-namespace juzz\UsuariosBundle\Mailer;
+namespace juzz\UsuariosBundle\Service\Mailer;
 
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;

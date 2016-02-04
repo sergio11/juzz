@@ -1,5 +1,5 @@
 <?php
-namespace juzz\UsuariosBundle\Util;
+namespace juzz\UsuariosBundle\Service\Util;
 
 interface TokenGeneratorInterface
 {

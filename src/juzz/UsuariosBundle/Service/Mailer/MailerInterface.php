@@ -1,5 +1,5 @@
 <?php
-namespace juzz\UsuariosBundle\Mailer;
+namespace juzz\UsuariosBundle\Service\Mailer;
 
 use juzz\UsuariosBundle\Entity\Usuarios as UserEntity;
 

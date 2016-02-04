@@ -5,14 +5,13 @@ namespace juzz\UsuariosBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use juzz\UsuariosBundle\Entity\Usuarios AS UsuarioEntity;
-use juzz\FilesBundle\Entity\Imagenes AS ImagenEntity;
-use juzz\FilesBundle\Entity\ProfileBackground;
 use juzz\UsuariosBundle\Entity\Paises AS CountryEntity;
 use juzz\UsuariosBundle\Form\UsuarioRegistroType;
 use juzz\UsuariosBundle\UsuariosBundleEvents;
 use juzz\UsuariosBundle\Event\RegistrationEvent;
+use juzz\UsuariosBundle\Event\RegistrationConfirmedEvent;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 
 
@@ -65,11 +64,12 @@ class RegistrationController extends Controller{
             ),'juzzUsuariosBundle');
             // Crear un mensaje flash para notificar al usuario que se ha registrado correctamente
             $this->get('ras_flash_alert.alert_reporter')->addSuccess($translated);
-            // Loguear al usuario automáticamente
-            $token = new UsernamePasswordToken($user, $user->getPassword(), 'frontend', $user->getRoles());
-            $this->container->get('security.context')->setToken($token);
-            //Redirigimos a su página de perfil.
-            $response =  $this->redirect($this->generateUrl('perfil',array('user' => $user->getNick() )));
+            //Notificamos que la cuenta ha sido activada.
+            $event = new RegistrationConfirmedEvent($user);
+            $dispatcher->dispatch(UsuariosBundleEvents::REGISTRATION_CONFIRM, $event);
+            if (null === $response = $event->getResponse()) {
+                $response = $this->redirect($this->generateUrl('confirmed'));
+            }
         }
 
         // Guardar el nuevo usuario en la base de datos
@@ -87,8 +87,8 @@ class RegistrationController extends Controller{
   }
   
    /**
-     * Tell the user to check his email provider
-     */
+    * Le indica al usuario que revise su correo para activar su cuenta.
+    */
     public function checkEmailAction()
     {
         $email = $this->get('session')->get('juzz_user_send_confirmation_email/email');
@@ -105,43 +105,43 @@ class RegistrationController extends Controller{
         ));
     }
   
-  /**
-     * Receive the confirmation token from user email provider, login the user
-     */
+    /**
+    * Recibe el token de confirmación y procede a activarlo.
+    */
     public function confirmAction(Request $request, $token)
     {
-        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
-        $userManager = $this->get('fos_user.user_manager');
-        $user = $userManager->findUserByConfirmationToken($token);
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('juzzUsuariosBundle:Usuarios')->findOneBy(array(
+            'confirmationToken' => $token
+        ));
         if (null === $user) {
             throw new NotFoundHttpException(sprintf('The user with confirmation token "%s" does not exist', $token));
         }
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->get('event_dispatcher');
         $user->setConfirmationToken(null);
-        $user->setEnabled(true);
-        $event = new GetResponseUserEvent($user, $request);
-        $dispatcher->dispatch(FOSUserEvents::REGISTRATION_CONFIRM, $event);
-        $userManager->updateUser($user);
+        $user->setActivo(1);
+        $em->flush();
+        
+        //Notificamos que la cuenta ha sido activada.
+        $event = new RegistrationConfirmedEvent($user);
+        $dispatcher->dispatch(UsuariosBundleEvents::REGISTRATION_CONFIRM, $event);
+        
         if (null === $response = $event->getResponse()) {
-            $url = $this->generateUrl('fos_user_registration_confirmed');
-            $response = new RedirectResponse($url);
+            $response = $this->redirect($this->generateUrl('confirmed',array('user' => $user->getNick())));
         }
-        $dispatcher->dispatch(FOSUserEvents::REGISTRATION_CONFIRMED, new FilterUserResponseEvent($user, $request, $response));
+        
         return $response;
     }
     /**
      * Tell the user his account is now confirmed
+     * @ParamConverter("user", options={"mapping": {"user" = "nick"}})
      */
-    public function confirmedAction()
+    public function confirmedAction(UsuarioEntity $user)
     {
-        $user = $this->getUser();
-        if (!is_object($user) || !$user instanceof UserInterface) {
-            throw new AccessDeniedException('This user does not have access to this section.');
-        }
-        return $this->render('FOSUserBundle:Registration:confirmed.html.twig', array(
-            'user' => $user,
-            'targetUrl' => $this->getTargetUrlFromSession(),
+        return $this->render('juzzUsuariosBundle:Accounts:confirmed.html.twig',array(
+            'user' => $user
         ));
     }
     
