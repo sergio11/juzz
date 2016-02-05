@@ -4,7 +4,7 @@ parameters:
 services:
   security.authentication.success_handler:
     class:  juzz\UsuariosBundle\Service\LoginSuccessHandler
-    arguments: [@router, @security.context]
+    arguments: ["@router", "@security.context"]
   juzz.mailer:
     class: juzz\UsuariosBundle\Service\Mailer\Mailer
     public: true
@@ -15,7 +15,7 @@ services:
     arguments: ["@logger"]
   juzz.listener.email_confirmation:
     class: juzz\UsuariosBundle\Service\EventListener\EmailConfirmationListener
-    arguments: ['@juzz.mailer','@juzz.util.token_generator',"@router","@session",%required_user_activation%,"@logger"]
+    arguments: ['@juzz.mailer','@juzz.util.token_generator',"@router","@session","@logger"]
     tags:
       -  { name: kernel.event_subscriber }
   juzz.listener.registration_confirmed:

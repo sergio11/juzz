@@ -10,6 +10,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class EmailConfirmationListener implements EventSubscriberInterface
 {
@@ -17,17 +18,21 @@ class EmailConfirmationListener implements EventSubscriberInterface
     private $tokenGenerator;
     private $router;
     private $session;
-    private $activate;
     private $logger;
+    private $active;
     
-    public function __construct(MailerInterface $mailer, TokenGeneratorInterface $tokenGenerator, UrlGeneratorInterface $router, SessionInterface $session, $activate, $logger = null)
+    public function __construct(MailerInterface $mailer, TokenGeneratorInterface $tokenGenerator, UrlGeneratorInterface $router, SessionInterface $session, $logger = null)
     {
         $this->mailer = $mailer;
         $this->tokenGenerator = $tokenGenerator;
         $this->router = $router;
         $this->session = $session;
-        $this->activate = $activate;
         $this->logger = $logger;
+    }
+
+    public function setActive( $active )
+    {
+        $this->active = $active;
     }
     
     public static function getSubscribedEvents()
@@ -40,7 +45,7 @@ class EmailConfirmationListener implements EventSubscriberInterface
     public function onRegistrationSuccess(RegistrationEvent $event)
     {
         $this->logger->info("Handling RegistrationSuccess Event");
-        if($this->activate){
+        if($this->active){
             $user = $event->getUser();
             $user->setActivo(0);
             if (null === $user->getConfirmationToken()) {

@@ -17,6 +17,11 @@
 	<img class="profile-header-avatar" src="{{ macros._profile_avatar_src(user) }}" alt="{{ user.getFullName() }}" />
 {% endmacro %}
 
+{% macro profile_avatar_medium(user) %}
+	{% import _self as macros %}
+	<img class='img-circle' width='60' height='60' src="{{ macros._profile_avatar_src(user) }}" alt="{{ user.getFullName() }}" />
+{% endmacro %}
+
 {% macro profile_avatar_mini(user) %}
 	{% import _self as macros %}
 	<img class='img-circle' width='45' height='45' src="{{ macros._profile_avatar_src(user) }}" alt="{{ user.getFullName() }}" />

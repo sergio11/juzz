@@ -32,23 +32,23 @@ confirmed:
         user:  \w*
 # Solicitud de reseteo de contraseña
 resetting_request:
-    path: /request
+    path: /accounts/request
     defaults:
         _controller: FrameworkBundle:Template:template
         template: juzzUsuariosBundle:Accounts:resetting/request.html.twig
 # Envío de email para completar reseteo de contraseña
 resetting_send_email:
-    path: /send-email
+    path: /accounts/send-email
     defaults: { _controller: juzzUsuariosBundle:Resetting:sendEmail}
     methods:  [POST]
 # Indica al usuario que compruebe su email para completar el reseteo de la password
 resetting_check_email:
-    path: /check-email
+    path: /accounts/check-email
     defaults: { _controller: juzzUsuariosBundle:Resetting:checkEmail}
     methods:  [GET]
 # Realiza el reseteo en caso de que el token sea correcto
 resetting_reset:
-    path: /reset/{token}
+    path: /accounts/reset/{token}
     defaults: { _controller: juzzUsuariosBundle:Resetting:reset}
     methods:  [GET|POST]
     requirements:

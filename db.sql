@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS usuarios(
 	email       VARCHAR(90) NOT NULL,
             CONSTRAINT USU_EMA_UK UNIQUE(email),
     password    CHAR(60) NOT NULL,
+    password_request_at DATE,
     activo 		BOOLEAN DEFAULT FALSE NOT NULL,
     ingreso		DATE NOT NULL,
     politica_comentarios TINYINT UNSIGNED DEFAULT 1 NOT NULL,

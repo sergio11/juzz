@@ -29,13 +29,17 @@ class ResettingController extends Controller
                 'invalid_username' => $nick
             ));
         }
+        //No permitimos solicitud de restablecimiento si esta no ha expirado.
+        if ($user->isPasswordRequestNonExpired($this->container->getParameter('juzz_usuarios.resetting.token_ttl'))) {
+            return $this->render('juzzUsuariosBundle:Accounts:resetting/passwordAlreadyRequested.html.twig');
+        }
         
         if ($user->getConfirmationToken() === null) {
             $tokenGenerator = $this->get('juzz.util.token_generator');
             $user->setConfirmationToken($tokenGenerator->generateToken());
         }
        // $this->get('juzz.mailer')->sendResettingEmailMessage($user);
-
+        $user->setPasswordRequestedAt(new \DateTime());
         $em->flush();
         return $this->redirect($this->generateUrl('resetting_check_email',
             array('email' => $this->getObfuscatedEmail($user))

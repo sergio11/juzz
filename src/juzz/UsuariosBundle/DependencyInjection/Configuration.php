@@ -19,10 +19,26 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('juzz_usuarios');
-
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode->
+            children()
+                ->arrayNode('registration')
+                    ->children()
+                        ->booleanNode('required_user_activation')
+                            ->defaultValue(true)
+                        ->end()
+                        ->booleanNode('auto_login_when_confirmed')
+                            ->defaultValue(true)
+                        ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('resetting')
+                    ->children()
+                        ->integerNode('token_ttl')
+                            ->min(86400)
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
 
         return $treeBuilder;
     }

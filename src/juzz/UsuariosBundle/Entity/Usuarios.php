@@ -157,6 +157,13 @@ class Usuarios implements AdvancedUserInterface, \Serializable
      */
     private $password;
 
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="password_request_at", type="date")
+     */
+    protected $passwordRequestedAt;
+
     /**
      * @var boolean
      *
@@ -572,6 +579,40 @@ class Usuarios implements AdvancedUserInterface, \Serializable
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * Set password request at
+     *
+     * @param string $password
+     * @return Usuarios
+     */
+
+    public function setPasswordRequestedAt(\DateTime $date = null)
+    {
+        $this->passwordRequestedAt = $date;
+        return $this;
+    }
+    /**
+     * Gets the timestamp that the user requested a password reset.
+     *
+     * @return null|\DateTime
+     */
+    public function getPasswordRequestedAt()
+    {
+        return $this->passwordRequestedAt;
+    }
+
+    /**
+    *
+    *
+    *
+    */
+
+    public function isPasswordRequestNonExpired($ttl)
+    {
+        return $this->getPasswordRequestedAt() instanceof \DateTime &&
+               $this->getPasswordRequestedAt()->getTimestamp() + $ttl > time();
     }
 
     /**
