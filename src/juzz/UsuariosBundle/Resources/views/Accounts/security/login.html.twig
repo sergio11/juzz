@@ -5,6 +5,6 @@
 	    {% if error %}
 	        <div class='alert alert-danger'><span class='fa fa-exclamation-circle'></span> &nbsp; {{ error.message }}</div>
 	    {% endif %}
-	    {% include 'juzzUsuariosBundle:Accounts:form_login.html.twig' %}
+	    {% include 'juzzUsuariosBundle:Accounts:security/form_login.html.twig' %}
 	</div>
 {% endblock %}

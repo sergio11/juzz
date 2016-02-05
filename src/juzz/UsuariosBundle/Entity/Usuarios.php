@@ -904,8 +904,13 @@ class Usuarios implements AdvancedUserInterface, \Serializable
     {
         return array('ROLE_USER');
     }
+
+    /**
+     * Removes sensitive data from the user.
+     */
     public function eraseCredentials()
     {
+        $this->plainPassword = null;
     }
     
     public function getConfirmationToken()

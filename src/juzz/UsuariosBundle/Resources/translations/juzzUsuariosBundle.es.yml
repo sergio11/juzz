@@ -39,3 +39,8 @@ resetting:
     email:
         subject: 'Restablecer Contraseña'
         message: "Hola %username%!\n\nPara restablecer tu contraseña - por favor visita %confirmationUrl%\n\nAtentamente,\nel Equipo.\n"
+change_password:
+    modal:
+        title: 'Cambiar Contraseña'
+    flash:
+        success: 'La contraseña ha sido cambiada con éxito'

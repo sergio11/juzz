@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use juzz\UsuariosBundle\Entity\Usuarios AS UsuarioEntity;
-use juzz\FilesBundle\Entity\Imagenes AS ImagenEntity;
 use juzz\UsuariosBundle\Form\UsuarioRegistroType;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -20,32 +19,15 @@ class DefaultController extends Controller
     	$categories = $repository->findBy(
 		    array('parent'  => null)
 		  );
-      $login_data = $this->loginAction($request);
       $response =  $this->render(':default:index.html.twig',array(
-        'categories' => $categories,
-        'login_data' => $login_data
+        'categories' => $categories
       ));
       return $response;
 
     }
 
 
-    //Muestra el formulario de Login.
-    public function loginAction(Request $request)
-    {
-      
-      $sesion = $request->getSession();
-      $error = $request->attributes->get(
-        SecurityContext::AUTHENTICATION_ERROR,
-        $sesion->get(SecurityContext::AUTHENTICATION_ERROR)
-      );
-
-      return $this->render('juzzUsuariosBundle:Accounts:login.html.twig',array(
-        'last_email' => $sesion->get(SecurityContext::LAST_USERNAME),
-        'error' => $error
-      ));
-
-    }
+    
     
   public function recentUserActivityAction(){
     

@@ -133,8 +133,6 @@ braincrafted_bootstrap:
         twig: true
         knp_menu: true
         knp_paginator: true
-
-
 # Bundle Subida de archivos
 vich_uploader:
     db_driver: orm

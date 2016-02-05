@@ -58,7 +58,12 @@ class UsuarioRegistroType extends AbstractType
                 'first_options'  => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat Password'),
             ))
-            ->add('Guardar', 'submit');
+            ->add('actions', 'form_actions', [
+                'buttons' => [
+                    'save' => ['type' => 'submit', 'options' => ['label' => 'Registrarme']],
+                    'cancel' => ['type' => 'reset', 'options' => ['label' => 'Restablecer']],
+                ]
+            ]);
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

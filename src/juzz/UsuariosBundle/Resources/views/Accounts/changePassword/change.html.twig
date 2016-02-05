@@ -1,0 +1,8 @@
+{% extends 'juzzUsuariosBundle:Accounts:base.html.twig' %}
+{% trans_default_domain 'juzzUsuariosBundle' %}
+
+{% block tabcontent %}
+	<div  class="container-fluid tab-pane active">
+    	{% include 'juzzUsuariosBundle:Accounts:changePassword/change_form.html.twig' %}
+   	</div>
+{% endblock %}

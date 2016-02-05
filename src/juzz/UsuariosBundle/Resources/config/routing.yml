@@ -1,7 +1,7 @@
 # Ruta Login.
 login:
     path:     /accounts/login
-    defaults: { _controller: juzzUsuariosBundle:Default:login}
+    defaults: { _controller: juzzUsuariosBundle:Security:login}
 # Ruta para la acción que comprueba el login del frontend
 login_check:
     path:   /accounts/login_check
@@ -53,6 +53,16 @@ resetting_reset:
     methods:  [GET|POST]
     requirements:
         token:  .{43}
+# Ruta mostrar formulario cambio password
+change_password_request:
+    path: /usuarios/change-password
+    defaults: { _controller: juzzUsuariosBundle:ChangePassword:show}
+    methods:  [GET]
+# Ruta para cambiar contraseña
+change_password:
+    path: /usuarios/change-password
+    defaults: { _controller: juzzUsuariosBundle:ChangePassword:change}
+    methods:  [POST]
 # Ruta del perfil del usuario.
 perfil:
     path:     /usuarios/{user}

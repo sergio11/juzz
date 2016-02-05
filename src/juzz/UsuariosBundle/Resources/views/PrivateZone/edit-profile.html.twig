@@ -30,6 +30,8 @@
 
 </div>
 
+{# Incluimos modal cambio de contraseña #}
+{% render(path('change_password_request')) %}
 {# Incluimos formulario cambio de email#} 
 {% include 'juzzUsuariosBundle:PrivateZone:partials/change-email.html.twig' %}
 
