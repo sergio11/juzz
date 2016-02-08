@@ -44,3 +44,14 @@ change_password:
         title: 'Cambiar Contraseña'
     flash:
         success: 'La contraseña ha sido cambiada con éxito'
+    form:
+        current_password:
+            label: 'Contraseña actual'
+            message: 'Contraseña actual incorrecta'
+        plain_password:
+            invalid_message: 'Los campos no coinciden.'
+            first_options: 'Contraseña'
+            second_options: 'Repetir Contraseña'
+        actions:
+            save: 'Guardar'
+            reset: 'Restablecer'

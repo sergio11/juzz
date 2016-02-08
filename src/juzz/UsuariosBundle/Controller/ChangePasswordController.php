@@ -15,9 +15,9 @@ class ChangePasswordController extends Controller
 	*	Formulario de cambio de contraseña.
 	*/
 	public function showAction(){
-
-		$requestStack = $this->get('request_stack')->getParentRequest();
+		
 		$form = $this->createForm(new UserChangePasswordType(), $this->getUser());
+		$requestStack = $this->get('request_stack')->getParentRequest();
     	//Comprobamos si es una sub request.
       	if ($requestStack) {
       		//Obtenemos cuerpo de la modal.
@@ -44,15 +44,21 @@ class ChangePasswordController extends Controller
     * Cambia la password del usuario.
     */
     public function changeAction(Request $request)
-    {
-    	$form = $this->createForm(new UserChangePasswordType(), $this->getUser());
+    {	
+    	$user = $this->getUser();
+    	$form = $this->createForm(new UserChangePasswordType(),$user );
        	$form->handleRequest($request);
        	if ($form->isValid()) {
+       		$em = $this->getDoctrine()->getManager();
+       		$encoder = $this->get('security.encoder_factory')->getEncoder($user);
+	        $password = $encoder->encodePassword($user->getPlainPassword(), $user->getSalt());
+	        $user->setPassword($password);
+	        $em->flush();
        		$translated = $this->get('translator')->trans('change_password.flash.success',array(),'juzzUsuariosBundle');
             // Crear un mensaje flash para notificar al usuario que se ha registrado correctamente
             $this->get('ras_flash_alert.alert_reporter')->addSuccess($translated);
         	//Redirigimos a editar perfil.
-        	$response =  $this->redirect($this->generateUrl('editar_perfil'));
+        	$response =  $this->redirect($this->generateUrl('editar_perfil',array('user' => $user->getNick())));
         }else{
         	$response = $this->render('juzzUsuariosBundle:Accounts:changePassword/change.html.twig',array(
 	      		'form' => $form->createView()

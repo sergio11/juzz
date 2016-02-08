@@ -12,23 +12,23 @@ class UserChangePasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('currentpassword', 'password', array('label'=>'Current password',
+            ->add('currentpassword', 'password', array('label'=>'change_password.form.current_password.label',
                 'mapped' => false,
-                'constraints' => new UserPassword(array('message' => 'Contraseña actual incorrecta')),
+                'constraints' => new UserPassword(array('message' => 'change_password.form.current_password.message')),
                 'required' => true
             ))
-        	->add('password', 'repeated', array(
+        	->add('plainPassword', 'repeated', array(
                 'type' => 'password',
-                'invalid_message' => 'The password fields must match.',
+                'invalid_message' => 'change_password.form.plain_password.invalid_message',
                 'options' => array('attr' => array('class' => 'password-field')),
                 'required' => true,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
+                'first_options'  => array('label' => 'change_password.form.plain_password.first_options'),
+                'second_options' => array('label' => 'change_password.form.plain_password.second_options')
             ))
             ->add('actions', 'form_actions', [
                 'buttons' => [
-                    'save' => ['type' => 'submit', 'options' => ['label' => 'Guardar']],
-                    'cancel' => ['type' => 'reset', 'options' => ['label' => 'Restablecer']],
+                    'save' => ['type' => 'submit', 'options' => ['label' => 'change_password.form.actions.save']],
+                    'reset' => ['type' => 'reset', 'options' => ['label' => 'change_password.form.actions.reset']],
                 ]
             ]);
     }
@@ -36,7 +36,8 @@ class UserChangePasswordType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'juzz\UsuariosBundle\Entity\Usuarios'
+            'data_class' => 'juzz\UsuariosBundle\Entity\Usuarios',
+            'translation_domain' => 'juzzUsuariosBundle'
         ));
     }
 

@@ -159,6 +159,13 @@ class Usuarios implements AdvancedUserInterface, \Serializable
 
 
     /**
+    * @var string
+    * @Assert\NotBlank()
+    * @Assert\NotNull()
+    */
+    private $plainPassword; 
+
+    /**
      * @var \DateTime
      * @ORM\Column(name="password_request_at", type="date")
      */
@@ -580,6 +587,30 @@ class Usuarios implements AdvancedUserInterface, \Serializable
     {
         return $this->password;
     }
+
+    /**
+    *  Set plainPassword
+    *
+    * @param string $plainPassword
+    * @return Usuarios
+    *
+    */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+        return $this;
+    }
+
+    /**
+     * Get plainPassword
+     *
+     * @return string 
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+    
 
     /**
      * Set password request at
