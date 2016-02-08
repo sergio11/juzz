@@ -32,7 +32,10 @@ class AppKernel extends Kernel
             new juzz\NotificationsBundle\juzzNotificationsBundle(),
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
-            new Hip\MandrillBundle\HipMandrillBundle()
+            new Hip\MandrillBundle\HipMandrillBundle(),
+            new JMS\AopBundle\JMSAopBundle(),
+            new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+            new JMS\DiExtraBundle\JMSDiExtraBundle($this)
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -9,6 +9,7 @@ use juzz\UsuariosBundle\Form\UserEditType;
 use juzz\UsuariosBundle\Form\UserChangeEmailType;
 use juzz\UsuariosBundle\Form\LowProcessType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use JMS\SecurityExtraBundle\Annotation\SecureParam;
 
 class ProfileController extends Controller
 {
@@ -37,15 +38,11 @@ class ProfileController extends Controller
     /**
      * Edit the user
      * @ParamConverter("user", options={"mapping": {"user" = "nick"}})
+     * @SecureParam(name="user", permissions="EDIT")
      */
     public function editAction(Request $request, UsuarioEntity $user)
     {
         
-        //Si el usuario de la sesión no es el propietario del perfil.
-        if ($this->getUser()->getNick() != $user->getNick()) {
-            throw $this->createAccessDeniedException();
-        }
-
         $form = $this->createForm(new UserEditType(), $user);
         $form->handleRequest($request);
 

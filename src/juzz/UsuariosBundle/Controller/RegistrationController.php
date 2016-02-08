@@ -49,7 +49,7 @@ class RegistrationController extends Controller{
         //Necesitamos saber el algoritmo de codificación utilizado en la contraseña.
         //Para poderlo aplicar a nuestros usuarios.
         $encoder = $this->get('security.encoder_factory')->getEncoder($user);
-        $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
+        $password = $encoder->encodePassword($user->getPlainPassword(), $user->getSalt());
         $user->setPassword($password);
         $user->setIngreso(new \DateTime());
         //Establecemos politica de comentarios por defecto.

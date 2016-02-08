@@ -50,7 +50,7 @@ class UsuarioRegistroType extends AbstractType
                 'placeholder' => 'p.e usuario@servidor',
                 'autocomplete' => 'off'
             )))
-            ->add('password', 'repeated', array(
+            ->add('plainPassword', 'repeated', array(
                 'type' => 'password',
                 'invalid_message' => 'The password fields must match.',
                 'options' => array('attr' => array('class' => 'password-field')),

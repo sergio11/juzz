@@ -31,7 +31,12 @@ framework:
         handler_id:  ~
     fragments: { path: /_fragment }
     http_method_override: true
-
+# Security Configuration
+security:
+    access_decision_manager:
+        # strategy can be: affirmative, unanimous or consensus
+        strategy: unanimous
+        allow_if_all_abstain: true
 # Twig Configuration
 twig:
     debug:            "%kernel.debug%"

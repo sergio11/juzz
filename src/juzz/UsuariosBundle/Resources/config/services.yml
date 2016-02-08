@@ -23,3 +23,9 @@ services:
     arguments: ["@router","@security.token_storage","@translator.default","@ras_flash_alert.alert_reporter"]
     tags:
       -  { name: kernel.event_subscriber }
+  juzz.security.owner_voter:
+    class:      juzz\UsuariosBundle\Service\Security\OwnerVoter
+    public:     false
+    arguments: [ "@service_container" ]
+    tags:
+      - { name: security.voter }
