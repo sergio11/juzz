@@ -75,6 +75,13 @@ editar_perfil:
     defaults: { _controller: juzzUsuariosBundle:Profile:edit}
     requirements:
         user:  \w+
+# Ruta darse de baja
+low_process:
+    path: /usuarios/{user}/low-process
+    defaults: { _controller: juzzUsuariosBundle:Profile:delete}
+    methods:  [GET|POST]
+    requirements:
+        user:  \w+
 mis_comentarios:
     path:   /usuarios/{user}/myComments
     defaults: {_controller: juzzUsuariosBundle:Profile:myComments}

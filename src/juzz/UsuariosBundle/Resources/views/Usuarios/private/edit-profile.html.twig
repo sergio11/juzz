@@ -1,22 +1,13 @@
-{% extends 'juzzUsuariosBundle:PrivateZone:base.html.twig' %} 
-
+{% extends 'juzzUsuariosBundle:Usuarios:private/base.html.twig' %} 
+{% trans_default_domain 'juzzUsuariosBundle' %}
 {% block tabContent %} 
 
 <div class="container">
 
     {{ render_flash_alerts() }}
-    <!--<div class="row">
-            
-            <div class="col-md-3">
-                <h2 class="section-title text-center">Mi Perfil</h2>
-            </div>
-            <div class="col-md-3 col-md-offset-4">
-                <h4 class="text-center">Te uniste el : {{ user.ingreso | date('Y-m-d') }}</h4>
-            </div>
-        </div>-->
-
+    
     <div class="container-card">
-        <h2 class="text-center">Edita los datos de tu perfil</h2>
+        <h2 class="text-center">{{ 'edit.title'|trans }}</h2>
 
         <div class="row">
             <div class="col-sm-12">
@@ -24,16 +15,21 @@
             </div>
         </div>
         
-        {% include 'juzzUsuariosBundle:PrivateZone:partials/other-edit-options.html.twig' %}
+        {% include 'juzzUsuariosBundle:Usuarios:private/partials/other-edit-options.html.twig' %}
 
     </div>
-
+    <!-- Darse de baja -->
+    <div class="row">
+        <div class="col-md-7 col-md-offset-5">
+            <p>{{ 'edit.low_process.notice'|trans }}&nbsp;<a href="{{ path('low_process',{user:user.nick}) }}" title=''>{{ 'edit.low_process.link'|trans }}</a></p>
+        </div>
+    </div>
 </div>
 
 {# Incluimos modal cambio de contraseña #}
 {% render(path('change_password_request')) %}
 {# Incluimos formulario cambio de email#} 
-{% include 'juzzUsuariosBundle:PrivateZone:partials/change-email.html.twig' %}
+{% include 'juzzUsuariosBundle:Usuarios:private/partials/change-email.html.twig' %}
 
 {% endblock %}
 

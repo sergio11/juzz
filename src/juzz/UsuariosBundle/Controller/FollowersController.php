@@ -58,7 +58,7 @@ class FollowersController extends Controller{
     */
     public function lastAction(UsuarioEntity $user){
   
-        return $this->render('juzzUsuariosBundle:Usuarios:partials/last_followers.html.twig',array(
+        return $this->render('juzzUsuariosBundle:Usuarios:public/partials/last_followers.html.twig',array(
             'followers' => $user->getFollowers(),
             'owner_nick' => $user->getNick()
         ));
@@ -69,7 +69,7 @@ class FollowersController extends Controller{
     * @ParamConverter("user", options={"mapping": {"user" = "nick"}})
     */
     public function showAction(UsuarioEntity $user){
-       return $this->render('juzzUsuariosBundle:Usuarios:tab-followers.html.twig',array(
+       return $this->render('juzzUsuariosBundle:Usuarios:public/tab-followers.html.twig',array(
            'owner' => $user
        ));
     }

@@ -991,6 +991,17 @@ class Usuarios implements AdvancedUserInterface, \Serializable
         return true;
     }
 
+    /**
+     * Compares this user to another to determine if they are the same.
+     *
+     * @param UserInterface $user The user
+     * @return boolean True if equal, false othwerwise.
+     */
+    public function equals(Usuarios $user) {
+        return md5($this->getUsername()) == md5($user->getUsername());
+ 
+    }
+
 
      /** @see \Serializable::serialize() */
     public function serialize()

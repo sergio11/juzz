@@ -15,6 +15,11 @@ login:
     recovery:
         text: 'Recuperar Contraseña'
         title: '¿Tienes problemas para iniciar sesión?'
+edit:
+    title: 'Edita los datos de tu perfil'
+    low_process:
+        notice: '¿Quieres darte de baja de juzz?'
+        link: 'visita la siguiente página.'
 registration:
     check_email: 'Se ha enviado un email a %email%. Contiene un enlace de activación que debes presionar para activar tu cuenta.'
     confirmed: 'Felicidades %username%, tu cuenta está ahora confirmada.'
@@ -55,3 +60,16 @@ change_password:
         actions:
             save: 'Guardar'
             reset: 'Restablecer'
+low_process:
+    title: 'Proceso de baja'
+    notice: > 
+        <p> Por motivos de seguridad, debes volver a proporcionar tus credenciales para poder darte de baja. Recuerda que al darte de baja, <strong>tu conenido será eliminado de Juzz.</strong></p>
+        <p> Si el motivo de la baja es cambiar de cuenta por cualquier motivo (como querer cambiar de nombre), te recomendamos que te pongas en contacto con nosotros previamente en la sección contacta con juzz.</p>
+    form:
+        password:
+            label: 'Contraseña'
+            invalid: 'La contraseña no coincide con tu contraseña actual'
+        reason:
+            label: '¿Porqué te quieres dar de baja de Juzz?'
+        submit: 'Darme de baja'
+        reset: 'Restablecer'

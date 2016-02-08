@@ -1,0 +1,18 @@
+{% extends 'juzzUsuariosBundle:Usuarios:private/base.html.twig' %} 
+{% trans_default_domain 'juzzUsuariosBundle' %}
+{% block tabContent %} 
+	<div class="container">
+		<div class="container-card">
+        	<h2 class="text-center">{{'low_process.title'| trans }}</h2>
+        	<div class="row">
+        		<!-- Aviso -->
+        		<div class="col-sm-12">
+	                {{'low_process.notice'|trans|raw}}
+	            </div>
+	            <div class="col-sm-12">
+	                {{ form(form, { 'action': path('low_process',{user:user.nick}), 'method': 'POST'}) }}
+	            </div>
+	        </div>
+        </div>
+	</div>
+{% endblock %}

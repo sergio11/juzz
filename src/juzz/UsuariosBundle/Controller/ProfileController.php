@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use juzz\UsuariosBundle\Entity\Usuarios AS UsuarioEntity;
 use juzz\UsuariosBundle\Form\UserEditType;
 use juzz\UsuariosBundle\Form\UserChangeEmailType;
+use juzz\UsuariosBundle\Form\LowProcessType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class ProfileController extends Controller
@@ -29,7 +30,7 @@ class ProfileController extends Controller
            $pusher->trigger( 'my-channel', 'profile_visited', $serializer->serialize($message, 'json'));
         }*/
         //Renderizamos página de perfil con la información del propietario.
-        return $this->render('juzzUsuariosBundle:Usuarios:tab-profile.html.twig',array(
+        return $this->render('juzzUsuariosBundle:Usuarios:public/tab-profile.html.twig',array(
             'owner' => $user
         ));
     }
@@ -57,13 +58,36 @@ class ProfileController extends Controller
 
         $changeEmailForm = $this->createForm(new UserChangeEmailType());
 
-        return $this->render('juzzUsuariosBundle:PrivateZone:edit-profile.html.twig', array(
+        return $this->render('juzzUsuariosBundle:Usuarios:private/edit-profile.html.twig', array(
             'user'      => $user,
             'edit_form'   => $form->createView(),
             'change_email_form' => $changeEmailForm->createView()
         ));   
     }
 
+    /**
+    * Delete User Account
+    * @ParamConverter("user", options={"mapping": {"user" = "nick"}})
+    */
+    public function deleteAction(Request $request,UsuarioEntity $user){
+      $form = $this->createForm(new LowProcessType());
+      $form->handleRequest($request);
+      if ($form->isValid()) {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($user);
+        $em->flush();
+        //invalidamos la sesión.
+        $this->get('session')->invalidate();
+        //redirigimos a la portada.
+        return $this->redirect($this->generateUrl('portada'));
+      }
+      
+      return $this->render('juzzUsuariosBundle:Usuarios:private/low-process.html.twig',array(
+        'form' => $form->createView(),
+        'user' => $user
+      ));
+
+    }
 
     public function myCommentsAction(Request $request,$user){
         $start = $request->query->getInt('start',0);
@@ -78,7 +102,7 @@ class ProfileController extends Controller
 
             
         }*/
-        return $this->render('juzzUsuariosBundle:PrivateZone:my-comments.html.twig');
+        return $this->render('juzzUsuariosBundle:Usuarios:private/my-comments.html.twig');
     }
 
 
