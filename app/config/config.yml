@@ -41,8 +41,14 @@ security:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-    form:
-        resources: ['juzzUsuariosBundle:Form:form-radio-button.html.twig','juzzUsuariosBundle:Form:terminos-tags-input.html.twig','juzzUsuariosBundle:Form:select-control.html.twig','juzzFilesBundle:Form:profile-image.html.twig']
+    form_themes:
+        # Select Control
+        - juzzUsuariosBundle:Form:select-control.html.twig
+        # Radio Buttons
+        - juzzUsuariosBundle:Form:form-radio-button.html.twig
+        #Tags Input
+        - juzzUsuariosBundle:Form:terminos-tags-input.html.twig
+        - juzzFilesBundle:Form:profile-image.html.twig
 
 # Assetic Configuration
 assetic:

@@ -20,6 +20,9 @@ edit:
     low_process:
         notice: '¿Quieres darte de baja de juzz?'
         link: 'visita la siguiente página.'
+    actions:
+        save: 'Actualizar'
+        reset: 'Restablecer'
 registration:
     check_email: 'Se ha enviado un email a %email%. Contiene un enlace de activación que debes presionar para activar tu cuenta.'
     confirmed: 'Felicidades %username%, tu cuenta está ahora confirmada.'
@@ -30,6 +33,36 @@ registration:
     email:
         subject: 'Bienvenido a Juzz %username%!'
         message: "Hola %username%!\n\nPara completar la validación de tu cuenta - por favor visita %confirmationUrl%\n\nAtentamente,\nel Equipo de juzz.\n"
+    actions:
+        save: 'Registrarme'
+        reset: 'Restablecer'
+form:
+    nick:
+        label: 'Nombre de usuario'
+        popover: 'Tu nombre de Usuario'
+    name:
+        label: 'Nombre'
+        help_text: 'Se admiten letras, números y guiones bajos .'
+    ape1:
+        label: 'Primer Apellido'
+    ape2:
+        label: 'Segundo Apellido'
+    gender:
+        man: 'Hombre'
+        woman: 'Mujer'
+    source:
+        empty_value: 'Seleccione un pais'
+    email:
+        label: 'Correo electrónico'
+    password:
+        first_options: 'Contraseña'
+        second_options: 'Repetir Contraseña'
+    description:
+        label: 'Descripción Personal'
+    category:
+        label: 'Intereses'
+    comments_policy:
+        label: 'Política Comentarios'
 resetting:
     password_already_requested: 'La contraseña para este usuario ya ha sido solicitada dentro de las 24 horas.'
     check_email: 'Un email ha sido enviado a %email%. Contiene un enlace de activación que debes presionar para restablecer tu contraseña.'

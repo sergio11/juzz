@@ -1,7 +1,6 @@
 {% extends 'juzzUsuariosBundle:Usuarios:private/base.html.twig' %} 
 {% trans_default_domain 'juzzUsuariosBundle' %}
 {% block tabContent %} 
-
 <div class="container">
 
     {{ render_flash_alerts() }}
@@ -15,15 +14,25 @@
             </div>
         </div>
         
-        {% include 'juzzUsuariosBundle:Usuarios:private/partials/other-edit-options.html.twig' %}
-
-    </div>
-    <!-- Darse de baja -->
-    <div class="row">
-        <div class="col-md-7 col-md-offset-5">
-            <p>{{ 'edit.low_process.notice'|trans }}&nbsp;<a href="{{ path('low_process',{user:user.nick}) }}" title=''>{{ 'edit.low_process.link'|trans }}</a></p>
+        <div class="row">
+            <!-- Darse de baja -->
+            <div class="col-xs-12 col-md-6">
+                <p>{{ 'edit.low_process.notice'|trans }}&nbsp;<a href="{{ path('low_process',{user:user.nick}) }}" title=''>{{ 'edit.low_process.link'|trans }}</a></p>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <a data-toggle="modal" class="btn btn-embossed btn-inverse pull-right" href="#changeEmail">
+                    <span class="hidden-sm">Cambiar Email</span>
+                    &nbsp;{{ icon('envelope') }}
+                </a>
+                <span class="btn-separator"></span>
+                <a data-toggle="modal" class="btn btn-embossed btn-inverse pull-right" href="#changePassword">
+                    <span class="hidden-sm">Cambiar Contraseña</span>
+                    &nbsp;{{ icon('lock') }}
+                </a>
+            </div>
         </div>
     </div>
+    
 </div>
 
 {# Incluimos modal cambio de contraseña #}
@@ -33,14 +42,4 @@
 
 {% endblock %}
 
-{% block javascripts %} 
-
-{{ parent() }}
-
-<script type="text/javascript">
-    $(function(){
-            $("select").select2({dropdownCssClass: 'dropdown-inverse'});
-        })
-</script>
-{% endblock %}
 

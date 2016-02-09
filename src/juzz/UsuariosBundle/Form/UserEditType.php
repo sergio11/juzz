@@ -18,37 +18,35 @@ class UserEditType extends AbstractType
                 'required' => false
             ))
             ->add('nick','text',array(
-                'label' => 'Nick',
+                'label' => 'form.nick.label',
                 'attr' => array(
-                    'placeholder' => 'p.e sergio11',
                     'maxlength' => 30,
                     'data-toggle' => 'popover',
                     'data-trigger' => 'focus',
-                    'data-content' => 'Tu Nick de Usuario',
+                    'data-content' => 'form.nick.popover',
                     'data-placement' => 'left'
                 )
             ))
             ->add('nombre','text',array(
+                'label' => 'form.name.label',
                 'attr' => array(
-                    'help_text' => 'Letters, numbers and underscores are allowed.',
+                    'help_text' => 'form.name.help_text',
                 )
             ))
             ->add('ape1','text',array(
-                'label' => 'Primer Apellido',
+                'label' => 'form.ape1.label',
                 'attr' => array(
-                    'placeholder' => 'p.e Sánchez',
                     'maxlength' => 30
                 )
             ))
             ->add('ape2','text',array(
-                'label' => 'Segundo Apellido',
+                'label' => 'form.ape2.label',
                 'attr' => array(
-                    'placeholder' => 'p.e Sánchez',
                     'maxlength' => 30
                 )
             ))
             ->add('genero', 'choice', array(
-                'choices'   => array('m' => 'Hombre', 'f' => 'Mujer'),
+                'choices'   => array('m' => 'form.gender.man', 'f' => 'form.gender.woman'),
                 'required'  => true,
                 'expanded' => true,
                 'multiple' => false,
@@ -57,18 +55,18 @@ class UserEditType extends AbstractType
             ->add('origen','entity', array(
                 'class' => 'juzz\UsuariosBundle\Entity\Paises',
                 'required' => true,
-                'empty_value' => 'Seleccione un pais',
+                'empty_value' => 'form.source.empty_value',
                 'property' => 'nombre'
             ))
             ->add('descripcion','textarea', array(
-                'label' => 'Descripción Personal'
+                'label' => 'form.description.label'
             ))
             ->add('categoria', 'entity', array(
                 'class'     => 'juzz\EpisodiosBundle\Entity\Categorias',
                 'expanded'  => false,
                 'multiple'  => true,
                 'required' => false,
-                'label' => 'Intereses',
+                'label' => 'form.category.label',
                 'choice_label' => function ($category) {
                     return $category->getTermino()->getNombre();
                 }
@@ -76,7 +74,7 @@ class UserEditType extends AbstractType
             ))
             ->add('politicaComentarios', 'entity', array(
                 'class' => 'juzz\CommentsBundle\Entity\PoliticaComentarios',
-                'label' => 'Política Comentarios',
+                'label' => 'form.comments_policy.label',
                 'required' => true,
                 'property' => 'name'
             ))
@@ -86,8 +84,8 @@ class UserEditType extends AbstractType
             ))
             ->add('actions', 'form_actions', [
                 'buttons' => [
-                    'save' => ['type' => 'submit', 'options' => ['label' => 'Guardar']],
-                    'cancel' => ['type' => 'reset', 'options' => ['label' => 'Restablecer']],
+                    'save' => ['type' => 'submit', 'options' => ['label' => 'edit.actions.save']],
+                    'reset' => ['type' => 'reset', 'options' => ['label' => 'edit.actions.reset']],
                 ]
             ]);
     }
@@ -96,7 +94,8 @@ class UserEditType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'juzz\UsuariosBundle\Entity\Usuarios',
-            'cascade_validation' => false
+            'cascade_validation' => false,
+            'translation_domain' => 'juzzUsuariosBundle'
         ));
     }
 

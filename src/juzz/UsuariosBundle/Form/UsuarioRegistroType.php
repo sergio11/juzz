@@ -16,26 +16,23 @@ class UsuarioRegistroType extends AbstractType
             ->add('nick','text',array(
                 'label' => 'Nick',
                 'attr' => array(
-                    'placeholder' => 'p.e sergio11',
                     'maxlength' => 30
                 )
             ))
             ->add('ape1','text',array(
-                'label' => 'Primer Apellido',
+                'label' => 'form.ape1.label',
                 'attr' => array(
-                    'placeholder' => 'p.e Sánchez',
                     'maxlength' => 30
                 )
             ))
             ->add('ape2','text',array(
-                'label' => 'Segundo Apellido',
+                'label' => 'form.ape2.label',
                 'attr' => array(
-                    'placeholder' => 'p.e Sánchez',
                     'maxlength' => 30
                 )
             ))
             ->add('genero', 'choice', array(
-                'choices'   => array('m' => 'Hombre', 'f' => 'Mujer'),
+                'choices'   => array('m' => 'form.gender.man', 'f' => 'form.gender.woman'),
                 'required'  => true,
                 'expanded' => true,
                 'multiple' => false
@@ -43,25 +40,28 @@ class UsuarioRegistroType extends AbstractType
             ->add('origen','entity', array(
                 'class' => 'juzz\UsuariosBundle\Entity\Paises',
                 'required' => true,
-                'empty_value' => 'Seleccione un pais',
+                'empty_value' => 'form.source.empty_value',
                 'property' => 'nombre'
             ))
-            ->add('email', 'email',  array('label' => 'Correo electrónico', 'attr' => array(
-                'placeholder' => 'p.e usuario@servidor',
-                'autocomplete' => 'off'
-            )))
+            ->add('email', 'email',  array(
+                'label' => 'form.email.label', 
+                'attr' => array(
+                    'placeholder' => 'p.e usuario@servidor',
+                    'autocomplete' => 'off'
+                )
+            ))
             ->add('plainPassword', 'repeated', array(
                 'type' => 'password',
-                'invalid_message' => 'The password fields must match.',
+                'invalid_message' => 'passwords_not_match',
                 'options' => array('attr' => array('class' => 'password-field')),
                 'required' => true,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
+                'first_options'  => array('label' => 'form.password.first_options'),
+                'second_options' => array('label' => 'form.password.second_options'),
             ))
             ->add('actions', 'form_actions', [
                 'buttons' => [
-                    'save' => ['type' => 'submit', 'options' => ['label' => 'Registrarme']],
-                    'cancel' => ['type' => 'reset', 'options' => ['label' => 'Restablecer']],
+                    'save' => ['type' => 'submit', 'options' => ['label' => 'registration.actions.save']],
+                    'cancel' => ['type' => 'reset', 'options' => ['label' => 'registration.actions.reset']],
                 ]
             ]);
     }
@@ -69,7 +69,8 @@ class UsuarioRegistroType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'juzz\UsuariosBundle\Entity\Usuarios'
+            'data_class' => 'juzz\UsuariosBundle\Entity\Usuarios',
+            'translation_domain' => 'juzzUsuariosBundle'
         ));
     }
     public function getName()
