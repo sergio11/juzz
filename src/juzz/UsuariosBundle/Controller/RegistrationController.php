@@ -45,7 +45,7 @@ class RegistrationController extends Controller{
         
         $event = new RegistrationEvent($form, $user);
         $dispatcher->dispatch(UsuariosBundleEvents::REGISTRATION_SUCCESS, $event);
-        
+
         //Necesitamos saber el algoritmo de codificación utilizado en la contraseña.
         //Para poderlo aplicar a nuestros usuarios.
         $encoder = $this->get('security.encoder_factory')->getEncoder($user);

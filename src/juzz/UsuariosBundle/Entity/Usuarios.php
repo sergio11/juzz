@@ -151,8 +151,6 @@ class Usuarios implements AdvancedUserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=60, nullable=false)
-     * @Assert\NotBlank()
-     * @Assert\NotNull()
      * 
      */
     private $password;
