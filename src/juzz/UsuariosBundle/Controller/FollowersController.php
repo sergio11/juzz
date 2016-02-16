@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use juzz\UsuariosBundle\Entity\Usuarios AS UsuarioEntity;
 use juzz\UsuariosBundle\Entity\Followers AS FollowerEntity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 
 class FollowersController extends Controller{
     
@@ -55,6 +56,7 @@ class FollowersController extends Controller{
     /**
     * Devuelve los últimos 5 followers para $user
     * @ParamConverter("user", options={"mapping": {"user" = "id"}})
+    * @Cache(expires="tomorrow")
     */
     public function lastAction(UsuarioEntity $user){
   
@@ -67,6 +69,7 @@ class FollowersController extends Controller{
     /**
     * Devuelve todos los seguidores para un usuario.
     * @ParamConverter("user", options={"mapping": {"user" = "nick"}})
+    * @Cache(expires="tomorrow")
     */
     public function showAction(UsuarioEntity $user){
        return $this->render('juzzUsuariosBundle:Usuarios:public/tab-followers.html.twig',array(

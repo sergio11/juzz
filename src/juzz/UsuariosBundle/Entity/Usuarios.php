@@ -149,7 +149,6 @@ class Usuarios implements AdvancedUserInterface, \Serializable
 
     /**
      * @var string
-     *
      * @ORM\Column(name="password", type="string", length=60, nullable=false)
      * 
      */
@@ -158,8 +157,6 @@ class Usuarios implements AdvancedUserInterface, \Serializable
 
     /**
     * @var string
-    * @Assert\NotBlank()
-    * @Assert\NotNull()
     */
     private $plainPassword; 
 
@@ -291,12 +288,12 @@ class Usuarios implements AdvancedUserInterface, \Serializable
     /**
      * @ORM\OneToMany(targetEntity="\juzz\UsuariosBundle\Entity\Followers", mappedBy="following", cascade={"persist", "remove","all"})
      */
-    protected $followers;
+    private $followers;
     
     /**
      * @ORM\OneToMany(targetEntity="\juzz\UsuariosBundle\Entity\Followers", mappedBy="follower", cascade={"persist", "remove","all"})
      */
-    protected $following;
+    private $following;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -318,7 +315,15 @@ class Usuarios implements AdvancedUserInterface, \Serializable
      * @ORM\Column(name="confirmation_token", type="string", length=32, nullable=true)
      * @var string
      */
-    protected $confirmationToken;
+    private $confirmationToken;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="last_modified", type="datetime", nullable=true)
+     */
+    private $lastModified;
+
 
     /**
      * Constructor

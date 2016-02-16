@@ -43,7 +43,8 @@ CREATE TABLE IF NOT EXISTS usuarios(
     	CONSTRAINT US_PRO_UK UNIQUE(profile_bg),
     updated_profilebg_at DATETIME,
     confirmation_token CHAR(43),
-    	CONSTRAINT US_TOK_UK UNIQUE(confirmation_token)
+    	CONSTRAINT US_TOK_UK UNIQUE(confirmation_token),
+    last_modified DATETIME
 )ENGINE=INNODB CHARSET=LATIN1 COMMENT="Tabla de Usuario";
 
 /*ALTER TABLE USUARIOS MODIFY COLUMN profile_bg BIGINT UNSIGNED DEFAULT NULL;*/
