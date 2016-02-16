@@ -21,8 +21,9 @@ class FollowersController extends Controller{
         
          if(!$user->getFollowers()->contains($follower)){
              $em = $this->getDoctrine()->getManager();
+             $user->setLastModified(new \DateTime());
              $follow = new FollowerEntity();
-             $follow->setDate(new \DateTime('now'));
+             $follow->setDate(new \DateTime());
              $follow->setFollowing($user);
              $follow->setFollower($follower);
              $em->persist($follow);
@@ -47,6 +48,7 @@ class FollowersController extends Controller{
             'following' => $user,
             'follower' => $follower
         ));
+        $follower->getFollowing()->setLastModified(new \DateTime());
         $em->remove($follower);
         $em->flush();
         $this->get('ras_flash_alert.alert_reporter')->addSuccess("Ahora ya no sigues a {$follower->getFollowing()->getFullName()} ");
@@ -69,7 +71,7 @@ class FollowersController extends Controller{
     /**
     * Devuelve todos los seguidores para un usuario.
     * @ParamConverter("user", options={"mapping": {"user" = "nick"}})
-    * @Cache(expires="tomorrow")
+    * @Cache(ETag="'Followers' ~ user.getId() ~ user.getFollowers()|length")
     */
     public function showAction(UsuarioEntity $user){
        return $this->render('juzzUsuariosBundle:Usuarios:public/tab-followers.html.twig',array(

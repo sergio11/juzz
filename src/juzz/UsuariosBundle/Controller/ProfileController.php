@@ -9,6 +9,7 @@ use juzz\UsuariosBundle\Form\UserEditType;
 use juzz\UsuariosBundle\Form\UserChangeEmailType;
 use juzz\UsuariosBundle\Form\LowProcessType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use JMS\SecurityExtraBundle\Annotation\SecureParam;
 
 class ProfileController extends Controller
@@ -16,6 +17,7 @@ class ProfileController extends Controller
     /**
      * Show the user
      * @ParamConverter("user", options={"mapping": {"user" = "nick"}})
+     * @Cache(lastModified="user.getLastModified()", ETag="'User' ~ user.getId() ~ user.getLastModified().getTimestamp()")
      */
     public function showAction(Request $request, UsuarioEntity $user)
     {
@@ -48,6 +50,7 @@ class ProfileController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $user->setLastModified(new \DateTime('now'));
             $em->persist($user);
             $em->flush();
             $this->get('ras_flash_alert.alert_reporter')->addSuccess('Cambios Guardados con Éxito');

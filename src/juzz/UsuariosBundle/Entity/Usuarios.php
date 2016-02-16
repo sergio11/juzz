@@ -319,8 +319,9 @@ class Usuarios implements AdvancedUserInterface, \Serializable
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="last_modified", type="datetime", nullable=true)
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     * @ORM\Column(name="last_modified", type="datetime", nullable=false)
      */
     private $lastModified;
 
@@ -888,6 +889,22 @@ class Usuarios implements AdvancedUserInterface, \Serializable
     
     public function getFollowing(){
         return $this->following;
+    }
+    
+    /*
+    * Set Profile last modified
+    */
+    
+    public function setLastModified(\DateTime $datetime){
+        $this->lastModified = $datetime;
+        return $this;
+    }
+    
+    /*
+    * Return profile last modified
+    */
+    public function getLastModified(){
+        return $this->lastModified;
     }
 
     /**

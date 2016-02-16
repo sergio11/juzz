@@ -91,7 +91,7 @@ doctrine:
 # Configuración del Bundle de Usuarios.
 juzz_usuarios:
     registration:
-        required_user_activation: true
+        required_user_activation: false
         auto_login_when_confirmed: true
     resetting:
         token_ttl: 86400

@@ -25,7 +25,8 @@ class RegistrationController extends Controller{
     $dispatcher = $this->get('event_dispatcher');
 
     $user = new UsuarioEntity();
-
+    $user->setLastModified(new \DateTime());
+    
     if ($request->getMethod() == 'GET') {
       //Usar getClientIp.
       $content = @file_get_contents('http://www.geoplugin.net/php.gp?ip=212.128.152.1');
@@ -52,6 +53,7 @@ class RegistrationController extends Controller{
         $password = $encoder->encodePassword($user->getPlainPassword(), $user->getSalt());
         $user->setPassword($password);
         $user->setIngreso(new \DateTime());
+
         //Establecemos politica de comentarios por defecto.
         $policy = $em->getRepository('juzzCommentsBundle:PoliticaComentarios')->find(1);
         $user->setPoliticaComentarios($policy);
@@ -71,7 +73,7 @@ class RegistrationController extends Controller{
                 $response = $this->redirect($this->generateUrl('confirmed'));
             }
         }
-
+            
         // Guardar el nuevo usuario en la base de datos
         $em->persist($user);
         $em->flush();
