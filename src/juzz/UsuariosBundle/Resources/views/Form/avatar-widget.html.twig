@@ -1,0 +1,31 @@
+
+{% block _edit_user_profile_avatarFile_widget %}
+    {% import '::macros.html.twig' as macros %}
+    {% spaceless %}
+    <div class='row'>
+        <div class='col-xs-2 col-xs-offset-4'>
+        {% if app.user is not null %}
+            {{macros.profile_avatar_large(app.user)}}
+        {% endif %}
+        </div>
+        <div class='col-xs-6'>
+            <div class='row'>
+                <div class='col-xs-12'>
+                    <p>Personaliza tu avatar</p>
+                </div>
+                <div class='col-xs-12'>
+                    <a href='#' class='btn btn-primary btn-file'>
+                        <span class='fui-clip'></span>&nbsp;Subir Archivo
+                        {{ block('form_widget') }}
+                    </a>
+                    <span class='btn-separator'></span>
+                    <a href='#' class='btn btn-primary'>
+                        <span class='fui-photo'></span>&nbsp;Tomar Foto
+                    </a>
+                 </div>
+            </div>
+            
+        </div>
+    </div>
+    {% endspaceless %}
+{% endblock %}

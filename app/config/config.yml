@@ -49,6 +49,8 @@ twig:
         #Tags Input
         - juzzUsuariosBundle:Form:terminos-tags-input.html.twig
         - juzzFilesBundle:Form:profile-image.html.twig
+        # Avatar Widget
+        - juzzUsuariosBundle:Form:avatar-widget.html.twig
 
 # Assetic Configuration
 assetic:
