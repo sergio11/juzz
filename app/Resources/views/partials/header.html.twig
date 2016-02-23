@@ -2,17 +2,13 @@
     <nav class="navbar navbar-default navbar-fixed-top">
         <div>
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle pull-left collapsed" data-toggle="collapse" data-target="#main-navbar">
+                
+                <button type="button" class="navbar-toggle pull-right collapsed" data-toggle="collapse" data-target="#main-navbar">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <button type="button" class="navbar-toggle pull-right active collapsed" data-toggle="collapse" data-target="#searchbar">
-                    <span class="sr-only">Toggle player</span>
-                    <span class="fui-search"></span>
-                </button>
-
                 {% set route = app.user ? path('perfil',{ 'user' : app.user.nick }) : path('portada') %}
                 <a class="navbar-brand" href="{{route}}"></a>
 

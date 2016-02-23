@@ -1,19 +1,24 @@
 <section class="section section-bg container-fluid" id='playlists'>
     <h2 class="section-title">¿Qué te interesa?</h2>
     <div class="row">
-        {% if categories|length > 0 %} {% set column = 2 %} {% set groups = categories|length / column | round(0, 'floor') %} {%
-        for category_group in categories|batch(groups, false) %}
-        <div class="col-md-offset-2 col-md-4 col-xs-12">
-            <ul class="playlists-list">
-                {% for category in category_group if category%}
-                <li class="">
-                    <span class="glyphicon glyphicon-menu-right"></span>
-                    <a href="{{ url('episodios_categorias', { 'category': category.termino.slug }) }}">{{category.termino.nombre}}</a>
-                </li>
+        <div class='col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3'>
+            {% if categories|length > 0 %} 
+            {% set column = 2 %} 
+            {% set groups = categories|length / column | round(0, 'floor') %} 
+                {% for category_group in categories|batch(groups, false) %}
+                <div class="col-xs-12 col-sm-6">
+                    <ul class="playlists-list">
+                        {% for category in category_group if category%}
+                        <li class="">
+                            <span class="fui-arrow-right"></span>
+                            <a href="{{ url('episodios_categorias', { 'category': category.termino.slug }) }}">{{category.termino.nombre}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
                 {% endfor %}
-            </ul>
-        </div>
-        {% endfor %} {% endif %}
+              {% endif %}
+         </div>
     </div>
     <div class="section-footer">
         <a href="" class="btn btn-transparent">Explorar todas</a>
