@@ -14,10 +14,12 @@ use JMS\SecurityExtraBundle\Annotation\SecureParam;
 
 class ProfileController extends Controller
 {
+
+  //@Cache(lastModified="user.getLastModified()", ETag="'User' ~ user.getId() ~ user.getLastModified().getTimestamp()")
     /**
      * Show the user
      * @ParamConverter("user", options={"mapping": {"user" = "nick"}})
-     * @Cache(lastModified="user.getLastModified()", ETag="'User' ~ user.getId() ~ user.getLastModified().getTimestamp()")
+     * 
      */
     public function showAction(Request $request, UsuarioEntity $user)
     {

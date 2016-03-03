@@ -10,5 +10,26 @@ body {
 }
 
 h2{font-size: 3rem;}
+h3{font-size: 2rem;}
 h4{font-size: 1.8rem;}
 h5{font-size: 1.6rem;}
+
+footer{
+	background-color: @wet-asphalt;
+	> .container-fluid {
+		&:not(:first-child)::before{
+			content: '';
+			position: relative;
+			top: -10%;
+			margin: 2rem 0;
+			width: 100%;
+			height: 2px;
+			border-radius: 5px;
+			background-color: #bac1c8;
+		}
+		.row {
+			margin: 3rem auto !important;
+		}
+
+	}
+}
