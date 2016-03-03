@@ -23,6 +23,12 @@
   <main>
     {% block main %}{% endblock %}
   </main>
+
+  {% if not app.user %}
+    {# Login Modal #}
+    {% render(path('login')) %}
+  {% endif %}
+
   {# Footer #}
   {% include '::partials/footer.html.twig' %}
   
