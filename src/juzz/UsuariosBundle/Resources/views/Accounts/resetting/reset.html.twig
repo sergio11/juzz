@@ -1,7 +1,6 @@
 {% extends 'juzzUsuariosBundle:Accounts:base.html.twig' %}
 {% trans_default_domain 'juzzUsuariosBundle' %}
 
-{% block tabcontent %}
-	<div  class="container-fluid tab-pane active">
+{% block cardContent %}
     {{ form(form, { 'action': path('resetting_reset', {'token': token}), 'method': 'POST','style': 'horizontal'}) }}
 {% endblock %}

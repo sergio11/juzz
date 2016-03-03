@@ -1,8 +1,6 @@
 {% extends 'juzzUsuariosBundle:Accounts:base.html.twig' %}
 {% trans_default_domain 'juzzUsuariosBundle' %}
 
-{% block tabcontent %}
-	<div  class="container-fluid tab-pane active">
-		<p>{{'registration.confirmed'| trans({' %username%': user.getFullName()}) }}</p>
-	</div>
+{% block cardContent %}
+	<p>{{'registration.confirmed'| trans({' %username%': user.getFullName()}) }}</p>
 {% endblock %}

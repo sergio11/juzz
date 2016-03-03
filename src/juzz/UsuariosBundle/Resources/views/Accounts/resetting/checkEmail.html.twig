@@ -1,8 +1,6 @@
 {% extends 'juzzUsuariosBundle:Accounts:base.html.twig' %}
 {% trans_default_domain 'juzzUsuariosBundle' %}
 
-{% block tabcontent %}
-	<div  class="container-fluid tab-pane active">
-		<p>{{ 'resetting.check_email'|trans({'%email%': email}) }}</p>
-	</div>
+{% block cardContent %}
+	<p class="alert alert-success"><span class="fui-check-circle"></span>&nbsp;{{ 'resetting.check_email'|trans({'%email%': email}) }}</p>
 {% endblock %}

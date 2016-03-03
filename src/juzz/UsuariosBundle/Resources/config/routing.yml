@@ -43,7 +43,7 @@ resetting_send_email:
     methods:  [POST]
 # Indica al usuario que compruebe su email para completar el reseteo de la password
 resetting_check_email:
-    path: /accounts/check-email
+    path: /accounts/resetting-check-email
     defaults: { _controller: juzzUsuariosBundle:Resetting:checkEmail}
     methods:  [GET]
 # Realiza el reseteo en caso de que el token sea correcto

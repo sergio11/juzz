@@ -1,12 +1,9 @@
 {% extends 'juzzUsuariosBundle:Accounts:base.html.twig' %}
 
-{% block tabcontent %}
-	<div  class="container-fluid tab-pane active">
+{% block cardContent %}
+	{{ form(form, { 'action': path('register'), 'method': 'POST','style': 'horizontal'}) }}
+    {# Incluímos las social options #}
+    {% include 'juzzUsuariosBundle:Accounts:partials/social-options.html.twig' %}
 
-		{{ form(form, { 'action': path('register'), 'method': 'POST','style': 'horizontal'}) }}
-        {# Incluímos las social options #}
-        {% include 'juzzUsuariosBundle:Accounts:partials/social-options.html.twig' %}
-		
-	</div>
 {% endblock %}
 
