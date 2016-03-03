@@ -1,0 +1,100 @@
+figure {
+	position: relative;
+	float: left;
+	overflow: hidden;
+	margin: 10px 1%;
+	min-width: 320px;
+	max-width: 480px;
+	max-height: 360px;
+	width: 100%;
+	text-align: center;
+	cursor: pointer;
+	img {
+		position: relative;
+		display: block;
+		min-height: 100%;
+		max-width: 100%;
+		opacity: 0.8;
+	}
+	figcaption {
+		padding: 2em;
+		color: #fff;
+		text-transform: uppercase;
+		font-size: 1.25em;
+		backface-visibility: hidden;
+		&::before,&::after{
+			pointer-events: none;
+		}
+		&, > a{
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+		> a {
+			z-index: 1000;
+			text-indent: 200%;
+			white-space: nowrap;
+			font-size: 0;
+			opacity: 0;
+		}
+	}
+	h2 {
+		word-spacing: -0.15em;
+		font-weight: 300;
+		span{
+			font-weight: 800;
+		}
+	}
+	p {
+		letter-spacing: 1px;
+		font-size: 68.5%;
+	}
+}
+
+// Effects
+
+figure.effect-oscar {
+	background: linear-gradient(45deg, @turquoise 0%,@wet-asphalt 40%,@emerald 100%);
+	img {
+		opacity: 0.9;
+		transition: opacity 0.35s;
+	}
+	&:hover img {
+		opacity: 0.4;
+	}
+	figcaption {
+		padding: 3em;
+		background-color: fade(@wet-asphalt,70%);
+		transition: background-color 0.35s;
+		&::before {
+			position: absolute;
+			top: 30px;
+			right: 30px;
+			bottom: 30px;
+			left: 30px;
+			border: 1px solid #fff;
+			content: '';
+		}
+	}
+	figcaption::before , p {
+		opacity: 0;
+		transition: opacity 0.35s, transform 0.35s;
+		transform: scale(0);
+	}
+	&:hover figcaption::before, &:hover p {
+		opacity: 1;
+		transform: scale(1);
+	}
+	&:hover figcaption {
+		background-color: rgba(58,52,42,0);
+	}
+	h2 {
+		transition: transform 0.35s;
+		transform: translate3d(0,50%,0);
+	}
+	&:hover h2{
+		transform: translate3d(0,0,0);
+	}
+}
