@@ -73,3 +73,48 @@
     cursor: inherit;
     display: block;
 }
+
+.btn-app-store,
+.btn-play-store,
+.btn-windows-phone{
+  width: 200px;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+
+.btn-app-store > [class^='fui'],
+.btn-play-store > [class^='fui'],
+.btn-windows-phone > [class^='fui']{
+  font-size: 3rem;
+  float: left;
+  margin: 0 .7rem;
+}
+
+.btn-app-store > strong,
+.btn-play-store > strong,
+.btn-windows-phone > strong{
+  display: block;
+  font-weight: bold;
+}
+
+.btn-app-store{
+  background-color: #000;
+  &:hover {
+    background-color: #3A3636;
+  }
+}
+
+.btn-play-store{
+  background-color: #78C257;
+  &:hover {
+    background-color: #82AB70;
+  }
+}
+
+.btn-windows-phone{
+  background-color: #0078D6;
+  &:hover {
+    background-color: #398ACA;
+  }
+}
