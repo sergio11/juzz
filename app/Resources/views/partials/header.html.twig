@@ -10,7 +10,9 @@
                     <span class="icon-bar"></span>
                 </button>
                 {% set route = app.user ? path('perfil',{ 'user' : app.user.nick }) : path('portada') %}
-                <a class="navbar-brand" href="{{route}}"></a>
+                <a class="navbar-brand" href="{{route}}">
+                    <img src="{{ asset('img/logo.png') }}" height='54' title="Juzz" />
+                </a>
 
             </div>
             <div class="navbar-collapse collapse in" id="main-navbar">

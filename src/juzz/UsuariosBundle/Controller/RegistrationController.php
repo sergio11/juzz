@@ -83,8 +83,7 @@ class RegistrationController extends Controller{
     }
 
     return $this->render('juzzUsuariosBundle:Accounts:registration/register.html.twig',array(
-        'form' =>  $form->createView(),
-        'tab' => 'register'
+        'form' =>  $form->createView()
     ));
   }
   

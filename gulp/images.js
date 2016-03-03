@@ -10,7 +10,7 @@ const plugins = require('gulp-load-plugins')({
 });
 
 gulp.task('images', () => {
-	return gulp.src('./app/Resources/public/img/*')
+	return gulp.src('./app/Resources/public/img/**/*')
 		.pipe(plugins.imagemin({
 			progressive: true,
       		interlaced: true,

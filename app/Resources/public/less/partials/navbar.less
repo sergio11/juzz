@@ -5,6 +5,10 @@
 	border: none;
     border-radius: 0;
     margin: 0;
+    .navbar-brand {
+      padding: 0;
+      margin-right: 4.5rem;
+    }
     &.navbar-default {
     	.navbar-nav {
     		margin: 0;
@@ -46,5 +50,8 @@
   	&.navbar-right:last-child {
   		margin-right: .5rem;
   	}
+    &.navbar-left:first-child>li:first-child a{
+      border-radius: 0;
+    }
   }
 }

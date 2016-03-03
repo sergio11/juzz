@@ -114,7 +114,8 @@ dcs_opauth:
     callback_transport: session    # ('session','post','get') HTTP transport type, for sending of Auth response
     security_iteration: 300        # (int) The number of times hashing is done to sign auth response
     security_timeout: 2 minutes 
-    redirect_after_response: http://localhost/juzz/web/app_dev.php/usuarios/accounts?tab=register&method=social
+    redirect_after_response: http://localhost/juzz/web/app_dev.php/accounts/register?method=social
+    error_view: DCSOpauthBundle:Response:error.html.twig
     strategies:
         facebook:
             id:             732244713585713
