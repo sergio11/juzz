@@ -1,3 +1,13 @@
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+
+hwi_oauth_login:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix:   /login
+
+facebook_login:
+    path: /social/check-facebook
 
 juzz_notifications:
     resource: "@juzzNotificationsBundle/Resources/config/routing.yml"
@@ -44,13 +54,7 @@ portada:
   path:  /
   defaults: { _controller: juzzUsuariosBundle:Default:index }
 
-dcs_opauth_connect:
-    resource: "@DCSOpauthBundle/Resources/config/routing/connect.xml"
-    prefix: /connect
 
-dcs_opauth_response:
-    resource: "@DCSOpauthBundle/Resources/config/routing/response.xml"
-    prefix: /connect
 
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

@@ -17,7 +17,6 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
-            new DCS\OpauthBundle\DCSOpauthBundle(),
             new juzz\CanalesBundle\juzzCanalesBundle(),
             new juzz\ProgramasBundle\juzzProgramasBundle(),
             new juzz\EpisodiosBundle\juzzEpisodiosBundle(),
@@ -34,7 +33,8 @@ class AppKernel extends Kernel
             new Hip\MandrillBundle\HipMandrillBundle(),
             new JMS\AopBundle\JMSAopBundle(),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
-            new JMS\DiExtraBundle\JMSDiExtraBundle($this)
+            new JMS\DiExtraBundle\JMSDiExtraBundle($this),
+            new HWI\Bundle\OAuthBundle\HWIOAuthBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

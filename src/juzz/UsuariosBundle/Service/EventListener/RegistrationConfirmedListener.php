@@ -41,7 +41,7 @@ class RegistrationConfirmedListener implements EventSubscriberInterface
         // Crear un mensaje flash para notificar al usuario que su cuenta ha sido activada con éxito.
         $this->reporter->addSuccess($translated);
     	// Loguear al usuario automáticamente
-        $token = new UsernamePasswordToken($user, $user->getPassword(), 'frontend', $user->getRoles());
+        $token = new UsernamePasswordToken($user, $user->getPassword(), 'main', $user->getRoles());
     	$this->token_storage->setToken($token);
     	$url = $this->router->generate('perfil',array('user' => $user->getNick() ));
         $event->setResponse(new RedirectResponse($url));

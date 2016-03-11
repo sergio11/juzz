@@ -109,20 +109,6 @@ hip_mandrill:
         sender_name: Equipo Juzz # Optionally define a sender name (from name)
     proxy: ~
 
-dcs_opauth:
-    debug_mode: false              # (boolean) Whether debug messages are to be displayed
-    callback_transport: session    # ('session','post','get') HTTP transport type, for sending of Auth response
-    security_iteration: 300        # (int) The number of times hashing is done to sign auth response
-    security_timeout: 2 minutes 
-    redirect_after_response: http://localhost/juzz/web/app_dev.php/accounts/register?method=social
-    error_view: DCSOpauthBundle:Response:error.html.twig
-    strategies:
-        facebook:
-            id:             732244713585713
-            secret:         'b1f2aaacba6ec0efd169d79051ecdff5'
-            strategy_class: Facebook
-            options:
-                scope: ['public_profile','email']
 
 lopi_pusher:
     app_id: 158835
@@ -147,6 +133,20 @@ braincrafted_bootstrap:
         twig: true
         knp_menu: true
         knp_paginator: true
+        
+# OAuth client integration for Symfony. Supports both OAuth1.0a and OAuth2.
+hwi_oauth:
+    firewall_name: social
+    resource_owners:
+        facebook:
+            type:          facebook
+            client_id:     732244713585713
+            client_secret: b1f2aaacba6ec0efd169d79051ecdff5
+            scope:         "email, public_profile, user_friends"
+            infos_url:     "https://graph.facebook.com/me?fields=id,email,first_name,last_name,gender,birthday"
+            options:
+                display: popup #dialog is optimized for popup window
+
 # Bundle Subida de archivos
 vich_uploader:
     db_driver: orm

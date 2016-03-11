@@ -20,9 +20,6 @@
         "sensio/distribution-bundle": "~4.0",
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
-        "damianociarla/opauth-bundle": "^1.0",
-        "opauth/facebook": "^0.2.1",
-        "opauth/twitter": "^0.3.1",
         "ras/flash-alert-bundle": "dev-master",
         "bes/mobiledetect-twig-extension": "v1.0",
         "laupifrpar/pusher-bundle": "^1.2",
@@ -31,7 +28,8 @@
         "braincrafted/bootstrap-bundle": "~2.0",
         "vich/uploader-bundle": "^0.14.0",
         "hipaway-travel/mandrill-bundle": "^1.0",
-        "jms/security-extra-bundle": "^1.5"
+        "jms/security-extra-bundle": "^1.5",
+        "hwi/oauth-bundle": "^0.4.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

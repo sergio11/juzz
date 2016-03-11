@@ -1,13 +1,9 @@
 <div class="social-buttons row text-center">
     <div class="col-md-12">
-		<a class="btn btn-social btn-facebook" rel="nofollow" href="{{ url('dcs_opauth_connect', {'strategy' : 'facebook'}) }}">
+		{#<a class="btn btn-social btn-facebook" rel="nofollow" href="{{ url('facebook_login') }}">
 			<span class="fui-facebook"></span> Iniciar Sesión con Facebook
-		</a>
-		<a class="btn btn-social btn-twitter" rel="nofollow" href="{{ url('dcs_opauth_connect', {'strategy' : 'twitter'}) }}">
-			<span class="fui-twitter"></span> Iniciar Sesión con Twitter
-		</a>
-		<a class="btn btn-social btn-google" rel="nofollow" href="{{ url('dcs_opauth_connect', {'strategy' : 'google'}) }}">
-			<span class="fui-google-plus"></span> Iniciar Sesión con Google +
-		</a>
+		</a>#}
+		{% render(controller('HWIOAuthBundle:Connect:connect')) %}
+		
     </div>
 </div>

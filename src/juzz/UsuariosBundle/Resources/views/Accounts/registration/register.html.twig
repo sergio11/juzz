@@ -1,7 +1,6 @@
 {% extends 'juzzUsuariosBundle:Accounts:base.html.twig' %}
 
 {% block cardContent %}
-	{{ dump(session) }}
 	{{ form(form, { 'action': path('register'), 'method': 'POST','style': 'horizontal'}) }}
     {# Incluímos las social options #}
     {% include 'juzzUsuariosBundle:Accounts:partials/social-options.html.twig' %}

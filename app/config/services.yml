@@ -4,3 +4,8 @@ parameters:
 #    parameter_name: value
 
 services:
+  hwi_oauth.user.provider.entity:
+    class: HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider
+  hwi_oauth.user.provider:
+    class: juzz\UsuariosBundle\Auth\OAuthProvider
+    arguments: [@session, @doctrine, @service_container]

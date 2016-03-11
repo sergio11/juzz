@@ -1,7 +1,34 @@
 security:
 
+    encoders:
+        juzz\UsuariosBundle\Entity\Usuarios:
+            algorithm: bcrypt
+            cost:      11
+
+    providers:
+        users:
+            entity: { class: juzz\UsuariosBundle\Entity\Usuarios, property: email }
+        hwi:
+            id: hwi_oauth.user.provider
+
     firewalls:
-        frontend:
+
+        social:
+            pattern: ^/social*
+            anonymous: ~
+            oauth:
+                resource_owners:
+                    facebook:      /social/check-facebook
+                login_path:        /social
+                check_path:        /social/login_check
+                use_forward:       false
+                failure_path:      /social
+                success_handler: security.authentication.success_handler
+
+                oauth_user_provider:
+                    service: hwi_oauth.user.provider
+
+        main:
             pattern:        ^/*
             provider:       users
             anonymous:      ~
@@ -17,17 +44,12 @@ security:
             remember_me:
                 key:        juzz_cookie
                 lifetime:   604800  # 604.800 = 3.600 * 24 * 7 = 1 semana
-
+        
     access_control:
+        - { path: ^/social/*, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/accounts/*, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/usuarios/*, roles: ROLE_USER }
 
-    encoders:
-        juzz\UsuariosBundle\Entity\Usuarios:
-            algorithm: bcrypt
-            cost:      11
 
-    providers:
-        users:
-            entity: { class: juzz\UsuariosBundle\Entity\Usuarios, property: email }
+    
 
